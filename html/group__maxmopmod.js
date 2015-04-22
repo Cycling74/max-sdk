@@ -1,0 +1,25 @@
+var group__maxmopmod =
+[
+    [ "max_jit_classex_mop_mproc", "group__maxmopmod.html#ga2641dd1bad637ebd190b858d2d72e928", null ],
+    [ "max_jit_classex_mop_wrap", "group__maxmopmod.html#ga7e08584771f58ce1fe0b190d27b5759b", null ],
+    [ "max_jit_mop_adapt_matrix_all", "group__maxmopmod.html#ga896bfac67eb5e18c1c91fedebe8fe858", null ],
+    [ "max_jit_mop_assist", "group__maxmopmod.html#gaf8a46feb31b44f110ed1dee18338e52f", null ],
+    [ "max_jit_mop_bang", "group__maxmopmod.html#ga2d8a375d2971f54b85315fb9f0d2bfc5", null ],
+    [ "max_jit_mop_clear", "group__maxmopmod.html#gab397419fccc40f7a17c6bff07458aee0", null ],
+    [ "max_jit_mop_free", "group__maxmopmod.html#ga441ff70d705e1eccff8297437c85e46c", null ],
+    [ "max_jit_mop_get_io_by_name", "group__maxmopmod.html#gac9b7b486107f75f0d01fe82b34a5a6ea", null ],
+    [ "max_jit_mop_getinput", "group__maxmopmod.html#ga92d7b66952db7f2b4045cfa51924c69d", null ],
+    [ "max_jit_mop_getoutput", "group__maxmopmod.html#ga4cc6070d8e9d74882ecfbeb7b244266f", null ],
+    [ "max_jit_mop_getoutputmode", "group__maxmopmod.html#gad8eb4eab73dc45290345b80f7ec31ec3", null ],
+    [ "max_jit_mop_inputs", "group__maxmopmod.html#gaec99be7b60c1cec6a8391097d5008bc6", null ],
+    [ "max_jit_mop_jit_matrix", "group__maxmopmod.html#gaf2aa6f991436199827afe1f934ec9150", null ],
+    [ "max_jit_mop_matrix_args", "group__maxmopmod.html#ga75f7f306602775484eaa1b3f9d3998f3", null ],
+    [ "max_jit_mop_matrixout_new", "group__maxmopmod.html#gade858d795f0afefa64a28acbb110f0a6", null ],
+    [ "max_jit_mop_notify", "group__maxmopmod.html#ga5032d682c77bcb7e2dcdf0e77d863d3c", null ],
+    [ "max_jit_mop_outputmatrix", "group__maxmopmod.html#ga1b3db3947c815f9aeab49643f1b29402", null ],
+    [ "max_jit_mop_outputs", "group__maxmopmod.html#ga07f044bc4c7fe4380f31e150844948df", null ],
+    [ "max_jit_mop_setup", "group__maxmopmod.html#ga21f81f6d30f54a671a78a6b44986392a", null ],
+    [ "max_jit_mop_setup_simple", "group__maxmopmod.html#gac3eaca207281516b72e81f0dc5f4bf94", null ],
+    [ "max_jit_mop_variable_addinputs", "group__maxmopmod.html#ga3e12ca35fc39ddd1209156912708f03c", null ],
+    [ "max_jit_mop_variable_addoutputs", "group__maxmopmod.html#ga7dab1b1ecbcea42dcdb18fc929385fa9", null ]
+];

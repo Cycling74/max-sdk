@@ -1,0 +1,25 @@
+var group__objectmod =
+[
+    [ "jit_object_attach", "group__objectmod.html#ga213166e8beeb29aca36c57cd07c722f1", null ],
+    [ "jit_object_attr_get", "group__objectmod.html#ga6d62c09fe37fc74bcaaa6ab326064b6f", null ],
+    [ "jit_object_attr_usercanget", "group__objectmod.html#ga03b2bb6645b076c4afbba3efbd5f14b9", null ],
+    [ "jit_object_attr_usercanset", "group__objectmod.html#gab5c10166fd7e2505b76a25e1cf0b6b09", null ],
+    [ "jit_object_class", "group__objectmod.html#gaecadd79da84aa20fe845cc4916f25721", null ],
+    [ "jit_object_classname", "group__objectmod.html#ga2d3302646e6bf59b4960dd0656632095", null ],
+    [ "jit_object_classname_compare", "group__objectmod.html#ga4fdf2959d720fe67e1ecc777189caa63", null ],
+    [ "jit_object_detach", "group__objectmod.html#gaa286218b643371fe28cbe261facd5b21", null ],
+    [ "jit_object_exportattrs", "group__objectmod.html#ga62d196313913e245d4baa69ed2308f01", null ],
+    [ "jit_object_exportsummary", "group__objectmod.html#ga9be3b8c2e695b471dee3e9242691c472", null ],
+    [ "jit_object_findregistered", "group__objectmod.html#ga328c0beb469f32437b756852fe8583bf", null ],
+    [ "jit_object_findregisteredbyptr", "group__objectmod.html#gaf59274b20cbf6a44cc4269a0a4165745", null ],
+    [ "jit_object_free", "group__objectmod.html#ga64970b62e5afe7a2cbd57efd6e9e9f74", null ],
+    [ "jit_object_getmethod", "group__objectmod.html#gaeba4eb06443064c2cb4b9c45edeb7ab2", null ],
+    [ "jit_object_importattrs", "group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e", null ],
+    [ "jit_object_method_argsafe_get", "group__objectmod.html#gacbb8c55e2c6c564d6018b8550cf7f98f", null ],
+    [ "jit_object_method_imp", "group__objectmod.html#ga27743559fe82c0adb99d45b87fd71196", null ],
+    [ "jit_object_method_typed", "group__objectmod.html#ga9c9b8591a887cddd19b313c8e995fbea", null ],
+    [ "jit_object_new_imp", "group__objectmod.html#ga0a34d363db7343083457a3dcf5fffb3e", null ],
+    [ "jit_object_notify", "group__objectmod.html#ga4bbd50b2d1e34de44d36e1a66a477b9f", null ],
+    [ "jit_object_register", "group__objectmod.html#gabcf088a00f36b6af8ce5896b81e4d0ef", null ],
+    [ "jit_object_unregister", "group__objectmod.html#ga21f77a08c1a98aaf68e4b2913487be0f", null ]
+];

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+	<SYSBUILD Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\sysbuild\win_debug</SYSBUILD>
+	<SYSBUILD Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\sysbuild\win_debug_x64</SYSBUILD>
+	<SYSBUILD Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\sysbuild\win_release</SYSBUILD>
+	<SYSBUILD Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\sysbuild\win_release_x64</SYSBUILD>
+    <C74SUPPORT>$(ProjectDir)..\..\c74support\</C74SUPPORT>
+	<C74_ROOT>$(SYSBUILD)\resources</C74_ROOT>
+	<EXTERNALS_ROOT>$(C74_ROOT)\externals</EXTERNALS_ROOT>
+	<EXTENSIONS_ROOT>$(C74_ROOT)\extensions</EXTENSIONS_ROOT>
+	<JSEXTENSIONS_ROOT>$(C74_ROOT)\jsextensions</JSEXTENSIONS_ROOT>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir>$(C74SUPPORT)..\..\externals\</OutDir>
+    <IntDir>..\..\sysbuild\intermediate\$(Configuration)_$(PlatformName)\$(ProjectName)\</IntDir>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>VER_TARGETNAME=\"$(TargetName)\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <ClCompile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Manifest>
+      <OutputManifestFile>$(IntDir)$(TargetName).manifest</OutputManifestFile>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="C74SUPPORT">
+      <Value>$(C74SUPPORT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="C74_ROOT">
+      <Value>$(C74_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="EXTERNALS_ROOT">
+      <Value>$(EXTERNALS_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="EXTENSIONS_ROOT">
+      <Value>$(EXTENSIONS_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="JSEXTENSIONS_ROOT">
+      <Value>$(JSEXTENSIONS_ROOT)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

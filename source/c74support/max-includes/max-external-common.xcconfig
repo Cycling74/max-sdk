@@ -1,0 +1,44 @@
+// Xcode target configuration settings for Max externals
+//
+// Changes to the settings in this file will be applied to all externals
+// To change settings for only one of the objects, override the settings using Xcode's target inspector.
+//
+// Timothy Place
+// Copyright © 2009, Cycling '74
+
+#include "max-common.xcconfig"
+
+
+// Paths
+
+C74SUPPORT = $(SRCROOT)/../../c74support
+C74PRIVATE = $(SRCROOT)/../../c74support-private
+HEADER_SEARCH_PATHS_COMMON = $(DEVELOPER_DIR)/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74PRIVATE)/max-includes"
+HEADER_SEARCH_PATHS = $(HEADER_SEARCH_PATHS_COMMON)
+USER_HEADER_SEARCH_PATHS = 
+FRAMEWORK_SEARCH_PATHS_COMMON = "$(C74SUPPORT)/max-includes/$(C74_FRAMEWORK_PATH_SUFFIX)"
+FRAMEWORK_SEARCH_PATHS = $(FRAMEWORK_SEARCH_PATHS_COMMON)
+
+// Define DSTROOT in a context-specific xcconfig file that includes this file, rather than globally:
+
+// DSTROOT = $(SRCROOT)/../../../sysbuild/$(CONFIGURATION)/Cycling '74/max-externals
+
+
+// (This next path is relative to DSTROOT)
+
+INSTALL_PATH = /
+
+
+// Special Files
+
+GCC_PREFIX_HEADER = $(C74SUPPORT)/max-includes/macho-prefix.pch
+INFOPLIST_FILE = $(C74PRIVATE)/max-includes/Info.plist
+
+
+// Static Configuration
+
+WRAPPER_EXTENSION = mxo;
+WARNING_CFLAGS = -Wmost -Wno-four-char-constants -Wno-unknown-pragmas
+DEPLOYMENT_LOCATION = YES
+GENERATE_PKGINFO_FILE = YES
+

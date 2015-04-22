@@ -1,0 +1,10 @@
+ {
+ "name": "Max-SDK",
+ "type": "package",
+ "author": "Cycling '74",
+ "description": "Max Software Development Kit",
+ "version": "7.0.3",
+ "major_version": "7",
+ "minor_version": "0",
+ "min_max_version": "7.0.3"
+}
