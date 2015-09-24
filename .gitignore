@@ -9,3 +9,6 @@ support
 build
 *.o
 *.dylib
+
+*.xcworkspace
+xcuserdata
