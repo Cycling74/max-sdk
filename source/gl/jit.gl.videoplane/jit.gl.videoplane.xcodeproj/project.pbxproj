@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22301F4A10D7BC6C00C1989F /* JitterAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22301F4910D7BC6C00C1989F /* JitterAPI.framework */; };
 		2282B5AB10D90CE800D827D3 /* jit.gl.videoplane.c in Sources */ = {isa = PBXBuildFile; fileRef = 2282B5AA10D90CE800D827D3 /* jit.gl.videoplane.c */; };
 		2282B5AD10D90CF000D827D3 /* max.jit.gl.videoplane.c in Sources */ = {isa = PBXBuildFile; fileRef = 2282B5AC10D90CF000D827D3 /* max.jit.gl.videoplane.c */; };
 		2282B5C510D90D3900D827D3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2282B5C410D90D3900D827D3 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22301F4910D7BC6C00C1989F /* JitterAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JitterAPI.framework; path = "../../../c74support/jit-includes/JitterAPI.framework"; sourceTree = SOURCE_ROOT; };
 		2282B5AA10D90CE800D827D3 /* jit.gl.videoplane.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jit.gl.videoplane.c; sourceTree = "<group>"; };
 		2282B5AC10D90CF000D827D3 /* max.jit.gl.videoplane.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = max.jit.gl.videoplane.c; sourceTree = "<group>"; };
 		2282B5C410D90D3900D827D3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -27,7 +25,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22301F4A10D7BC6C00C1989F /* JitterAPI.framework in Frameworks */,
 				2282B5C510D90D3900D827D3 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				2282B5C410D90D3900D827D3 /* OpenGL.framework */,
-				22301F4910D7BC6C00C1989F /* JitterAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -179,13 +175,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/jit-includes\"",
-				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "$(C74SUPPORT)/max-includes/macho-gl-prefix.pch";
-				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 			};
 			name = Development;
 		};
@@ -195,12 +186,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/jit-includes\"",
-				);
 				GCC_PREFIX_HEADER = "$(C74SUPPORT)/max-includes/macho-gl-prefix.pch";
-				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 			};
 			name = Deployment;
 		};
