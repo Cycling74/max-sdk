@@ -34,7 +34,7 @@ def build_projects_for_dir(path)
 
     if $mac && filename.match(/.*\.xcodeproj/)
       puts "  Building #{filename}" 
-      result = `cd #{path}; xcodebuild -project #{filename} 2>&1`
+      result = `cd "#{path}"; xcodebuild -project #{filename} 2>&1`
       if result.match(/\*\* BUILD SUCCEEDED \*\*/)
         puts "    (success)"
       else
