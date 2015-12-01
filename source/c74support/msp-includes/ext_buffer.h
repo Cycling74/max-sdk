@@ -192,7 +192,7 @@ t_max_err buffer_setdirty(t_buffer_obj *buffer_object);
 	@param	buffer_object	the buffer object
 	@return					The name of the file last read, or gensym("") if no files have been read.
  
-	@version Introduced in Max 7.0.1
+	@version Introduced in Max 7.0.1 on the Mac, not available until Max 7.1 on Windows.
  */
 t_symbol *buffer_getfilename(t_buffer_obj *buffer_object);
 
