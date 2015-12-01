@@ -189,7 +189,8 @@ typedef struct _pathlink {
 
 // flags for t_searchpath
 typedef enum {
-	PATH_FLAGS_RECURSIVE = 1
+	PATH_FLAGS_RECURSIVE	= 0x001,
+	PATH_FLAGS_READONLY		= 0x010
 } e_max_searchpath_flags;
 
 
@@ -265,26 +266,23 @@ short locatefilelist(char *name, short *outvol, t_fourcc *outtype, t_fourcc *fil
 
 
 /**
-	Find a Max document by name in the search path.
+	Find a file by name. 
+	If a complete path is not specified, search for the name in the search path.
 	This is the preferred method for file searching since its introduction in Max version 4.
 	
-	This routine performs the same function as the routine path_getdefault().
-	locatefile() searches through the directories specified by the user for 
-	Patcher files and tables in the File Preferences dialog as well as the 
-	current default path (see path_getdefault) and the directory
-	containing the Max application
-
 	@ingroup	files
 	@version	4.0
 	
-	@param	name			The file name for the search, receives actual filename.
+	@param	name			The file name for the search, receives actual filename upon return.
 	@param	outvol			The Path ID of the file (if found).
 	@param	outtype			The file type of the file (if found).
-	@param	filetypelist	The file type(s) that you are searching for.
-	@param	numtypes		The number of file types in the typelist array (1 if a single entry).
+	@param	filetypelist	The file type(s) for which you are searching for, or NULL if any type is acceptable.
+	@param	numtypes		The number of file types in the typelist array (1 if a single entry, 0 if any type is acceptable).
 
-	@return			If a file is found with the name 
-					specified by filename, locatefile returns 0, otherwise it returns non-zero. 
+	@return					If a file is found with the name 
+							specified by filename, locatefile returns 0, otherwise it returns non-zero. 
+
+	@see					path_getdefault().
 
 	@remark			The old file search routines locatefile() and locatefiletype() 
 					are still supported in Max 4, but the use of a new routine 
@@ -570,8 +568,8 @@ short path_topotentialunicodename(short path, char *file, unsigned short **name,
 short path_fromunicodepathname(unsigned short *name, short *path, char *filename, short check);		// if check is non-zero then file must exist
 	
 /**
-	Translates a Max path+filename combo into a correct absolutepath that can be used to pass to libraries
-	expecting system-native paths (i.e. POSIX on the Mac) that also handle multiple volumes correctly.
+	Translates a Max path+filename combo into a correct POSIX absolute path that can be used to pass to libraries 
+	and also handles multiple volumes correctly.
  
 	@ingroup files
 	@param	in_path			The Max path reference
@@ -581,6 +579,12 @@ short path_fromunicodepathname(unsigned short *name, short *path, char *filename
  
 	@see path_topotentialname()
 	@see path_nameconform()
+
+	@code
+	// example for getting a windows-formatted path for a folder path:
+	path_toabsolutesystempath(pathid, "", filestring);
+	path_nameconform(filestring, sNativeQualifiedPathname, PATH_STYLE_NATIVE, PATH_TYPE_PATH);
+	@endcode
 */
 t_max_err path_toabsolutesystempath(const short in_path, const char *in_filename, char *out_filepath);
 
