@@ -2079,6 +2079,17 @@ void filewatcher_stop(void *x);
 void fileusage_addfile(void *w, long flags, C74_CONST char *name, C74_CONST short path);
 
 void fileusage_addfilename(void *w, long flags, C74_CONST char *name);
+
+/**	Add a package to a standalone.
+	@ingroup					files
+	@param	w					Handle for the standalone builder
+	@param	name				The name of the package
+	@param	subfoldernames		A #t_atomarray containing symbols, each of which is a foldername in the package to include.
+								Pass NULL to include the entire package contents.
+	@version					Introduced in Max 7.0.4
+ */
+void fileusage_addpackage(void *w, C74_CONST char *name, t_object *subfoldernames);
+
 void fileusage_addpathname(void *w, long flags, C74_CONST char *name);
 void fileusage_copyfolder(void *w, C74_CONST char *name, long recursive);
 void fileusage_makefolder(void *w, C74_CONST char *name);
