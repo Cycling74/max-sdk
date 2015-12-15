@@ -13,6 +13,7 @@ var searchData=
   ['fileload',['fileload',['../group__loading__max__files.html#gab4d0195eb3897bfa1cd8711dd0cae70e',1,'ext_proto.h']]],
   ['files_20and_20folders',['Files and Folders',['../group__files.html',1,'']]],
   ['fileusage_5faddfile',['fileusage_addfile',['../group__files.html#ga2fce56ee681efcc473951ebcba79580c',1,'ext_proto.h']]],
+  ['fileusage_5faddpackage',['fileusage_addpackage',['../group__files.html#gaf25bd3f2783853c08493171311bf1c0b',1,'ext_proto.h']]],
   ['filewatcher_5fnew',['filewatcher_new',['../group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97',1,'ext_proto.h']]],
   ['fill_5fattr_5fsave',['FILL_ATTR_SAVE',['../group__styles.html#ga1880358cd3e9fd6cbb686979439e249b',1,'ext_boxstyle.h']]],
   ['filterget',['filterget',['../structt__jit__attribute.html#a5dd20af492c14f7b35c0b07ba4586653',1,'t_jit_attribute::filterget()'],['../structt__jit__attr__offset.html#a48bd2b568c1a9174f1d31de2b2b602c3',1,'t_jit_attr_offset::filterget()'],['../structt__jit__attr__offset__array.html#a3a36a6dd1ef7ab01a717084351445d10',1,'t_jit_attr_offset_array::filterget()'],['../structt__jit__attr.html#ae8018ca710848cb75b7e3c8f9bb9c428',1,'t_jit_attr::filterget()']]],

@@ -291,8 +291,8 @@ var NAVTREE =
       [ "Support for Max 7 UI Object Styles", "chapter_appendix_f.html#chapter_appendix_f_styles", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
-    [ "Data Structures", null, [
-      [ "Data Structures", "annotated.html", "annotated" ],
+    [ "Data Structures", "annotated.html", [
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
       [ "Data Fields", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
@@ -306,17 +306,16 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "functions_m.html",
-"group__attr.html#ga9ce1cdfb365ad9de15840fdaa5b4b1cd",
-"group__color.html#ga322f6e69277981f02effe1212affed3c",
-"group__hashtab.html#ga34ced5b4da65b4068829f799a53ea6bf",
-"group__jgraphics.html#gaf5bdf39aeacf475471f2271e4fedcdee",
-"group__jmouse.html#gga4d6e7dd3d4d260c28f3bce9b9f36f764a7250b137e39249c7bb6c1c6eb8922c1f",
-"group__mathmod.html#gaae4361174ece63c93cf437e0b8dfffdd",
-"group__mutex.html#gaa8cae78764c59883566ac4f861dd534e",
-"group__opvecmod.html#gaa3a4995b1eda5ef6f7576c458215d56f",
-"group__time.html#ga844cd45c507bf4c89b91f2c2713fb128",
-"structt__jdataview.html#ad2ad33f299babdcd0db6232dbebd9c2c",
-"structt__wind__mouse__info.html#a6ca3ce85fad8ad945633b185105dca7e"
+"group__attr.html#gaababb47839dc4396bddfbf8149214e21",
+"group__console.html#gaef84325d992e0afa14b2e7b0c0515601",
+"group__hashtab.html#gab5cb27719ed31725c46ff3ff52356aa8",
+"group__jgraphics.html#gga3519fa317c6811b619af2d70e3c1eca7ab3d013abb01bb8b776878740c806be4f",
+"group__jmouse.html#ggae6e0f3193b01069c1bce512ab787a681a7ce9f8e318648eef4ca2c0cdcf02d388",
+"group__matrixmod.html#ga12b4661428435cba18ab80d25c7581b1",
+"group__ob3dmod.html#ga354e6daa1b458570e2528e12819b0c2a",
+"group__opvecmod.html#gaba8a6b1cff6bf9770ea3994d8be30e38",
+"group__time.html#gacad240f629ef5619c9949ba7a3adec95",
+"structt__jgraphics__font__extents.html#af187e59f203debcb25545a5427f0a105"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

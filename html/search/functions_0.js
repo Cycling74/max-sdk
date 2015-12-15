@@ -48,6 +48,7 @@ var searchData=
   ['atomarray_5fappendatoms',['atomarray_appendatoms',['../group__atomarray.html#gae604fed9f8ca266b1b0d080e8cc929c3',1,'ext_atomarray.h']]],
   ['atomarray_5fchuckindex',['atomarray_chuckindex',['../group__atomarray.html#gaf76d3ab0de8a7b6b0b0e32193608c2dd',1,'ext_atomarray.h']]],
   ['atomarray_5fclear',['atomarray_clear',['../group__atomarray.html#ga185b275ee3d94fa9a21d3ca6ece43c33',1,'ext_atomarray.h']]],
+  ['atomarray_5fclone',['atomarray_clone',['../group__atomarray.html#ga1f3a262fe7017bf1eb201f1193220ad6',1,'ext_atomarray.h']]],
   ['atomarray_5fcopyatoms',['atomarray_copyatoms',['../group__atomarray.html#gaec25ec428f6bb7b1a1c8092b5c01f2c2',1,'ext_atomarray.h']]],
   ['atomarray_5fduplicate',['atomarray_duplicate',['../group__atomarray.html#ga96ea96717c2ed692197361b1d02bab47',1,'ext_atomarray.h']]],
   ['atomarray_5fflags',['atomarray_flags',['../group__atomarray.html#gad99be67bb7fafb7987412ee8fc2802f0',1,'ext_atomarray.h']]],

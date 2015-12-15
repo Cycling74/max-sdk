@@ -60,6 +60,7 @@ var group__files =
       [ "TEXT_NULL_TERMINATE", "group__files.html#ggaa3b412e918d334f06e322bde03fbd59fa134f84529c248946c91917a1e341a0db", null ]
     ] ],
     [ "fileusage_addfile", "group__files.html#ga2fce56ee681efcc473951ebcba79580c", null ],
+    [ "fileusage_addpackage", "group__files.html#gaf25bd3f2783853c08493171311bf1c0b", null ],
     [ "filewatcher_new", "group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97", null ],
     [ "locatefile", "group__files.html#ga62afd78207189cc22bf2f48d36e986a6", null ],
     [ "locatefile_extended", "group__files.html#gace9f6c70d9d937bd157f5c382618c5fd", null ],
