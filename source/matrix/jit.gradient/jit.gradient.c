@@ -117,9 +117,6 @@ out:
 //recursive functions to handle higher dimension matrices, by processing 2D sections at a time
 //
 
-static double table[32768]; //temporarily made global to compile. -jkc
-//should allocate this some other way...not currently reentrant
-
 // jit_gradient_calculate_ndim() -- when x->dimmode==-1, sorts both dimensions together
 void jit_gradient_calculate_ndim(t_jit_gradient *x, long dimcount, long *dim, long planecount,
 								 t_jit_matrix_info *out_minfo, char *bop)
@@ -127,7 +124,7 @@ void jit_gradient_calculate_ndim(t_jit_gradient *x, long dimcount, long *dim, lo
 	long i,j,width,height, index;
 	long start[4], end[4], chebycount;
 	float indperc;
-	double cheby[64]/*, table[32768]*/;
+	double cheby[64], *table=NULL;
 	float Tn, Tn1, Tn2, v,d;
 	float wmax, xmax=0.0;
 	uchar *op;
@@ -156,7 +153,8 @@ void jit_gradient_calculate_ndim(t_jit_gradient *x, long dimcount, long *dim, lo
 
 		width  = dim[0];
 		height = dim[1];
-
+        table = (double *)sysmem_newptr(width*sizeof(double));
+            
 		// compute the transfer function using the chebyshev equation...
 		d=(float)(width/2-.5);
 		for(i=0; i<width; i++) {
@@ -221,6 +219,8 @@ ick1:
 				}
 			}
 		}
+        if (table)
+            sysmem_freeptr((void *)table);
 		break;
 	default:
 		for	(i=0; i<dim[dimcount-1]; i++) {
@@ -228,6 +228,7 @@ ick1:
 			jit_gradient_calculate_ndim(x,dimcount-1,dim,planecount,out_minfo,op);
 		}
 	}
+
 }
 
 
