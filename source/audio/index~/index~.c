@@ -64,9 +64,9 @@ void index_perform64(t_index *x, t_object *dsp64, double **ins, long numins, dou
 	if (!tab)
 		goto zero;
 
-	chan = MIN(x->l_chan, 3);
 	frames = buffer_getframecount(buffer);
 	nc = buffer_getchannelcount(buffer);
+	chan = MIN(x->l_chan, nc);
 	while (n--) {
 		temp = *in++;
 		f = temp + 0.5;
@@ -86,9 +86,7 @@ zero:
 		*out++ = 0.0;
 }
 
-
-// here's where we set the buffer~ we're going to access
-void index_doset(t_index *x, t_symbol *s)
+void index_set(t_index *x, t_symbol *s)
 {
 	if (!x->l_buffer_reference)
 		x->l_buffer_reference = buffer_ref_new((t_object *)x, s);
@@ -96,15 +94,10 @@ void index_doset(t_index *x, t_symbol *s)
 		buffer_ref_set(x->l_buffer_reference, s);
 }
 
-void index_set(t_index *x, t_symbol *s)
-{
-	defer(x, (method)index_doset, s, 0, NULL);
-}
-
 void index_in1(t_index *x, long n)
 {
 	if (n)
-		x->l_chan = CLAMP(n,1,4) - 1;
+		x->l_chan = MAX(n, 1) - 1;
 	else
 		x->l_chan = 0;
 }
