@@ -15,7 +15,7 @@ ONLY_ACTIVE_ARCH=YES
 
 // The following section sets the Mac SDK version to be used.
 // For most projects this has little to no impact because there are no direct dependencies on OS function calls.
-// In those projects with OS function calls, it should be okay to use the most recent SDK version because the 
+// In those projects with OS function calls, it should be okay to use the most recent SDK version because the
 // MACOSX_DEPLOYMENT_TARGET will disable functionality that is unavailable in the older target OS.
 // For this reason, the SDKROOT variable is commented out, telling Xcode to use the default (which is the most recent SDK).
 //
@@ -33,6 +33,8 @@ GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 
 //SYSBUILD_BRANCH = master
 SYSBUILD = $(SRCROOT)/../../../sysbuild$(SYSBUILD_BRANCH)_$(ARCHS)
+
+CLANG_LINK_OBJC_RUNTIME = NO
 
 C74_FRAMEWORK_PATH_SUFFIX[arch=i386] =
 C74_FRAMEWORK_PATH_SUFFIX[arch=x86_64] = x64
