@@ -56,6 +56,8 @@ void ext_main(void *r)
 
 	ps_spfft = gensym("__pfft~__");	// owning pfft~ is bound to this while patch is loaded
 	fftinfo_warning = 1;
+
+	return 0;
 }
 
 void fftinfo_bang(t_fftinfo *x)
