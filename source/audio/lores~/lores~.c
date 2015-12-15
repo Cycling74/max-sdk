@@ -64,6 +64,8 @@ void ext_main(void *r)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	lores_class = c;
+
+	return 0;
 }
 
 void lores_dsp(t_lores *x, t_signal **sp, short *count)
