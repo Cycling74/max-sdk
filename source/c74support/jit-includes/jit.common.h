@@ -19,8 +19,6 @@
 #include "jit.file.h"
 #include "jit.math.h"
 #include "jit.symbols.h"
-#include "jit.gworld.h"
-//#include "jit.qt.codec.h"
 #include "jit.critical.h"
 #include "ext_preprocessor.h"
 

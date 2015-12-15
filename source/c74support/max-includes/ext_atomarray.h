@@ -216,6 +216,17 @@ t_max_err atomarray_setindex(t_atomarray *x, long index, t_atom *av);
 void *atomarray_duplicate(t_atomarray *x);
 
 
+/**
+	Create a new atomarray object which is a full clone of another atomarray object.
+ 
+	@ingroup		atomarray
+	@param	x		The atomarray instance which is to be copied.
+	@return			A new atomarray which is copied from x.
+ 
+	@see	atomarray_new()
+ */
+void *atomarray_clone(t_atomarray *x);
+
 /** 
 	Copy a new atom onto the end of the array.
 

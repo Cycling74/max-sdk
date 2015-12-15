@@ -64,8 +64,8 @@ struct _buffer
 	short b_unusedshort1;		// was Point b_scroll
 	short b_unusedshort2;		// could chop if struct compatibility wasn't important
 	long b_scrollscale;
-	long b_selbegin[MAXCHAN];
-	long b_selend[MAXCHAN];
+	long b_selbegin[MAXCHAN];	// unused - do NOT USE - MAXCHAN is retired
+	long b_selend[MAXCHAN];		// unused - do NOT USE - MAXCHAN is retired
 	long b_zoom;
 	long b_zim[11];
 	void *b_mouseout;
