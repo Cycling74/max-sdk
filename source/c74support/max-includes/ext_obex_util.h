@@ -66,16 +66,7 @@ BEGIN_USING_C_LINKAGE
 			class_addattr((c),attr_offset_new(attrname,USESYM(atom_long),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
 		}
 
-/**
-	Create a t_int32 integer attribute and add it to a Max class.
-
-	@ingroup	attr
-	@param	c				The class pointer.
-	@param	attrname		The name of this attribute as a C-string.
-	@param	flags			Any flags you wish to declare for this attribute, as defined in #e_max_attrflags.
-	@param	structname		The C identifier for the struct (containing a valid #t_object header) representing an instance of this class.
-	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
-*/
+// “int32” attribute types are not supported for user facing attributes
 
 #define CLASS_ATTR_INT32(c,attrname,flags,structname,structmember) \
 		{		\
