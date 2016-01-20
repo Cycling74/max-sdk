@@ -170,7 +170,7 @@ void jit_simple_vector(t_jit_simple *x, long n, t_jit_op_info *in, t_jit_op_info
 	T		*op;
 	long	is,
 			os;
-	long	tmp;
+	T		tmp;
 
 	ip = ((T *)in->p);
 	op = ((T *)out->p);
@@ -249,7 +249,7 @@ void jit_simple_calculate_ndim(t_jit_simple *x, long dimcount, long *dim, long p
 		if (in_minfo->type == _jit_sym_char)
 			jit_simple_loop<uchar>(x, n, &in_opinfo, &out_opinfo, in_minfo, out_minfo, bip, bop, dim, planecount, 1);
 		else if (in_minfo->type == _jit_sym_long)
-			jit_simple_loop<long>(x, n, &in_opinfo, &out_opinfo, in_minfo, out_minfo, bip, bop, dim, planecount, 4);
+			jit_simple_loop<int>(x, n, &in_opinfo, &out_opinfo, in_minfo, out_minfo, bip, bop, dim, planecount, 4);
 		else if (in_minfo->type == _jit_sym_float32)
 			jit_simple_loop<float>(x, n, &in_opinfo, &out_opinfo, in_minfo, out_minfo, bip, bop, dim, planecount, 4);
 		else if (in_minfo->type == _jit_sym_float64)
