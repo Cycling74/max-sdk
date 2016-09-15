@@ -13,7 +13,6 @@
 // can use prefix files for faster compilation, in which case, the following are 
 // redundant, but harmless, as they will exit quickly based on header defines
 #include <Carbon/Carbon.h>
-#include <QuickTime/QuickTime.h>
 #else
 #include <MacTypes.h>
 #include <devices.h> 

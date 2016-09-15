@@ -3,7 +3,6 @@
 //
 
 #include <Carbon/Carbon.h>
-#include <QuickTime/QuickTime.h>
 
 #ifdef __glext_h_
 	#undef __glext_h_
