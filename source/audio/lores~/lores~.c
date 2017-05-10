@@ -484,9 +484,7 @@ void lores_assist(t_lores *x, void *b, long m, long a, char *s)
 void *lores_new(double val, double reso)
 {
 	t_lores *x = object_alloc(lores_class);
-	dsp_setup((t_pxobject *)x,3);
-
-	// three signal inlets
+	dsp_setup((t_pxobject *)x,3);			// three signal inlets
 
 	x->l_freq = val;
 	x->l_r = reso >= 1.0 ? 1. - 1E-20 : reso;
@@ -496,9 +494,6 @@ void *lores_new(double val, double reso)
 	x->l_a1p = x->l_a1;
 	x->l_a2p = x->l_a2;
 
-	// one signal outlet
-
-	outlet_new((t_object *)x, "signal");
-
+	outlet_new((t_object *)x, "signal");	// one signal outlet
 	return (x);
 }
