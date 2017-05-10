@@ -37,7 +37,7 @@ void ext_main(void *r)
 {
 	t_class *c;
 
-	c = class_new("plussz2", (method)plussz2_new, (method)plussz2_free, sizeof(t_plussz2), 0L, A_GIMME, 0);
+	c = class_new("plussz2", (method)plussz2_new, (method)plussz2_free, sizeof(t_plussz2), 0L, A_DEFLONG, 0);
 
 	class_addmethod(c, (method)plussz2_bang,	"bang",		0);				// the method it uses when it gets a bang in the left inlet
 	class_addmethod(c, (method)plussz2_int,		"int",		A_LONG, 0);		// the method for ints in any inlet
