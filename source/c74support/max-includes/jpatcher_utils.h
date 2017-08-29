@@ -11,10 +11,8 @@ BEGIN_USING_C_LINKAGE
 					Note that this array must already by allocated using sysmem_newptr() or atom_alloc(). */
 void atom_copy(long argc1, t_atom *argv1, t_atom *argv2);
 
-/**	Print the contents of an array of atoms to the Max window.
-	@ingroup		atom
-	@param	argc	The count of atoms in argv.
-	@param	argv	The address to the first of an array of atoms.	*/
+//	Print the contents of an array of atoms to the Max window.
+//	Internal C74 use only.
 void postargs(long argc, t_atom *argv);
 
 /**	Print the contents of a dictionary to the Max window.
