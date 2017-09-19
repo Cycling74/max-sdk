@@ -167,7 +167,7 @@ void freeobject(t_object *op);
 	tables. See the source code for the coll object for an example of using a 
 	privately defined class. 
 */
-void *newinstance(t_symbol *s, short argc, t_atom *argv);
+void *newinstance(const t_symbol *s, short argc, const t_atom *argv);
 
 
 /**
@@ -873,7 +873,7 @@ void *outlet_list(void *o, t_symbol *s, short ac, t_atom *av);
 					the selector argument. Use the outlet_list() function instead. 
 */
 #ifndef outlet_anything
-void *outlet_anything(void *o, t_symbol *s, short ac, t_atom *av);
+void *outlet_anything(void *o, const t_symbol *s, short ac, const t_atom *av);
 #endif
 
 

@@ -1203,7 +1203,7 @@ t_hashtab *object_obex_enforce(void *x);
 	@return 		This function returns the error code #MAX_ERR_NONE if successful, 
 	 				or one of the other error codes defined in #e_max_errorcodes if unsuccessful.
 */
-void object_obex_dumpout(void *x, t_symbol *s, long argc, t_atom *argv);
+void object_obex_dumpout(void *x, const t_symbol *s, long argc, const t_atom *argv);
 
 
 // DO NOT CALL THIS -- It is called automatically now from object_free() or freeobject() -- calling this will cause problems.
@@ -1256,7 +1256,7 @@ t_max_err atom_setfloat(t_atom *a, double b);
 	@return 		This function returns the error code #MAX_ERR_NONE if successful, 
 	 				or one of the other error codes defined in #e_max_errorcodes if unsuccessful.
 */
-t_max_err atom_setsym(t_atom *a, t_symbol *b);				
+t_max_err atom_setsym(t_atom *a, const t_symbol *b);				
 #endif
 
 
