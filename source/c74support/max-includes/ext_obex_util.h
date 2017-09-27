@@ -11,8 +11,10 @@
 BEGIN_USING_C_LINKAGE
 
 // symbol macros which may be swapped to use common symbol pointers for performance
+#ifndef USESYM
 #define USESYM(x)	gensym(#x)
 //#define USESYM(x)	_sym_##x
+#endif
 
 // macros for attributes
 // class attributes are almost universally attr_offset, except for class static attributes
