@@ -54,6 +54,7 @@ void simpletext_assist(t_simpletext *x, void *b, long m, long a, char *s)
 
 void simpletext_free(t_simpletext *x)
 {
+	object_free(t_editor);
 	if (x->t_text)
 		sysmem_freehandle(x->t_text);
 }
