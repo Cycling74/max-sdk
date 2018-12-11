@@ -10,6 +10,8 @@
 #ifndef JIT_GL_MESH_CACHE_H
 #define JIT_GL_MESH_CACHE_H
 
+#include "jit.gl.h"
+
 /*************************************************************************/
 
 #ifdef __cplusplus
@@ -54,7 +56,7 @@ typedef struct _jit_gl_cache {
 	long						stride;			// stride length between elements
 	long						start;			// start index
 	long						end;			// end index
-	long						mode;			// cache mode (STATIC/DYNAMIC)
+	//long						mode;			// cache mode (STATIC/DYNAMIC)
 	long						used;			// used flag
 	long						update;			// update flag
 	long						capacity;		// allocated element count

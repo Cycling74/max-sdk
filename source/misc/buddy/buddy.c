@@ -25,7 +25,6 @@ typedef struct {
 	t_object b_ob;
 	long b_num;
 	t_member *b_mem;
-	long b_id;
 } t_buddy;
 
 void buddy_bang(t_buddy *x);
@@ -229,11 +228,10 @@ void *buddy_new(long num)
 	if (num < 2)
 		num = 2;
 	x->b_num = num;
-	x->b_id = 0;
 	x->b_mem = (t_member *)sysmem_newptr((unsigned short)(num * sizeof(t_member)));
 	for (i=num-1,m = x->b_mem + i; i >= 0; i--,m--) {
 		if (i)
-			m->m_proxy = proxy_new(x,(long)i,&x->b_id);
+			m->m_proxy = proxy_new(x,(long)i,NULL);
 		m->m_out = outlet_new(x,0L);
 		m->m_on = 0;
 		m->m_argc = 1;

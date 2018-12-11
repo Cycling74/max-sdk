@@ -24,6 +24,7 @@ typedef struct _max_jit_textfile
 	t_handle			text;
 	t_symbol			*title;
 	char				convert;
+	char				edvalid;
 } t_max_jit_textfile;
 
 t_jit_err jit_textfile_init(void);
@@ -108,7 +109,7 @@ void ext_main(void *r)
 	max_addmethod_usurp_low((method)max_jit_textfile_outputmatrix,	"outputmatrix");
 	max_addmethod_defer_low((method)max_jit_textfile_line,			"line");
 
-	return 0;
+	return;
 }
 
 t_jit_err max_jit_textfile_outputline(void *x)
@@ -246,11 +247,11 @@ void max_jit_textfile_mproc(t_max_jit_textfile *x, void *mop)
 
 	jit_attr_setlong(max_jit_obex_jitob_get(x), gensym("texthandle"), (long)x->text);
 
-	if (err=(t_jit_err) jit_object_method(
+	if ((err=(t_jit_err) jit_object_method(
 				max_jit_obex_jitob_get(x),
 				_jit_sym_matrix_calc,
 				jit_object_method(mop,_jit_sym_getinputlist),
-				jit_object_method(mop,_jit_sym_getoutputlist)))
+				jit_object_method(mop,_jit_sym_getoutputlist))))
 	{
 		jit_error_code(x,err);
 	}
@@ -263,28 +264,26 @@ void max_jit_textfile_okclose(t_max_jit_textfile *x, char *prompt, short *result
 	*result = 3;
 }
 
-
-
 void max_jit_textfile_edclose(t_max_jit_textfile *x, char **text, long size)
 {
-	if (x->text)
-		sysmem_resizehandle(x->text, size);
-	else
-		x->text = sysmem_newhandle(size);
+	if (x->edvalid || size) {
+		if (x->text)
+			sysmem_resizehandle(x->text, size);
+		else
+			x->text = sysmem_newhandle(size);
 
-	sysmem_lockhandle(x->text, 1);
-	jit_copy_bytes(*(x->text), *text, size);
-	sysmem_lockhandle(x->text, 0);
-
+		sysmem_lockhandle(x->text, 1);
+		jit_copy_bytes(*(x->text), *text, size);
+		sysmem_lockhandle(x->text, 0);
+	}
 	x->editor = 0;
+	x->edvalid = false;
 }
-
 
 void *max_jit_textfile_edsave(t_max_jit_textfile *x, char **text, long size, char *filename, short vol)
 {
 	return 0;
 }
-
 
 void max_jit_textfile_wclose(t_max_jit_textfile *x)
 {
@@ -309,7 +308,7 @@ void max_jit_textfile_dblclick(t_max_jit_textfile *x)
 	if (x->text) {
 		object_attr_setchar(x->editor, gensym("scratch"), 1); // what does this do?
 		sysmem_nullterminatehandle(x->text);
-		object_method(x->editor, gensym("settext"), *(x->text), gensym("utf-8"));
+		x->edvalid = (t_max_err)object_method(x->editor, gensym("settext"), *(x->text), gensym("utf-8")) == MAX_ERR_NONE;
 	}
 }
 
@@ -341,7 +340,7 @@ void max_jit_textfile_opentextfile_write(t_max_jit_textfile *x, t_symbol *s, lon
 	else if (saveasdialog_extended(filename, &path, &type, &type, 1))
 		return;
 
-	if (err = path_createsysfile(filename, path, type, &fh_write)) {
+	if ((err = path_createsysfile(filename, path, type, &fh_write))) {
 		jit_object_error((t_object *)x,"jit.textfile: %s: error %d creating file", filename, err);
 		return;
 	}
@@ -385,7 +384,7 @@ t_jit_err max_jit_textfile_closetextfile_write(t_max_jit_textfile *x)
 
 	sysfile_getpos(x->fh_write, &position);
 	sysfile_seteof(x->fh_write, position);
-	if (err = sysfile_close(x->fh_write)) {
+	if ((err = sysfile_close(x->fh_write))) {
 		jit_atom_setlong(&a[0], 0);
 		jit_atom_setlong(&a[1], err);
 		max_jit_obex_dumpout(x, gensym("write"), 2, a);
@@ -476,7 +475,7 @@ void max_jit_textfile_opentextfile_read(t_max_jit_textfile *x, t_symbol *s, long
 		goto out;
 	}
 
-	if (err = path_opensysfile(filename, path, &fh_read, READ_PERM)) {
+	if ((err = path_opensysfile(filename, path, &fh_read, READ_PERM))) {
 		jit_object_error((t_object *)x,"%s: error %d opening file", filename, err);
 		rv = 0;
 		goto out;
@@ -498,7 +497,7 @@ t_jit_err max_jit_textfile_closetextfile_read(t_max_jit_textfile *x)
 {
 	long err = 0;
 
-	if (err = sysfile_close(x->fh_read)) {
+	if ((err = sysfile_close(x->fh_read))) {
 		jit_object_error((t_object *)x,"jit.textfile: error closing file: %d", err);
 	}
 
@@ -518,7 +517,7 @@ t_jit_err max_jit_textfile_read(t_max_jit_textfile *x)
 t_jit_err max_jit_textfile_tobuffer(t_max_jit_textfile *x)
 {
 	t_ptr_size count;
-	long err;
+	long err = JIT_ERR_GENERIC;
 	t_ptr_size eof;
 
 	if (x && x->fh_read) {
@@ -599,10 +598,10 @@ void *max_jit_textfile_new(t_symbol *s, long argc, t_atom *argv)
 	t_max_jit_textfile *x;
 	void *o;
 
-	if (x=(t_max_jit_textfile *)max_jit_obex_new(max_jit_textfile_class,gensym("jit_textfile"))) {
+	if ((x=(t_max_jit_textfile *)max_jit_obex_new(max_jit_textfile_class,gensym("jit_textfile")))) {
 		x->editor = NULL;
 		x->text = NULL;
-		if (o=jit_object_new(gensym("jit_textfile"))) {
+		if ((o=jit_object_new(gensym("jit_textfile")))) {
 			max_jit_mop_setup_simple(x,o,argc,argv);
 			//add additional non-matrix outputs
 			x->fh_write = 0;
@@ -612,6 +611,7 @@ void *max_jit_textfile_new(t_symbol *s, long argc, t_atom *argv)
 			x->title = NULL;
 			x->convert = 1;
 			x->text = NULL;
+			x->edvalid = false;
 			max_jit_attr_args(x,argc,argv);
 		} else {
 			jit_object_error((t_object *)x,"jit.textfile: could not allocate object");

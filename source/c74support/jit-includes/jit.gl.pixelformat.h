@@ -50,10 +50,14 @@ extern "C" {
 #define JIT_GL_PF_FLAG_TEXTURE_DEPTH			(1 << 5)
 #define JIT_GL_PF_FLAG_BIND_TO_TEXTURE			(1 << 6)	// render to texture
 
-#ifdef JIT_GL_NSGL
+#ifdef MAC_VERSION
+
 typedef uint32_t t_jit_gl_pixel_attribute;
+
 #else
+
 typedef GLint t_jit_gl_pixel_attribute;
+
 #endif
 
 /****************************************************************************/

@@ -39,7 +39,6 @@ extern t_symbol *ps_textchanged;
 extern t_symbol *ps_textcolor; 
 extern t_symbol *ps_color; 
 extern t_symbol *ps_grabfocus; 
-extern t_symbol *ps_fontchanged; 
 extern t_symbol *ps_inletoutlet;
 extern t_symbol *ps_bfixwidth; 
 extern t_symbol *ps_showcaption;
@@ -110,6 +109,17 @@ extern t_symbol *ps_getnamed;
 extern t_symbol *ps_getlogical;
 extern t_symbol *ps_bringtofront;
 extern t_symbol *ps_sendtoback;
+
+// patcher dictionary syms
+extern t_symbol *ps_pound_PD;
+extern t_symbol *ps_appversion;
+extern t_symbol *ps_major;
+extern t_symbol *ps_minor;
+extern t_symbol *ps_revision;
+extern t_symbol *ps_architecture;
+extern t_symbol *ps_x86;
+extern t_symbol *ps_x64;
+extern t_symbol *ps_modernui;
 
 // Attributes of the Maxobj class
 extern t_symbol *ps_rect;

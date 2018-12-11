@@ -11,8 +11,8 @@
 
 // Name & Version
 PRODUCT_NAME = $(PROJECT_NAME)
-PRODUCT_VERSION = 7.0.1
-ARCHS = i386 x86_64
+PRODUCT_VERSION = 8.0.2
+ARCHS = x86_64
 
 
 // Paths
@@ -30,7 +30,7 @@ INFOPLIST_FILE = $(SRCROOT)/../../Info.plist
 
 
 // Architecture and Deployment
-ARCHS = i386 x86_64
+ARCHS = x86_64
 
 // The following section sets the Mac SDK version to be used.
 // For most projects this has little to no impact because there are no direct dependencies on OS function calls.
@@ -40,7 +40,7 @@ ARCHS = i386 x86_64
 //
 // SDKROOT = macosx10.6
 
-MACOSX_DEPLOYMENT_TARGET = 10.7
+MACOSX_DEPLOYMENT_TARGET = 10.9
 
 
 // Compiler Version -- leave them all commented out to get the default version provided by Xcode

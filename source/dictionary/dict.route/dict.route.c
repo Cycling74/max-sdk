@@ -8,7 +8,6 @@ typedef struct _dict_route {
 	t_object		obj;
 	void			*outlet_dict;
 	void			*outlet_nomatch;
-	long			inletnum;
 	void			*inlet_tomatch;
 	t_symbol		*schema_name;
 	t_dictionary	*schema_dict;
@@ -54,7 +53,7 @@ void *dict_route_new(t_symbol *s, long argc, t_atom *argv)
 	if (x) {
 		x->outlet_nomatch = outlet_new(x, "dictionary");
 		x->outlet_dict = outlet_new(x, "dictionary");
-		x->inlet_tomatch = proxy_new(x, 1, &x->inletnum);
+		x->inlet_tomatch = proxy_new(x, 1, NULL);
 
 		if (attrstart)
 			dictobj_dictionaryfromatoms(&d, attrstart, argv);

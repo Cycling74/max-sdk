@@ -4,7 +4,12 @@
 /****************************************************************************/
 
 #include "jit.gl.h"
-#include "jit.gl.procs.h"
+#if defined(WIN_VERSION) || !defined(GL3_VERSION)
+	#define JIT_GL_USE_PROCS 1
+#endif
+#ifdef JIT_GL_USE_PROCS
+	#include "jit.gl.procs.h"
+#endif
 #include "jit.gl.support.h"
 #include "jit.gl.pixelformat.h"
 
@@ -20,44 +25,6 @@ extern "C" {
     #pragma pack(2)
 #endif
 
-/****************************************************************************/
-
-#ifdef MAC_VERSION
-#ifdef JIT_GL_AGL
-typedef WindowRef					t_jit_gl_native_window;
-typedef AGLDevice					t_jit_gl_native_device;			// Defines a reference to a list of graphics devices.
-typedef AGLDrawable					t_jit_gl_native_drawable;		// Defines an opaque data type that represents a Carbon window.
-typedef AGLContext					t_jit_gl_native_context;		// Represents a pointer to an opaque AGL context object
-typedef AGLPixelFormat				t_jit_gl_native_pixelformat;	// Represents a pointer to an opaque pixel format object.
-#endif
-#ifdef JIT_GL_NSGL
-typedef void*						t_jit_gl_native_window;			// NWWindow *
-typedef CGDirectDisplayID			t_jit_gl_native_device;			// Defines a reference to a list of graphics devices.
-typedef void*						t_jit_gl_native_drawable;		// NSView *
-typedef void*						t_jit_gl_native_context;		// NSOpenGLContext *
-typedef void*						t_jit_gl_native_pixelformat;	// NSOpenGLPixelFormat *
-#endif
-#endif
-
-#ifdef WIN_VERSION
-/*
-	Key object types:
-		
-		HDC - a handle to a device independent graphics context (screen, printer, memory, etc.).  HDC
-				conflates the AGLDevice and AGLDrawable concepts.
-
-		HGLRC - a handle to an opengl rendering context.  Equivalent to an AGLContext.
-*/
-typedef HWND						t_jit_gl_native_window;
-typedef HDC							t_jit_gl_native_device;
-typedef HDC							t_jit_gl_native_drawable;
-typedef HGLRC						t_jit_gl_native_context;	
-typedef GLint*						t_jit_gl_native_pixelformat;	
-
-typedef struct _jit_gl_platform_data {
-	PROC set_swap_interval;
-} t_jit_gl_platform_data;
-#endif
 
 /****************************************************************************/
 
@@ -65,8 +32,10 @@ typedef struct _jit_gl_context_struct
 {
 	t_jit_gl_native_context			context;
 	t_jit_gl_native_device			device;
-	t_jit_gl_native_pixelformat 	pixelformat;	
+	t_jit_gl_native_pixelformat 	pixelformat;
+#ifdef JIT_GL_USE_PROCS
 	t_jit_gl_extprocs				*procs;			// proc table for opengl extensions
+#endif
 	t_jit_gl_support				*support;		// opengl feature support
 	const char						*extensions;	// opengl extensions string 
 	void							*target;
@@ -74,6 +43,8 @@ typedef struct _jit_gl_context_struct
 	long							renderer_id;	// mac only
 	long							flags;
 	void							*auxdata;
+	void							*offscreentex;
+	void							*offscreenfbo;
 #ifdef WIN_VERSION
 	t_jit_gl_platform_data			platform_data;
 #endif
@@ -86,6 +57,7 @@ typedef struct _jit_gl_context_info
 	long							renderer_id;	//mac only
 	t_jit_gl_context				share;
 	t_jit_gl_pixelformat			*pixelformat;
+	void							*nativewin;
 } t_jit_gl_context_info;
 
 

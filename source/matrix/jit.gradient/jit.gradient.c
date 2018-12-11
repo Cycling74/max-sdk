@@ -77,7 +77,7 @@ t_jit_err jit_gradient_init(void)
 t_jit_err jit_gradient_matrix_calc(t_jit_gradient *x, void *inputs, void *outputs)
 {
 	t_jit_err err=JIT_ERR_NONE;
-	long out_savelock, dimmode;
+	long out_savelock;
 	t_jit_matrix_info out_minfo;
 	char *out_bp;
 	long i,dimcount,planecount,dim[JIT_MATRIX_MAX_DIMCOUNT];
@@ -121,13 +121,12 @@ out:
 void jit_gradient_calculate_ndim(t_jit_gradient *x, long dimcount, long *dim, long planecount,
 								 t_jit_matrix_info *out_minfo, char *bop)
 {
-	long i,j,width,height, index;
+	long i,j,width,height;
 	long start[4], end[4], chebycount;
-	float indperc;
 	double cheby[64], *table=NULL;
 	float Tn, Tn1, Tn2, v,d;
 	float wmax, xmax=0.0;
-	uchar *op;
+	char *op;
 	t_uint32 *lp1,*lp2;
 
 	start[0] = x->start[0]*255.;
@@ -194,28 +193,36 @@ void jit_gradient_calculate_ndim(t_jit_gradient *x, long dimcount, long *dim, lo
 					else {
 						*op++ = ((1.-table[j])*(start[0]-end[0]))+end[0];
 					}
+					if(planecount == 1) {
+						continue;
+					}
+					
 					if(start[1]<end[1]) {
 						*op++ = (table[j]*(end[1]-start[1]))+start[1];
 					}
 					else {
 						*op++ = ((1.-table[j])*(start[1]-end[1]))+end[1];
 					}
+					if(planecount == 2) {
+						continue;
+					}
+					
 					if(start[2]<end[2]) {
 						*op++ = (table[j]*(end[2]-start[2]))+start[2];
 					}
 					else {
 						*op++ = ((1.-table[j])*(start[2]-end[2]))+end[2];
 					}
+					if(planecount == 3) {
+						continue;
+					}
+					
 					if(start[3]<end[3]) {
 						*op++ = (table[j]*(end[3]-start[3]))+start[3];
 					}
 					else {
 						*op++ = ((1.-table[j])*(start[3]-end[3]))+end[3];
 					}
-
-ick1:
-					;
-
 				}
 			}
 		}
@@ -237,7 +244,7 @@ t_jit_gradient *jit_gradient_new(void)
 	t_jit_gradient *x;
 	short i;
 
-	if (x=(t_jit_gradient *)jit_object_alloc(_jit_gradient_class)) {
+	if ((x=(t_jit_gradient *)jit_object_alloc(_jit_gradient_class))) {
 		x->start[0] = 0.;
 		x->start[1] = 0.;
 		x->start[2] = 0.;

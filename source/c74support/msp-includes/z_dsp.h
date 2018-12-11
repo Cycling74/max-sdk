@@ -19,9 +19,18 @@
 /**	MSP System Properties.
 	@ingroup	 msp	*/
 enum {
-	SYS_MAXBLKSIZE = 2048,	///< a good number for a maximum signal vector size
-	SYS_MAXSIGS = 250		///< number of signal inlets you can have in an object
+	SYS_MAXBLKSIZE = 2048	///< a good number for a maximum signal vector size
 };
+
+// maximum channels in a multi-channel signal
+
+#define MC_MAX_CHANS 1024
+
+// suggested maximum number of inlets or outlets in a multi-channel object
+// this is not a hard limit, just a way to keep people from making objects
+// with huge numbers of inlets and outlets by mistake
+
+#define MC_MAX_IO 64
 
 // header for all DSP objects. Provides a proxy.
 
@@ -32,6 +41,7 @@ enum {
 #define Z_PUT_FIRST 4	///< when list of ugens is resorted, put this object at beginning @ingroup msp
 #define Z_IGNORE_DISABLE 8	///< ignore the disable field when executing the chain, e.g. to process the pass~ object in a muted patcher.
 #define Z_DONT_ADD 16		///< if this flag is set the object will be ignored and its dsp method won't be called.
+#define Z_MC_INLETS 32	///< object knows how to count channels of incoming multi-channel signals
 
 #define SIXTEENIZE(p) ((((t_ptr_uint)(p)) + 16) & (~(t_ptr_uint)0xF))
 #define THIRTYTWOIZE(p) ((((t_ptr_uint)(p)) + 32) & (~(t_ptr_uint)0x1F))

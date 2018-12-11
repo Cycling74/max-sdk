@@ -13,7 +13,6 @@ typedef struct vexpr
 	t_expr *v_expr;
 	void **v_proxy;
 	void *v_outlet;
-	long v_inReceive;
 	t_atom *v_argv[10];
 	short v_argc[10];
 	short v_numargs;
@@ -234,7 +233,6 @@ void *vexpr_new(t_symbol *s, short argc, t_atom *argv)
 	x->v_proxy = 0;
 	x->v_numargs = 0;
 	x->v_scalarmode = 0;
-	x->v_inReceive = 0;
 
 	for (i=0; i < 10; i++) {
 		x->v_argv[i] = (t_atom *)sysmem_newptr(MAXLIST * sizeof(t_atom));
@@ -248,7 +246,7 @@ void *vexpr_new(t_symbol *s, short argc, t_atom *argv)
 					x->v_proxy = (void **)getbytes(i * sizeof(void *));
 					x->v_numargs = i;
 				}
-				x->v_proxy[i-1] = proxy_new((Object *)x,(long)i,&x->v_inReceive);
+				x->v_proxy[i-1] = proxy_new((Object *)x,(long)i,NULL);
 			} else if (i < x->v_numargs) {
 				x->v_proxy[i-1] = NULL;
 			}

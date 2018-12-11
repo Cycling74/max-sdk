@@ -269,7 +269,9 @@ t_jit_err jit_attr_user_touch(void *x, t_symbol *s);
 t_jit_err jit_attr_user_touch_parse(void *x, char *attrnames);
 t_jit_err jit_object_addattr(void *x, t_object *attr);
 t_jit_err jit_object_deleteattr(void *x, t_symbol *attrname);
-		
+
+void jit_attr_cleanall(t_object *x);
+void jit_attr_clean(t_object *x, t_symbol *name);
 		
 //more util functions
 void jit_rand_setseed(long n);
@@ -279,6 +281,8 @@ void jit_error_code(void *x,t_jit_err v); //interrupt safe
 void jit_error_sym(void *x,t_symbol *s); //interrupt safe
 void jit_post_sym(void *x,t_symbol *s);  //interrupt safe
 
+t_jit_err jit_err_from_max_err(t_max_err err);
+		
 //load test
 
 #ifdef __APPLE_CC__

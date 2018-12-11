@@ -25,26 +25,8 @@ typedef t_atom_long t_jit_gl_context_status;
 #define JIT_GL_VIEW_AVAILABLE		0
 #define JIT_GL_VIEW_UNAVAILABLE		1
 #define JIT_GL_VIEW_ERROR			2
-
-
-typedef long t_jit_gl_context_modifier;
-#define JIT_GL_VIEW_COMMAND_KEY		(1<<0)
-#define JIT_GL_VIEW_SHIFT_KEY		(1<<1)
-#define JIT_GL_VIEW_CAPS_LOCK		(1<<2)
-#define JIT_GL_VIEW_ALT_KEY			(1<<3)
-#define JIT_GL_VIEW_CONTROL_KEY		(1<<4)
 	
-typedef struct _jit_pt {
-	long	x;
-	long	y;
-} t_jit_pt;
 
-typedef struct _jit_rect {
-	long	x;
-	long	y;
-	long	width;
-	long	height;
-} t_jit_rect;
 
 // attributes of t_jit_gl_context_view to cache when recreating
 typedef struct _jit_gl_context_view_cache {
@@ -98,8 +80,13 @@ typedef struct _jit_gl_context_view {
 	t_object			*patcher;			///< patcher the context view is in (if there is one)
 	long				freeing;			///< in the process of freeing flag
 	long				creating;			///< in the process of creating flag
+	long				destroying;			///< in the process of destroying flag
 	float				scalefactor;		///< scaling factor when drawing to retina display
 	long				allow_hi_res;		///< allows for high resolution drawing when available
+	char				view_valid;
+	char				first_frame;
+	void				*nativewinhandle;	///< patcher native window handle, for offscreen contexts
+	char				is_mfl;
 } t_jit_gl_context_view;
 
 
@@ -147,6 +134,7 @@ t_jit_gl_context_status jit_gl_context_view_make_current(t_jit_gl_context_view *
 
 // renderer interface
 t_jit_gl_context_status jit_gl_context_view_swap(t_jit_gl_context_view *x);
+t_jit_gl_context_status jit_gl_context_view_leave(t_jit_gl_context_view *x);
 
 // inspection interface
 t_jit_err jit_gl_context_view_describe(t_jit_gl_context_view *x, t_dictionary *d);

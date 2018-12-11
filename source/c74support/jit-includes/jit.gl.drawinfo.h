@@ -41,12 +41,14 @@ typedef struct _jit_gl_drawinfo
 
 t_jit_err jit_gl_drawinfo_setup(void *x, t_jit_gl_drawinfo *drawinfo);
 long jit_gl_drawinfo_active_textures(t_jit_gl_drawinfo *drawinfo);
+#ifndef GL3_VERSION
 void jit_gl_texcoord1f(t_jit_gl_drawinfo *drawinfo, float s);
 void jit_gl_texcoord2f(t_jit_gl_drawinfo *drawinfo, float s, float t);
 void jit_gl_texcoord3f(t_jit_gl_drawinfo *drawinfo, float s, float t, float r);
 void jit_gl_texcoord1fv(t_jit_gl_drawinfo *drawinfo, float *v);
 void jit_gl_texcoord2fv(t_jit_gl_drawinfo *drawinfo, float *v);
 void jit_gl_texcoord3fv(t_jit_gl_drawinfo *drawinfo, float *v);
+#endif
 void jit_gl_bindtexture(t_jit_gl_drawinfo *drawinfo, t_symbol *s, long i);
 void jit_gl_unbindtexture(t_jit_gl_drawinfo *drawinfo, t_symbol *s, long i);
 void jit_gl_begincapture(t_jit_gl_drawinfo *drawinfo, t_symbol *s, long i);

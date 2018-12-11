@@ -3,6 +3,9 @@
 //
 
 #include <Carbon/Carbon.h>
+#ifndef C74_X64
+#include <QuickTime/QuickTime.h>
+#endif
 
 #ifdef __glext_h_
 	#undef __glext_h_

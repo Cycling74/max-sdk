@@ -1072,15 +1072,6 @@ typedef struct {
   void (APIENTRY *VertexArrayParameteriAPPLE) (GLenum pname, GLint param);
   void (APIENTRY *TextureRangeAPPLE) (GLenum target, GLsizei length, GLvoid *pointer);
   void (APIENTRY *GetTexParameterPointervAPPLE) (GLenum target, GLenum pname, GLvoid **params);
-#ifdef JIT_GL_AGL
-  GLboolean (APIENTRY *CreatePBuffer) (GLint width, GLint height, GLenum target, GLenum internalFormat, long max_level, AGLPbuffer *pbuffer);
-  GLboolean (APIENTRY *DescribePBuffer) (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level );
-  GLboolean (APIENTRY *DestroyPBuffer) ( AGLPbuffer pbuffer );
-  GLboolean (APIENTRY *GetPBuffer) (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen );
-  GLboolean (APIENTRY *SetPBuffer) (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen );
-  GLboolean (APIENTRY *TexImagePBuffer) (AGLContext ctx, AGLPbuffer pbuffer, GLint source );
-  GLboolean (APIENTRY *SurfaceTexture) (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext );
-#endif  
 #endif
 #ifdef _WIN32
   HANDLE (WINAPI *CreateBufferRegionARB) (HDC hDC, int iLayerPlane, UINT uType);
@@ -2166,13 +2157,6 @@ typedef struct {
 #define glVertexArrayParameteriAPPLE     (_jit_gl_get_proctable()->VertexArrayParameteriAPPLE)
 #define glTextureRangeAPPLE              (_jit_gl_get_proctable()->TextureRangeAPPLE)
 #define glGetTexParameterPointervAPPLE   (_jit_gl_get_proctable()->GetTexParameterPointervAPPLE)
-#define aglCreatePBuffer                 (_jit_gl_get_proctable()->CreatePBuffer)
-#define aglDescribePBuffer               (_jit_gl_get_proctable()->DescribePBuffer)
-#define aglDestroyPBuffer                (_jit_gl_get_proctable()->DestroyPBuffer)
-#define aglGetPBuffer                    (_jit_gl_get_proctable()->GetPBuffer)
-#define aglSetPBuffer                    (_jit_gl_get_proctable()->SetPBuffer)
-#define aglTexImagePBuffer				 (_jit_gl_get_proctable()->TexImagePBuffer)
-#define aglSurfaceTexture                (_jit_gl_get_proctable()->SurfaceTexture)
 #endif
 #ifdef _WIN32
 #define wglCreateBufferRegionARB          (_jit_gl_get_proctable()->CreateBufferRegionARB)

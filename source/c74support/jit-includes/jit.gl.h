@@ -7,54 +7,110 @@
 
 // --------------------------------------------------------------------------------
 
-#include "jit.common.h"
+#include "jit.gl.common.h"
 
 // --------------------------------------------------------------------------------
 
 #ifdef MAC_VERSION
 
-//#ifdef C74_X64
-	#define JIT_GL_NSGL
-//#else
-//	#define JIT_GL_AGL
-//#endif
+	#ifdef GL3_VERSION
 
-#ifdef JIT_GL_AGL 
-#include <AGL/agl.h>
-#else
-#include <OpenGL/gl.h>
-#endif
-#include <OpenGL/glu.h>
-#include <OpenGL/OpenGL.h>
+		#include <OpenGL/gl3.h>
+		#define GL_QUAD_STRIP                     0x0008
+		#define GL_POLYGON                        0x0009
 
-#include "jit.agl.h"
+	#else
 
-// defined in jit.agl.h
-#ifdef JIT_GL_AGL
-#define glGetProcAddress aglGetProcAddress
-#else
-#define glGetProcAddress nsglGetProcAddress
-#endif
+		#include <OpenGL/gl.h>
+		#include <OpenGL/glu.h>
 
-#include "jit.glext.h"
+	#endif
+
+	#include <OpenGL/OpenGL.h>
+
+	void * nsglGetProcAddress (const char *pszProc);
+	void nsglSetRect(void *context, GLint *val);
+
+	#define glGetProcAddress nsglGetProcAddress
+
+	#include "jit.glext.h"
+
 #endif	// MAC_VERSION
 
 // --------------------------------------------------------------------------------
 
 #ifdef WIN_VERSION
-#include <windows.h>
-#include "gl\gl.h"
-#include "gl\glu.h"
-#include "jit.wglext.h"
-#include "jit.glext.h"
-#define glGetProcAddress wglGetProcAddress
-#endif
+
+	#include <windows.h>
+
+	#ifdef GL3_VERSION
+		#if defined(_DEBUG)
+			#define printf printf2
+			int __cdecl printf2(const char *format, ...);
+		#endif
+
+		#include "GL\gl3w.h"
+		
+		#include "wglext.h"
+		//#include "jit.wglext.h"
+		//#include "jit.glext.h"
+
+		#ifndef GL_APPLE_ycbcr_422
+		#define GL_APPLE_ycbcr_422 1
+		#define GL_YCBCR_422_APPLE                0x85B9
+		#endif /* GL_APPLE_ycbcr_422 */
+
+		#define GL_QUAD_STRIP                     0x0008
+		#define GL_POLYGON                        0x0009
+
+		#define GLsizeiptrARB GLsizeiptr
+		#define GLintptrARB GLintptr
+		#define GLhandleARB unsigned int
+		#define GLcharARB GLchar
+		#define GLhalfARB unsigned short
+		#define GLhalfNV unsigned short
+
+	#else
+
+		#include "gl\gl.h"
+		#include "gl\glu.h"
+		#include "jit.wglext.h"
+		#include "jit.glext.h"
+	#endif
+	
+	#define glGetProcAddress wglGetProcAddress
+	#define glCheckFramebufferStatus glCheckFramebufferStatusEXT
+
+
+	/*
+	Key object types:
+
+	HDC - a handle to a device independent graphics context (screen, printer, memory, etc.).  HDC
+	conflates the AGLDevice and AGLDrawable concepts.
+
+	HGLRC - a handle to an opengl rendering context.  Equivalent to an AGLContext.
+	*/
+	typedef HWND						t_jit_gl_native_window;
+	typedef HDC							t_jit_gl_native_device;
+	typedef HDC							t_jit_gl_native_drawable;
+	typedef HGLRC						t_jit_gl_native_context;
+	typedef GLint*						t_jit_gl_native_pixelformat;
+
+	typedef struct _jit_gl_platform_data {
+		PROC set_swap_interval;
+		float scalefactor;
+	} t_jit_gl_platform_data;
+
+#endif	// WIN_VERSION
 
 // --------------------------------------------------------------------------------
 
+#include "jit.gl.draw.h"
 #include "jit.gl.chunk.h"
 #include "jit.gl.ob3d.h"
+#ifndef GL3_VERSION
 #include "jit.gl.procs.h"
+#endif
 #include "jit.gl.support.h"
 #include "jit.gl.context.h"
 #include "jit.gl.drawinfo.h"
@@ -73,38 +129,13 @@ extern "C" {
     #pragma pack(2)
 #endif
 
-/****************************************************************************/
-// konstants
 
-#define		JIT_GL_RENDER_REG_STR	"jit_r3nd3r_"
-#define		JIT_CLASS3D_FINDER		"this_is_the_jit_class3d"
-
-#define		JIT_GL_MAX_TEXTUREUNITS	32
-
-#ifndef PI
-#define		PI	3.141592653589793
-#endif
-
-// layer defines
-#define JIT_GL_LAYER_FIRST		-1000
-#define JIT_GL_LAYER_DEFAULT	0
-#define JIT_GL_LAYER_LAST		1000
-
-// animator update priority flags
-#define JIT_ANIMATOR_PRIORITY_FIRST	-1000
-#define JIT_ANIMATOR_PRIORITY_DEF	0
-#define JIT_ANIMATOR_PRIORITY_PASS2	1000	// updated *after* nodes are updated
-
-// default animator mouse-ui priority
-#define JIT_ANIM_UIP_FIRST			-1000
-#define JIT_ANIM_UIP_CORNERPIN		-900	// gl.cornerpin
-#define JIT_ANIM_UIP_PHYS			-800	// phys.picker
-#define JIT_ANIM_UIP_HANDLE			-700	// gl.handle
-#define JIT_ANIM_UIP_DEFAULT		0
-#define JIT_ANIM_UIP_ADRIVE			900	// anim.drive
-#define JIT_ANIM_UIP_LAST			1000
-
-#define JIT_GL_MAX_PICK_FILTERS		10
+// --------------------------------------------------------------------------------
+// get the appropriate version of objects depending on OpenGL version used
+long jit_gl_object_is_texture(void *x);
+long jit_gl_texture_get(void **tex, t_symbol *dest_name);
+long jit_gl_slab_get(void **slab, t_symbol *dest_name);
+long jit_gl_mesh_get(void **mesh, t_symbol *dest_name);
 
 // --------------------------------------------------------------------------------
 // utility methods
@@ -132,64 +163,12 @@ char jit_gl_is_min_version(int major, int minor, int release);
 long jit_gl_plane_from_format(GLenum format);
 long jit_gl_get_datasize_from_datatype(GLenum e);
 
-// --------------------------------------------------------------------------------
-// misc
-
-/**
- * t_wind_mouse_info_struct provided by jit.window and jit.pwindow mouse events
- *
- */
-typedef struct {
-   t_atom		mouseatoms[8];	///< h, v, (up/down), cmdKey, shiftKey, alphaLock, option, control.
-   int			argc;			///< argument count
-   t_symbol 	*mousesymbol;	///< mouse event type
-}  t_wind_mouse_info;
-
-typedef struct {
-   t_atom		mouseatoms[16];	///< h, v, (up/down), cmdKey, shiftKey, alphaLock, option, control, dx, dy + RFU
-   int			argc;			///< argument count
-   t_symbol 	*mousesymbol;	///< mouse event type
-}  t_wind_mousewheel_info;
-
-typedef struct {
-   t_atom		keyatoms[8];	///< keycode, textcharacter, (up/down), cmdKey, shiftKey, alphaLock, option, control.
-   int			argc;			///< argument count
-   t_symbol 	*keysymbol;		///< key event type
-}  t_wind_key_info;
-
-
-// --------------------------------------------------------------------------------
-// geometry stuff
-
-/** 2D point (GLfloat) */
-typedef GLfloat t_point_2d[2];
-/** 3D point (GLfloat) */
-typedef GLfloat t_point_3d[3];
-/** 3D vector (GLfloat) */
-typedef GLfloat t_vec_3d[3];		
-/** 4D quaternion (GLfloat). Used for rotation */
-typedef GLfloat t_quaternion[4];
-/** 4D angle/axis rotation vector (GLfloat) */
-typedef GLfloat t_rotation[4];		
-/** RGBA color vector (GLfloat) */
-typedef GLfloat t_color[4];			
-
-/** Line or line segment in 3D space (GLfloat) */
-typedef struct {
- 	GLfloat	u[3]; ///< starting point
- 	GLfloat	v[3]; ///< ending point
-}  	t_line_3d;						// line or line segment
-
-typedef struct {
-	t_symbol	*colormode;	///< texture colormode
-	t_symbol	*type;		///< texture data type (char, float32, ...)
-	int			dim[3];		///< texture dimensions
-	int			dimcount;	///< number of texture dimensions
-} t_jit_gl_texture_info;
 
 t_jit_err jit_gl_worldtoscreen(t_jit_object *x, t_point_3d p_world, t_point_3d p_screen); 
 t_jit_err jit_gl_screentoworld(t_jit_object *x, t_point_3d p_screen, t_point_3d p_world);
 extern void * jit_gl_getscenegraph(t_symbol *ctx);
+
+t_jit_err jit_err_from_max_err(t_max_err err);
 
 /****************************************************************************/
 

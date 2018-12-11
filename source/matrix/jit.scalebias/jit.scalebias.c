@@ -92,17 +92,17 @@ t_jit_err jit_scalebias_init(void)
 	attr = jit_object_new(_jit_sym_jit_attr_offset,"rbias",_jit_sym_float32,attrflags,
 						  (method)0L,(method)0L,calcoffset(t_jit_scalebias,rbias));
 	jit_class_addattr(_jit_scalebias_class,attr);
-	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Red Scale\"");
+	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Red Bias\"");
 	
 	attr = jit_object_new(_jit_sym_jit_attr_offset,"gbias",_jit_sym_float32,attrflags,
 						  (method)0L,(method)0L,calcoffset(t_jit_scalebias,gbias));
 	jit_class_addattr(_jit_scalebias_class,attr);
-	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Green Scale\"");
+	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Green Bias\"");
 	
 	attr = jit_object_new(_jit_sym_jit_attr_offset,"bbias",_jit_sym_float32,attrflags,
 						  (method)0L,(method)0L,calcoffset(t_jit_scalebias,bbias));
 	jit_class_addattr(_jit_scalebias_class,attr);
-	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Blue Scale\"");
+	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Blue Bias\"");
 
 	// these attributes set all the channels at once, and are only settable
 	attrflags = JIT_ATTR_GET_OPAQUE_USER | JIT_ATTR_SET_USURP_LOW;
