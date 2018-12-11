@@ -30,6 +30,8 @@ var searchData=
   ['t_5fjit_5fattr_5foffset',['t_jit_attr_offset',['../structt__jit__attr__offset.html',1,'']]],
   ['t_5fjit_5fattr_5foffset_5farray',['t_jit_attr_offset_array',['../structt__jit__attr__offset__array.html',1,'']]],
   ['t_5fjit_5fattribute',['t_jit_attribute',['../structt__jit__attribute.html',1,'']]],
+  ['t_5fjit_5fgl_5fbuffer_5fdata',['t_jit_gl_buffer_data',['../structt__jit__gl__buffer__data.html',1,'']]],
+  ['t_5fjit_5fgl_5fbuffer_5fview',['t_jit_gl_buffer_view',['../structt__jit__gl__buffer__view.html',1,'']]],
   ['t_5fjit_5fgl_5fcontext_5fview',['t_jit_gl_context_view',['../structt__jit__gl__context__view.html',1,'']]],
   ['t_5fjit_5fgl_5fdrawinfo',['t_jit_gl_drawinfo',['../structt__jit__gl__drawinfo.html',1,'']]],
   ['t_5fjit_5fglchunk',['t_jit_glchunk',['../structt__jit__glchunk.html',1,'']]],

@@ -31,6 +31,8 @@ var annotated_dup =
     [ "t_jit_attr_offset", "structt__jit__attr__offset.html", "structt__jit__attr__offset" ],
     [ "t_jit_attr_offset_array", "structt__jit__attr__offset__array.html", "structt__jit__attr__offset__array" ],
     [ "t_jit_attribute", "structt__jit__attribute.html", "structt__jit__attribute" ],
+    [ "t_jit_gl_buffer_data", "structt__jit__gl__buffer__data.html", null ],
+    [ "t_jit_gl_buffer_view", "structt__jit__gl__buffer__view.html", null ],
     [ "t_jit_gl_context_view", "structt__jit__gl__context__view.html", "structt__jit__gl__context__view" ],
     [ "t_jit_gl_drawinfo", "structt__jit__gl__drawinfo.html", "structt__jit__gl__drawinfo" ],
     [ "t_jit_glchunk", "structt__jit__glchunk.html", "structt__jit__glchunk" ],

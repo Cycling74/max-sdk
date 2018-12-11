@@ -7,6 +7,7 @@ var searchData=
   ['appendix_3a_20updating_20externals_20for_20max_206',['Appendix: Updating Externals for Max 6',['../chapter_appendix_d.html',1,'']]],
   ['appendix_3a_20updating_20externals_20for_20max_206_2e1_20_28x64_20architecture_29',['Appendix: Updating Externals for Max 6.1 (x64 architecture)',['../chapter_appendix_e.html',1,'']]],
   ['appendix_3a_20sdk_20changes_20for_20max_207',['Appendix: SDK changes for Max 7',['../chapter_appendix_f.html',1,'']]],
+  ['appendix_3a_20sdk_20changes_20for_20max_208',['Appendix: SDK changes for Max 8',['../chapter_appendix_g.html',1,'']]],
   ['atoms_20and_20messages',['Atoms and Messages',['../chapter_atoms.html',1,'']]],
   ['advanced_20signal_20object_20topics',['Advanced Signal Object Topics',['../chapter_msp_advanced.html',1,'']]],
   ['anatomy_20of_20a_20msp_20object',['Anatomy of a MSP Object',['../chapter_msp_anatomy.html',1,'']]],

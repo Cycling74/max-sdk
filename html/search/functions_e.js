@@ -20,6 +20,7 @@ var searchData=
   ['path_5fabsolutepath',['path_absolutepath',['../group__files.html#gac7464bcde8db7b02fb97a4b341f98f04',1,'ext_path.h']]],
   ['path_5fclosefolder',['path_closefolder',['../group__files.html#ga63ca3fd6e4acb9f1b1e56b2d609bf4af',1,'ext_path.h']]],
   ['path_5fcreatesysfile',['path_createsysfile',['../group__files.html#gafd6e5cccc1eb10df5c58b51ca9df4f81',1,'ext_path.h']]],
+  ['path_5fexists',['path_exists',['../group__files.html#ga975c09f35b1f140124e32de6ad6f5cd5',1,'ext_path.h']]],
   ['path_5ffileinfo',['path_fileinfo',['../group__files.html#gaff0841e652133373b334f4976d5abdc0',1,'ext_path.h']]],
   ['path_5ffoldernextfile',['path_foldernextfile',['../group__files.html#gafa408a1435ddf8bd3e4c778f9d8ea0f4',1,'ext_path.h']]],
   ['path_5ffrompathname',['path_frompathname',['../group__files.html#gad1bbb97bd62d1ea92d1625a310c8222a',1,'ext_path.h']]],

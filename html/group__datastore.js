@@ -19,6 +19,8 @@ var group__datastore =
       [ "OBJ_FLAG_SILENT", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a7551721629504fee7ecf5973e467de80", null ],
       [ "OBJ_FLAG_INHERITABLE", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a20be48992fc9be2b12940730c09d704c", null ],
       [ "OBJ_FLAG_ITERATING", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a723b3619680045af03253e5e26d481f5", null ],
+      [ "OBJ_FLAG_CLONE", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348ac266242023e62d52333ae30a402121a7", null ],
+      [ "OBJ_FLAG_DANGER", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a9de4da280873aafea3228ab80a877f67", null ],
       [ "OBJ_FLAG_DEBUG", "group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348ab321f10bb0eb0d7f9b29b60a99e2ba7c", null ]
     ] ]
 ];

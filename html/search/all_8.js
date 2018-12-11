@@ -28,6 +28,7 @@ var searchData=
   ['hashtab_5fstorelong',['hashtab_storelong',['../group__hashtab.html#gacd212fab6d20968228106144d161dfcb',1,'ext_hashtab.h']]],
   ['hashtab_5fstoresym',['hashtab_storesym',['../group__hashtab.html#gab1dbc19e35e10d2863fd6763245bc04d',1,'ext_hashtab.h']]],
   ['height',['height',['../structt__jgraphics__font__extents.html#af187e59f203debcb25545a5427f0a105',1,'t_jgraphics_font_extents::height()'],['../structt__rect.html#aca22f5c74590cfbbc24c75dd432e5f75',1,'t_rect::height()'],['../structt__size.html#aa7ec2bdc3c47d9e01bffdab3c63b3112',1,'t_size::height()']]],
+  ['hitborder',['HitBorder',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021ac054b745b3acff1d6c0dda2154f7bfd8',1,'jpatcher_api.h']]],
   ['hitbox',['HitBox',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021a221361506a6a16b6c6ef01e0df8ba1c8',1,'jpatcher_api.h']]],
   ['hitgrowbox',['HitGrowBox',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021ada85a1e80aea2609cb61236fce30e53c',1,'jpatcher_api.h']]],
   ['hitinlet',['HitInlet',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021abbaf64215e72c962b14e40c5a44daaab',1,'jpatcher_api.h']]],

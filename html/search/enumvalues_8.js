@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sys_5fmaxblksize',['SYS_MAXBLKSIZE',['../group__msp.html#ggaaf8fd5f0e57d456151c951e0f3715fc4a29738f7ba126b5468181b4c017e573d0',1,'z_dsp.h']]],
-  ['sys_5fmaxsigs',['SYS_MAXSIGS',['../group__msp.html#ggaaf8fd5f0e57d456151c951e0f3715fc4a00acca9cc1491d6006a4c38127f02a90',1,'z_dsp.h']]],
+  ['sys_5fmaxblksize',['SYS_MAXBLKSIZE',['../group__msp.html#ggaac34dfe6c6b73b43a4656c9dce041034a29738f7ba126b5468181b4c017e573d0',1,'z_dsp.h']]],
   ['sysdateformat_5fflags_5flong',['SYSDATEFORMAT_FLAGS_LONG',['../group__systime.html#gga26a8d02aa000843530dcb2d350766951a0cdecdf057e390773e60c3d71de7faf4',1,'ext_systime.h']]],
   ['sysdateformat_5fflags_5fmedium',['SYSDATEFORMAT_FLAGS_MEDIUM',['../group__systime.html#gga26a8d02aa000843530dcb2d350766951a44be9bae61adf4f4b802989465768d63',1,'ext_systime.h']]],
   ['sysdateformat_5fflags_5fshort',['SYSDATEFORMAT_FLAGS_SHORT',['../group__systime.html#gga26a8d02aa000843530dcb2d350766951a03c806745c3aad02d768797ead649e20',1,'ext_systime.h']]],

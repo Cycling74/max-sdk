@@ -1,7 +1,7 @@
 var group__jpopupmenu =
 [
     [ "jpopupmenu_additem", "group__jpopupmenu.html#ga1911796fed5dd59d3ab9a7471f6161a9", null ],
-    [ "jpopupmenu_addseperator", "group__jpopupmenu.html#gad948b473c9ff12c1159960dcd36fb9a2", null ],
+    [ "jpopupmenu_addseparator", "group__jpopupmenu.html#gae97ef446e6e6a1348cae265a2aece07c", null ],
     [ "jpopupmenu_addsubmenu", "group__jpopupmenu.html#ga5ba90215f0693fe446f0f4c64af954b1", null ],
     [ "jpopupmenu_clear", "group__jpopupmenu.html#gaf4f15c09d15aaaa33d149a6109c4aa47", null ],
     [ "jpopupmenu_create", "group__jpopupmenu.html#ga4ee6ff8775c88750bc002db49bdaa98b", null ],

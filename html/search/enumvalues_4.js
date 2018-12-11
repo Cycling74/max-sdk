@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['jbox_5ffontface_5fbold',['JBOX_FONTFACE_BOLD',['../group__jbox.html#ggadb49720dc49f7d4e4cf9adbf2948e409a7c5afcc54470110f9adafe6643860e33',1,'jpatcher_api.h']]],
-  ['jbox_5ffontface_5fbolditalic',['JBOX_FONTFACE_BOLDITALIC',['../group__jbox.html#ggadb49720dc49f7d4e4cf9adbf2948e409ac504521024538cbb38406272126cb30b',1,'jpatcher_api.h']]],
-  ['jbox_5ffontface_5fitalic',['JBOX_FONTFACE_ITALIC',['../group__jbox.html#ggadb49720dc49f7d4e4cf9adbf2948e409a804e35b0947d1056b75c0b7416aed5f1',1,'jpatcher_api.h']]],
-  ['jbox_5ffontface_5fregular',['JBOX_FONTFACE_REGULAR',['../group__jbox.html#ggadb49720dc49f7d4e4cf9adbf2948e409a0071b2aa858b0b85866ec55f920661ea',1,'jpatcher_api.h']]],
+  ['jbox_5ffontface_5fbold',['JBOX_FONTFACE_BOLD',['../group__jbox.html#gga7ff5f2dff38e7639981794c43dc9167ba7c5afcc54470110f9adafe6643860e33',1,'jpatcher_api.h']]],
+  ['jbox_5ffontface_5fbolditalic',['JBOX_FONTFACE_BOLDITALIC',['../group__jbox.html#gga7ff5f2dff38e7639981794c43dc9167bac504521024538cbb38406272126cb30b',1,'jpatcher_api.h']]],
+  ['jbox_5ffontface_5fitalic',['JBOX_FONTFACE_ITALIC',['../group__jbox.html#gga7ff5f2dff38e7639981794c43dc9167ba804e35b0947d1056b75c0b7416aed5f1',1,'jpatcher_api.h']]],
+  ['jbox_5ffontface_5fregular',['JBOX_FONTFACE_REGULAR',['../group__jbox.html#gga7ff5f2dff38e7639981794c43dc9167ba0071b2aa858b0b85866ec55f920661ea',1,'jpatcher_api.h']]],
   ['jgraphics_5ffileformat_5fjpeg',['JGRAPHICS_FILEFORMAT_JPEG',['../group__jgraphics.html#gga81465e1a6989399e343d081defd90dbeae2a7397922debc6f37505eb58aa58d2f',1,'jgraphics.h']]],
   ['jgraphics_5ffileformat_5fpng',['JGRAPHICS_FILEFORMAT_PNG',['../group__jgraphics.html#gga81465e1a6989399e343d081defd90dbea2370a1696e7b478145fece2d7b2ee903',1,'jgraphics.h']]],
   ['jgraphics_5ffont_5fslant_5fitalic',['JGRAPHICS_FONT_SLANT_ITALIC',['../group__jfont.html#ggaea63403193677b088b56cb60c69c37b4a66269b2de097def1c7d8100683cae0da',1,'jgraphics.h']]],

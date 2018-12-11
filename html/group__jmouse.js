@@ -33,8 +33,8 @@ var group__jmouse =
       [ "eCapsLock", "group__jmouse.html#ggae6e0f3193b01069c1bce512ab787a681aa20bd26db483cff1f37697899767fdb3", null ],
       [ "eAutoRepeat", "group__jmouse.html#ggae6e0f3193b01069c1bce512ab787a681a5d0dfbd38a8045f96ba1c9f66bfc270b", null ]
     ] ],
-    [ "jkeyboard_getcurrentmodifiers", "group__jmouse.html#gaba226c92f2227a75e696e3d302d92ca1", null ],
-    [ "jkeyboard_getcurrentmodifiers_realtime", "group__jmouse.html#ga8e41a07bb098e3855b9c60f74d29337e", null ],
+    [ "jkeyboard_getcurrentmodifiers", "group__jmouse.html#gabc63dfbdcf7640e3162853c6d5faf649", null ],
+    [ "jkeyboard_getcurrentmodifiers_realtime", "group__jmouse.html#ga630a6d0a75e63abf03fc1aefe1744da9", null ],
     [ "jmouse_getposition_global", "group__jmouse.html#gaff8fb5e060894aa39293153424c5c939", null ],
     [ "jmouse_setcursor", "group__jmouse.html#gaf8bd554aa25bb4ccd3945a227876fe47", null ],
     [ "jmouse_setposition_box", "group__jmouse.html#ga8d209aa8fadfbe4d5038b2041eae801e", null ],

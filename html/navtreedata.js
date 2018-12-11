@@ -1,3 +1,26 @@
+/*
+@ @licstart  The following is the entire license notice for the
+JavaScript code in this file.
+
+Copyright (C) 1997-2017 by Dimitri van Heesch
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+@licend  The above is the entire license notice
+for the JavaScript code in this file
+*/
 var NAVTREE =
 [
   [ "Max API", "index.html", [
@@ -133,6 +156,17 @@ var NAVTREE =
       [ "Scheduling Temporary Events", "chapter_itm.html#chapter_itm_temp", null ],
       [ "Permanent Events", "chapter_itm.html#chapter_itm_permanent", null ],
       [ "Cleaning Up", "chapter_itm.html#chapter_itm_clean", null ]
+    ] ],
+    [ "MC", "chapter_mc.html", [
+      [ "The MC Wrapper", "chapter_mc.html#chapter_mc_wrapper", null ],
+      [ "Multi-channel Inputs and Outputs", "chapter_mc.html#chapter_mc_ins_and_outs", null ],
+      [ "Creating Multi-channel Inlets and Outlets", "chapter_mc.html#chapter_mc_inlets_and_outlets", null ],
+      [ "Channel Counting in the Perform Method", "chapter_mc.html#chapter_mc_channelcounting", null ],
+      [ "Specifying Output Channel Counts", "chapter_mc.html#chapter_mc_output_channelcount", null ],
+      [ "How to Auto-Adapt", "chapter_mc.html#chapter_mc_autoadapt", null ],
+      [ "How Many Output Channels Do I Have?", "chapter_mc.html#chapter_mc_how_many", null ],
+      [ "Handling MC Signals in Traditional MSP Objects", "chapter_mc.html#chapter_mc_msp_inlets", null ],
+      [ "Examples", "chapter_mc.html#chapter_mc_examples", null ]
     ] ],
     [ "Jitter Object Model", "chapter_jit_objectmodel.html", [
       [ "Jitter Object Model Basics", "chapter_jit_objectmodel.html#chapter_jit_objectmodel_basics", null ],
@@ -290,6 +324,9 @@ var NAVTREE =
       [ "Using ext_main for Entry Point", "chapter_appendix_f.html#chapter_appendix_f_main", null ],
       [ "Support for Max 7 UI Object Styles", "chapter_appendix_f.html#chapter_appendix_f_styles", null ]
     ] ],
+    [ "Appendix: SDK changes for Max 8", "chapter_appendix_g.html", [
+      [ "Support for MC", "chapter_appendix_g.html#chapter_appendix_g_mc", null ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -305,17 +342,17 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"functions_m.html",
-"group__attr.html#gaababb47839dc4396bddfbf8149214e21",
-"group__console.html#gaef84325d992e0afa14b2e7b0c0515601",
-"group__hashtab.html#gab5cb27719ed31725c46ff3ff52356aa8",
-"group__jgraphics.html#gga3519fa317c6811b619af2d70e3c1eca7ab3d013abb01bb8b776878740c806be4f",
-"group__jmouse.html#ggae6e0f3193b01069c1bce512ab787a681a7ce9f8e318648eef4ca2c0cdcf02d388",
-"group__matrixmod.html#ga12b4661428435cba18ab80d25c7581b1",
-"group__ob3dmod.html#ga354e6daa1b458570e2528e12819b0c2a",
-"group__opvecmod.html#gaba8a6b1cff6bf9770ea3994d8be30e38",
-"group__time.html#gacad240f629ef5619c9949ba7a3adec95",
-"structt__jgraphics__font__extents.html#af187e59f203debcb25545a5427f0a105"
+"classes.html",
+"group__attr.html#ga993e3c3fa7470fcc90b0603e56a3010c",
+"group__color.html#ga22c35beb59c7430d6c6e25e6e1fdb8c9",
+"group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c",
+"group__jgraphics.html#gab6eb126ec0f85fa48c30aff48a3e0f5b",
+"group__jmouse.html#ga030290f12df92eb02c507ed271ffcde9",
+"group__mathmod.html#ga41dfbcb172c26b6698188c1ae277fbcc",
+"group__msp.html#ga8c499862db0fcf07692989aae3d84c9e",
+"group__opvecmod.html#gad7efeea7c1d620197481cb1b9d7b46e4",
+"group__time.html#ggabc6126af1d45847bc59afa0aa3216b04af2db490f1904d9f1e834f9ea062ad67e",
+"structt__jit__attr__filter__proc.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

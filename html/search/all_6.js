@@ -13,6 +13,7 @@ var searchData=
   ['fileload',['fileload',['../group__loading__max__files.html#gab4d0195eb3897bfa1cd8711dd0cae70e',1,'ext_proto.h']]],
   ['files_20and_20folders',['Files and Folders',['../group__files.html',1,'']]],
   ['fileusage_5faddfile',['fileusage_addfile',['../group__files.html#ga2fce56ee681efcc473951ebcba79580c',1,'ext_proto.h']]],
+  ['fileusage_5faddfolder',['fileusage_addfolder',['../group__files.html#ga29f82d102666d24b0b69147c9cdbf7f9',1,'ext_proto.h']]],
   ['fileusage_5faddpackage',['fileusage_addpackage',['../group__files.html#gaf25bd3f2783853c08493171311bf1c0b',1,'ext_proto.h']]],
   ['filewatcher_5fnew',['filewatcher_new',['../group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97',1,'ext_proto.h']]],
   ['fill_5fattr_5fsave',['FILL_ATTR_SAVE',['../group__styles.html#ga1880358cd3e9fd6cbb686979439e249b',1,'ext_boxstyle.h']]],

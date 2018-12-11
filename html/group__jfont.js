@@ -30,8 +30,8 @@ var group__jfont =
     [ "jfont_set_weight", "group__jfont.html#gaf9e0b85896193489682b019d67a56579", null ],
     [ "jfont_text_measure", "group__jfont.html#gad587e956e70581198b075cb336b4ccce", null ],
     [ "jfont_text_measuretext_wrapped", "group__jfont.html#ga9db6688289427ac765b5ff3b48039aef", null ],
-    [ "systemfontname", "group__jfont.html#gafa70864b20c34d1c67e87dcd1eaeab4a", null ],
-    [ "systemfontname_bold", "group__jfont.html#ga495a1971236bb1325b2528d9ded54a4e", null ],
-    [ "systemfontname_light", "group__jfont.html#gac934f86b897046ba414f69e15e8f7253", null ],
-    [ "systemfontsym", "group__jfont.html#gaecc09a42c4a99d0a7ae0ed86899f5b78", null ]
+    [ "systemfontname", "group__jfont.html#ga3c764062494e09ce54423670ed4c02ef", null ],
+    [ "systemfontname_bold", "group__jfont.html#gac1d020d1acde12201e3c9aa8cf479de1", null ],
+    [ "systemfontname_light", "group__jfont.html#gab1743dbc4c37b2a64a858eb584d8744a", null ],
+    [ "systemfontsym", "group__jfont.html#ga1a8d00272eb597f6f20c37053ab3d876", null ]
 ];

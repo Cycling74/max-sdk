@@ -15,13 +15,17 @@ var group__class =
       [ "CLASS_FLAG_REGISTERED", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a2ecc4a934743139d88d39fc62d028614", null ],
       [ "CLASS_FLAG_UIOBJECT", "group__class.html#gga124a08e1744d9e999211abaa9df9f556acdc1b6c10a366457cca2ea5e01964d80", null ],
       [ "CLASS_FLAG_ALIAS", "group__class.html#gga124a08e1744d9e999211abaa9df9f556aa44754fe97e81d80049c2647fb4d6a62", null ],
+      [ "CLASS_FLAG_MULTITOUCH", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a7a8befc0ff60038e02201b0e13a9cf35", null ],
       [ "CLASS_FLAG_DO_NOT_PARSE_ATTR_ARGS", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a99981e2a6df832c0f59871193f2060a5", null ],
       [ "CLASS_FLAG_DO_NOT_ZERO", "group__class.html#gga124a08e1744d9e999211abaa9df9f556ae6233c38c0dbacbc12b6ff152803c9cb", null ],
       [ "CLASS_FLAG_NOATTRIBUTES", "group__class.html#gga124a08e1744d9e999211abaa9df9f556aa8a5af40c8083496ee03dd3480087eee", null ],
       [ "CLASS_FLAG_OWNATTRIBUTES", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a2c12440c31196a04f5ab4883a2334659", null ],
       [ "CLASS_FLAG_PARAMETER", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a07a14e2f32bd185dd34742d77c8e2eb8", null ],
       [ "CLASS_FLAG_RETYPEABLE", "group__class.html#gga124a08e1744d9e999211abaa9df9f556ad06351e541da166e4924c27abb81151a", null ],
-      [ "CLASS_FLAG_OBJECT_METHOD", "group__class.html#gga124a08e1744d9e999211abaa9df9f556aa4be223531ae66209bf2d37a1c18dd79", null ]
+      [ "CLASS_FLAG_OBJECT_METHOD", "group__class.html#gga124a08e1744d9e999211abaa9df9f556aa4be223531ae66209bf2d37a1c18dd79", null ],
+      [ "CLASS_FLAG_VISUALIZER", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a356b54df0591c99bbe66077a5425e783", null ],
+      [ "CLASS_FLAG_USES_PROXIES", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a2d4de577798aa59ca3d04f01de80fb62", null ],
+      [ "CLASS_FLAG_OWN_DATA", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a82669475c4156b1050623dd6ade65510", null ]
     ] ],
     [ "class_addattr", "group__class.html#ga2289eb7e26b552be6e015c2f9912a9ac", null ],
     [ "class_addmethod", "group__class.html#gaab2e3c25868317c8a9c216bbca2c040d", null ],

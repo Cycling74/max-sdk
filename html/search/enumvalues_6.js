@@ -8,6 +8,8 @@ var searchData=
   ['obex_5futil_5fatom_5fgettext_5fsym_5fforce_5fquote',['OBEX_UTIL_ATOM_GETTEXT_SYM_FORCE_QUOTE',['../group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a8adcad05a635857f1f76aec4188e9ae9',1,'ext_obex_util.h']]],
   ['obex_5futil_5fatom_5fgettext_5fsym_5fno_5fquote',['OBEX_UTIL_ATOM_GETTEXT_SYM_NO_QUOTE',['../group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a639f398e983f74ee2adbf39a69062a93',1,'ext_obex_util.h']]],
   ['obex_5futil_5fatom_5fgettext_5ftruncate_5fzeros',['OBEX_UTIL_ATOM_GETTEXT_TRUNCATE_ZEROS',['../group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a433f595f519e0a4051d769db66b9b5d8',1,'ext_obex_util.h']]],
+  ['obj_5fflag_5fclone',['OBJ_FLAG_CLONE',['../group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348ac266242023e62d52333ae30a402121a7',1,'ext_obex.h']]],
+  ['obj_5fflag_5fdanger',['OBJ_FLAG_DANGER',['../group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a9de4da280873aafea3228ab80a877f67',1,'ext_obex.h']]],
   ['obj_5fflag_5fdata',['OBJ_FLAG_DATA',['../group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a862748073762ebc9f5899a8c1d63053a',1,'ext_obex.h']]],
   ['obj_5fflag_5fdebug',['OBJ_FLAG_DEBUG',['../group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348ab321f10bb0eb0d7f9b29b60a99e2ba7c',1,'ext_obex.h']]],
   ['obj_5fflag_5finheritable',['OBJ_FLAG_INHERITABLE',['../group__datastore.html#ggaa858d4b3815076d79624c39d9ca59348a20be48992fc9be2b12940730c09d704c',1,'ext_obex.h']]],

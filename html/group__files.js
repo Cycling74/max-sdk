@@ -43,7 +43,9 @@ var group__files =
       [ "PATH_TYPE_DESKTOP", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eeacb2d739b28156f9a09a540f5c65126c3", null ],
       [ "PATH_TYPE_TILDE", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eeab56db350ca8f7d66f710c6b6607aea3f", null ],
       [ "PATH_TYPE_TEMPFOLDER", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea81b90ec686dca7ec2b94580704595fee", null ],
-      [ "PATH_TYPE_MAXDB", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea0f9949f6b36f41512f2153430f1ad800", null ]
+      [ "PATH_TYPE_USERMAX", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea0aa6e7f06a8a2bbcd3511b75eafd77a4", null ],
+      [ "PATH_TYPE_MAXDB", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea0f9949f6b36f41512f2153430f1ad800", null ],
+      [ "PATH_TYPE_PLUGIN", "group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea413b19b328edd27a678b9a00065be370", null ]
     ] ],
     [ "t_sysfile_pos_mode", "group__files.html#gaa0726cf3525f28c2bba73401193c430e", [
       [ "SYSFILE_ATMARK", "group__files.html#ggaa0726cf3525f28c2bba73401193c430ea912f3ce009e04501285d5e029edef84a", null ],
@@ -60,6 +62,7 @@ var group__files =
       [ "TEXT_NULL_TERMINATE", "group__files.html#ggaa3b412e918d334f06e322bde03fbd59fa134f84529c248946c91917a1e341a0db", null ]
     ] ],
     [ "fileusage_addfile", "group__files.html#ga2fce56ee681efcc473951ebcba79580c", null ],
+    [ "fileusage_addfolder", "group__files.html#ga29f82d102666d24b0b69147c9cdbf7f9", null ],
     [ "fileusage_addpackage", "group__files.html#gaf25bd3f2783853c08493171311bf1c0b", null ],
     [ "filewatcher_new", "group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97", null ],
     [ "locatefile", "group__files.html#ga62afd78207189cc22bf2f48d36e986a6", null ],
@@ -70,6 +73,7 @@ var group__files =
     [ "path_absolutepath", "group__files.html#gac7464bcde8db7b02fb97a4b341f98f04", null ],
     [ "path_closefolder", "group__files.html#ga63ca3fd6e4acb9f1b1e56b2d609bf4af", null ],
     [ "path_createsysfile", "group__files.html#gafd6e5cccc1eb10df5c58b51ca9df4f81", null ],
+    [ "path_exists", "group__files.html#ga975c09f35b1f140124e32de6ad6f5cd5", null ],
     [ "path_fileinfo", "group__files.html#gaff0841e652133373b334f4976d5abdc0", null ],
     [ "path_foldernextfile", "group__files.html#gafa408a1435ddf8bd3e4c778f9d8ea0f4", null ],
     [ "path_frompathname", "group__files.html#gad1bbb97bd62d1ea92d1625a310c8222a", null ],

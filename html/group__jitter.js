@@ -14,7 +14,6 @@ var group__jitter =
     [ "MOP Module", "group__mopmod.html", "group__mopmod" ],
     [ "Parallel Utility Module", "group__parallelutilmod.html", "group__parallelutilmod" ],
     [ "MOP Max Wrapper Module", "group__maxmopmod.html", "group__maxmopmod" ],
-    [ "OB3D Module", "group__ob3dmod.html", "group__ob3dmod" ],
     [ "Operator Vector Module", "group__opvecmod.html", "group__opvecmod" ],
     [ "JIT_ATTR_GET_DEFER", "group__jitter.html#ga13c8aa5f90991dad82d1d4dcc3623223", null ],
     [ "JIT_ATTR_GET_DEFER_LOW", "group__jitter.html#ga810447020b75b5173d4c6776cd2653d8", null ],

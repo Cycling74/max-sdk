@@ -20,6 +20,7 @@ var group__threading =
     [ "schedule_delay", "group__threading.html#gaa9b66fe2fc601f110bd962a622f1d5a0", null ],
     [ "systhread_create", "group__threading.html#ga7217fa33811a5ed35b970f504b4e4a79", null ],
     [ "systhread_detach", "group__threading.html#ga943d19bf724a3cf229b7e8eaaeb56faf", null ],
+    [ "systhread_equal", "group__threading.html#ga2f67954fe34c2141d00c465d7f3aa778", null ],
     [ "systhread_exit", "group__threading.html#gad448ff5be27ef8233162a0e24751786f", null ],
     [ "systhread_getpriority", "group__threading.html#gaf073584f030cffc3a823601173803a95", null ],
     [ "systhread_isaudiothread", "group__threading.html#gaa1b536002d2b9deb06b44eb5ab91b744", null ],

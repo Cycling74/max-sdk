@@ -2,6 +2,7 @@ var searchData=
 [
   ['fileload',['fileload',['../group__loading__max__files.html#gab4d0195eb3897bfa1cd8711dd0cae70e',1,'ext_proto.h']]],
   ['fileusage_5faddfile',['fileusage_addfile',['../group__files.html#ga2fce56ee681efcc473951ebcba79580c',1,'ext_proto.h']]],
+  ['fileusage_5faddfolder',['fileusage_addfolder',['../group__files.html#ga29f82d102666d24b0b69147c9cdbf7f9',1,'ext_proto.h']]],
   ['fileusage_5faddpackage',['fileusage_addpackage',['../group__files.html#gaf25bd3f2783853c08493171311bf1c0b',1,'ext_proto.h']]],
   ['filewatcher_5fnew',['filewatcher_new',['../group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97',1,'ext_proto.h']]],
   ['floatin',['floatin',['../group__inout.html#ga01125a22c75ef028199febbe21346f0e',1,'ext_proto.h']]],

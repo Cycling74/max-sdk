@@ -1,7 +1,6 @@
 var searchData=
 [
   ['t_5fcritical',['t_critical',['../group__critical.html#ga8d715cd96234700ea62572e0d19e27e6',1,'ext_critical.h']]],
-  ['t_5fitm',['t_itm',['../group__time.html#gac656fa1f920c69cf77e6631bcec53077',1,'ext_itm.h']]],
   ['t_5fmagic',['t_magic',['../structt__tinyobject.html#ac512106b41d8eb500619b66e5dc001d3',1,'t_tinyobject']]],
   ['t_5fmesslist',['t_messlist',['../structt__tinyobject.html#a9c84a65d0f833bca63712f335d6305fd',1,'t_tinyobject']]],
   ['t_5fpatcher',['t_patcher',['../group__patcher.html#ga1c34fe7546d5c8a9a00e8fa17f85e66e',1,'ext_maxtypes.h']]],

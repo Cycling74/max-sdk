@@ -1,6 +1,7 @@
 var searchData=
 [
   ['name',['name',['../structt__jit__attribute.html#a9d73ebbafed2d8da2a971962e5ccfeff',1,'t_jit_attribute::name()'],['../structt__jit__attr__offset.html#a0972d52a5b1ab0b054222cba18d98430',1,'t_jit_attr_offset::name()'],['../structt__jit__attr__offset__array.html#a2bc8326087aa9bfb338172f56ce384c9',1,'t_jit_attr_offset_array::name()'],['../structt__jit__attr.html#ae44dfc755dd3a5c525826114d5bd6a64',1,'t_jit_attr::name()'],['../structt__jit__gl__context__view.html#a564629275a660ed2949bb9cc6722355a',1,'t_jit_gl_context_view::name()']]],
+  ['nativewinhandle',['nativewinhandle',['../structt__jit__gl__context__view.html#abecd14edd6d737a96f2ec513906eac00',1,'t_jit_gl_context_view']]],
   ['newhandle',['newhandle',['../group__memory.html#ga50135e5f9bb18030ff1d12e9976253ab',1,'ext_proto.h']]],
   ['newinstance',['newinstance',['../group__class__old.html#ga4c1f100a92d6f519ba4e93665ff54998',1,'ext_proto.h']]],
   ['newobject',['newobject',['../group__class__old.html#ga053f428d5edcc7d663980330848e73a6',1,'ext_proto.h']]],

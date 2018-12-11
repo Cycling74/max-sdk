@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['hitborder',['HitBorder',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021ac054b745b3acff1d6c0dda2154f7bfd8',1,'jpatcher_api.h']]],
   ['hitbox',['HitBox',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021a221361506a6a16b6c6ef01e0df8ba1c8',1,'jpatcher_api.h']]],
   ['hitgrowbox',['HitGrowBox',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021ada85a1e80aea2609cb61236fce30e53c',1,'jpatcher_api.h']]],
   ['hitinlet',['HitInlet',['../group__jbox.html#gga956a254a140565aa9ff36a514740e021abbaf64215e72c962b14e40c5a44daaab',1,'jpatcher_api.h']]],

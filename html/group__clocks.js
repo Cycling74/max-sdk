@@ -9,7 +9,7 @@ var group__clocks =
     [ "gettime", "group__clocks.html#gabe5d8b1c9f260d13734a328b2a60ff69", null ],
     [ "gettime_forobject", "group__clocks.html#gab07f4f2122cf12ec0f03aa9b6e0bdebf", null ],
     [ "scheduler_fromobject", "group__clocks.html#ga18134769aacb89b12258898166a99ff2", null ],
-    [ "scheduler_get", "group__clocks.html#ga7f67cd4fe41445e1d11afe84742a6d5f", null ],
+    [ "scheduler_get", "group__clocks.html#gae846a278aa14ae40f9f4cb1744a01750", null ],
     [ "scheduler_gettime", "group__clocks.html#gadbaa75aac36f99e3559827a55c12c36e", null ],
     [ "scheduler_new", "group__clocks.html#ga90e58fdc4b6aa7a1485220d808d6fc4b", null ],
     [ "scheduler_run", "group__clocks.html#ga69f8d9f511899d3f4b30f6b7a032849a", null ],

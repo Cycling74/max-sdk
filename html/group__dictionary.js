@@ -48,9 +48,11 @@ var group__dictionary =
     [ "dictionary_getsym", "group__dictionary.html#ga34ab042134a90bfa71eb6cde7c795561", null ],
     [ "dictionary_hasentry", "group__dictionary.html#gac0fefbbfabecbe9f85066283a3aab637", null ],
     [ "dictionary_new", "group__dictionary.html#gab62d5491c3a2e88e855c4db921b12712", null ],
-    [ "dictionary_read", "group__dictionary.html#ga2c64f2e3bce940ca992b3dd3ffe292ac", null ],
+    [ "dictionary_read", "group__dictionary.html#gacb3809ef6dd90f87ef77464d763e683a", null ],
     [ "dictionary_read_yaml", "group__dictionary.html#gae89b41cc204bfc725490e54afba3fc45", null ],
     [ "dictionary_sprintf", "group__dictionary.html#ga5099d74946c0117f96e8fc0164efcdf2", null ],
+    [ "dictionary_transaction_lock", "group__dictionary.html#ga8ac5786f74b29dc1d988932445fb7049", null ],
+    [ "dictionary_transaction_unlock", "group__dictionary.html#ga9b3718054667f9c5d69e4e73de4d6f92", null ],
     [ "dictionary_write", "group__dictionary.html#ga54f1888c1ca3cd84d32cd2de7a392e35", null ],
     [ "dictionary_write_yaml", "group__dictionary.html#gabb9f7aaacfc6d983eb4932c2f1bfa9ba", null ],
     [ "postdictionary", "group__dictionary.html#ga7619544926e5c62caf19176ebab5b1a2", null ]

@@ -55,6 +55,7 @@ var searchData=
   ['day',['day',['../structt__datetime.html#a0e45cee31731fe05a42b94e230c4b2a5',1,'t_datetime']]],
   ['depthbuffer',['depthbuffer',['../structt__jit__gl__context__view.html#a7c22d08fc3aa22efadd340663cbaf772',1,'t_jit_gl_context_view']]],
   ['descent',['descent',['../structt__jgraphics__font__extents.html#a6828e1a138b6be881785b447e1ad094c',1,'t_jgraphics_font_extents']]],
+  ['destroying',['destroying',['../structt__jit__gl__context__view.html#a4384762bc250c5a20ac75e2e9b24f214',1,'t_jit_gl_context_view']]],
   ['dim',['dim',['../structt__jit__matrix__info.html#a1910d191539aa64e8a949c62629e17b0',1,'t_jit_matrix_info']]],
   ['dimcount',['dimcount',['../structt__jit__matrix__info.html#a51f55844070b10955b23235f6ef68d1c',1,'t_jit_matrix_info']]],
   ['dimlink',['dimlink',['../structt__jit__mop__io.html#a90026d4aeefbd8ede206e7b2c9aec1e8',1,'t_jit_mop_io']]],
