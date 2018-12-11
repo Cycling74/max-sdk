@@ -353,6 +353,7 @@ void *gridmeter_new(t_symbol *s, long argc, t_atom *argv)
 	gridmeter_initvalues(x);
 	x->a_obj.z_box.b_firstin = (void *)x;
 	dsp_setupjbox((t_pxjbox *)x, 1);
+	x->a_obj.z_misc |= Z_MC_INLETS;
 
 	x->a_clock = clock_new(x, (method)gridmeter_tick);
 	attr_dictionary_process(x, d);

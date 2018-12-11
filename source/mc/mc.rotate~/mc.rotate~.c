@@ -62,7 +62,7 @@ void *mcrotate_new(long size)
 	x->m_size = CLAMP(size, 1, 512);
 	
 	dsp_setup((t_pxobject *)x, 1);
-	x->m_obj.z_misc |= Z_NO_INPLACE;
+	x->m_obj.z_misc |= Z_NO_INPLACE | Z_MC_INLETS;
 	outlet_new((t_object *)x, "multichannelsignal");
 	return x;
 }
