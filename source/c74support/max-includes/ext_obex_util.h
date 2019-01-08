@@ -35,7 +35,7 @@ BEGIN_USING_C_LINKAGE
 
 
 /**
-	Create a t_atom_long integer attribute and add it to a Max class.
+	Create a long integer attribute and add it to a Max class.
 
 	@ingroup	attr
 	@param	c				The class pointer.
