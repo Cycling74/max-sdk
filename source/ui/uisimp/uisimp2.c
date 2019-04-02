@@ -51,6 +51,7 @@ void ext_main(void *r)
 
 	class_addmethod(c, (method) uisimp_paint, "paint", A_CANT, 0);
 	class_addmethod(c, (method) uisimp_int, "int", A_LONG, 0);
+	class_addmethod(c, (method) uisimp_bang, "bang", 0);
 
 	class_addmethod(c, (method) uisimp_mousedown, "mousedown", A_CANT, 0);
 	class_addmethod(c, (method) uisimp_mousedrag, "mousedrag", A_CANT, 0);
