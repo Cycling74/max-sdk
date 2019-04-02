@@ -7,23 +7,23 @@
 	"extensible" : 0,
 	"homepatcher" : "",
 	"max_version_max" : "none",
-	"max_version_min" : "7.1",
+	"max_version_min" : "8.0.3",
 	"name" : "Max-SDK",
 	"os" : 	{
 		"macintosh" : 		{
-			"platform" : [ "ia32", "x64" ],
+			"platform" : [ "x64" ],
 			"min_version" : "10.7.x"
 		}
 ,
 		"windows" : 		{
-			"platform" : [ "ia32", "x64" ],
+			"platform" : [ "x64" ],
 			"min_version" : "7"
 		}
 
 	}
 ,
 	"tags" : [ "sdk" ],
-	"version" : "7.1.0",
+	"version" : "8.0.3",
 	"website" : "https://github.com/Cycling74/max-sdk",
 	"filelist" : 	{
 		"help" : [ "attrtester.maxhelp", "buddy.maxhelp", "collect.maxhelp", "dbcuelist.maxhelp", "dbviewer.maxhelp", "delay2.maxhelp", "dict.group.maxhelp", "dict.route.maxhelp", "dict.strip.maxhelp", "dllcounter.maxhelp", "dllreport.maxhelp", "dspstress~.maxhelp", "dummy.maxhelp", "fftinfo~.maxhelp", "filebyte.maxhelp", "filedate.maxhelp", "filein.maxhelp", "folder.maxhelp", "howbigisyourp.maxhelp", "index~.maxhelp", "iter.maxhelp", "iterate2.maxhelp", "iterator.maxhelp", "jit.3m.maxhelp", "jit.alphablend.maxhelp", "jit.change.maxhelp", "jit.charmap.maxhelp", "jit.clip.maxhelp", "jit.coerce.maxhelp", "jit.concat.maxhelp", "jit.demultiplex.maxhelp", "jit.dimmap.maxhelp", "jit.eclipse.maxhelp", "jit.fill.maxhelp", "jit.findbounds.maxhelp", "jit.fluoride.maxhelp", "jit.gl.gridshape.maxhelp", "jit.gl.simple.help", "jit.gl.videoplane.maxhelp", "jit.glue.maxhelp", "jit.gradient.maxhelp", "jit.hello.maxhelp", "jit.histogram.maxhelp", "jit.iter.maxhelp", "jit.keyscreen.maxhelp", "jit.la.diagproduct.maxhelp", "jit.map.maxhelp", "jit.noise.maxhelp", "jit.op.maxhelp", "jit.p.bounds.maxhelp", "jit.pack.maxhelp", "jit.peek~.maxhelp", "jit.poke~.maxhelp", "jit.print.maxhelp", "jit.rgb2luma.maxhelp", "jit.scalebias.maxhelp", "jit.scissors.maxhelp", "jit.simple.maxhelp", "jit.simple~.maxhelp", "jit.spill.maxhelp", "jit.split.maxhelp", "jit.str.op.maxhelp", "jit.submatrix.maxhelp", "jit.textfile.maxhelp", "jit.thin.maxhelp", "jit.transpose.maxhelp", "jit.turtle.maxhelp", "jit.unpack.maxhelp", "jslider.maxhelp", "linky.maxhelp", "lores~.maxhelp", "master.maxhelp", "match.maxhelp", "minimum.maxhelp", "past.maxhelp", "pictmeter~.maxhelp", "plussz.maxhelp", "plussz2.maxhelp", "plussz~.maxhelp", "scripto.maxhelp", "servant.maxhelp", "sheep.maxhelp", "shepherd.maxhelp", "simplejs.maxhelp", "simplemax.maxhelp", "simplemsp~.maxhelp", "simpleparallel.maxhelp", "simpletext.maxhelp", "simplethread.maxhelp", "simpwave~.maxhelp", "split~.maxhelp", "threadpool.maxhelp", "thresh.maxhelp", "times~.maxhelp", "uioptimized.maxhelp", "uires.maxhelp", "uisimp.maxhelp", "uitester.maxhelp", "uitextfield.maxhelp", "urner.maxhelp", "vexpr.maxhelp", "whosyourdaddy.maxhelp", "windowwatcher.maxhelp" ]
