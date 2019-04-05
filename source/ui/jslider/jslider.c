@@ -9,7 +9,7 @@
 #include "jgraphics.h"
 #include "ext_parameter.h"
 #include "ext_boxstyle.h"
-#include "common/commonsyms.c"
+
 
 #ifdef WIN_VERSION
 #include <float.h>
