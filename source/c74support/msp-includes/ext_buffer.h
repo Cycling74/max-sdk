@@ -209,8 +209,28 @@ t_symbol *buffer_getfilename(t_buffer_obj *buffer_object);
 t_max_err buffer_perform_begin(t_buffer_obj *buffer_object);
 t_max_err buffer_perform_end(t_buffer_obj *buffer_object);
 
-// utility function for getting buffer info in struct form
-// without needing to know entire buffer struct
+/** Get a infomation of any buffer
+ *
+  Utility function for getting buffer info in struct form without needing to know entire buffer struct.
+  I recommend use it between critical section for safety and accuracy like :
+
+  @code
+  ...
+  buffer_perform_begin( buffer );
+    
+    ...
+    t_buffer_info info;
+    t_max_err     error;
+    error = buffer_getinfo( buffer, &info );
+    ...
+
+  buffer_perform_end( buffer );
+  @endcode
+
+  @param  buffer_object [in]   a pointer of target buffer_objct
+  @param  info          [out]  a pointer of t_buffer_info structure, need allocated spaces to store got information 
+  @return                      this function will return MAX_ERR_NONE when success
+ */
 t_max_err buffer_getinfo(t_buffer_obj *buffer_object, t_buffer_info *info);
 
 
