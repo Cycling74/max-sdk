@@ -798,7 +798,7 @@ void *outlet_float(void *o, double f);
 
 	@ingroup inout
 	@param	o		Outlet that will send the message.
-	@param	s		Should be NULL, but can be the _sym_list.
+	@param	s		Should be the symbol "list".
 	@param	ac		Number of elements in the list in argv. 
 	@param	av		Atoms constituting the list. 
 	@return			Returns 0 if a stack overflow occurred, otherwise returns 1.
