@@ -6,7 +6,7 @@ The SDK is structured as a Max package. Simply place the SDK in your `Max 8/Pack
 
 ## c++ api
 
-If you are interested in using Modern C++ to write external objects, please take a look the [Min DevKit](https://github.com/Cycling74/min-devkit).
+If you are interested in using Modern C++ to write external objects, please take a look at the [Min DevKit](https://github.com/Cycling74/min-devkit).
 
 ## testing
 
