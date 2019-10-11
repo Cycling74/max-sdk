@@ -508,7 +508,7 @@ void *object_method_imp(void *x, void *sym, void *p1, void *p2, void *p3, void *
 #define object_method_direct(rt, sig, x, s, ...) ((rt (*)sig)object_method_direct_getmethod((t_object *)x, s))(object_method_direct_getobject((t_object *)x, s), __VA_ARGS__)
 
 method object_method_direct_getmethod(t_object *x, t_symbol *sym);
-void *object_method_direct_getobject(t_object *x, t_symbol *sym);
+t_object *object_method_direct_getobject(t_object *x, t_symbol *sym);
 
 /**
 	Sends a type-checked message to an object.
