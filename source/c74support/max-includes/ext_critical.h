@@ -12,7 +12,7 @@ BEGIN_USING_C_LINKAGE
 #endif
 
 #ifdef MAC_VERSION
-
+#include <Multiprocessing.h>
 typedef MPCriticalRegionID t_critical;	///< a critical region  @ingroup critical
 	
 #endif // MAC_VERSION
