@@ -138,7 +138,7 @@ void object_style_setfillattribute(t_object *x, t_symbol *fillattr, t_symbol *en
 	@param		mapname		The name of the attribute from the style.
 	@see		'jslider' example project in the SDK.
 */
-void class_attr_stylemap(t_class *c, char *attrname, char *mapname);
+void class_attr_stylemap(t_class *c, const char *attrname, const char *mapname);
 
 t_symbol *object_attr_attrname_forstylemap(t_object *x, t_symbol *mapname);		// internal use only
 t_symbol *object_attr_stylemapname(t_object *x, t_symbol *attrname);		 	// internal use only

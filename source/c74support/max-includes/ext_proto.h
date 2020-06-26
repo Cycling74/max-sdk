@@ -200,7 +200,7 @@ void class_noinlet(t_messlist *m);
 	@param	obname		A character string with the name of your object class as it appears in Max. 
 	@param	filename	A character string with the name of your external's file as it appears on disk. 
 */
-void class_setname(char *obname, char *filename);
+void class_setname(const char *obname, const char *filename);
 
 
 short force_install(char *classname);

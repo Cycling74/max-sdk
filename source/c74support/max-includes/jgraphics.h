@@ -1099,7 +1099,7 @@ void		jfont_copy_juce_fallback_fontname(char *s, long maxlen);
  	you are rendering text on a transparent background. 
 	@ingroup	jgraphics
 	@return		Non-zero if you can anti-alias text to a transparent background.	*/
-long jgraphics_system_canantialiastexttotransparentbg(); 
+long jgraphics_system_canantialiastexttotransparentbg(void); 
 
 
 long jgraphics_fontname_hasglyph(char *name, long code);
@@ -1108,7 +1108,7 @@ long jgraphics_fontname_hasglyph(char *name, long code);
 /**	Create a new textlayout object.
 	@ingroup	textlayout
 	@return		The new textlayout object.	*/
-t_jtextlayout*	jtextlayout_create(); 
+t_jtextlayout*	jtextlayout_create(void); 
 
 
 /**	Create a new textlayout object.
@@ -1632,7 +1632,7 @@ long jcolor_getcolor(t_symbol *name, t_jrgba *on, t_jrgba *off);
 	Free this pop-up menu using jpopupmenu_destroy().
 	@ingroup	jpopupmenu
 	@return		A pointer to the newly created jpopupmenu object. */
-t_jpopupmenu* jpopupmenu_create(); 
+t_jpopupmenu* jpopupmenu_create(void); 
 
 /**	Free a pop-up menu created with jpopupmenu_create().
 	@ingroup		jpopupmenu
@@ -1778,7 +1778,7 @@ void jpopupmenu_setstandardstyle_forjucemenu(void *jpm, long styleindex, double 
 
 /** Tell any open popup menus to go away. 
 */
-void jpopupmenu_closeall(); 
+void jpopupmenu_closeall(void); 
 
 // unused by any C74 code
 // you can draw to a surface and then turn that into a cursor

@@ -38,10 +38,10 @@ typedef enum {
 	@param	...	Any variables that should be substituted in the string defined by s.
 	@return		One of the values defined in #e_max_wind_advise_result, depending on what the user selected.
 */
-short wind_advise(t_object *w, char *s, ...);
+short wind_advise(t_object *w, const char *s, ...);
 
 // internal use only
-short wind_advise_explain(t_object *w, char *note, char *explanation, char *b1, char *b2, char *b3);
+short wind_advise_explain(t_object *w, const char *note, const char *explanation, const char *b1, const char *b2, const char *b3);
 
 /**	Change the cursor.
 	@ingroup		misc

@@ -335,7 +335,7 @@ void z_sysinit(void);
 #define dsp_sysinit z_sysinit
 
 void dsp_setpatcher(void *p);
-void *dsp_getpatcher();
+void *dsp_getpatcher(void);
 
 short z_isconnected(t_object *x, t_object *dst, short *index);
 #define dsp_isconnected z_isconnected

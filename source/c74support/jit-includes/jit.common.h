@@ -276,7 +276,7 @@ void jit_attr_clean(t_object *x, t_symbol *name);
 //more util functions
 void jit_rand_setseed(long n);
 long jit_rand(void);
-t_symbol *jit_symbol_unique();
+t_symbol *jit_symbol_unique(void);
 void jit_error_code(void *x,t_jit_err v); //interrupt safe
 void jit_error_sym(void *x,t_symbol *s); //interrupt safe
 void jit_post_sym(void *x,t_symbol *s);  //interrupt safe
