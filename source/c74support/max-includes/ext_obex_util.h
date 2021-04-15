@@ -10,6 +10,8 @@
 
 BEGIN_USING_C_LINKAGE
 
+#include <stdarg.h>
+
 // symbol macros which may be swapped to use common symbol pointers for performance
 #ifndef USESYM
 #define USESYM(x)	gensym(#x)
