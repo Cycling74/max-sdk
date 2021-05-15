@@ -15,10 +15,17 @@ endif ()
 set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${EXTERN_OUTPUT_NAME}")
 
+#add_library("${MAX_SDK_INCLUDES}/common/commonsyms.c")
+
 ### Output ###
 if (APPLE)
-    find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}"  )
-    target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
+	if ("${PROJECT_NAME}" MATCHES "jit.*")
+    	find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}"  )
+    	target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
+		if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
+			target_link_libraries(${PROJECT_NAME} PUBLIC "-framework OpenGL")
+		endif()
+	endif()
 	
 	set_property(TARGET ${PROJECT_NAME}
 				 PROPERTY BUNDLE True)

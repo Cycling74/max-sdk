@@ -19,6 +19,7 @@ add_library(
 	${PROJECT_NAME} 
 	MODULE
 	${PROJECT_SRC}
+	${MAX_SDK_INCLUDES}/common/jpatcher_syms.c
 )
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../script/max-posttarget.cmake)

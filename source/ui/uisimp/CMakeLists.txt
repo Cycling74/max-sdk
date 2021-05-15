@@ -18,7 +18,7 @@ file(GLOB PROJECT_SRC
 add_library( 
 	${PROJECT_NAME} 
 	MODULE
-	${PROJECT_SRC}
+	uisimp.c
 )
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../script/max-posttarget.cmake)

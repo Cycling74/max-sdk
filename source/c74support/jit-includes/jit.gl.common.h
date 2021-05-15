@@ -3,6 +3,10 @@
 
 #include "jit.common.h"
 
+#ifdef MAC_VERSION
+#include <Carbon/Carbon.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
