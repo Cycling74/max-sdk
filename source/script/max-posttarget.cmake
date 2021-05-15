@@ -12,18 +12,12 @@ else ()
 	set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 endif ()
 
-if ("${PROJECT_NAME}" MATCHES ".*_tilde")
-	string(REGEX REPLACE "_tilde" "~" EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
-else ()
-    set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
-endif ()
+set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${EXTERN_OUTPUT_NAME}")
-
-
 
 ### Output ###
 if (APPLE)
-    find_library(JITTER_LIBRARY "JitterAPI" HINTS "${C74_MAX_API_DIR}/lib/mac"  )
+    find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}"  )
     target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
 	
 	set_property(TARGET ${PROJECT_NAME}
@@ -34,19 +28,11 @@ if (APPLE)
 	set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${GIT_VERSION_TAG}")
     set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_LIST_DIR}/Info.plist.in)
 elseif (WIN32)
-    if ("${PROJECT_NAME}" MATCHES "_test")
-    else ()
-
-		target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAPI_LIB})
-		target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAudio_LIB})
-		target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
-	endif ()
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAPI_LIB})
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAudio_LIB})
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
 	
-	if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-		set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mxe64")
-	else ()
-		set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mxe")
-	endif ()
+	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mxe64")
 
 	# warning about constexpr not being const in c++14
 	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/wd4814")
@@ -65,15 +51,11 @@ endif ()
 
 
 ### Post Build ###
-
 if (APPLE)
-    if ("${PROJECT_NAME}" MATCHES "_test")
-    else ()
-    	add_custom_command( 
-    		TARGET ${PROJECT_NAME} 
-    		POST_BUILD 
-    		COMMAND cp "${CMAKE_CURRENT_LIST_DIR}/PkgInfo" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${EXTERN_OUTPUT_NAME}.mxo/Contents/PkgInfo" 
-    		COMMENT "Copy PkgInfo" 
-    	)
-    endif ()    
+	add_custom_command( 
+		TARGET ${PROJECT_NAME} 
+		POST_BUILD 
+		COMMAND cp "${CMAKE_CURRENT_LIST_DIR}/PkgInfo" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${EXTERN_OUTPUT_NAME}.mxo/Contents/PkgInfo" 
+		COMMENT "Copy PkgInfo" 
+	)
 endif ()
