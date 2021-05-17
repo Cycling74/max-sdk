@@ -3,6 +3,8 @@
 
 string(REGEX REPLACE "(.*)/" "" THIS_FOLDER_NAME "${CMAKE_CURRENT_SOURCE_DIR}")
 
+string(REPLACE "~" "_tilde" THIS_FOLDER_NAME "${THIS_FOLDER_NAME}")
+
 if (WIN32)
 	# These must be prior to the "project" command
 	# https://stackoverflow.com/questions/14172856/compile-with-mt-instead-of-md-using-cmake
@@ -23,7 +25,6 @@ project(${THIS_FOLDER_NAME})
 if (NOT DEFINED C74_SUPPORT_DIR)
 	set(C74_SUPPORT_DIR ${CMAKE_CURRENT_LIST_DIR}/../c74support)
 endif ()
-message("c74support is ${C74_SUPPORT_DIR}")
 
 set(MAX_SDK_INCLUDES "${C74_SUPPORT_DIR}/max-includes")
 set(MAX_SDK_MSP_INCLUDES "${C74_SUPPORT_DIR}/msp-includes")

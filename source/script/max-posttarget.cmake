@@ -12,7 +12,12 @@ else ()
 	set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 endif ()
 
-set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
+if ("${PROJECT_NAME}" MATCHES ".*_tilde")
+	string(REGEX REPLACE "_tilde" "~" EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
+else ()
+	set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
+endif ()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${EXTERN_OUTPUT_NAME}")
 
 #add_library("${MAX_SDK_INCLUDES}/common/commonsyms.c")
