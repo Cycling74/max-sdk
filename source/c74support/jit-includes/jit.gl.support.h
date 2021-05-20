@@ -232,8 +232,12 @@ void jit_gl_support_free(t_jit_gl_support *x);
 #ifndef WGL_ATI_pixel_format_float
 #define WGL_ATI_pixel_format_float							(1)
 #define WGL_TYPE_RGBA_FLOAT_ATI								(0x21A0)
+#ifndef GL_RGBA_FLOAT_MODE_ATI
 #define GL_RGBA_FLOAT_MODE_ATI								(0x8820)
+#endif
+#ifndef GL_COLOR_CLEAR_UNCLAMPED_VALUE_ATI
 #define GL_COLOR_CLEAR_UNCLAMPED_VALUE_ATI					(0x8835)
+#endif
 #endif
 
 // APPLE float32 & float16

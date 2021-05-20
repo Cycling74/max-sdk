@@ -24,12 +24,12 @@ t_messlist *max_jit_findbounds_class;
 
 t_symbol *ps_getboundmin,*ps_getboundmax;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_findbounds_init();
-	setup(&max_jit_findbounds_class, max_jit_findbounds_new, (method)max_jit_findbounds_free, (short)sizeof(t_max_jit_findbounds),
+	setup(&max_jit_findbounds_class, (method)max_jit_findbounds_new, (method)max_jit_findbounds_free, (short)sizeof(t_max_jit_findbounds),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_findbounds,obex));

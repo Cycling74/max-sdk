@@ -22,13 +22,13 @@ t_messlist *max_jit_change_class;
 
 t_symbol *ps_change;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	long attrflags;
 	void *p, *q, *attr;
 
 	jit_change_init();
-	setup(&max_jit_change_class, max_jit_change_new, (method)max_jit_change_free, (short)sizeof(t_max_jit_change),
+	setup(&max_jit_change_class, (method)max_jit_change_new, (method)max_jit_change_free, (short)sizeof(t_max_jit_change),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_change,obex));

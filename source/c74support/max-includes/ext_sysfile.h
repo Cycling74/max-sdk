@@ -1,6 +1,8 @@
 #ifndef _EXT_SYSFILE_H_
 #define _EXT_SYSFILE_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
 
 typedef struct _filestruct t_filestruct; 
 

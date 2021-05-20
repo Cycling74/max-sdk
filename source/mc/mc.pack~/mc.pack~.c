@@ -43,7 +43,7 @@ static t_class *s_mcpack_class, *s_mccombine_class;
 
 static t_symbol *ps_getnuminputchannels, *ps_mc_combine;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
  
@@ -100,6 +100,8 @@ long mcpack_inputchanged(t_mcpack *x, long index, long chans)
     return false;
 }
 
+// inputs totaling > 1024 are shut off
+
 void mcpack_countchannels(t_mcpack *x)
 {
     long i, inlet, it, sum;
@@ -115,9 +117,15 @@ void mcpack_countchannels(t_mcpack *x)
 		x->m_inletstarts[0] = 0;
 		for (i = 1; i < total; i++) {
 			temp += x->m_siginchans[i - 1]? x->m_siginchans[i - 1] : 1;
-			x->m_inletstarts[i] = temp;
+			if (temp < MC_MAX_CHANS)
+				x->m_inletstarts[i] = temp;
+			else
+				x->m_inletstarts[i] = -1;
 		}
 	}
+	
+	if (total > MC_MAX_CHANS)
+		total = MC_MAX_CHANS;
 	
 	if (total != x->m_inputcount) {
 		x->m_inputcount = total;
@@ -132,8 +140,12 @@ void mcpack_countchannels(t_mcpack *x)
 		x->m_chaninlets = (long *)sysmem_newptr(total * sizeof(long));
 		for (inlet = 0, it = 0; inlet < x->m_size; inlet++) {
 			sum = x->m_siginchans[inlet]? x->m_siginchans[inlet] : 1;
-			for (i = 0; i < sum; i++)
-				x->m_chaninlets[it + i] = inlet;
+			if (sum > MC_MAX_CHANS)
+				sum = MC_MAX_CHANS;
+			for (i = 0; i < sum; i++) {
+				if (it + i < MC_MAX_CHANS)
+					x->m_chaninlets[it + i] = inlet;
+			}
 			it += sum;
 		}
 	}
@@ -187,7 +199,7 @@ void *mcpack_new(t_symbol *name, long argc, t_atom *argv)
 	
 	if (offset >= 1) {
 		long size = (long)atom_getlong(argv);
-		size = CLAMP(size, 2, MC_MAX_CHANS);
+		size = CLAMP(size, 1, MC_MAX_CHANS);
 		x->m_size = size;
 	}
     x->m_fixedoutputchans = 0;
@@ -252,7 +264,7 @@ void mcpack_perform64(t_mcpack *x, t_object *dsp64, double **ins, long numins, d
 	} else {
 		for (i = 0; i < numouts; i++) {
             if (i < x->m_size && !x->m_muteall) {
-                if (x->m_siginchans[i])
+                if (x->m_siginchans[i] && (x->m_inletstarts[i] != -1))
                     sysmem_copyptr(ins[x->m_inletstarts[i]], outs[i], sizeof(double) * sampleframes);
                 else
                     mcpack_setconstant(outs[i], x->m_values[i], sampleframes);

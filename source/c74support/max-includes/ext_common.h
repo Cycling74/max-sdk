@@ -2,13 +2,16 @@
 #ifndef _EXT_COMMON_H_
 #define _EXT_COMMON_H_
 
+#include "ext_infer_system.h"
 
 #ifdef WIN_VERSION
 #define C74_EXPORT __declspec(dllexport)
+#define C74_HIDDEN
 #define C74_MUST_CHECK
 #else // MAC_VERSION
 
 #define C74_EXPORT __attribute__((visibility("default")))
+#define C74_HIDDEN __attribute__((visibility("hidden")))
 
 /** If the result of a function is unused, force a compiler warning about it. */
 #define C74_MUST_CHECK __attribute__((warn_unused_result))
@@ -16,10 +19,10 @@
 #endif
 
 
-#if C74_NO_CONST == 0
-#define C74_CONST const
-#else
+#if C74_NO_CONST
 #define C74_CONST
+#else
+#define C74_CONST const
 #endif
 
 #ifdef C74_NO_DEPRECATION
@@ -89,6 +92,17 @@
 
 #ifndef ABS
 #define ABS(x) ((x)<0?-(x):(x))
+#endif
+
+#if defined(MAC_VERSION) || defined(LINUX_VERSION)
+#define strcmp_case_insensitive strcasecmp
+#endif
+#ifdef WIN_VERSION
+#if _MSC_VER < 1400
+#define strcmp_case_insensitive strcmpi
+#else
+#define strcmp_case_insensitive _strcmpi
+#endif
 #endif
 
 #endif /* _EXT_COMMON_H_ */

@@ -9,6 +9,8 @@
 #ifndef __JIT_BYTEORDER_H__
 #define __JIT_BYTEORDER_H__
 
+#include "ext_byteorder.h"
+
 #if (defined(WIN32) || TARGET_RT_LITTLE_ENDIAN || C74_LITTLE_ENDIAN || __i386__)
 #define JIT_LITTLE_ENDIAN
 #else

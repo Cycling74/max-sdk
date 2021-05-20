@@ -276,13 +276,16 @@ void jit_attr_clean(t_object *x, t_symbol *name);
 //more util functions
 void jit_rand_setseed(long n);
 long jit_rand(void);
-t_symbol *jit_symbol_unique(void);
+t_symbol *jit_symbol_unique();
 void jit_error_code(void *x,t_jit_err v); //interrupt safe
 void jit_error_sym(void *x,t_symbol *s); //interrupt safe
 void jit_post_sym(void *x,t_symbol *s);  //interrupt safe
 
 t_jit_err jit_err_from_max_err(t_max_err err);
-		
+
+// jit_matrix - type = 0, jit_gl_texture type = 1
+t_jit_err jit_video_recreate_outlet(t_object *maxob, long type, void **curoutlet);
+
 //load test
 
 #ifdef __APPLE_CC__

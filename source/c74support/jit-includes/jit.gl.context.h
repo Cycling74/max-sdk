@@ -58,6 +58,7 @@ typedef struct _jit_gl_context_info
 	t_jit_gl_context				share;
 	t_jit_gl_pixelformat			*pixelformat;
 	void							*nativewin;
+	short							samples;
 } t_jit_gl_context_info;
 
 

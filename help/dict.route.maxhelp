@@ -2,22 +2,24 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 0,
-			"revision" : 0,
-			"architecture" : "x86",
+			"major" : 8,
+			"minor" : 1,
+			"revision" : 4,
+			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 641.0, 466.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 34.0, 79.0, 581.0, 427.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 13.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
-		"gridonopen" : 0,
+		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 0,
+		"gridsnaponopen" : 1,
+		"objectsnaponopen" : 1,
 		"statusbarvisible" : 2,
 		"toolbarvisible" : 1,
 		"lefttoolbarpinned" : 0,
@@ -34,8 +36,10 @@
 		"digest" : "",
 		"tags" : "",
 		"style" : "",
+		"subpatcher_template" : "",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -45,13 +49,12 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 445.0, 350.0, 164.0, 21.0 ],
+					"patching_rect" : [ 445.0, 350.0, 164.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"filename" : "helpstarter",
 						"parameter_enable" : 0
 					}
 ,
-					"style" : "",
 					"text" : "js helpstarter dict.route"
 				}
 
@@ -67,22 +70,24 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 0,
-							"revision" : 0,
-							"architecture" : "x86",
+							"major" : 8,
+							"minor" : 1,
+							"revision" : 4,
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 34.0, 105.0, 641.0, 440.0 ],
+						"classnamespace" : "box",
+						"rect" : [ 34.0, 105.0, 581.0, 401.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
-						"gridonopen" : 0,
+						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 0,
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
 						"statusbarvisible" : 2,
 						"toolbarvisible" : 1,
 						"lefttoolbarpinned" : 0,
@@ -99,47 +104,66 @@
 						"digest" : "",
 						"tags" : "",
 						"style" : "",
+						"subpatcher_template" : "",
 						"showontab" : 1,
+						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-9",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 197.0, 174.5, 62.0, 23.0 ],
+									"text" : "loadbang"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "dictionary" ],
+									"patching_rect" : [ 197.0, 204.5, 97.0, 23.0 ],
+									"text" : "dict.pack frog:4"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "dict.view",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.0, 327.0, 99.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "dict.view",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 227.0, 327.0, 98.0, 24.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-25",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 375.0, 190.0, 249.0, 36.0 ],
+									"patching_rect" : [ 300.0, 198.0, 240.0, 36.0 ],
 									"style" : "helpfile_label",
 									"text" : "In this example a dict will be passed when it has a 'frog' key with a value of 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 13.0,
-									"hidden" : 1,
-									"id" : "obj-36",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 235.0, 340.0, 90.0, 23.0 ],
-									"style" : "",
-									"text" : "loadmess set"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 13.0,
-									"id" : "obj-74",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 225.0, 380.0, 108.0, 23.0 ],
-									"style" : ""
 								}
 
 							}
@@ -150,23 +174,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 200.0, 390.0, 24.0, 24.0 ],
-									"presentation_rect" : [ 200.0, 390.0, 24.0, 24.0 ],
-									"style" : ""
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 13.0,
-									"id" : "obj-26",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 65.0, 380.0, 108.0, 23.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 197.0, 327.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -177,9 +186,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 40.0, 390.0, 24.0, 24.0 ],
-									"presentation_rect" : [ 40.0, 390.0, 24.0, 24.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 50.0, 327.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -192,9 +200,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "dictionary", "dictionary" ],
-									"patching_rect" : [ 40.0, 260.0, 181.0, 23.0 ],
-									"style" : "",
-									"text" : "dict.route frog:4"
+									"patching_rect" : [ 50.0, 268.0, 166.0, 23.0 ],
+									"text" : "dict.route"
 								}
 
 							}
@@ -208,8 +215,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 40.0, 160.0, 50.0, 23.0 ],
-									"style" : ""
+									"patching_rect" : [ 50.0, 174.5, 50.0, 23.0 ]
 								}
 
 							}
@@ -218,14 +224,12 @@
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
 									"id" : "obj-1",
-									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 5,
+									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "dictionary" ],
-									"patching_rect" : [ 40.0, 190.0, 330.0, 38.0 ],
-									"style" : "",
-									"text" : "dict.pack frog: pig: horse: duck: \"quack quack\" goose: @triggers 0 1 2 3 4"
+									"patching_rect" : [ 50.0, 204.5, 89.0, 23.0 ],
+									"text" : "dict.pack frog:"
 								}
 
 							}
@@ -241,7 +245,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 620.0, 125.0 ]
+									"patching_rect" : [ 10.0, 10.0, 551.0, 131.0 ]
 								}
 
 							}
@@ -257,8 +261,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 225.0, 260.0, 195.866592, 39.0 ],
-									"presentation_rect" : [ 225.0, 260.0, 195.866592, 39.0 ]
+									"patching_rect" : [ 221.0, 268.0, 195.85198974609375, 39.0 ]
 								}
 
 							}
@@ -266,97 +269,76 @@
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-1", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-26", 0 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-36", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-74", 0 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-36", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-1", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-6", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-8", 1 ],
+									"source" : [ "obj-7", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
+									"order" : 1,
 									"source" : [ "obj-8", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-26", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 49.5, 370.0, 163.5, 370.0 ],
-									"source" : [ "obj-8", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-74", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 211.5, 371.0, 323.5, 371.0 ],
+									"destination" : [ "obj-3", 0 ],
+									"order" : 0,
 									"source" : [ "obj-8", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"order" : 0,
+									"source" : [ "obj-8", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-75", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
+									"order" : 1,
 									"source" : [ "obj-8", 1 ]
 								}
 
 							}
- ],
-						"bgfillcolor_type" : "gradient",
-						"bgfillcolor_color1" : [ 0.454902, 0.462745, 0.482353, 1.0 ],
-						"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"bgfillcolor_color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"bgfillcolor_angle" : 270.0,
-						"bgfillcolor_proportion" : 0.39
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-9", 0 ]
+								}
+
+							}
+ ]
 					}
 ,
-					"patching_rect" : [ 10.0, 85.0, 51.0, 21.0 ],
+					"patching_rect" : [ 10.0, 85.0, 51.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
 						"fontsize" : 13.0,
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p basic",
 					"varname" : "basic_tab"
 				}
@@ -373,22 +355,24 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 0,
-							"revision" : 0,
-							"architecture" : "x86",
+							"major" : 8,
+							"minor" : 1,
+							"revision" : 4,
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 641.0, 440.0 ],
+						"classnamespace" : "box",
+						"rect" : [ 0.0, 26.0, 581.0, 401.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
-						"gridonopen" : 0,
+						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 0,
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
 						"statusbarvisible" : 2,
 						"toolbarvisible" : 1,
 						"lefttoolbarpinned" : 0,
@@ -405,28 +389,22 @@
 						"digest" : "",
 						"tags" : "",
 						"style" : "",
+						"subpatcher_template" : "",
 						"showontab" : 1,
+						"assistshowspatchername" : 0,
 						"boxes" : [  ],
-						"lines" : [  ],
-						"bgfillcolor_type" : "gradient",
-						"bgfillcolor_color1" : [ 0.454902, 0.462745, 0.482353, 1.0 ],
-						"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"bgfillcolor_color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"bgfillcolor_angle" : 270.0,
-						"bgfillcolor_proportion" : 0.39
+						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 205.0, 205.0, 50.0, 21.0 ],
+					"patching_rect" : [ 205.0, 205.0, 50.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
 						"fontsize" : 13.0,
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p ?",
 					"varname" : "q_tab"
 				}
@@ -436,27 +414,24 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "helpargs.js",
-				"bootpath" : "/Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
-				"patcherrelativepath" : "../../../../../../Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
+				"bootpath" : "C74:/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "helpdetails.js",
-				"bootpath" : "/Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
-				"patcherrelativepath" : "../../../../../../Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
+				"bootpath" : "C74:/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "helpstarter.js",
-				"bootpath" : "/Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
-				"patcherrelativepath" : "../../../../../../Applications/Max 7/Max.app/Contents/Resources/C74/help/resources",
+				"bootpath" : "C74:/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],
-		"embedsnapshot" : 0
+		"autosave" : 0
 	}
 
 }

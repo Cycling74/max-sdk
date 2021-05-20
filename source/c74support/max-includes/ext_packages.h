@@ -8,6 +8,10 @@
 #ifndef _EXT_PACKAGES_H_
 #define _EXT_PACKAGES_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_linklist.h"
+#include "ext_dictionary.h"
 
 /** A container for a path/filename pair,
 	together with additional meta fields for special cases

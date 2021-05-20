@@ -24,13 +24,13 @@ t_messlist     *max_jit_glue_class;
 
 t_symbol *ps_input,*ps_rows,*ps_columns;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q,*attr;
 	long attrflags;
 
 	jit_glue_init();
-	setup(&max_jit_glue_class, max_jit_glue_new, (method)max_jit_glue_free, (short)sizeof(t_max_jit_glue),
+	setup(&max_jit_glue_class, (method)max_jit_glue_new, (method)max_jit_glue_free, (short)sizeof(t_max_jit_glue),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_glue,obex));
@@ -60,7 +60,7 @@ void max_jit_glue_assist(t_max_jit_glue *x, void *b, long m, long a, char *s)
 	if (m == 1) { //input
 		sprintf(s,"(matrix) in");
 		if (a>0)
-			sprintf(s,"%s%d",s,a+1);
+			snprintf_zero(s,ASSIST_MAX_STRING_LEN,"%s%d",s,a+1);
 	} else {	//output
 		max_jit_mop_assist(x,b,m,a,s);
 	}

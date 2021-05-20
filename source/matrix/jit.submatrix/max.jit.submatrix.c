@@ -20,12 +20,12 @@ void max_jit_submatrix_mproc(t_max_jit_submatrix *x, void *mop);
 
 t_messlist *max_jit_submatrix_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_submatrix_init();
-	setup(&max_jit_submatrix_class, max_jit_submatrix_new, (method)max_jit_submatrix_free, (short)sizeof(t_max_jit_submatrix),
+	setup(&max_jit_submatrix_class, (method)max_jit_submatrix_new, (method)max_jit_submatrix_free, (short)sizeof(t_max_jit_submatrix),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_submatrix,obex));

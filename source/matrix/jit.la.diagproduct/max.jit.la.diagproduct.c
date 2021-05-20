@@ -24,11 +24,11 @@ t_messlist *max_jit_la_diagproduct_class;
 
 t_symbol *ps_getresult;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
-	setup(&max_jit_la_diagproduct_class, max_jit_la_diagproduct_new, (method)max_jit_la_diagproduct_free, (short)sizeof(t_max_jit_la_diagproduct),
+	setup(&max_jit_la_diagproduct_class, (method)max_jit_la_diagproduct_new, (method)max_jit_la_diagproduct_free, (short)sizeof(t_max_jit_la_diagproduct),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_la_diagproduct,obex));

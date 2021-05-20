@@ -18,12 +18,12 @@ void *max_jit_thin_new(t_symbol *s, long argc, t_atom *argv);
 void max_jit_thin_free(t_max_jit_thin *x);
 t_messlist *max_jit_thin_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_thin_init();
-	setup(&max_jit_thin_class, max_jit_thin_new, (method)max_jit_thin_free, (short)sizeof(t_max_jit_thin),
+	setup(&max_jit_thin_class, (method)max_jit_thin_new, (method)max_jit_thin_free, (short)sizeof(t_max_jit_thin),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_thin,obex));

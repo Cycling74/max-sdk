@@ -34,12 +34,12 @@ void max_jit_op_mproc(t_max_jit_op *x, void *mop);
 
 t_messlist *max_jit_op_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q,*attr;
 	long attrflags;
 
-	setup(&max_jit_op_class, max_jit_op_new, (method)max_jit_op_free, (short)sizeof(t_max_jit_op),
+	setup(&max_jit_op_class, (method)max_jit_op_new, (method)max_jit_op_free, (short)sizeof(t_max_jit_op),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_op,obex));

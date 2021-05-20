@@ -1,6 +1,10 @@
 #ifndef _EXT_PREFERENCES_H_
 #define _EXT_PREFERENCES_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_dictionary.h"
+
 BEGIN_USING_C_LINKAGE
 
 t_max_err preferences_getatomforkey(t_symbol *key, t_atom *value);

@@ -154,25 +154,25 @@ void jit_str_op_vector_ignore(long n, void *vecdata, t_jit_op_info *in1, t_jit_o
 	//nada
 }
 
-method jit_str_op_sym2fn(t_symbol *opsym) {
+t_jit_op_fn_binary jit_str_op_sym2fn(t_symbol *opsym) {
 	if (opsym == ps_strcat)
-		return jit_str_op_strcat;
+		return (t_jit_op_fn_binary)jit_str_op_strcat;
 	else if (opsym == ps_strrev)
-		return jit_str_op_strrev;
+		return (t_jit_op_fn_binary)jit_str_op_strrev;
 	else if (opsym == ps_slice)
-		return jit_str_op_slice;
+		return (t_jit_op_fn_binary)jit_str_op_slice;
 	else if (opsym == ps_strcmp)
-		return jit_str_op_strcmp;
+		return (t_jit_op_fn_binary)jit_str_op_strcmp;
 	else if (opsym == ps_strlen)
-		return jit_str_op_strlen;
+		return (t_jit_op_fn_binary)jit_str_op_strlen;
 	else if (opsym == ps_toupper)
-		return jit_str_op_toupper;
+		return (t_jit_op_fn_binary)jit_str_op_toupper;
 	else if (opsym == ps_tolower)
-		return jit_str_op_tolower;
+		return (t_jit_op_fn_binary)jit_str_op_tolower;
 	else if (opsym == ps_thru)
-		return jit_str_op_thru;
+		return (t_jit_op_fn_binary)jit_str_op_thru;
 	else
-		return jit_str_op_vector_ignore;
+		return (t_jit_op_fn_binary)jit_str_op_vector_ignore;
 }
 
 t_jit_err jit_str_op_matrix_calc(t_jit_str_op *x, void *inputs, void *outputs) {
@@ -233,9 +233,9 @@ t_jit_err jit_str_op_matrix_calc(t_jit_str_op *x, void *inputs, void *outputs) {
 				vecdata.in1_len = strlen(string);
 				if (slice) {
 					if (flag)
-						vecdata.opfn = jit_str_op_strrev;
+						vecdata.opfn = (t_jit_op_fn_binary)jit_str_op_strrev;
 					else
-						vecdata.opfn = jit_str_op_thru; // it's sliced. just output it.
+						vecdata.opfn = (t_jit_op_fn_binary)jit_str_op_thru; // it's sliced. just output it.
 				}
 			}
 			else goto out;
@@ -243,7 +243,7 @@ t_jit_err jit_str_op_matrix_calc(t_jit_str_op *x, void *inputs, void *outputs) {
 		else {
 			in1_opinfo.stride = 1;
 			in1_opinfo.p = in1_bp;
-			vecdata.in1_len = jit_str_op_checklen(in1_minfo.dim[0], &in1_opinfo.p);
+			vecdata.in1_len = jit_str_op_checklen(in1_minfo.dim[0], &in1_opinfo);
 		}
 
 		// we only make an in2_string if we need it
@@ -264,7 +264,7 @@ t_jit_err jit_str_op_matrix_calc(t_jit_str_op *x, void *inputs, void *outputs) {
 		else {
 			in2_opinfo.stride = 1;
 			in2_opinfo.p = in2_bp;
-			vecdata.in2_len = jit_str_op_checklen(in2_minfo.dim[0], &in2_opinfo.p);
+			vecdata.in2_len = jit_str_op_checklen(in2_minfo.dim[0], &in2_opinfo);
 		}
 
 		n = out_minfo.dim[0];

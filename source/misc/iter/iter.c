@@ -14,23 +14,22 @@
 typedef struct iter {
 	t_object i_ob;
 	t_atom *i_av;
-	short i_ac;
+	long i_ac;
 } t_iter;
 
-t_symbol *ps_bang;
-void *iter_class;
+static t_class *s_iter_class;
 
 void iter_assist(t_iter *x, void *b, long m, long a, char *s);
-void iter_int(t_iter *x, long n);
+void iter_int(t_iter *x, t_atom_long n);
 void iter_float(t_iter *x, double f);
 void iter_bang(t_iter *x);
-void iter_list(t_iter *x, t_symbol *s, short ac, t_atom *av);
-void iter_anything(t_iter *x, t_symbol *s, short ac, t_atom *av);
+void iter_list(t_iter *x, t_symbol *s, long ac, t_atom *av);
+void iter_anything(t_iter *x, t_symbol *s, long ac, t_atom *av);
 void *iter_new(long dummy);
 void iter_free(t_iter *x);
 void iter_resize(t_iter *x, long size);
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -42,11 +41,7 @@ void ext_main(void *r)
 	class_addmethod(c, (method)iter_assist, "assist", A_CANT, 0);
 	class_addmethod(c, (method)iter_float, "float", A_FLOAT, 0);
 	class_register(CLASS_BOX, c);
-	iter_class = c;
-
-	ps_bang = gensym("bang");
-
-	return 0;
+	s_iter_class = c;
 }
 
 void iter_assist(t_iter *x, void *b, long m, long a, char *s)
@@ -57,70 +52,71 @@ void iter_assist(t_iter *x, void *b, long m, long a, char *s)
 		sprintf(s,"Sequential Output of Incoming list");
 }
 
-void iter_int(t_iter *x, long n)
+void iter_int(t_iter *x, t_atom_long n)
 {
-	iter_resize(x,1);
+	iter_resize(x, 1);
 	x->i_ac = 1;
-	atom_setlong(x->i_av,n);
-	outlet_int(x->i_ob.o_outlet,n);
+	atom_setlong(x->i_av, n);
+	outlet_int(x->i_ob.o_outlet, n);
 }
 
 void iter_float(t_iter *x, double f)
 {
-	iter_resize(x,1);
+	iter_resize(x, 1);
 	x->i_ac = 1;
-	atom_setfloat(x->i_av,f);
-	outlet_float(x->i_ob.o_outlet,f);
+	atom_setfloat(x->i_av, f);
+	outlet_float(x->i_ob.o_outlet, f);
 }
 
 void iter_bang(t_iter *x)
 {
-	short i;
+	long i;
 	t_atom *av;
 
 	for (i=0, av = x->i_av; i < x->i_ac; i++,av++) {
 		if (atom_gettype(av) == A_LONG)
-			outlet_int(x->i_ob.o_outlet,atom_getlong(av));
+			outlet_int(x->i_ob.o_outlet, atom_getlong(av));
 		else if (atom_gettype(av) == A_FLOAT)
-			outlet_float(x->i_ob.o_outlet,atom_getfloat(av));
+			outlet_float(x->i_ob.o_outlet, atom_getfloat(av));
 		else if (atom_gettype(av) == A_SYM)
-			outlet_anything(x->i_ob.o_outlet,atom_getsym(av),0,0);
+			outlet_anything(x->i_ob.o_outlet, atom_getsym(av), 0, 0);
 	}
 }
 
-void iter_list(t_iter *x, Symbol *s, short ac, t_atom *av)
+void iter_list(t_iter *x, t_symbol *s, long ac, t_atom *av)
 {
-	short i;
+	long i;
 
-	iter_resize(x,ac);
-	for (i=0; i < ac; i++,av++) {
+	iter_resize(x, ac);
+	
+	for (i = 0; i < ac; i++,av++) {
 		x->i_av[i] = *av;
 		if (atom_gettype(av)==A_LONG)
-			outlet_int(x->i_ob.o_outlet,atom_getlong(av));
+			outlet_int(x->i_ob.o_outlet, atom_getlong(av));
 		else if (atom_gettype(av)==A_FLOAT)
-			outlet_float(x->i_ob.o_outlet,atom_getfloat(av));
+			outlet_float(x->i_ob.o_outlet, atom_getfloat(av));
 		else if (atom_gettype(av)==A_SYM)
-			outlet_anything(x->i_ob.o_outlet,atom_getsym(av),0,0);
+			outlet_anything(x->i_ob.o_outlet, atom_getsym(av),0,0);
 	}
 	x->i_ac = ac;
 }
 
-void iter_anything(t_iter *x, Symbol *s, short ac, t_atom *av)
+void iter_anything(t_iter *x, t_symbol *s, long ac, t_atom *av)
 {
 	short i;
 
-	iter_resize(x,ac+1);
-	outlet_anything(x->i_ob.o_outlet,s,0,0);
-	x->i_av[0].a_w.w_sym = s;
-	x->i_av[0].a_type = A_SYM;
-	for (i=0; i < ac; i++,av++) {
-		x->i_av[i+1] = *av;
+	iter_resize(x, ac+1);
+	outlet_anything(x->i_ob.o_outlet, s, 0, 0);
+	atom_setsym(x->i_av + 0, s);
+
+	for (i = 0; i < ac; i++,av++) {
+		x->i_av[i + 1] = *av;
 		if (atom_gettype(av)==A_LONG)
-			outlet_int(x->i_ob.o_outlet,atom_getlong(av));
+			outlet_int(x->i_ob.o_outlet, atom_getlong(av));
 		else if (atom_gettype(av)==A_FLOAT)
-			outlet_float(x->i_ob.o_outlet,atom_getfloat(av));
+			outlet_float(x->i_ob.o_outlet, atom_getfloat(av));
 		else if (atom_gettype(av)==A_SYM)
-			outlet_anything(x->i_ob.o_outlet,atom_getsym(av),0,0);
+			outlet_anything(x->i_ob.o_outlet, atom_getsym(av), 0, 0);
 	}
 	x->i_ac = ac+1;
 }
@@ -129,10 +125,10 @@ void *iter_new(long dummy)
 {
 	t_iter *x;
 
-	x = object_alloc(iter_class);
+	x = object_alloc(s_iter_class);
 	x->i_ac = 0;
 	x->i_av = NULL;
-	outlet_new(x,0L);
+	outlet_new(x, NULL);
 	return x;
 }
 
@@ -144,11 +140,11 @@ void iter_free(t_iter *x)
 
 void iter_resize(t_iter *x, long size)
 {
-	if (size!=x->i_ac) {
+	if (size != x->i_ac) {
 		if (x->i_av)
 			sysmem_freeptr(x->i_av);
 		if (size)
-			x->i_av = (t_atom *)sysmem_newptr(size*sizeof(t_atom));
+			x->i_av = (t_atom *)sysmem_newptr(size * sizeof(t_atom));
 		else
 			x->i_av = NULL;
 		x->i_ac = size;

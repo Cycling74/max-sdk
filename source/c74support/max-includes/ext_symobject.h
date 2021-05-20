@@ -1,5 +1,8 @@
-#ifndef __SYMOBJECT_H__
-#define __SYMOBJECT_H__
+#ifndef __EXT_SYMOBJECT_H__
+#define __EXT_SYMOBJECT_H__
+
+#include "ext_prefix.h"
+#include "ext_mess.h"
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
@@ -25,15 +28,7 @@ typedef struct _symobject{
     #pragma pack()
 #endif
 
-
-#ifdef __cplusplus
-	extern "C" {
-#endif // __cplusplus
-
-
-// private
-void symobject_initclass(void);
-
+BEGIN_USING_C_LINKAGE
 
 /** The symobject data structure. 
 
@@ -73,8 +68,6 @@ void *symobject_new(t_symbol *sym);
 long symobject_linklist_match(void *a, void *b);
 
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
-
-#endif // __SYMOBJECT_H__
+END_USING_C_LINKAGE
+	
+#endif // #ifndef __EXT_SYMOBJECT_H__

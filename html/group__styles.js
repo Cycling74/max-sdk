@@ -10,7 +10,7 @@ var group__styles =
     [ "class_attr_setfill", "group__styles.html#ga1cee724bf9cd8c39c44cceb5f617b951", null ],
     [ "class_attr_setstyle", "group__styles.html#gab86edd0b122c7de78268867ae3f10b68", null ],
     [ "class_attr_style_alias", "group__styles.html#ga2641331033ac36daa3326cfe689e14b2", null ],
-    [ "class_attr_stylemap", "group__styles.html#ga5fe5b2650b578a55ae747db665564a38", null ],
+    [ "class_attr_stylemap", "group__styles.html#gaa590b16994743470cefd689bfc86eb37", null ],
     [ "jgraphics_attr_fillrect", "group__styles.html#gaeae9d92bfe8123e9d57032faa96e261a", null ],
     [ "jgraphics_attr_setfill", "group__styles.html#ga87bff31a6820a9896239a8c14d8684c6", null ],
     [ "object_attr_getfill", "group__styles.html#ga987100b3ea0bdaf664486bed084c1442", null ],

@@ -476,7 +476,6 @@ t_hashtab_entry *hashtab_entry_new(t_symbol *key, t_object *val);
 void hashtab_entry_free(t_hashtab_entry *x);
 
 
-
 END_USING_C_LINKAGE
 
 #endif // _EXT_HASHTAB_H_

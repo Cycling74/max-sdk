@@ -28,6 +28,7 @@ var group__threading =
     [ "systhread_istimerthread", "group__threading.html#ga9bc306a6b164f705e55d1612c5ccfb78", null ],
     [ "systhread_join", "group__threading.html#gaac24a9db0d7af2343501a4e762d2ce85", null ],
     [ "systhread_self", "group__threading.html#gab76eb3e1668b13483533c4929be5c914", null ],
+    [ "systhread_set_name", "group__threading.html#ga7c2472eda975f12c6053de171176c17f", null ],
     [ "systhread_setpriority", "group__threading.html#ga4e4b35c628d791550e5523c4b554d466", null ],
     [ "systhread_sleep", "group__threading.html#gad1ca1694ee14824a56916d8f67d7966b", null ],
     [ "systhread_terminate", "group__threading.html#gaacc57aeddc69c01e7562397bdf6f12f5", null ],

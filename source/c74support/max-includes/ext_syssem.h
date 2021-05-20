@@ -1,6 +1,8 @@
 #ifndef _EXT_SYSSEM_H_
 #define _EXT_SYSSEM_H_
 
+#include "ext_prefix.h"
+
 BEGIN_USING_C_LINKAGE
 
 // syssem is a platform independent way of using named semaphores 

@@ -28,15 +28,15 @@ typedef struct {
 } t_buddy;
 
 void buddy_bang(t_buddy *x);
-void buddy_anything(t_buddy *x, t_symbol *s, short argc, t_atom *argv);
+void buddy_anything(t_buddy *x, t_symbol *s, long argc, t_atom *argv);
 void buddy_float(t_buddy *x,double f);
-void buddy_int(t_buddy *x,long n);
-void buddy_list(t_buddy *x, t_symbol *s, short argc, t_atom *argv);
+void buddy_int(t_buddy *x, t_atom_long n);
+void buddy_list(t_buddy *x, t_symbol *s, long argc, t_atom *argv);
 void buddy_atom(t_buddy *x, t_atom *a);
 short buddy_all(t_buddy *x);
 void buddy_off(t_buddy *x);
 void buddy_out(t_buddy *x);
-void outlet_member(void *out, short argc, t_atom *argv);
+void outlet_member(void *out, long argc, t_atom *argv);
 void buddy_assist(t_buddy *x, void *b, long m, long a, char *s);
 void buddy_inletinfo(t_buddy *x, void *b, long a, char *t);
 void buddy_free(t_buddy *x);
@@ -46,7 +46,7 @@ void buddy_clear(t_buddy *x);
 void *buddy_class;
 t_symbol *ps_list;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -66,7 +66,7 @@ void ext_main(void *r)
 
 	ps_list = gensym("list");
 
-	return 0;
+	return;
 }
 
 void buddy_bang(t_buddy *x)
@@ -79,7 +79,7 @@ void buddy_clear(t_buddy *x)
 	buddy_off(x);
 }
 
-void buddy_anything(t_buddy *x, t_symbol *s, short argc, t_atom *argv)
+void buddy_anything(t_buddy *x, t_symbol *s, long argc, t_atom *argv)
 {
 	t_member *m;
 	long in = proxy_getinlet((t_object *)x);
@@ -97,7 +97,7 @@ void buddy_anything(t_buddy *x, t_symbol *s, short argc, t_atom *argv)
 	}
 }
 
-void buddy_list(t_buddy *x, t_symbol *s, short argc, t_atom *argv)
+void buddy_list(t_buddy *x, t_symbol *s, long argc, t_atom *argv)
 {
 	buddy_anything(x,ps_list,argc,argv);
 }
@@ -109,7 +109,7 @@ void buddy_float(t_buddy *x, double f)
 	buddy_atom(x,&a);
 }
 
-void buddy_int(t_buddy *x, long n)
+void buddy_int(t_buddy *x, t_atom_long n)
 {
 	t_atom a;
 	atom_setlong(&a, n);
@@ -160,7 +160,7 @@ void buddy_out(t_buddy *x)
 		outlet_member(m->m_out,m->m_argc,m->m_argv);
 }
 
-void outlet_member(void *out, short argc, t_atom *argv)
+void outlet_member(void *out, long argc, t_atom *argv)
 {
 	if (argc == 1) {
 		switch (atom_gettype(argv)) {
@@ -211,7 +211,7 @@ void buddy_inletinfo(t_buddy *x, void *b, long a, char *t)
 
 void buddy_free(t_buddy *x)
 {
-	short i;
+	long i;
 
 	for (i=1; i < x->b_num; i++)
 		object_free(x->b_mem[i].m_proxy);
@@ -221,14 +221,14 @@ void buddy_free(t_buddy *x)
 void *buddy_new(long num)
 {
 	t_buddy *x;
-	short i;
+	long i;
 	t_member *m;
 
 	x = (t_buddy *)object_alloc(buddy_class);
 	if (num < 2)
 		num = 2;
 	x->b_num = num;
-	x->b_mem = (t_member *)sysmem_newptr((unsigned short)(num * sizeof(t_member)));
+	x->b_mem = (t_member *)sysmem_newptr(num * sizeof(t_member));
 	for (i=num-1,m = x->b_mem + i; i >= 0; i--,m--) {
 		if (i)
 			m->m_proxy = proxy_new(x,(long)i,NULL);

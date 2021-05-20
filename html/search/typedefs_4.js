@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vptr',['vptr',['../group__msp.html#ga6ff70012dce98a61c680a920f660c210',1,'z_dsp.h']]]
+  ['zero_5fmeth_4718',['zero_meth',['../group__datatypes.html#ga8552ad27c1d2770e99ae94a7cdc87d0e',1,'ext_mess.h']]]
 ];

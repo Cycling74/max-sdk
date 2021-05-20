@@ -30,7 +30,7 @@ static t_symbol *ps_dictionary;
 
 
 /************************************************************************************/
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class	*c = class_new("dict.group", (method)dict_group_new, (method)dict_group_free, sizeof(t_dict_group), (method)NULL, A_GIMME, 0);
 

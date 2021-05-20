@@ -1,6 +1,11 @@
 #ifndef _EXT_BOXSTYLE_H_
 #define _EXT_BOXSTYLE_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
+#include "jgraphics.h"
+
 BEGIN_USING_C_LINKAGE
 
 
@@ -148,7 +153,6 @@ t_symbol *object_attr_stylemapname(t_object *x, t_symbol *attrname);		 	// inter
 
 t_jpopupmenu *style_getmenu(t_object *context, t_symbol *current, long mask, long *selecteditem, long *headercount);		// internal use only
 void style_handlemenu(t_object *context, long itemindex, t_symbol **current);												// internal use only
-
 
 // Attribute Macros for simple and maintainable style attribute definitions
 

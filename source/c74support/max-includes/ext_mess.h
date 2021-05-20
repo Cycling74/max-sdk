@@ -1,9 +1,10 @@
 #ifndef _EXT_MESS_H_
 #define _EXT_MESS_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ext_prefix.h"
+#include "ext_common.h"
+
+BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
@@ -15,19 +16,102 @@ extern "C" {
 
 /* mess.h -- define a symbol table and message-passing system.  */
 
+// CALL_METHOD() macros rely on __typeof which is not supported on Windows
+// The "safe" versions are necessary for ARM but should be fine on Intel mac as well.
+// Enabling on Intel mac so we get broader testing.
+#ifndef WIN_VERSION
+#define USE_SAFE_METHOD_CALL
+#endif
 
 /**	Function pointer type for generic methods.
 	@ingroup datatypes
 */
+
+#ifdef USE_SAFE_METHOD_CALL
+typedef void *(*method)(void *);
+#else
 typedef void *(*method)(void *, ...);
+#endif
 
 
 /**	Function pointer type for methods returning a long.
 	@ingroup datatypes
 */
+#ifdef USE_SAFE_METHOD_CALL
+typedef long (*t_intmethod)(void *);
+#else
 typedef long (*t_intmethod)(void *, ...);
+#endif
 
-/** The symbol. 
+#define CALL_METHOD_0(rt, m, x) ((rt(*)(void*))(m))(x)
+#define CALL_METHOD_1(rt, m, x, p1) ((rt(*)(void*, __typeof(p1)))(m))(x, p1)
+#define CALL_METHOD_2(rt, m, x, p1,p2) ((rt(*)(void*, __typeof(p1),__typeof(p2) ))(m))(x, p1, p2)
+#define CALL_METHOD_3(rt, m, x, p1,p2,p3) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3) ))(m))(x, p1,p2,p3)
+#define CALL_METHOD_4(rt, m, x, p1,p2,p3,p4) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4) ))(m))(x, p1,p2,p3,p4)
+#define CALL_METHOD_5(rt, m, x, p1,p2,p3,p4,p5) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5) ))(m))(x, p1,p2,p3,p4,p5)
+#define CALL_METHOD_6(rt, m, x, p1,p2,p3,p4,p5,p6) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6) ))(m))(x, p1,p2,p3,p4,p5,p6)
+#define CALL_METHOD_7(rt, m, x, p1,p2,p3,p4,p5,p6,p7) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7) ))(m))(x, p1,p2,p3,p4,p5,p6,p7)
+#define CALL_METHOD_8(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8)
+#define CALL_METHOD_9(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8,p9) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8),__typeof(p9) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8,p9)
+
+#define _GET_CALL_METHOD_MACRO_INDEX(_method, _object, _1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
+#define GET_CALL_METHOD_MACRO_INDEX(...) C74_EXPAND(_GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
+
+#define GET_CALL_METHOD_MACRO_NAME(...) C74_JOIN_2(CALL_METHOD_, GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__))
+
+// for now only use special macro for ARM
+// we want to avoid casting all args to void* on intel
+// and ultimately should come up with a better approach on ARM as well
+
+#ifdef USE_SAFE_METHOD_CALL
+
+#define CALL_INTMETHOD(...) C74_EXPAND(GET_CALL_METHOD_MACRO_NAME(__VA_ARGS__) ( long, __VA_ARGS__ ))
+#define CALL_METHOD(...) C74_EXPAND(GET_CALL_METHOD_MACRO_NAME(__VA_ARGS__) ( void*, __VA_ARGS__ ))
+
+#else
+
+#define CALL_INTMETHOD(m, ...) (*m)(__VA_ARGS__)
+#define CALL_METHOD(m, ...) (*m)(__VA_ARGS__)
+
+#endif
+
+// Forward declarations of important Max types
+
+typedef struct _atomarray t_atomarray;
+
+// eventually convert all externals to use explicit types instead of void*
+// can define C74_USE_STRICT_TYPES=1 to enable for specific externals to test
+#if !defined(_MAX_CORE_H_) && !defined(C74_USE_STRICT_TYPES)
+#define C74_USE_STRICT_TYPES 0
+#else
+#define C74_USE_STRICT_TYPES 1
+#endif
+
+#if C74_USE_STRICT_TYPES
+
+typedef struct _outlet t_outlet;
+typedef struct _inlet t_inlet;
+typedef struct _binbuf t_binbuf;
+typedef struct _qelem t_qelem;
+typedef struct _scheduler t_scheduler;
+typedef struct _clock t_clock;
+typedef struct _setclock t_setclock;
+typedef struct _toolfile t_toolfile;
+
+#else
+
+typedef void t_outlet;
+typedef void t_inlet;
+typedef void t_binbuf;
+typedef void t_qelem;
+typedef void t_scheduler;
+typedef void t_clock;
+typedef void t_setclock;
+typedef void t_toolfile;
+
+#endif // #if !C74_USE_STRICT_TYPES
+
+/** The symbol.
 	
 	Note: You should <em>never</em> manipulate the s_name field of the #t_symbol directly!
 	Doing so will corrupt Max's symbol table.  
@@ -41,7 +125,10 @@ typedef struct symbol
 	char *s_name;			///< name: a c-string
 	struct object *s_thing;	///< possible binding to a t_object
 } t_symbol;
+
+#ifdef C74_DEFINE_DEPRECATED_TYPES
 C74_DEPRECATED( typedef struct symbol Symbol );
+#endif
 
 #define CAREFUL
 
@@ -52,11 +139,20 @@ C74_DEPRECATED( typedef struct symbol Symbol );
 	
 #define OB_MAGIC MAGIC
 
+/** function version of NOGOOD test is potentially more reliable
+*/
+long object_isnogood(void *x);
+
 #ifdef  WIN_VERSION
 /**	Returns true if a pointer is not a valid object. 
 	@ingroup obj
 */
+#ifdef _DEBUG
+#define NOGOOD(x) object_isnogood(x)
+#else
 #define NOGOOD(x) ( IsBadReadPtr((void *)(x),sizeof(struct object)) || ((struct object *)(x))->o_magic != MAGIC )
+#endif
+
 #else
 /**	Returns true if a pointer is not a valid object. 
 	@ingroup obj
@@ -82,8 +178,10 @@ typedef struct messlist
 	method m_fun;				///< Method associated with the message
 	char m_type[MSG_MAXARG + 1];	///< Argument type information
 } t_messlist;
-C74_DEPRECATED( typedef struct messlist Messlist );
 
+#ifdef C74_DEFINE_DEPRECATED_TYPES
+C74_DEPRECATED( typedef struct messlist Messlist );
+#endif
 
 /**	The tiny object structure sits at the head of any object to which you may
  	pass messages (and which you may feed to freeobject()).
@@ -98,7 +196,10 @@ typedef struct tinyobject
 	long t_magic;					///< magic number
 #endif
 } t_tinyobject;
+
+#ifdef C74_DEFINE_DEPRECATED_TYPES
 C74_DEPRECATED( typedef struct tinyobject Tinyobject );
+#endif
 
 
 /** The structure for the head of any object which wants to have inlets or outlets,
@@ -112,10 +213,13 @@ typedef struct object
 #ifdef CAREFUL
 	t_ptr_int o_magic;					///< magic number
 #endif
-	struct inlet *o_inlet;			///<  list of inlets
-	struct outlet *o_outlet;		///<  list of outlets
+	t_inlet *o_inlet;			///<  list of inlets
+	t_outlet *o_outlet;		///<  list of outlets
 } t_object;
+
+#ifdef C74_DEFINE_DEPRECATED_TYPES
 C74_DEPRECATED( typedef struct object Object );
+#endif
 
 /** 
 	The data structure for a Max class. This struct is provided for debugging convenience, 
@@ -146,7 +250,10 @@ typedef struct maxclass
 	method c_attr_getnames;			// if not set, NULL, if not present CLASS_NO_METHOD
 	struct maxclass *c_superclass;	// a superclass point if this is a derived class
 } t_class;
+
+#ifdef C74_DEFINE_DEPRECATED_TYPES
 C74_DEPRECATED( typedef struct maxclass Maxclass );
+#endif
 
 
 /** Class flags. If not box or polyglot, class is only accessible in C via known interface
@@ -159,13 +266,18 @@ typedef enum {
 	CLASS_FLAG_REGISTERED =				0x00000008L,	///< for backward compatible messlist implementation (once reg'd can't grow)
 	CLASS_FLAG_UIOBJECT =				0x00000010L,	///< for objects that don't go inside a newobj box. 
 	CLASS_FLAG_ALIAS =					0x00000020L,	///< for classes that are just copies of some other class (i.e. del is a copy of delay)
+	CLASS_FLAG_MULTITOUCH =				0x00000040L,	///< sent multitouch version of mouse messages
 	CLASS_FLAG_DO_NOT_PARSE_ATTR_ARGS =	0x00000080L, 	///< override dictionary based constructor attr arg parsing
 	CLASS_FLAG_DO_NOT_ZERO =			0x00000100L, 	///< don't zero the object struct on construction (for efficiency)
 	CLASS_FLAG_NOATTRIBUTES =			0x00010000L,	///< for efficiency
 	CLASS_FLAG_OWNATTRIBUTES =			0x00020000L,	///< for classes which support a custom attr interface (e.g. jitter)
 	CLASS_FLAG_PARAMETER =				0x00040000L,	///< for classes which have a parameter
 	CLASS_FLAG_RETYPEABLE =				0x00080000L,	///< object box can be retyped without recreating the object
-	CLASS_FLAG_OBJECT_METHOD =			0x00100000L		///< objects of this class may have object specific methods
+	CLASS_FLAG_OBJECT_METHOD =			0x00100000L,	///< objects of this class may have object specific methods
+	CLASS_FLAG_VISUALIZER =				0x00200000L,	///< objects of this class are signal visualizers
+	CLASS_FLAG_USES_PROXIES =			0x00400000L, 	///< objects of this class might use proxies (set automatically in proxy_new)
+	CLASS_FLAG_OWN_DATA =				0x00800000L,	///< objects of this class save data in their own format
+	CLASS_FLAG_DYNAMICCOLOR =			0x01000000L		///< objects which contain colors supporting dynamic colors (set automatically in class_attr_dynamiccolor_init)
 } e_max_class_flags;
 
 
@@ -229,7 +341,10 @@ typedef struct atom		// and an atom which is a typed datum
 	short			a_type;	
 	union word		a_w;
 } t_atom;
-C74_DEPRECATED( typedef struct atom Atom );	
+
+#ifdef C74_DEFINE_DEPRECATED_TYPES
+C74_DEPRECATED( typedef struct atom Atom );
+#endif
 
 /**	Function pointer type for methods with no arguments.
 	@ingroup datatypes
@@ -266,15 +381,17 @@ typedef long *(*gimmeback_meth)(void *x, t_symbol *s, long ac, t_atom *av, t_ato
 #define ob_sym(x) (ob_class(x)->c_sym)
 #define ob_filename(x) (ob_class(x)->c_filename->s_name)
 #define ob_filesym(x) (ob_class(x)->c_filename)
-#define OB_MESS0(x, y) (*(getfn((struct object *)x, y)))((struct object *)x)
+#define OB_MESS0(x, y) (CALL_METHOD(getfn((struct object *)x, y), (struct object *)x))
 #define mess0 OB_MESS0
-#define OB_MESS1(x, y, z1) (*(getfn((struct object *)x, y)))((struct object *)x, z1)
+// #define OB_MESS1(x, y, z1) (*(getfn((struct object *)x, y)))((struct object *)x, z1)
+#define OB_MESS1(x, y, z1) (CALL_METHOD(getfn((struct object *)x, y), (struct object *)x, z1))
 #define mess1 OB_MESS1
-#define OB_MESS2(x, y, z1,z2) (*(getfn((struct object *)x, y)))((struct object *)x, z1,z2)
+//#define OB_MESS2(x, y, z1,z2) (*(getfn((struct object *)x, y)))((struct object *)x, z1,z2)
+#define OB_MESS2(x, y, z1,z2) (CALL_METHOD((getfn((struct object *)x, y)), (struct object *)x, z1, z2))
 #define mess2 OB_MESS2
-#define mess3(x, y, z1,z2,z3) (*(getfn((struct object *)x, y)))(x, z1,z2,z3)
-#define mess4(x, y, z1,z2,z3,z4) (*(getfn((struct object *)x, y)))(x, z1,z2,z3,z4)
-#define mess5(x, y, z1,z2,z3,z4,z5) (*(getfn((struct object *)x, y)))(x, z1,z2,z3,z4,z5)
+#define mess3(x, y, z1,z2,z3) (CALL_METHOD(getfn((struct object *)x, y), x, z1, z2, z3))
+#define mess4(x, y, z1,z2,z3,z4) (CALL_METHOD(getfn((struct object *)x, y), x, z1,z2,z3,z4))
+#define mess5(x, y, z1,z2,z3,z4,z5) (CALL_METHOD(getfn((struct object *)x, y), x, z1,z2,z3,z4,z5))
 #define floatmess1(x,y,z1)  ((floatmeth)(*(getfn((struct object *)x, y))))((struct object *)x, z1)
 #define NIL ((void *)0)
 #define A_SETCOMMA(ap) ((ap)->a_type = A_COMMA)
@@ -292,8 +409,6 @@ typedef long *(*gimmeback_meth)(void *x, t_symbol *s, long ac, t_atom *av, t_ato
     #pragma pack()
 #endif
 
-#ifdef __cplusplus
-}
-#endif
+END_USING_C_LINKAGE
 
 #endif /* _EXT_MESS_H_ */

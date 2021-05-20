@@ -1,6 +1,9 @@
 #ifndef _EXT_SYSPARALLEL_H_
 #define _EXT_SYSPARALLEL_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
 #elif C74_PRAGMA_STRUCT_PACK
@@ -60,6 +63,7 @@ typedef struct _sysparallel_worker
 
 void sysparallel_init(void);
 long sysparallel_processorcount(void);
+long sysparallel_physical_processorcount(void);
 t_sysparallel_task *sysparallel_task_new(void *data, method workerproc, long maxworkercount);
 t_max_err sysparallel_task_workercount(t_sysparallel_task *x, long workercount);
 t_max_err sysparallel_task_execute(t_sysparallel_task *x);

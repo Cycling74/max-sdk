@@ -16,7 +16,9 @@ var group__atom =
       [ "OBEX_UTIL_ATOM_GETTEXT_COMMA_DELIM", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a45021a54b7ef864284a15b898d169a13", null ],
       [ "OBEX_UTIL_ATOM_GETTEXT_FORCE_ZEROS", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a6cffcc55e28bd69beb674fe018c18e35", null ],
       [ "OBEX_UTIL_ATOM_GETTEXT_NUM_HI_RES", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a9a254b928e25b9023b6e3bb6b25f35b7", null ],
-      [ "OBEX_UTIL_ATOM_GETTEXT_NUM_LO_RES", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a6acacb8ed677c3b50a0a406b9ae7a998", null ]
+      [ "OBEX_UTIL_ATOM_GETTEXT_NUM_LO_RES", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a6acacb8ed677c3b50a0a406b9ae7a998", null ],
+      [ "OBEX_UTIL_ATOM_GETTEXT_NOESCAPE", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772ac14c2655bb14b5fb31fa8a8e6683f0a6", null ],
+      [ "OBEX_UTIL_ATOM_GETTEXT_LINEBREAK_NODELIM", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772aa83560e4695ec2447d38e3438f1cf00b", null ]
     ] ],
     [ "e_max_atomtypes", "group__atom.html#ga8aa6700e9f00b132eb376db6e39ade47", [
       [ "A_NOTHING", "group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47a858ddb5d5927eae3fd699a82c7e174b6", null ],
@@ -62,6 +64,7 @@ var group__atom =
     [ "atom_getsym", "group__atom.html#ga395f0acece3db45a0e9d45b6361ee222", null ],
     [ "atom_getsym_array", "group__atom.html#ga48c3655238debe58e8a943dc28381953", null ],
     [ "atom_gettext", "group__atom.html#gade94ebf977b43b151a906b2b70d12301", null ],
+    [ "atom_gettext_precision", "group__atom.html#gaf7f9fdb4716a10f805688a9c485fdbf7", null ],
     [ "atom_gettype", "group__atom.html#gae1bb68c21541e2b4b15af94c5178b282", null ],
     [ "atom_setatom_array", "group__atom.html#ga6d8f3b8d919c155a69d9e6a9c010ec74", null ],
     [ "atom_setchar_array", "group__atom.html#ga88e54464a226b4fa99113f39ca522fb2", null ],

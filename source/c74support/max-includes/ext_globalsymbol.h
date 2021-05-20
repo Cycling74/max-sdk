@@ -1,6 +1,9 @@
 #ifndef __EXT_GLOBALSYMBOL_H__
 #define __EXT_GLOBALSYMBOL_H__
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 /**	Get a reference to an object that is bound to a #t_symbol.

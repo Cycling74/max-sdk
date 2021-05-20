@@ -1,6 +1,9 @@
 #ifndef _EXT_SYSSHMEM_H_
 #define _EXT_SYSSHMEM_H_
 
+#include "ext_prefix.h"
+#include "max_types.h"
+
 BEGIN_USING_C_LINKAGE
 
 // sysshmem is a platform independent interface to shared memory

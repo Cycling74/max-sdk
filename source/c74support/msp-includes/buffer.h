@@ -6,6 +6,7 @@
 #include "ext_critical.h"
 #include "ext_atomic.h"
 #include "ext_buffer.h"
+#include "ext_maxtypes.h"
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)

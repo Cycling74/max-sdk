@@ -39,6 +39,7 @@ typedef struct _jit_gl_context_view_cache {
     long	idlemouse;
     long	mousewheel;
     long    allow_hi_res;
+	long 	threaded;
 } t_jit_gl_context_view_cache;
 
 /**
@@ -57,7 +58,6 @@ typedef struct _jit_gl_context_view {
 	t_object			ob;					///< jitter object
 	long				rebuild;			///< rebuild flag
 	t_jit_gl_context	context;			///< OpenGL context
-	t_symbol			*shared_context;	///< shared context name
 	t_wind_mouse_info	mouse_info;			///< data for mouse events
 	t_wind_mousewheel_info mousewheel_info;	///< data for mouse wheel events 
 	t_wind_key_info		key_info;			///< data for key events
@@ -77,16 +77,18 @@ typedef struct _jit_gl_context_view {
 	t_symbol			*name;				///< name of the view
 	long				reshaping;			///< flag for breaking cycles on reshape notification
 	long				ownerreshape;		///< flag for if the owner handles reshaping the context
-	t_object			*patcher;			///< patcher the context view is in (if there is one)
 	long				freeing;			///< in the process of freeing flag
 	long				creating;			///< in the process of creating flag
 	long				destroying;			///< in the process of destroying flag
+	long				recreating;
 	float				scalefactor;		///< scaling factor when drawing to retina display
 	long				allow_hi_res;		///< allows for high resolution drawing when available
 	char				view_valid;
 	char				first_frame;
 	void				*nativewinhandle;	///< patcher native window handle, for offscreen contexts
 	char				is_mfl;
+	char				threaded;
+	t_linklist			*ext_objects;
 } t_jit_gl_context_view;
 
 
@@ -104,7 +106,6 @@ void jit_gl_context_view_free(t_jit_gl_context_view *x);
 // render destination interface
 long jit_gl_context_view_is_available(t_jit_gl_context_view *x);
 t_jit_err jit_gl_context_view_rebuild(t_jit_gl_context_view *x);
-t_jit_err jit_gl_context_view_register_jpatcher(t_jit_gl_context_view *x);
 t_jit_err jit_gl_context_view_destroy(t_jit_gl_context_view *x);
 t_jit_err jit_gl_context_view_update(t_jit_gl_context_view *x);
 t_jit_err jit_gl_context_view_clear(t_jit_gl_context_view *x);
@@ -122,12 +123,10 @@ void jit_gl_context_view_handle_mouse_event(t_jit_gl_context_view *x, t_symbol *
 void jit_gl_context_view_handle_mousewheel_event(t_jit_gl_context_view *x, t_symbol *s, long mousedown, t_jit_pt pt, t_jit_gl_context_modifier modifiers, double dx, double dy);
 t_jit_err  jit_gl_context_view_get_mouse_info(t_jit_gl_context_view *x, t_wind_mouse_info **minfo);
 t_jit_err jit_gl_context_view_get_mousewheel_info(t_jit_gl_context_view *x, t_wind_mousewheel_info **minfo);
-void jit_gl_context_view_notify(t_jit_gl_context_view *x, t_symbol *sender_name, t_symbol *msg, void *p_sender);
-t_jit_err jit_gl_context_view_disable_shared_context(t_jit_gl_context_view *x);
 t_jit_err jit_gl_context_view_setname(t_jit_gl_context_view *x, void *attr, long argc, t_atom *argv);
 t_jit_err jit_gl_context_view_setflag(t_jit_gl_context_view *x, void *attr, long argc, t_atom *argv);
-t_jit_err jit_gl_context_view_setshared_context(t_jit_gl_context_view *x, void *attr, long argc, t_atom *argv);
-t_jit_err jit_gl_context_view_calcpickray(t_jit_gl_context_view *x, long px, long py, float *ray);
+t_jit_err jit_gl_context_view_calcpickray(t_jit_gl_context_view *x, long ac, t_atom *av, t_atom *rv);
+void jit_gl_camera_calcpickray(void *camera, long px, long py, t_jit_vec3 *p1i, t_jit_vec3 *p2i, double scalefactor);
 
 // common to render destination and renderer interface
 t_jit_gl_context_status jit_gl_context_view_make_current(t_jit_gl_context_view *x);

@@ -11,7 +11,6 @@
 #include "ext_obex.h"
 #include "ext_path.h"
 
-
 void *filein_class;
 
 typedef struct filein {
@@ -19,8 +18,8 @@ typedef struct filein {
 	t_filehandle f_fh;
 	short f_open;			/* spool flag */
 	short f_spool;
-	t_uint8 **f_data;			/* read in data */
-	long f_size;
+	t_handle f_data;			/* read in data */
+	t_ptr_size f_size;
 	void *f_out;
 	void *f_eof;
 	void *f_readdone;
@@ -28,10 +27,10 @@ typedef struct filein {
 
 t_symbol *ps_nothing,*ps_spool,*ps_int,*ps_in1,*ps_in2;
 
-void filein_access(t_filein *x, t_symbol *s, short ac, t_atom *av);
-void filein_int(t_filein *x, long n);
-void filein_in1(t_filein *x, long n);
-void filein_in2(t_filein *x, long n);
+void filein_access(t_filein *x, t_symbol *s, long ac, t_atom *av);
+void filein_int(t_filein *x, t_atom_long n);
+void filein_in1(t_filein *x, t_atom_long n);
+void filein_in2(t_filein *x, t_atom_long n);
 void filein_close(t_filein *x);
 void filein_open(t_filein *x, char *name);
 void filein_doread(t_filein *x, t_symbol *s);
@@ -40,10 +39,8 @@ void filein_read(t_filein *x, t_symbol *s);
 void filein_free(t_filein *x);
 void filein_assist(t_filein *x, void *b, long m, long a, char *s);
 void *filein_new(t_symbol *fn, t_symbol *spoolFlag);
-void ctopcpy(unsigned char *p1, char *p2);
-//char *strcpy(char *s1, const char *s2);
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -65,151 +62,106 @@ void ext_main(void *r)
 	ps_in1 = gensym("in1");
 	ps_in2 = gensym("in2");
 
-	return (0);
+	return;
 }
 
-void filein_access(t_filein *x, t_symbol *s, short ac, t_atom *av)
+static t_atom_long get_value_for_data(const char* data, t_symbol *s)
 {
-	t_max_err err;
-	t_uint8 data[8];
-	t_ptr_size count;
-	unsigned long dummy;
-
-	if (s==ps_int)
-		count = 1;
-	else if (s==ps_in1)
-		count = 2;
-	else
-		count = 4;
-	err = sysfile_setpos(x->f_fh,SYSFILE_FROMSTART,av->a_w.w_long);
-	if (err)
-		object_error((t_object *)x, "seek err %d",err);
+	t_atom_long value;
+	if (s == ps_int) {
+		const t_uint8 *pd = (const t_uint8*) data;
+		value = *pd;
+	}
+	else if (s == ps_in1) {
+		const t_uint16 *pd = (const t_uint16*) data;
+		value = *pd;
+	}
+	else if (s == ps_in2) {
+		const t_uint32 *pd = (const t_uint32*) data;
+		value = *pd;
+	}
 	else {
-		err = sysfile_read(x->f_fh,&count,data);
-		if (err)
-			object_error((t_object *)x, "read err %d",err);
-		else {
-			if (count==1)
-				dummy = data[0];
-			else
-				sysmem_copyptr(data,&dummy,count);
-			outlet_int(x->f_out,dummy);
-		}
+		C74_ASSERT(false);
+		value = 0;
 	}
+	return value;
 }
 
-void filein_int(t_filein *x, long n)		/* byte access */
+static int get_data_size_for_symbol(t_symbol *s)
 {
-	t_atom info;
-	t_uint8 data[16];
-	t_ptr_size count;
-	t_max_err err;
+	if (s == ps_int) {
+		return 1;
+	}
+	else if (s == ps_in1) {
+		return 2;
+	}
+	else if (s == ps_in2) {
+		return 4;
+	}
+	C74_ASSERT(false);
+	return 0;
+}
+
+void filein_access(t_filein *x, t_symbol *s, long ac, t_atom *av)
+{
+	t_atom_long n = atom_getlong(av);
+	const t_ptr_size datasize = get_data_size_for_symbol(s);
 
 	if (x->f_open) {
-		if (isr()) {
-			atom_setlong(&info,n);
-			defer(x,(method)filein_access,ps_int,1,&info);
+		if (systhread_istimerthread()) {
+			defer(x, (method) filein_access, s, ac, av);
 		} else {
-			err = sysfile_setpos(x->f_fh,SYSFILE_FROMSTART,n);
+			t_max_err err = sysfile_setpos(x->f_fh,SYSFILE_FROMSTART,n);
 			if (err)
 				object_error((t_object *)x, "seek err %d",err);
 			else {
-				count = 1;
-				err = sysfile_read(x->f_fh,&count,data);
-				if (err)
-					object_error((t_object *)x, "read err %d",err);
+				char data[8] = { 0 };
+				t_ptr_size count = datasize;
+				sysfile_read(x->f_fh, &count, data);
+				if (count < datasize) {
+					outlet_bang(x->f_eof);
+				}
 				else {
-					count = data[0];
-					outlet_int(x->f_out,count);
+					t_atom_long value = get_value_for_data(data, s);
+					outlet_int(x->f_out, value);
 				}
 			}
 		}
 	} else if (x->f_data) {
 		if (n < 0)
 			object_error((t_object *)x, "access out of range");
-		else if (n >= x->f_size)
+		else if (n+datasize > x->f_size)
 			outlet_bang(x->f_eof);
 		else {
-			count = *((*(x->f_data))+n);
-			outlet_int(x->f_out,count);
+			const char* pd = (*(x->f_data)) + n;
+			t_atom_long value = get_value_for_data(pd, s);
+			outlet_int(x->f_out, value);
 		}
 	}
 }
 
-void filein_in1(t_filein *x, long n)		/* int access */
+void filein_int(t_filein *x, t_atom_long n)		/* byte access */
 {
-	t_atom info;
-	unsigned short data[4];
-	t_ptr_size count;
-	t_max_err err;
-
-	if (x->f_open) {
-		if (isr()) {
-			atom_setlong(&info,n);
-			defer(x,(method)filein_access,ps_in1,1,&info);
-		} else {
-			err = sysfile_setpos(x->f_fh,SYSFILE_FROMSTART,n);
-			if (err)
-				object_error((t_object *)x, "seek err %d",err);
-			else {
-				count = 2;
-				err = sysfile_read(x->f_fh,&count,data);
-				if (err)
-					object_error((t_object *)x, "read err %d",err);
-				else {
-					count = data[0];
-					outlet_int(x->f_out,count);
-				}
-			}
-		}
-	} else if (x->f_data) {
-		if (n < 0)
-			object_error((t_object *)x, "access out of range");
-		else if (n >= x->f_size)
-			outlet_bang(x->f_eof);
-		else {
-			sysmem_copyptr(*(x->f_data)+n,data,2L);
-			outlet_int(x->f_out,data[0]);
-		}
-	}
+	t_atom a;
+	
+	atom_setlong(&a, n);
+	filein_access(x, ps_int, 1, &a);
 }
 
-void filein_in2(t_filein *x, long n)		/* long access */
+void filein_in1(t_filein *x, t_atom_long n)		/* int access */
 {
-	t_atom info;
-	t_uint32 data[4];
-	t_ptr_size count;
-	t_max_err err;
+	t_atom a;
+	
+	atom_setlong(&a, n);
+	filein_access(x, ps_in1, 1, &a);
+}
 
-	if (x->f_open) {
-		if (isr()) {
-			atom_setlong(&info,n);
-			defer(x,(method)filein_access,ps_in2,1,&info);
-		} else {
-			err = sysfile_setpos(x->f_fh,SYSFILE_FROMSTART,n);
-			if (err)
-				object_error((t_object *)x, "seek err %d",err);
-			else {
-				count = 4;
-				err = sysfile_read(x->f_fh,&count,data);
-				if (err)
-					object_error((t_object *)x, "read err %d",err);
-				else {
-					count = data[0];
-					outlet_int(x->f_out,count);
-				}
-			}
-		}
-	} else if (x->f_data) {
-		if (n < 0)
-			object_error((t_object *)x, "access out of range");
-		else if (n >= x->f_size)
-			outlet_bang(x->f_eof);
-		else {
-			sysmem_copyptr(*(x->f_data)+n,data,4L);
-			outlet_int(x->f_out,data[0]);
-		}
-	}
+void filein_in2(t_filein *x, t_atom_long n)		/* long access */
+{
+	t_atom a;
+	
+	atom_setlong(&a, n);
+	filein_access(x, ps_in2, 1, &a);
 }
 
 void filein_close(t_filein *x)
@@ -220,8 +172,8 @@ void filein_close(t_filein *x)
 		x->f_open = FALSE;
 	}
 	if (x->f_data) {
-		sysmem_lockhandle((t_handle)x->f_data,0);
-		sysmem_freehandle((t_handle)x->f_data);
+		sysmem_lockhandle(x->f_data,0);
+		sysmem_freehandle(x->f_data);
 		x->f_data = 0;
 	}
 }
@@ -234,10 +186,10 @@ void filein_open(t_filein *x, char *name)
 		x->f_open = TRUE;
 	else {
 		sysfile_geteof(x->f_fh,&size);
-		if (!(x->f_data = (t_uint8 **)sysmem_newhandle(size)))
+		if (!(x->f_data = sysmem_newhandle(size)))
 			object_error((t_object *)x, "%s too big to read",name);
 		else {
-			sysmem_lockhandle((t_handle)x->f_data,1);
+			sysmem_lockhandle(x->f_data,1);
 			sysfile_read(x->f_fh,&size,*x->f_data);
 			x->f_size = size;
 		}
@@ -332,18 +284,3 @@ void *filein_new(t_symbol *fn, t_symbol *spoolFlag)
 	}
 	return (x);
 }
-
-#ifndef WIN_VERSION
-#ifndef TARGET_RT_MAC_MACHO
-char *strcpy(char *s1, const char *s2)
-{
-	char *ret = s1;
-
-	while ((*s1++ = *s2++) != 0)
-		;
-
-	return ret;
-}
-#endif// TARGET_RT_MAC_MACHO
-#endif// WIN_VERSION
-

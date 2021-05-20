@@ -19,19 +19,19 @@ typedef struct past
 	void *p_out;
 } t_past;
 
-void past_int(t_past *x, long n);
+void past_int(t_past *x, t_atom_long n);
 void past_float(t_past *x, double f);
-void past_list(t_past *x, t_symbol *s, short ac, t_atom *av);
+void past_list(t_past *x, t_symbol *s, long ac, t_atom *av);
 void past_clear(t_past *x);
-void past_set(t_past *x, t_symbol *s, short ac, t_atom *av);
+void past_set(t_past *x, t_symbol *s, long ac, t_atom *av);
 void past_assist(t_past *x, void *b, long m, long a, char *s);
-void *past_new(t_symbol *s, short ac, t_atom *av);
-void past_assign(t_past *x, short ac, t_atom *av);
+void *past_new(t_symbol *s, long ac, t_atom *av);
+void past_assign(t_past *x, long ac, t_atom *av);
 short past_compare(t_past *x, t_atom *a, long index);
 
-void *past_class;
+static t_class *s_past_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -43,12 +43,10 @@ void ext_main(void *r)
 	class_addmethod(c, (method)past_assist,	"assist",	A_CANT,0);
 	class_addmethod(c, (method)past_set,	"set",		A_GIMME,0);
 	class_register(CLASS_BOX, c);
-	past_class = c;
-
-	return 0;
+	s_past_class = c;
 }
 
-void past_int(t_past *x, long n)
+void past_int(t_past *x, t_atom_long n)
 {
 	t_atom a;
 
@@ -88,9 +86,9 @@ void past_float(t_past *x, double f)
 	}
 }
 
-void past_list(t_past *x, t_symbol *s, short ac, t_atom *av)
+void past_list(t_past *x, t_symbol *s, long ac, t_atom *av)
 {
-	short i;
+	long i;
 	short canfail,result;
 
 	canfail = false;
@@ -127,7 +125,7 @@ void past_clear(t_past *x)
 	x->p_set = 0;
 }
 
-void past_set(t_past *x, t_symbol *s, short ac, t_atom *av)
+void past_set(t_past *x, t_symbol *s, long ac, t_atom *av)
 {
 	if (ac)
 		past_assign(x,ac,av);
@@ -141,18 +139,18 @@ void past_assist(t_past *x, void *b, long m, long a, char *s)
 		sprintf(s,"bang When Numbers Rise Above Specified Value");
 }
 
-void *past_new(t_symbol *s, short ac, t_atom *av)
+void *past_new(t_symbol *s, long ac, t_atom *av)
 {
 	t_past *x;
 
-	x = object_alloc(past_class);
+	x = object_alloc(s_past_class);
 	x->p_out = bangout((t_object *)x);
 	past_assign(x,ac,av);
 	x->p_set = 0;
 	return x;
 }
 
-void past_assign(t_past *x, short ac, t_atom *av)
+void past_assign(t_past *x, long ac, t_atom *av)
 {
 	short i;
 

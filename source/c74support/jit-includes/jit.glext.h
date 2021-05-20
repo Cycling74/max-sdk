@@ -40,6 +40,8 @@ extern "C" {
 #include <windows.h>
 #endif
 
+#include "jit.gl.h"
+
 #ifndef APIENTRY
 #define APIENTRY
 #endif
@@ -2838,7 +2840,7 @@ typedef ptrdiff_t GLsizeiptrARB;
 #ifndef GL_ARB_shader_objects
 /* GL types for handling shader object handles and characters */
 typedef char GLcharARB;		/* native character */
-typedef unsigned int GLhandleARB;	/* shader object handle */
+typedef void* GLhandleARB;	/* shader object handle */
 #endif
 
 #endif

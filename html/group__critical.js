@@ -5,5 +5,5 @@ var group__critical =
     [ "critical_free", "group__critical.html#gaedbe0cba11940710c789ac01194e3712", null ],
     [ "critical_new", "group__critical.html#gaaa373bcd9c8059e4887225aaf32a76d2", null ],
     [ "critical_tryenter", "group__critical.html#ga0a4109d5c2b82f0c1022015abac175dc", null ],
-    [ "t_critical", "group__critical.html#ga8d715cd96234700ea62572e0d19e27e6", null ]
+    [ "t_critical", "group__critical.html#gae454b08515c952ae1b6d90d161705412", null ]
 ];

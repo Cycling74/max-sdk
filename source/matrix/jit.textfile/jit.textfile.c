@@ -19,7 +19,7 @@ typedef struct _jit_textfile
 {
 	t_object		ob;
 	char			autoclear;
-	long			text_local;
+	t_handle        text_local;
 	long			line;
 	t_symbol		*linebreak;
 } t_jit_textfile;
@@ -38,6 +38,9 @@ void jit_textfile_packmatrix(t_jit_textfile *x, long dimcount, long *dim,
 							 t_jit_matrix_info *info, char *bop);
 void jit_textfile_read_char(t_jit_textfile *x, long *dim,
 							t_jit_matrix_info *info, char *bop);
+
+t_jit_err jit_textfile_set_texthandle(t_jit_textfile* x, t_handle handle);
+t_jit_err jit_textfile_get_texthandle(t_jit_textfile* x, t_handle* handle);
 
 // matrix to textfile functions
 void jit_textfile_write_char(t_jit_textfile *x, long *dim, t_jit_matrix_info *info, char *bip);
@@ -60,6 +63,8 @@ t_jit_err jit_textfile_init(void)
 	jit_class_addadornment(_jit_textfile_class, mop);
 
 	jit_class_addmethod(_jit_textfile_class, (method)jit_textfile_matrix_calc, "matrix_calc", A_CANT, 0L);
+	jit_class_addmethod(_jit_textfile_class, (method)jit_textfile_set_texthandle, "set_texthandle", A_CANT, 0L);
+	jit_class_addmethod(_jit_textfile_class, (method)jit_textfile_get_texthandle, "get_texthandle", A_CANT, 0L);
 
 	//add attributes
 	attrflags = JIT_ATTR_GET_DEFER_LOW | JIT_ATTR_SET_USURP_LOW;
@@ -69,9 +74,6 @@ t_jit_err jit_textfile_init(void)
 	object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Auto Clear\"");
 
 	attrflags = JIT_ATTR_GET_OPAQUE_USER | JIT_ATTR_SET_OPAQUE_USER;
-	attr = jit_object_new(_jit_sym_jit_attr_offset,"texthandle",_jit_sym_long,attrflags,
-						  (method)0L,(method)0L,calcoffset(t_jit_textfile,text_local));
-	jit_class_addattr(_jit_textfile_class,attr);
 	attr = jit_object_new(_jit_sym_jit_attr_offset,"jline",_jit_sym_long,attrflags,
 						  (method)0L,(method)0L,calcoffset(t_jit_textfile,line));
 	jit_class_addattr(_jit_textfile_class,attr);
@@ -87,6 +89,18 @@ t_jit_err jit_textfile_init(void)
 	ps_dos = gensym("dos");
 	ps_unix = gensym("unix");
 
+	return JIT_ERR_NONE;
+}
+
+t_jit_err jit_textfile_set_texthandle(t_jit_textfile* x, t_handle handle)
+{
+	x->text_local = handle;
+	return JIT_ERR_NONE;
+}
+
+t_jit_err jit_textfile_get_texthandle(t_jit_textfile* x, t_handle* handle)
+{
+	*handle = x->text_local;
 	return JIT_ERR_NONE;
 }
 
@@ -177,7 +191,7 @@ void jit_textfile_write_char(t_jit_textfile *x, long *dim, t_jit_matrix_info *in
 	width = dim[0];
 	height = dim[1];
 	planecount = info->planecount;
-	th = (t_handle)jit_attr_getlong(x, gensym("texthandle"));
+	th = x->text_local;
 	size = (width * planecount * height) + height*crsize; // extra per row for cr
 
 	// 24.7.2005 jb changed this to write to a temp pointer, get the length of the string
@@ -225,7 +239,7 @@ void jit_textfile_write_char(t_jit_textfile *x, long *dim, t_jit_matrix_info *in
 	sysmem_copyptr(tmp, *th, len);
 	sysmem_lockhandle(th, 0);
 	sysmem_freeptr(tmp);
-	x->text_local = (long)th;
+	x->text_local = th;
 }
 
 t_jit_err jit_textfile_tomatrix_nonadapt(t_jit_textfile *x, void *inputs, void *outputs)
@@ -281,12 +295,12 @@ t_jit_err jit_textfile_tomatrix_adapt(t_jit_textfile *x, void *inputs, void *out
 		{
 			long size;
 			long n, loc;
-			t_handle th = (t_handle)x->text_local;
+			t_handle th = x->text_local;
 			char *text;
 
 			if (!th) return JIT_ERR_NONE;
 			text = *th;
-			size = sysmem_handlesize((t_handle)x->text_local);
+			size = sysmem_handlesize(x->text_local);
 
 			loc = 0;
 			crcount = 0;
@@ -372,7 +386,7 @@ void jit_textfile_read_char(t_jit_textfile *x, long *dim, t_jit_matrix_info *inf
 	long width, height, planecount, bytecount;
 	long size;
 	uchar *text;
-	t_handle th = (t_handle)x->text_local;
+	t_handle th = x->text_local;
 
 	if (!th) return;
 
@@ -446,7 +460,7 @@ t_jit_err jit_textfile_tomatrix_line(t_jit_textfile *x, void *inputs, void *outp
 	if (x && out_matrix) {
 		jit_object_method(out_matrix,_jit_sym_getinfo,&info);
 
-		th = (t_handle)x->text_local;
+		th = x->text_local;
 		if (!th) return JIT_ERR_NONE;
 		text = *th;
 		size = sysmem_handlesize(th);

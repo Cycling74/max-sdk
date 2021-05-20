@@ -29,13 +29,27 @@
 	#include <OpenGL/OpenGL.h>
 
 	void * nsglGetProcAddress (const char *pszProc);
-	void nsglSetRect(void *context, GLint *val);
 
 	#define glGetProcAddress nsglGetProcAddress
 
 	#include "jit.glext.h"
 
 #endif	// MAC_VERSION
+
+#ifdef LINUX_VERSION
+
+#ifdef GL3_VERSION
+
+	#include <GL/gl3.h>
+
+#else
+
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+
+#endif
+#endif
+
 
 // --------------------------------------------------------------------------------
 
@@ -68,18 +82,19 @@
 		#define GLhandleARB unsigned int
 		#define GLcharARB GLchar
 		#define GLhalfARB unsigned short
-		#define GLhalfNV unsigned short
+		//#define GLhalfNV unsigned short
 
+		#define glGetProcAddress gl3wGetProcAddress
 	#else
 
 		#include "gl\gl.h"
 		#include "gl\glu.h"
 		#include "jit.wglext.h"
 		#include "jit.glext.h"
+
+		#define glGetProcAddress wglGetProcAddress
+		#define glCheckFramebufferStatus glCheckFramebufferStatusEXT
 	#endif
-	
-	#define glGetProcAddress wglGetProcAddress
-	#define glCheckFramebufferStatus glCheckFramebufferStatusEXT
 
 
 	/*
@@ -98,7 +113,6 @@
 
 	typedef struct _jit_gl_platform_data {
 		PROC set_swap_interval;
-		float scalefactor;
 	} t_jit_gl_platform_data;
 
 #endif	// WIN_VERSION
@@ -108,9 +122,6 @@
 #include "jit.gl.draw.h"
 #include "jit.gl.chunk.h"
 #include "jit.gl.ob3d.h"
-#ifndef GL3_VERSION
-#include "jit.gl.procs.h"
-#endif
 #include "jit.gl.support.h"
 #include "jit.gl.context.h"
 #include "jit.gl.drawinfo.h"
@@ -150,6 +161,9 @@ long jit_gl_report_error (char *prefix);
 long jit_gl_object_report_error (void *x, char *prefix);
 void jit_gl_object_error (void *x, char *s, ...);
 
+// only valid for the life of a render draw call
+double jit_gl_get_current_scalefactor();
+	
 // --------------------------------------------------------------------------------
 // query methods
 
@@ -168,8 +182,19 @@ t_jit_err jit_gl_worldtoscreen(t_jit_object *x, t_point_3d p_world, t_point_3d p
 t_jit_err jit_gl_screentoworld(t_jit_object *x, t_point_3d p_screen, t_point_3d p_world);
 extern void * jit_gl_getscenegraph(t_symbol *ctx);
 
-t_jit_err jit_err_from_max_err(t_max_err err);
+t_jit_err jit_gl_err_from_max_err(t_max_err err);
 
+extern t_bool g_gl_unsupported_silence_warning;
+t_jit_err jit_gl_unsupported(t_jit_object *x, void *attr, long ac, t_atom *av);
+	
+#define GL3_CLASS_ATTR_OBSOLETE(c, attrname) \
+{ \
+	long flags = JIT_ATTR_GET_DEFER_LOW | JIT_ATTR_SET_USURP_LOW; \
+	void * obs_attr = jit_object_new(_jit_sym_jit_attr_offset, attrname, _jit_sym_long, flags, (method)0L, (method)jit_gl_unsupported, 0L); \
+	jit_class_addattr(c, obs_attr); \
+	CLASS_ATTR_OBSOLETE(c, attrname, 0); \
+}
+	
 /****************************************************************************/
 
 #if C74_PRAGMA_STRUCT_PACKPUSH

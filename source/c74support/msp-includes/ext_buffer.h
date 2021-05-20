@@ -1,6 +1,8 @@
 #ifndef _EXT_BUFFER_H_
 #define _EXT_BUFFER_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
 
 /**	A buffer~ reference.
 	Use this struct to represent a reference to a buffer~ object in Max.
@@ -192,7 +194,7 @@ t_max_err buffer_setdirty(t_buffer_obj *buffer_object);
 	@param	buffer_object	the buffer object
 	@return					The name of the file last read, or gensym("") if no files have been read.
  
-	@version Introduced in Max 7.0.1 on the Mac, not available until Max 7.1 on Windows.
+	@version Introduced in Max 7.0.1
  */
 t_symbol *buffer_getfilename(t_buffer_obj *buffer_object);
 
@@ -209,28 +211,8 @@ t_symbol *buffer_getfilename(t_buffer_obj *buffer_object);
 t_max_err buffer_perform_begin(t_buffer_obj *buffer_object);
 t_max_err buffer_perform_end(t_buffer_obj *buffer_object);
 
-/** Get a infomation of any buffer
- *
-  Utility function for getting buffer info in struct form without needing to know entire buffer struct.
-  I recommend use it between critical section for safety and accuracy like :
-
-  @code
-  ...
-  buffer_perform_begin( buffer );
-    
-    ...
-    t_buffer_info info;
-    t_max_err     error;
-    error = buffer_getinfo( buffer, &info );
-    ...
-
-  buffer_perform_end( buffer );
-  @endcode
-
-  @param  buffer_object [in]   a pointer of target buffer_objct
-  @param  info          [out]  a pointer of t_buffer_info structure, need allocated spaces to store got information 
-  @return                      this function will return MAX_ERR_NONE when success
- */
+// utility function for getting buffer info in struct form
+// without needing to know entire buffer struct
 t_max_err buffer_getinfo(t_buffer_obj *buffer_object, t_buffer_info *info);
 
 

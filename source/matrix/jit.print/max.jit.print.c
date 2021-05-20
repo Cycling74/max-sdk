@@ -20,16 +20,17 @@ void max_jit_print_jit_matrix(t_max_jit_print *x, t_symbol *s, long argc, t_atom
 void max_jit_print_assist(t_max_jit_print *x, void *b, long m, long a, char *s);
 void max_jit_print_free(t_max_jit_print *x);
 
-t_jit_err jit_print_matrix_calc(void *x, void *in_matrix);
+typedef struct _jit_print t_jit_print;
+t_jit_err jit_print_matrix_calc(t_jit_print *x, void *in_matrix);
 
 t_messlist *max_jit_print_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_print_init();
-	setup(&max_jit_print_class, max_jit_print_new, (method)max_jit_print_free, (short)sizeof(t_max_jit_print),
+	setup(&max_jit_print_class, (method)max_jit_print_new, (method)max_jit_print_free, (short)sizeof(t_max_jit_print),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_print,obex));

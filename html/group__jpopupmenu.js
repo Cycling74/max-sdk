@@ -11,6 +11,7 @@ var group__jpopupmenu =
     [ "jpopupmenu_popup_aboverect", "group__jpopupmenu.html#ga872fac493163389d92cea9f51938bd72", null ],
     [ "jpopupmenu_popup_belowrect", "group__jpopupmenu.html#gab4209d718062281ddfb76ee6ee8e6996", null ],
     [ "jpopupmenu_popup_nearbox", "group__jpopupmenu.html#gab7ff50b3fcc40c38c478f97b1848e099", null ],
+    [ "jpopupmenu_popup_nearbox_with_options", "group__jpopupmenu.html#ga7941de0cc764a5c9798729203141fe08", null ],
     [ "jpopupmenu_setcolors", "group__jpopupmenu.html#gaef73894f17b579c0cc6cc6d56de4ffe5", null ],
     [ "jpopupmenu_setfont", "group__jpopupmenu.html#gaf4a1c2ad6943b5095cac1932f9c39972", null ]
 ];

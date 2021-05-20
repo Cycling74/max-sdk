@@ -78,7 +78,8 @@ enum {
 	JCOLUMN_MENU_SELECT = 8,					// row is selected on mouse down
 	JCOLUMN_MENU_NOPANEL = 16,				// for font menu, don't include the show fonts item
 	JCOLUMN_MENU_CLEARITEM = 32,				// for font menu, include a clear item
-	JCOLUMN_MENU_STYLEMENU = 64				// show a menu of all current styles
+	JCOLUMN_MENU_STYLEMENU = 64,			// show a menu of all current styles
+	JCOLUMN_MENU_FONTFIXEDWIDTHONLY = 128
 };
 
 enum {
@@ -98,7 +99,8 @@ enum {
 	JCOLUMN_TEXT_FILTERED = 8192,
 	JCOLUMN_TEXT_STRINGOBJECT = 16384,
 	JCOLUMN_TEXT_PITCH = 32768,
-	JCOLUMN_TEXT_FILECLEARBUTTON = 65536
+	JCOLUMN_TEXT_FILECLEARBUTTON = 65536,
+	JCOLUMN_TEXT_SCANBUTTON = 131072
 };
 
 enum {
@@ -246,6 +248,10 @@ typedef struct _jdataview
 	t_jrgba d_headerbgcolor;
 	t_jrgba d_headertextcolor;
 	void *d_context;
+	char d_drawheadertopline;
+	char d_drawheaderbottomline;
+	t_jrgba d_headerlinecolor;
+	char d_showcolumnheadercaptions;
 } t_jdataview;
 
 
@@ -330,6 +336,7 @@ void jdataview_patchervis(t_object *dv, t_object *pv, t_object *box);
 void jdataview_patcherinvis(t_object *dv, t_object *pv);
 void jdataview_obscuring(t_object *dv, t_object *pv);
 
+void jdataview_repaintforview(t_object *dv, t_object *patcherview);
 
 // set global attributes
 
@@ -397,6 +404,9 @@ long jdataview_getborderthickness(t_object *dv);
 void jdataview_setkeyfocusable(t_object *x, long val);
 long jdataview_getkeyfocusable(t_object *x);
 
+void jdataview_focusgained(t_object *x, t_object *patcherview);
+void jdataview_focuslost(t_object *x, t_object *patcherview);
+
 void jdataview_setenabledeletekey(t_object *dv, long way); 
 long jdataview_getenabledeletekey(t_object *dv); 
 
@@ -414,6 +424,9 @@ void jdataview_setdragenabled(t_object *dv, long way);
 
 void jdataview_setcolumnheadercluemsg(t_object *dv, t_symbol *msg);
 t_symbol *jdataview_getcolumnheadercluemsg(t_object *dv);
+void jdataview_getcolumnheaderclue(t_object *dv, t_object *col, const char **a, const char **b);
+void jdataview_setshowcolumnheadercaptions(t_object *dv, long way);
+long jdataview_getshowcolumnheadercaptions(t_object *dv);
 
 int jdataview_getdrawgrid(t_object *dv);
 void jdataview_setdrawgrid(t_object *dv, int way);
@@ -428,7 +441,7 @@ long jdataview_getoverridefocus(t_object *dv);
 void jdataview_setreturnkeycolumn(t_object *dv, t_object *col);
 t_object *jdataview_getreturnkeycolumn(t_object *dv);
 
-int jdataview_keynavigate(t_object *dv, char *buffer);
+int jdataview_keynavigate(t_object *dv, const char *buffer);
 
 // header color
 
@@ -438,6 +451,10 @@ void jdataview_getheaderbgcolor(t_object *dv, t_jrgba *c);
 void jdataview_getheadertextcolor(t_object *dv, t_jrgba *c);
 long jdataview_getheadersolidcolor(t_object *dv);
 void jdataview_setheadersolidcolor(t_object *dv, long way);
+long jdataview_getdrawheadertopline(t_object *dv);
+void jdataview_setdrawheadertopline(t_object *dc, long way);
+long jdataview_getdrawheaderbottomline(t_object *dv);
+void jdataview_setdrawheaderbottomline(t_object *d, long way);
 
 // context
 
@@ -449,16 +466,19 @@ void *jdataview_getcontext(t_object *dv);
 t_object *jdataview_addcolumn(t_object *dv, t_symbol *name, t_symbol *before, short unused);
 t_object *jdataview_addcolumn_hidden(t_object *dv, t_symbol *name, t_symbol *before, short unused);
 void *jcolumn_new(void);
+void jcolumn_free(t_jcolumn *x);
 void jcolumn_setdataview(t_object *c, t_object *dv);
 
 void jdataview_colname_delete(t_object *dv, t_symbol *name);
 void jdataview_deletecolumn(t_object *dv, t_object *col);
+void jdataview_movecolumn(t_object *dv, t_object *col, long toindex);
 t_object *jdataview_getnamedcolumn(t_object *dv, t_symbol *name);
 t_object *jdataview_getnthcolumn(t_object *dv, long index);
 int jdataview_colname2index(t_object *dv, t_symbol *name);
 void jdataview_colname_setvisible(t_object *dv, t_symbol *name, long way);
 short jdataview_colname_getvisible(t_object *dv, t_symbol *name);
 int jdataview_getnumcolumns(t_object *dv);
+int jdataview_column2visibleindex(t_object *dv, t_object *col);
 
 // column
 
@@ -470,6 +490,7 @@ int jcolumn_getminwidth(t_object *col);
 void jcolumn_setminwidth(t_object *col, long width);
 long jcolumn_getid(t_object *col);
 int jcolumn_getautosize(t_object *col);
+void jcolumn_setautosize(t_object *col, long way);
 void jcolumn_setdataview(t_object *col, t_object *dv);
 t_symbol *jcolumn_getname(t_object *col);
 void jcolumn_setname(t_object *col, t_symbol *name);
@@ -483,6 +504,7 @@ void jcolumn_setcustomsort(t_object *col, t_symbol *msg);
 t_symbol *jcolumn_getcustomsort(t_object *col);
 void jcolumn_setoverridesort(t_object *col, char val);
 char jcolumn_getoverridesort(t_object *col);
+char jcolumn_getsortdirection(t_object *col);
 void jcolumn_setcustompaint(t_object *col, t_symbol *msg);
 t_symbol *jcolumn_getcustompaint(t_object *col);
 void jcolumn_setcustommenu(t_object *col, t_symbol *setmsg, t_symbol *resultmsg);
@@ -553,6 +575,9 @@ void jdataview_addrowtosection(t_object *dv, void *section, t_rowref rr);
 void jdataview_addrow(t_object *dv, t_rowref rr);
 void jdataview_addrowstosection(t_object *dv, void *section, long count, t_rowref *rrs);
 void jdataview_addrows(t_object *dv, long count, t_rowref *rrs);
+
+void jdataview_insertrow(t_object *dv, long loc, t_rowref rr);
+void jdataview_insertrowinsection(t_object *dv, void *section, long loc, t_rowref rr);
 void jdataview_deleterowfromsection(t_object *dv, void *section, t_rowref rr);
 void jdataview_deleterow(t_object *dv, t_rowref rr);
 void jdataview_deleterowsfromsection(t_object *dv, void *section, long count, t_rowref *rrs);
@@ -568,6 +593,7 @@ t_rowref *jdataview_getallrows(t_object *dv);
 t_rowref *jdataview_section_getallrows(t_object *dv, void *section, long *count);
 t_rowref *jdataview_getselectedrowsforview(t_object *dv, t_object *patcherview);
 t_rowref *jdataview_getselectedrows(t_object *dv);
+t_bool jdataview_has_selection(t_object *dv);
 void jdataview_applytoselectedrows(t_object *dv, t_symbol *msg, long bycell);
 void jdataview_applytorows(t_object *dv, t_symbol *msg, long bycell, t_rowref *srs);
 
@@ -617,6 +643,7 @@ int jdataview_getcellcomponent(t_object *dv, t_symbol *colname, t_rowref rr, lon
 int jdataview_getcellfiletypes(t_object *dv, t_symbol *colname, t_rowref rr, long *count, t_fourcc **types, char *alloc);
 t_symbol *jdataview_getcellfilterval(t_object *dv, t_symbol *colname, t_rowref rr);
 void jdataview_redrawcell(t_object *dv, t_symbol *colname, t_rowref rr);
+void jdataview_redrawcolumn(t_object *dv, t_symbol *colname);
 void jdataview_begincellchange(t_object *dv, t_symbol *colname, t_rowref rr);
 void jdataview_endcellchange(t_object *dv, t_symbol *colname, t_rowref rr);
 void jdataview_selected(t_object *dv, t_symbol *colname, t_rowref rr);
@@ -633,6 +660,9 @@ double jdataview_getcellindent(t_object *dv, t_symbol *colname, t_rowref rr);
 void jdataview_cellenter(t_object *dv, t_symbol *colname, t_rowref rr, int px, int py);
 void jdataview_cellexit(t_object *dv, t_symbol *colname, t_rowref rr, int px, int py);
 void jdataview_cellmove(t_object *dv, t_symbol *colname, t_rowref rr, int px, int py);
+void jdataview_cellclick(t_object *dv, t_symbol *colname, t_rowref rr, int px, int py);
+
+void jdataview_setfontmenurow(t_object *dv, t_rowref rr);
 
 t_atom_long jdataview_getcelleditable(t_object *dv, t_symbol *colname, t_rowref rr);
 
@@ -684,7 +714,7 @@ long jdataview_getsortcolumn(t_object *x);
 // selection
 
 void jdataview_selectcell(t_object *dv, t_symbol *colname, t_rowref rr);
-void jdataview_selectrow(t_jdataview *x, t_rowref rr);
+void jdataview_selectrow(t_jdataview *x, t_rowref rr, t_bool unselect);
 void jdataview_selectcolumn(t_jdataview *x, t_symbol *colname);
 void jdataview_selectallrows(t_jdataview *x);
 
@@ -696,6 +726,8 @@ void jdataview_savecolumnwidths(t_object *dv, t_dictionary **d);
 void jdataview_restorecolumnwidths(t_object *dv, t_dictionary *d);
 
 void jdataview_updatefontpanelforclient(t_object *dv, long show);
+
+void jdataview_unselected(t_object *dv);
 
 // utilities for painting
 
@@ -723,6 +755,9 @@ t_object *jdataview_getrowobject(t_object *dv, t_rowref rr);	// return object as
 void jdataview_entermodalstate(t_object *dv, long way);
 
 void *jdataview_getdragreceiver(t_object *dv);
+
+long jdataview_getpaintoverchildren(t_object *dv);
+void jdataview_paintoverchildren(t_object *dv, t_object *pv);
 
 /*
 

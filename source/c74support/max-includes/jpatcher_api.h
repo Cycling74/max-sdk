@@ -2,6 +2,8 @@
 #define _JPATCHER_API_H_
 
 #include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "max_keydefs.h"
 
 BEGIN_USING_C_LINKAGE
 
@@ -116,9 +118,9 @@ typedef struct _jboxdrawparams {
 #define JBOX_SPOOL_CONTENTS		1
 #define JBOX_SPOOL_WHOLEBOX		2
 
-#define JBOX_RELINE_DEFER
-#define JBOX_FLAG_READY			0x01
-#define JBOX_FLAG_FIRST_PAINT	0x02
+#define JBOX_FLAG_READY				0x01	// set once the box has finished construction
+#define JBOX_FLAG_NOT_YET_VISIBLE	0x02	// used to defer expensive size calculations until will be visible
+#define JBOX_FLAG_VALIDATE_RECT		0x04	// used to force rect to be validated despite size not changing
 
 /** The t_jbox struct provides the header for a Max user-interface object. 
 	This struct should be considered opaque and is subject to change without notice.
@@ -162,7 +164,7 @@ typedef struct _jbox
 	char		b_drawiolocked;
 	char		b_dragactive; 
 	char		b_drawbackground;		
-	char		b_hinttrack;
+	char		b_unused2;				// was b_hinttrack, now unused
 	char		b_fontface;
 	char		*b_annotation;
 	char		b_opaque;
@@ -171,7 +173,7 @@ typedef struct _jbox
 	char		b_editactive;			// editing via inspector 
 	t_symbol	*b_prototypename;
 	char		b_commasupport;
-	char		b_reserved1;            // this is actually used and should be renamed!
+	char		b_boxflags;
 	char		b_textjustification;
 	char		b_reserved3;
 	void		*b_ptemp;
@@ -201,7 +203,9 @@ typedef struct _pvselinfo
 	long sameclass;		// are all selected items of the same class (true for one object, N patchlines, or N boxes of the same class)
 	long editbox;			// is a text box currently being edited
 	long nlineswithsegments;// how many of the selected lines have at least one segment
-	long nlinesdisabled;	// how many of the selected lines are disabled 
+	long nlinesdisabled;	// how many of the selected lines are disabled
+	long nsignallines;		// number of selected lines that are signal patch cords
+	long nboxdblclick;		// how many of the selected boxes respond to the dblclick msg
 } t_pvselinfo;
 
 
@@ -1739,6 +1743,7 @@ t_symbol *textfield_get_emptytext(t_object *tf);
 #define JBOX_COPYLEGACYDEFAULT		(1<<24)			///< if there is a legacy default, copy it instead of the regular default   @ingroup jbox
 #define JBOX_NOLEGACYDEFAULT		(1<<25)			///< if there is a legacy default, don't copy any default   @ingroup jbox
 
+#define JBOX_MULTITOUCH				(1<<26)			///< when passed to jbox_initclass box will be sent multitouch version of mouse messages
 
 /** actual numerical values of the b_fontface attribute; use jbox_fontface() to weight 
 	@ingroup	jbox		*/
@@ -1762,7 +1767,8 @@ typedef enum _HitTestResult {
 	HitOutlet = 3,		///< an outlet
 	HitGrowBox = 4,		///< the grow handle
 	HitLine = 5,		///< a line
-	HitLineLocked = 6	///< a line in a locked patcher (for probing)
+	HitLineLocked = 6,	///< a line in a locked patcher (for probing)
+	HitBorder = 7		///< border around the box (drawn when selected), can use to select or move (only used when patch is unlocked)
 } HitTestResult;
 
 // private
@@ -1869,26 +1875,6 @@ t_max_err dictionary_appendtpt(t_dictionary *d, t_symbol *key, t_pt *pt);
 void atomstojrgba(long argc, t_atom *argv, t_jrgba *dest);
 void jrgbatoatoms(t_jrgba *src, t_atom *argv);
 
-/**	Read the specified JSON file and return a #t_dictionary object.
-	You are responsible for freeing the dictionary with object_free(),
-	subject to the caveats explained in @ref when_to_free_a_dictionary.
-	@ingroup			dictionary
-	@param	filename	The name of the file.
-	@param	path		The path of the file.
-	@param	d			The address of a #t_dictionary pointer that will be set to the newly created dictionary.
-	@return				A Max error code
-*/
-t_max_err dictionary_read(char *filename, short path, t_dictionary **d);
-
-/**	Serialize the specified #t_dictionary object to a JSON file.
-	@ingroup			dictionary
-	@param	d			The dictionary to serialize into JSON format and write to disk.
-	@param	filename	The name of the file to write.
-	@param	path		The path to which the file should be written.
-	@return				A Max error code.
-*/
-t_max_err dictionary_write(t_dictionary *d, char *filename, short path);
-
 /**	Read the specified YAML file and return a #t_dictionary object.
 	You are responsible for freeing the dictionary with object_free(),
 	subject to the caveats explained in @ref when_to_free_a_dictionary.
@@ -1915,106 +1901,111 @@ t_max_err dictionary_write_yaml(const t_dictionary *d, const char *filename, con
 
 #define newobject_fromdictionary_delete(p,d) newobject_fromdictionary(p,d), freeobject((t_object *)d)
 
-#ifdef MAC_VERSION
-#define strcmp_case_insensitive strcasecmp
-#endif
-#ifdef WIN_VERSION
-#if _MSC_VER < 1400
-#define strcmp_case_insensitive strcmpi
-#else
-#define strcmp_case_insensitive _strcmpi
-#endif
-#endif
+// private
+t_dictionary* dictionary_prototypefromclass(t_class *c);
+
+/**
+	Create a new object in a specified patcher with values using a combination of attribute and sprintf syntax.
+	
+	@ingroup		obj
+	@param	patcher	An instance of a patcher object.
+	@param	fmt		An sprintf-style format string specifying key-value pairs with attribute nomenclature.
+	@param	...		One or more arguments which are to be substituted into the format string.
+	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
+	
+	@remark			Max attribute syntax is used to define key-value pairs.  For example,
+	@code
+	"@key1 value @key2 another_value"
+	@endcode
+	
+	@remark			The example below creates a new object that in a patcher whose
+					object pointer is stored in a variable called "aPatcher".
+	@code
+	t_object *my_comment;
+	char text[4];
+	
+	strncpy_zero(text, "foo", 4);
+
+	my_comment = newobject_sprintf(aPatcher, "@maxclass comment @varname _name \
+		@text \"%s\" @patching_rect %.2f %.2f %.2f %.2f \
+		@fontsize %f @textcolor %f %f %f 1.0 \
+		@fontname %s @bgcolor 0.001 0.001 0.001 0.",
+		text, 20.0, 20.0, 200.0, 24.0,
+		18, 0.9, 0.9, 0.9, "Arial");
+	@endcode
+	
+	@see			dictionary_sprintf()
+	@see			newobject_fromdictionary()
+	@see			atom_setparse()
+*/
+t_object *newobject_sprintf(t_object *patcher, C74_CONST char *fmt, ...);
 
 
-/**	Bit mask values for various meta-key presses on the keyboard.
-	@ingroup	jmouse	*/
-typedef enum _modifiers {
-	eCommandKey = 1,		///< Command Key
-	eShiftKey = 2,			///< Shift Key
-	eControlKey = 4,		///< Control Key
-	eAltKey = 8,			///< Alt Key
-	eLeftButton = 16,		///< Left mouse button
-	eRightButton = 32,		///< Right mouse button
-	eMiddleButton = 64,		///< Middle mouse button
-	ePopupMenu = 128,		///< Popup Menu (contextual menu requested)
-	eCapsLock = 256,		///< Caps lock
-	eAutoRepeat = 512		///< Key is generated by key press auto-repeat
-} t_modifiers;
+/**
+	Create an object from the passed in text.
+	The passed in text is in the same format as would be typed into an object box.
+	It can be used for UI objects or text objects so this is the simplest way to create objects from C.
+ 
+	@ingroup		obj
+	@param	patcher	An instance of a patcher object.
+	@param	text	The text as if typed into an object box.
+	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
+
+	@see newobject_sprintf()
+*/
+t_object *newobject_fromboxtext(t_object *patcher, const char *text);
+
+
+/**
+	Place a new object into a patcher.  The new object will be created based on a specification
+	contained in a @ref dictionary.
+	
+	Create a new dictionary populated with values using a combination of attribute and sprintf syntax.
+	
+	@ingroup		obj
+	@param	patcher	An instance of a patcher object.
+	@param	d		A dictionary containing an object specification.
+	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
+	
+	@remark			Max attribute syntax is used to define key-value pairs.  For example,
+	@code
+	"@key1 value @key2 another_value"
+	@endcode
+	
+	@remark			The example below creates a new object that in a patcher whose
+					object pointer is stored in a variable called "aPatcher".
+	@code
+	t_dictionary *d;
+	t_object *o;
+	char text[4];
+	
+	strncpy_zero(text, "foo", 4);
+
+	d = dictionary_sprintf("@maxclass comment @varname _name \
+		@text \"%s\" @patching_rect %.2f %.2f %.2f %.2f \
+		@fontsize %f @textcolor %f %f %f 1.0 \
+		@fontname %s @bgcolor 0.001 0.001 0.001 0.",
+		text, 20.0, 20.0, 200.0, 24.0,
+		18, 0.9, 0.9, 0.9, "Arial");
+	
+	o = newobject_fromdictionary(aPatcher, d);
+	@endcode
+	
+	@see			newobject_sprintf()
+	@see			newobject_fromdictionary()
+	@see			atom_setparse()
+*/
+t_object *newobject_fromdictionary(t_object *patcher, t_dictionary *d);
 
 /**	Return the last known combination of modifier keys being held by the user.
 	@ingroup	jmouse
 	@return		The current modifier keys that are activated.	*/
-t_modifiers jkeyboard_getcurrentmodifiers(); 
+t_modifiers jkeyboard_getcurrentmodifiers(void);
 
 /**	Return the current combination of modifier keys being held by the user.
 	@ingroup	jmouse
 	@return		The current modifier keys that are activated.	*/
-t_modifiers jkeyboard_getcurrentmodifiers_realtime(); 
-
-// key codes
-// key/keyup objects fourth outlet and key message to objects uses 
-// the following values for keycodes
-typedef enum _keycode {
-	// keycode is ascii value with modifiers stripped
-	// a-z keys thus report lowercase keycode regardless of shift key or capslock state
-	JKEY_NONE		        = -1,
-	JKEY_SPACEBAR           = -2,
-	JKEY_ESC				= -3,
-	JKEY_RETURN             = -4,
-	JKEY_ENTER				= -4,  // same as JKEY_RETURN
-	JKEY_TAB                = -5,
-	JKEY_DELETE             = -6,
-	JKEY_BACKSPACE          = -7,
-	JKEY_INSERT             = -8,
-	JKEY_UPARROW            = -9,
-	JKEY_DOWNARROW          = -10,
-	JKEY_LEFTARROW          = -11,
-	JKEY_RIGHTARROW         = -12,
-	JKEY_PAGEUP             = -13,
-	JKEY_PAGEDOWN           = -14,
-	JKEY_HOME               = -15,
-	JKEY_END                = -16,
-	JKEY_F1                 = -17,
-	JKEY_F2                 = -18,
-	JKEY_F3                 = -19,
-	JKEY_F4                 = -20,
-	JKEY_F5                 = -21,
-	JKEY_F6                 = -22,
-	JKEY_F7                 = -23,
-	JKEY_F8                 = -24,
-	JKEY_F9                 = -25,
-	JKEY_F10                = -26,
-	JKEY_F11                = -27,
-	JKEY_F12                = -28,
-	JKEY_F13                = -29,
-	JKEY_F14                = -30,
-	JKEY_F15                = -31,
-	JKEY_F16                = -32,
-	JKEY_NUMPAD0            = -33,
-	JKEY_NUMPAD1            = -34,
-	JKEY_NUMPAD2            = -35,
-	JKEY_NUMPAD3            = -36,
-	JKEY_NUMPAD4            = -37,
-	JKEY_NUMPAD5            = -38,
-	JKEY_NUMPAD6            = -39,
-	JKEY_NUMPAD7            = -40,
-	JKEY_NUMPAD8            = -41,
-	JKEY_NUMPAD9            = -42,
-	JKEY_NUMPADADD          = -43,
-	JKEY_NUMPADSUBTRACT     = -44,
-	JKEY_NUMPADMULTIPLY     = -45,
-	JKEY_NUMPADDIVIDE       = -46,
-	JKEY_NUMPADSEPARATOR    = -47,
-	JKEY_NUMPADDECIMALPOINT = -48,
-	JKEY_NUMPADEQUALS       = -49,
-	JKEY_NUMPADDELETE       = -50,
-	JKEY_PLAYPAUSE			= -51,
-	JKEY_STOP				= -52,
-	JKEY_NEXTTRACK			= -53,
-	JKEY_PREVTRACK			= -54,
-	JKEY_HELP				= -55
-} t_keycode;
+t_modifiers jkeyboard_getcurrentmodifiers_realtime(void);
 
 // mouse cursor stuff
 
@@ -2045,7 +2036,7 @@ void jmouse_setposition_view(t_object *patcherview, double cx, double cy);
 	@param	by			The new y-coordinate of the mouse cursor position.	*/
 void jmouse_setposition_box(t_object *patcherview, t_object *box, double bx, double by);
 
-void *jmouse_getobject();
+void *jmouse_getobject(void);
 
 /**	Mouse cursor types.
 	@ingroup jmouse			*/
@@ -2079,8 +2070,43 @@ typedef enum _jmouse_cursortype {
 	@param	type		The type of cursor for the mouse to use.		*/
 void jmouse_setcursor(t_object *patcherview, t_object *box, t_jmouse_cursortype type);
 
+// UI objects are sent messages for each mouse event
+// object's that include JBOX_MULTITOUCH flag in jbox_initclass call are sent multitouch version of event
+// the multitouch messages are prefixed with "mt_" and have a different function prototype
 
+// standard mouse events:
+// mouseenter, mousemove, mousedown, mousedrag, mouseup, mouseleave
+// mousedoubleclick will also be sent on double click
+// mousedragdelta is a special alternative -- see JBOX_MOUSEDRAGDELTA
+// function prototype is of form:
+// void myobj_mousemove(t_myobj *x, t_object *patcherview, t_pt position, long modifiers);
 
+// mousewheel will be sent when the wheel moves over the box:
+// void myobj_mousewheel(t_myobj *x, t_object *patcherview, t_pt position, long modifiers, double wheelIncX, double wheelIncY);
+
+// multitouch mouse events: 
+// note, if machine doesn't support touch then these events are still sent but only for the one mouse of course
+// mt_mouseenter, mt_mousemove, mt_mousedown, mt_mousedrag, mt_mouseup, mt_mouseleave
+// function prototype is of form:
+// void myobj_mtmousemove(t_myobj *x, t_object *patcherview, t_mouseevent *mouseevent);
+
+typedef enum _inputeventtype {
+	eMouseEvent = 1,
+	eTouchEvent = 2,
+	ePenEvent = 3
+} t_inputeventtype;
+
+typedef struct _mouseevent {
+	t_inputeventtype type;
+	t_atom_long index;
+	t_pt position;
+	t_modifiers modifiers;
+	t_atom_float pressure;
+	t_atom_float orientation;
+	t_atom_float rotation;
+	t_atom_float tiltX;
+	t_atom_float tiltY;
+} t_mouseevent;
 
 /**	Get the current window, if any.
 	@ingroup	jwind
@@ -2103,7 +2129,7 @@ t_object* jwind_getat(long index);
 /**	Return the number of monitors on which can be displayed.
 	@ingroup	jmonitor
 	@return		The number of monitors.		*/
-long jmonitor_getnumdisplays();
+long jmonitor_getnumdisplays(void);
 
 /**	Return the #t_rect for a given display.
 	@ingroup				jmonitor
@@ -2125,65 +2151,81 @@ void jmonitor_getdisplayrect_foralldisplays(long workarea, t_rect *rect);			// g
 	@param	rect			The address of a valid #t_rect whose values will be filled-in upon return.		*/
 void jmonitor_getdisplayrect_forpoint(long workarea, t_pt pt, t_rect *rect);
 
+/**	Return the scale factor for the display on which a point exists.
+@ingroup				jmonitor
+@param	displayindex	Index of the monitor whose scale factor will be returned.			*/
+double jmonitor_getdisplayscalefactor(long displayindex);
 
-// color support -- private
-void swatches_init(void);
-void swatches_shutdown(void);
+/**	Return the scale factor for the display on which a point exists.
+@ingroup				jmonitor
+@param	pt				A point, for which the monitor will be determined and the scale factor recturned.			*/
+double jmonitor_getdisplayscalefactor_forpoint(t_pt pt);
 
-void *jpatcher_load(char *name, short volume, short ac, t_atom *av);
-void *jpatcher_load_frombuffer(char *name, short vol, const char *json, long len, short ac, t_atom *av);
-void *jpatcher_load_fromdictionary(char *name, short vol, t_object *rd, short ac, t_atom *av);
-
-void *jpatcher_load_namespace(char *name, short volume, short ac, t_atom *av, t_symbol *classnamespace);
-void *jpatcher_load_frombuffer_namespace(char *name, short vol, const char *json, long len, short ac, t_atom *av, t_symbol *classnamespace);
-void *jpatcher_load_fromdictionary_namespace(char *name, short vol, t_object *rd, short ac, t_atom *av, t_symbol *classnamespace);
-
-/**	Show the refpage for a given class.
-	@ingroup				misc
-	@param	classnamespace	The namespace for the class, e.g. "box".
-	@param	classname		The name of the class.
+/** take an unscaled point and convert it to a scaled point
+    note --  most APIs take scaled coordinates so drawing doesn't need to consider scale factor for each monitor
+@ingroup				jmonitor
+@param unscaled_pt		the point to be scaled, should be in pixels on the global "virtual" screen consisting of all monitors
+@return					pointer to receive the scaled point, scaled to normalize based on various scale factors and monitor arrangement
 */
-void classname_openrefpage_ext(t_symbol *classnamespace, char *classname);
+t_pt jmonitor_scale_pt(t_pt unscaled_pt);
 
-long jpatcher_is_box_namespace(t_object *p);
-t_object *jbox_get_dragtarget(t_jbox *b, char locked);
+/** take an unscaled point and convert it to a scaled point
+note --  most APIs take scaled coordinates so drawing doesn't need to consider scale factor for each monitor
+@ingroup				jmonitor
+@param scaled_pt		the point to be unscaled, should be in normalized coordinates, scaled based on scale factors and monitor arrangement
+@return					pointer to receive the unscaled point, which will be pixel-based coordinates relative to the main monitor origin
+*/
+t_pt jmonitor_unscale_pt(t_pt scaled_pt);
+
+void jpatcher_bulk_load_begin(void);
+void jpatcher_bulk_load_end(void);
+
+void *jpatcher_load(const char *name, short volume, short ac, t_atom *av);
+void *jpatcher_load_frombuffer(char *name, short vol, const char *json, long len, short ac, t_atom *av);
+void *jpatcher_load_fromdictionary(const char *name, short vol, t_object *rd, short ac, t_atom *av);
+
+void *jpatcher_load_namespace(const char *name, short volume, short ac, t_atom *av, t_symbol *classnamespace);
+void *jpatcher_load_frombuffer_namespace(const char *name, short vol, const char *json, long len, short ac, t_atom *av, t_symbol *classnamespace);
+void *jpatcher_load_fromdictionary_namespace(const char *name, short vol, t_object *rd, short ac, t_atom *av, t_symbol *classnamespace);
 
 // private -- internal use only
-long jpatcher_inc_maxsendcontext();
+long jpatcher_inc_maxsendcontext(void);
 
 // private -- internal use only
 long jbox_is_selected_in_view(t_object *box, t_object *view);
 
 // private -- internal use only
 t_atom_long jpatcher_dictionary_modernui(t_dictionary *d);
-t_atom_long jpatcher_dictionary_version();
-t_dictionary *jpatcher_fallback_version();
+t_atom_long jpatcher_dictionary_version(void);
+t_dictionary *jpatcher_fallback_version(void);
 long jbox_isdefaultattribute(t_jbox *x, t_symbol *attrname);
+
+long jwind_canfullscreen(void);
 
 
 /**	Retrieve the name of Max's system font.
 	@ingroup	jfont
 	@return		The name of Max's system font.
 */
-const char *systemfontname();
+const char *systemfontname(void);
 
 /**	Retrieve the name of Max's bold system font.
 	@ingroup	jfont
 	@return		The name of Max's bold system font.
 */
-const char *systemfontname_bold();
+const char *systemfontname_bold(void);
 
 /**	Retrieve the name of Max's light system font.
 	@ingroup	jfont
 	@return		The name of Max's light system font.
 */
-const char *systemfontname_light();
+const char *systemfontname_light(void);
 
 /**	Retrieve the name of Max's system font as a symbol.
 	@ingroup	jfont
 	@return		The name of Max's system font.
 */
-t_symbol *systemfontsym();
+t_symbol *systemfontsym(void);
 
 
 #define JPATCHER_DEFAULT_EXTENSION ".maxpat"

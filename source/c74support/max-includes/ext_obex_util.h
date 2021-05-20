@@ -8,19 +8,34 @@
 #ifndef _EXT_OBEX_UTIL_H_
 #define _EXT_OBEX_UTIL_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #include <stdarg.h>
 
 // symbol macros which may be swapped to use common symbol pointers for performance
-#ifndef USESYM
 #define USESYM(x)	gensym(#x)
 //#define USESYM(x)	_sym_##x
-#endif
 
 // macros for attributes
 // class attributes are almost universally attr_offset, except for class static attributes
 
+
+/**
+ Create an attribute that does not store its data in the object struct.
+ NB: if you use this you must have a custom getter/setter or not ever get/set.
+ Perhaps we should rewrite this using a generic attribute_new rather than attr_offset_new?
+ 
+ @ingroup	attr
+ @param	c				The class pointer.
+ @param	attrname		The name of this attribute as a C-string.
+ @param	flags			Any flags you wish to declare for this attribute, as defined in #e_max_attrflags.
+ @param typesym			The type the getter and setter would expect: _sym_char, _sym_long, _sym_atom_long, _sym_float32, _sym_float64, _sym_symbol, _sym_atom, etc
+ */
+#define CLASS_ATTR_OFFSET_DUMMY(c,attrname,flags,typesym) \
+	class_addattr((c),attr_offset_new(attrname,typesym,(flags),(method)0L,(method)0L,0));
 
 /**
 	Create a char attribute and add it to a Max class.
@@ -33,7 +48,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_CHAR(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(char),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(char), "structmember must be char type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(char),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 
 /**
@@ -70,7 +88,16 @@ BEGIN_USING_C_LINKAGE
 			class_addattr((c),attr_offset_new(attrname,USESYM(atom_long),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
 		}
 
-// “int32” attribute types are not supported for user facing attributes
+/**
+	Create a t_int32 integer attribute and add it to a Max class.
+
+	@ingroup	attr
+	@param	c				The class pointer.
+	@param	attrname		The name of this attribute as a C-string.
+	@param	flags			Any flags you wish to declare for this attribute, as defined in #e_max_attrflags.
+	@param	structname		The C identifier for the struct (containing a valid #t_object header) representing an instance of this class.
+	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
+*/
 
 #define CLASS_ATTR_INT32(c,attrname,flags,structname,structmember) \
 		{		\
@@ -95,7 +122,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_FLOAT(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(float32),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(float), "structmember must be float type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(float32),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 
 /**
@@ -109,7 +139,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_DOUBLE(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(float64),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(double), "structmember must be double type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(float64),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 
 /**
@@ -123,7 +156,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_SYM(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(symbol),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(t_symbol*), "structmember must be t_symbol* type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(symbol),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 
 /**
@@ -137,7 +173,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_ATOM(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(atom),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(t_atom), "structmember must be t_atom type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(atom),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 
 /**
@@ -151,10 +190,10 @@ BEGIN_USING_C_LINKAGE
 	@param	structmember	The C identifier of the member in the struct that holds the value of this attribute.
 */
 #define CLASS_ATTR_OBJ(c,attrname,flags,structname,structmember) \
-	class_addattr((c),attr_offset_new(attrname,USESYM(object),(flags),(method)0L,(method)0L,calcoffset(structname,structmember)))
-
-
-
+		{		\
+			C74_STATIC_ASSERT(structmembersize(structname,structmember)==sizeof(t_object*), "structmember must be t_object* type"); \
+		class_addattr((c),attr_offset_new(attrname,USESYM(object),(flags),(method)0L,(method)0L,calcoffset(structname,structmember))); \
+		}
 
 /**
 	Create an array-of-chars attribute of fixed length, and add it to a Max class.
@@ -218,7 +257,10 @@ BEGIN_USING_C_LINKAGE
 	@param	size			The number of floats in the array.
 */
 #define CLASS_ATTR_FLOAT_ARRAY(c,attrname,flags,structname,structmember,size) \
-	class_addattr((c),attr_offset_array_new(attrname,USESYM(float32),(size),(flags),(method)0L,(method)0L,0/*fix*/,calcoffset(structname,structmember)))
+	{			\
+		C74_STATIC_ASSERT(structmembersize(structname, structmember[0])==sizeof(float), "structmember must be float type"); \
+		class_addattr((c), attr_offset_array_new(attrname, USESYM(float32), (size), (flags), (method)0L, (method)0L, 0/*fix*/, calcoffset(structname, structmember))); \
+	}
 
 
 /**
@@ -1788,7 +1830,9 @@ typedef enum{
 	OBEX_UTIL_ATOM_GETTEXT_COMMA_DELIM =		0x00000008, ///< separate atoms with commas (useful for JSON)
 	OBEX_UTIL_ATOM_GETTEXT_FORCE_ZEROS =		0x00000010, ///< always print the zeros
 	OBEX_UTIL_ATOM_GETTEXT_NUM_HI_RES =			0x00000020,	///< print more decimal places
-	OBEX_UTIL_ATOM_GETTEXT_NUM_LO_RES =			0x00000040  ///< // print fewer decimal places (HI_RES will win though)
+	OBEX_UTIL_ATOM_GETTEXT_NUM_LO_RES =			0x00000040, ///< print fewer decimal places (HI_RES will win though)
+	OBEX_UTIL_ATOM_GETTEXT_NOESCAPE =			0x00000080, ///< don't add extra escape characters
+	OBEX_UTIL_ATOM_GETTEXT_LINEBREAK_NODELIM = 	0x00000100, ///< don't insert spaces before/after linebreak characters
 } e_max_atom_gettext_flags;
 
 
@@ -2000,6 +2044,28 @@ t_max_err atom_gettext(long ac, t_atom *av, long *textsize, char **text, long fl
 
 
 /**
+	Convert an array of atoms into a C-string, specifying floating-point precision.
+
+	@ingroup	atom
+
+	@param		ac			The number of atoms to fetch in av.
+	@param		av			The address of the first #t_atom pointer in an array to retrieve.
+	@param		textsize	The size of the string to which the atoms will be formatted and copied.
+	@param		text		The address of the string to which the text will be written.
+	@param		flags		Determines the rules by which atoms will be translated into text.
+							Values are bit mask as defined by #e_max_atom_gettext_flags.
+	@param		precision	Determines the number of digits after the decimal point when floats are translated into text.
+							This overrides the OBEX_UTIL_ATOM_GETTEXT_NUM_HI_RES and
+							OBEX_UTIL_ATOM_GETTEXT_NUM_LO_RES #e_max_atom_gettext_flags.
+							Pass -1 to ignore this value and behave as atom_gettext().
+
+	@return		A Max error code.
+	@see		atom_setparse()
+*/
+t_max_err atom_gettext_precision(long ac, t_atom *av, long *textsize, char **text, long flags, long precision);
+
+
+/**
 	Fetch an array of char values from an array of atoms.
 
 	@ingroup	atom
@@ -2108,7 +2174,7 @@ long atomisstring(const t_atom *a);
 	@param		a				The address of the atom to test.
 	@return		Returns true if the #t_atom contains a valid #t_atomarray object.
 */
-long atomisatomarray(const t_atom *a);
+long atomisatomarray(t_atom *a);
 
 
 /**
@@ -2118,7 +2184,7 @@ long atomisatomarray(const t_atom *a);
 	@param		a				The address of the atom to test.
 	@return		Returns true if the #t_atom contains a valid #t_dictionary object.
 */
-long atomisdictionary(const t_atom *a);
+long atomisdictionary(t_atom *a);
 
 
 // quick object programming macros

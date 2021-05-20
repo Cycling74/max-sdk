@@ -176,7 +176,8 @@ var NAVTREEINDEX0 =
 "chapter_mc.html":[18],
 "chapter_mc.html#chapter_mc_autoadapt":[18,5],
 "chapter_mc.html#chapter_mc_channelcounting":[18,3],
-"chapter_mc.html#chapter_mc_examples":[18,8],
+"chapter_mc.html#chapter_mc_examples":[18,9],
+"chapter_mc.html#chapter_mc_help":[18,8],
 "chapter_mc.html#chapter_mc_how_many":[18,6],
 "chapter_mc.html#chapter_mc_inlets_and_outlets":[18,2],
 "chapter_mc.html#chapter_mc_ins_and_outs":[18,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "chapter_ui_anatomy.html#chapter_ui_anatomy_mouse":[10,8],
 "chapter_ui_anatomy.html#chapter_ui_anatomy_new":[10,5],
 "chapter_ui_anatomy.html#chapter_ui_anatomy_paint":[10,7],
-"chapter_ui_anatomy.html#chapter_ui_anatomy_struct":[10,1],
-"chapter_ui_anatomy.html#chapter_ui_anatomy_updating":[10,6]
+"chapter_ui_anatomy.html#chapter_ui_anatomy_struct":[10,1]
 };

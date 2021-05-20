@@ -47,6 +47,7 @@ var group__attr =
     [ "CLASS_ATTR_OBJ_ARRAY", "group__attr.html#gac4ac2f09318920332814d5686ca914e0", null ],
     [ "CLASS_ATTR_OBJ_VARSIZE", "group__attr.html#gab759b34dacbfce67de844f5711f7fc38", null ],
     [ "CLASS_ATTR_OBSOLETE", "group__attr.html#ga0287acde26bb6e247625b5a9490c8cb0", null ],
+    [ "CLASS_ATTR_OFFSET_DUMMY", "group__attr.html#ga6478d9f5025c64477d7a2b3b168e904b", null ],
     [ "CLASS_ATTR_ORDER", "group__attr.html#gad7180abb3483e57b94e3c2603b862730", null ],
     [ "CLASS_ATTR_PAINT", "group__attr.html#gaee847156d2c156b4c9f73652b6059500", null ],
     [ "CLASS_ATTR_REMOVE_FLAGS", "group__attr.html#gaf59e0b77e66f714f5f2644e6923685f2", null ],

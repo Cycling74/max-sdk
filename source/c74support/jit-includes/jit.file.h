@@ -10,6 +10,8 @@
 #ifndef _JIT_FILE_H_
 #define _JIT_FILE_H_
 
+#include "jit.error.h"
+
 typedef long t_jit_fileref;
 
 #ifdef __cplusplus

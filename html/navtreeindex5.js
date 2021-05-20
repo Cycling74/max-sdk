@@ -1,5 +1,16 @@
 var NAVTREEINDEX5 =
 {
+"group__jgraphics.html#ga81465e1a6989399e343d081defd90dbe":[37,13,0,26],
+"group__jgraphics.html#ga893fefbf4f38bb4b3b83850c21f8b836":[37,13,0,36],
+"group__jgraphics.html#ga8a6b2b8982f78d417cb5a15a3fbdb2e2":[37,13,0,38],
+"group__jgraphics.html#ga910977684c0f03be9edfb9f861905d5e":[37,13,0,37],
+"group__jgraphics.html#ga91b780fe7e636c4497d0f8ab0ebfd41e":[37,13,0,71],
+"group__jgraphics.html#gaa3000c3aa85e3d7c87f59c44d5d7ccab":[37,13,0,22],
+"group__jgraphics.html#gaa3cb88e5a2a6b52ea668a1ed1bba4422":[37,13,0,16],
+"group__jgraphics.html#gaa8e30eaa2c74766b0c7ef3977fd8a06c":[37,13,0,61],
+"group__jgraphics.html#gaa936ddd5bfc6b091b730c834858326c2":[37,13,0,25],
+"group__jgraphics.html#gaabca7cb7d45c92e788456a2d7dbfd4f6":[37,13,0,60],
+"group__jgraphics.html#gaafd9fedb4ec2870714890120ae1c353d":[37,13,0,31],
 "group__jgraphics.html#gab6eb126ec0f85fa48c30aff48a3e0f5b":[37,13,0,14],
 "group__jgraphics.html#gab885fa94835713451fb83eaa2d950c1b":[37,13,0,48],
 "group__jgraphics.html#gabdf52225c137e70eea1f955559d19591":[37,13,0,46],
@@ -238,16 +249,5 @@ var NAVTREEINDEX5 =
 "group__jmatrix.html#gad5a50cfd545eaec3cf4adb02bb4f4995":[37,13,0,3,5],
 "group__jmatrix.html#gae2fbe033e0d1cae567b9cea4c4c8c91d":[37,13,0,3,10],
 "group__jmatrix.html#gae46840f2ac22aee22c9b211d60f4b381":[37,13,0,3,6],
-"group__jmatrix.html#gaf39440de92c4e2164d233761af8ba4b9":[37,13,0,3,11],
-"group__jmatrix.html#gafb24446d0616fbfca7d8bb96ba97b4ef":[37,13,0,3,1],
-"group__jmonitor.html":[37,7,7],
-"group__jmonitor.html#ga01a29271efbe83993f8f424fa20cc629":[37,7,7,7],
-"group__jmonitor.html#ga0ed7c2c443ef010c4584096967f3b00f":[37,7,7,1],
-"group__jmonitor.html#ga13ca722c39aef7393d572790c01da558":[37,7,7,5],
-"group__jmonitor.html#ga354f8b2efda018ec3ff2a609205a74a0":[37,7,7,2],
-"group__jmonitor.html#ga65d6131aef016f81d41280047b61abda":[37,7,7,6],
-"group__jmonitor.html#ga80e9cf5a83dd5390be4b6bd5b89d6788":[37,7,7,3],
-"group__jmonitor.html#gaa3897d3a91c956db1fb2b223c3daf3b1":[37,7,7,4],
-"group__jmonitor.html#gac11ee33880f15ef641236e864978d9af":[37,7,7,0],
-"group__jmouse.html":[37,7,9]
+"group__jmatrix.html#gaf39440de92c4e2164d233761af8ba4b9":[37,13,0,3,11]
 };

@@ -3,6 +3,8 @@
 #ifndef _EXT_CRITICAL_H_
 #define _EXT_CRITICAL_H_
 
+#include "ext_prefix.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -10,13 +12,6 @@ BEGIN_USING_C_LINKAGE
 #elif C74_PRAGMA_STRUCT_PACK
     #pragma pack(2)
 #endif
-
-#ifdef MAC_VERSION
-
-#include <pthread.h>
-typedef pthread_mutex_t* t_critical;	///< a critical region  @ingroup critical
-
-#endif // MAC_VERSION
 	
 #ifdef WIN_VERSION
 	
@@ -24,6 +19,18 @@ typedef LPCRITICAL_SECTION t_critical;	///< a critical region  @ingroup critical
 	
 #endif  // WIN_VERSION
 	
+
+#if defined(MAC_VERSION) || defined(LINUX_VERSION)
+
+#include <pthread.h>
+
+typedef pthread_mutex_t* t_critical;	///< a critical region  @ingroup critical
+
+#endif  // WIN_VERSION
+
+
+
+
 
 /**
 	Create a new critical region.

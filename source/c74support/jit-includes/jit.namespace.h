@@ -1,6 +1,8 @@
 #ifndef __JIT_NAMESPACE_H__
 #define __JIT_NAMESPACE_H__
 
+#include "jit.common.h"
+
 // object structs
 typedef struct _jit_namespace_data
 {

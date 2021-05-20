@@ -10,6 +10,7 @@
 #define _JIT_FUNCTOR_H_
 
 #include "jit.fixmath.h"
+#include "jit.common.h"
 
 #ifdef __cplusplus
 extern "C" {

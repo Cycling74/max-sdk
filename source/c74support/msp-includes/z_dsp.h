@@ -9,6 +9,7 @@
 #include "ext_systhread.h"
 #include "ext_linklist.h"
 #include "ext_atomic.h"
+#include "ext_maxtypes.h"
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
@@ -54,7 +55,7 @@ typedef struct _pxdata {
 	long	z_in;
 	void	*z_proxy;
 	long	z_disabled;		///< set to non-zero if this object is muted (using the pcontrol or mute~ objects)
-	short	z_count;		///< an array that indicates what inlets/outlets are connected with signals
+	short	z_count;		///< the number of signal inlets
 	short	z_misc;			///< flags (bitmask) determining object behaviour, such as #Z_NO_INPLACE, #Z_PUT_FIRST, or #Z_PUT_LAST
 } t_pxdata; 
 
@@ -66,7 +67,7 @@ typedef struct t_pxobject {
 	long z_in;
 	void *z_proxy;
 	long z_disabled;	///< set to non-zero if this object is muted (using the pcontrol or mute~ objects)
-	short z_count;		///< an array that indicates what inlets/outlets are connected with signals
+	short z_count;		///< the number of signal inlets
 	short z_misc;		///< flags (bitmask) determining object behaviour, such as #Z_NO_INPLACE, #Z_PUT_FIRST, or #Z_PUT_LAST
 } t_pxobject;
 
@@ -78,7 +79,7 @@ typedef struct t_pxobject {
 typedef struct _signal
 {
     long s_n;						///< The vector size of the signal.
-    t_sample *s_vec;				///< An array of buffers holding the vectors of audio.
+    t_sample *s_vec;				///< A buffer holding the vector of audio samples.
     float s_sr;						///< The sample rate of the signal.
     struct _signal *s_next;
     struct _signal *s_nextused;
@@ -335,7 +336,7 @@ void z_sysinit(void);
 #define dsp_sysinit z_sysinit
 
 void dsp_setpatcher(void *p);
-void *dsp_getpatcher(void);
+void *dsp_getpatcher();
 
 short z_isconnected(t_object *x, t_object *dst, short *index);
 #define dsp_isconnected z_isconnected
@@ -445,7 +446,7 @@ typedef struct _pxjbox {
 	long	z_in;
 	void	*z_proxy;
 	long	z_disabled;		///< set to non-zero if this object is muted (using the pcontrol or mute~ objects)
-	short	z_count;		///< an array that indicates what inlets/outlets are connected with signals
+	short	z_count;		///< the number of signal inlets
 	short	z_misc;			///< flags (bitmask) determining object behaviour, such as #Z_NO_INPLACE, #Z_PUT_FIRST, or #Z_PUT_LAST
 } t_pxjbox;
 

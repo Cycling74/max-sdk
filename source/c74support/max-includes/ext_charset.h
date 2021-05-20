@@ -9,6 +9,9 @@
 #ifndef _EXT_CHARSET_H_
 #define _EXT_CHARSET_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH

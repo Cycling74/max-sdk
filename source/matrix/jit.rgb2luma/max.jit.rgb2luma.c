@@ -18,12 +18,12 @@ void *max_jit_rgb2luma_new(t_symbol *s, long argc, t_atom *argv);
 void max_jit_rgb2luma_free(t_max_jit_rgb2luma *x);
 t_messlist *max_jit_rgb2luma_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_rgb2luma_init();
-	setup(&max_jit_rgb2luma_class, max_jit_rgb2luma_new, (method)max_jit_rgb2luma_free, (short)sizeof(t_max_jit_rgb2luma),
+	setup(&max_jit_rgb2luma_class, (method)max_jit_rgb2luma_new, (method)max_jit_rgb2luma_free, (short)sizeof(t_max_jit_rgb2luma),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_rgb2luma,obex));

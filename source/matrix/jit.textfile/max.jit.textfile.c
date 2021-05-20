@@ -60,13 +60,14 @@ t_jit_err max_jit_textfile_tobuffer(t_max_jit_textfile *x);
 void max_jit_textfile_frombuffer(t_max_jit_textfile *x);
 void max_jit_textfile_convert_breaks(t_max_jit_textfile *x);
 
-void jit_textfile_tomatrix_nonadapt(void *x, void *inputs, void *outputs);
-void jit_textfile_tomatrix_adapt(void *x, void *inputs, void *outputs);
-t_jit_err jit_textfile_tomatrix_line(void *x, void *inputs, void *outputs);
+typedef struct _jit_textfile t_jit_textfile;
+t_jit_err jit_textfile_tomatrix_nonadapt(t_jit_textfile *x, void *inputs, void *outputs);
+t_jit_err jit_textfile_tomatrix_adapt(t_jit_textfile *x, void *inputs, void *outputs);
+t_jit_err jit_textfile_tomatrix_line(t_jit_textfile *x, void *inputs, void *outputs);
 
 void *max_jit_textfile_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	long attrflags;
 	void *p,*q,*attr;
@@ -166,7 +167,7 @@ void max_jit_textfile_line(t_max_jit_textfile *x, t_symbol *s, long ac, t_atom *
 
 	if (ac && av) {
 		jit_attr_setlong(max_jit_obex_jitob_get(x), gensym("jline"), jit_atom_getlong(av));
-		jit_attr_setlong(max_jit_obex_jitob_get(x), gensym("texthandle"), (long)x->text);
+		jit_object_method(max_jit_obex_jitob_get(x), gensym("set_texthandle"), x->text);
 
 		mop = max_jit_obex_adornment_get(x, _jit_sym_jit_mop);
 
@@ -217,7 +218,7 @@ void max_jit_textfile_bang(t_max_jit_textfile *x)
 
 	mop = max_jit_obex_adornment_get(x,_jit_sym_jit_mop);
 
-	jit_attr_setlong(max_jit_obex_jitob_get(x), gensym("texthandle"), (long)x->text);
+	jit_object_method(max_jit_obex_jitob_get(x), gensym("set_texthandle"), x->text);
 
 //	jit_object_post((t_object *)x,"pointer %x, size %d", *(x->text), x->textsize);
 	adapt = (long)jit_attr_getlong(mop, gensym("adapt"));
@@ -245,7 +246,7 @@ void max_jit_textfile_mproc(t_max_jit_textfile *x, void *mop)
 	if (!x->text)
 		x->text = sysmem_newhandle(0);
 
-	jit_attr_setlong(max_jit_obex_jitob_get(x), gensym("texthandle"), (long)x->text);
+	jit_object_method(max_jit_obex_jitob_get(x), gensym("set_texthandle"), x->text);
 
 	if ((err=(t_jit_err) jit_object_method(
 				max_jit_obex_jitob_get(x),
@@ -256,7 +257,7 @@ void max_jit_textfile_mproc(t_max_jit_textfile *x, void *mop)
 		jit_error_code(x,err);
 	}
 
-	x->text = (t_handle)jit_attr_getlong(max_jit_obex_jitob_get(x), gensym("texthandle"));
+	jit_object_method(max_jit_obex_jitob_get(x), gensym("get_texthandle"), &x->text);
 }
 
 void max_jit_textfile_okclose(t_max_jit_textfile *x, char *prompt, short *result)

@@ -2,7 +2,12 @@
 #ifndef _EXT_OBEX_H_
 #define _EXT_OBEX_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 #include "ext_preprocessor.h"
+#include "ext_hashtab.h"
+#include "ext_dictionary.h"
 
 BEGIN_USING_C_LINKAGE
 
@@ -13,6 +18,7 @@ BEGIN_USING_C_LINKAGE
 #define FALSE 	0
 #endif
 
+#ifndef C74_USE_COMMON_SYMBOLS
 /**	The namespace for all Max object classes which can be instantiated in a box, i.e. in a patcher.
 	@ingroup class */
 #define CLASS_BOX				gensym("box")
@@ -22,6 +28,10 @@ BEGIN_USING_C_LINKAGE
 	@ingroup class */
 #define CLASS_NOBOX				gensym("nobox")
 
+#else
+#define CLASS_BOX				_sym_box
+#define CLASS_NOBOX				_sym_nobox
+#endif
 
 /** Attribute flags
 	@ingroup attr
@@ -47,17 +57,6 @@ typedef enum {
 	ATTR_DIRTY =			0x20000000  // attr has been changed from its default value
 } e_max_attrflags;
 
-/** Standard values returned by function calls with a return type of #t_max_err
-	@ingroup misc */
-typedef enum {
-	MAX_ERR_NONE =			0,	///< No error
-	MAX_ERR_GENERIC =		-1,	///< Generic error
-	MAX_ERR_INVALID_PTR =	-2,	///< Invalid Pointer
-	MAX_ERR_DUPLICATE =		-3,	///< Duplicate
-	MAX_ERR_OUT_OF_MEM =	-4	///< Out of memory
-} e_max_errorcodes;
-
-
 /** Flags used in linklist and hashtab objects 
 	@ingroup datastore */
 typedef enum {
@@ -68,6 +67,8 @@ typedef enum {
 	OBJ_FLAG_SILENT =		0x00000100,	///< don't notify when modified
 	OBJ_FLAG_INHERITABLE =	0x00000200,  ///< obexprototype entry will be inherited by subpatchers and abstractions
 	OBJ_FLAG_ITERATING =	0x00001000,	///< used by linklist to signal when is inside iteration 
+	OBJ_FLAG_CLONE =		0x00002000,	///< object should be cloned when added to data structure (i.e. dictionary)
+	OBJ_FLAG_DANGER =		0x20000000,	///< context-dependent flag, used internally for hashtable code
 	OBJ_FLAG_DEBUG =		0x40000000	///< context-dependent flag, used internally for linklist debug code
 } e_max_datastore_flags;
 
@@ -508,7 +509,7 @@ void *object_method_imp(void *x, void *sym, void *p1, void *p2, void *p3, void *
 #define object_method_direct(rt, sig, x, s, ...) ((rt (*)sig)object_method_direct_getmethod((t_object *)x, s))(object_method_direct_getobject((t_object *)x, s), __VA_ARGS__)
 
 method object_method_direct_getmethod(t_object *x, t_symbol *sym);
-t_object *object_method_direct_getobject(t_object *x, t_symbol *sym);
+void *object_method_direct_getobject(t_object *x, t_symbol *sym);
 
 /**
 	Sends a type-checked message to an object.
@@ -1044,6 +1045,10 @@ t_max_err object_attr_getvalueof(void *x, t_symbol *s, long *argc, t_atom **argv
 t_max_err object_attr_setvalueof(void *x, t_symbol *s, long argc, t_atom *argv);
 
 
+// for internal use only
+t_max_err object_attr_lock(t_object *x, t_symbol *s);
+t_max_err object_attr_unlock(t_object *x, t_symbol *s);
+
 //object specific attributes(dynamically add/delete)
 
 /**
@@ -1203,7 +1208,7 @@ t_hashtab *object_obex_enforce(void *x);
 	@return 		This function returns the error code #MAX_ERR_NONE if successful, 
 	 				or one of the other error codes defined in #e_max_errorcodes if unsuccessful.
 */
-void object_obex_dumpout(void *x, const t_symbol *s, long argc, const t_atom *argv);
+void object_obex_dumpout(void *x, t_symbol *s, long argc, t_atom *argv);
 
 
 // DO NOT CALL THIS -- It is called automatically now from object_free() or freeobject() -- calling this will cause problems.
@@ -1256,7 +1261,7 @@ t_max_err atom_setfloat(t_atom *a, double b);
 	@return 		This function returns the error code #MAX_ERR_NONE if successful, 
 	 				or one of the other error codes defined in #e_max_errorcodes if unsuccessful.
 */
-t_max_err atom_setsym(t_atom *a, const t_symbol *b);				
+t_max_err atom_setsym(t_atom *a, t_symbol *b);				
 #endif
 
 
@@ -2441,6 +2446,11 @@ t_max_err object_attr_touch(t_object *x, t_symbol *attrname);
 	@return				A Max error code 
  */				
 t_max_err object_attr_touch_parse(t_object *x, char *attrnames);
+
+
+t_max_err object_attr_getvalueof_ext(void *x, t_symbol *s, long *argc, t_atom **argv);
+t_max_err object_attr_setvalueof_ext(void *x, t_symbol *s, long argc, t_atom *argv);
+long object_attr_getdirty(t_object *x, t_symbol *attrname);
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(pop)

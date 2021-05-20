@@ -1,6 +1,8 @@
 #ifndef __EXT_PROTO_WIN_H__
 #define __EXT_PROTO_WIN_H__
 
+#include "ext_prefix.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -11,11 +13,11 @@ BEGIN_USING_C_LINKAGE
 
 #ifdef WIN_VERSION
 
-HINSTANCE main_get_instance(void);
-HWND main_get_client(void);	
-HWND main_get_frame(void);
-LPSTR main_get_commandline(void);
-LPSTR main_get_appfilename(void);
+HINSTANCE main_get_instance();
+HWND main_get_client();	
+HWND main_get_frame();
+LPSTR main_get_commandline();
+LPSTR main_get_appfilename();
 
 #endif // WIN_VERSION
 

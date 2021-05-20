@@ -20,12 +20,12 @@ void *max_jit_keyscreen_new(t_symbol *s, long argc, t_atom *argv);
 void max_jit_keyscreen_free(t_max_jit_keyscreen *x);
 t_messlist *max_jit_keyscreen_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_keyscreen_init();
-	setup(&max_jit_keyscreen_class, max_jit_keyscreen_new, (method)max_jit_keyscreen_free, (short)sizeof(t_max_jit_keyscreen),
+	setup(&max_jit_keyscreen_class, (method)max_jit_keyscreen_new, (method)max_jit_keyscreen_free, (short)sizeof(t_max_jit_keyscreen),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_keyscreen,obex));

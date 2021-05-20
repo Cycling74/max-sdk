@@ -9,36 +9,9 @@
 #ifndef __JIT_PLATFORM_H__
 #define __JIT_PLATFORM_H__
 
-#ifndef WIN_VERSION
-#define MAC
-#endif
+#include "ext_infer_system.h"
 
 #ifdef WIN_VERSION
-
-// the maxcrt is now deprecated
-// we recommend you link dynamically to the VS2013 CRT as this is what max currently uses
-#define MAXAPI_MAXCRT_DEPRECATED
-
-#if !defined(MAXAPI_USE_MSCRT) && !defined(MAXAPI_MAXCRT_DEPRECATED)
-
-#ifndef _CRT_NOFORCE_MANIFEST
-#define _CRT_NOFORCE_MANIFEST
-#endif
-
-#ifndef _STL_NOFORCE_MANIFEST
-#define _STL_NOFORCE_MANIFEST
-#endif
-
-#ifndef _DEBUG
-// for debug use the standard microsoft C runtime
-
-#pragma comment(linker,"/NODEFAULTLIB:msvcrt.lib")
-#pragma comment(lib,"maxcrt.lib")
-#pragma comment(linker,"/NODEFAULTLIB:msvcprt.lib")
-#pragma comment(lib,"maxcrt_p.lib")
-#endif
-
-#endif // #if !defined(MAXAPI_USE_MSCRT) && !defined(MAXAPI_MAXCRT_DEPRECATED)
 
 #define JIT_EX_DATA_DECL __declspec(dllexport)
 #ifdef WIN_JITLIB
@@ -49,15 +22,10 @@
 #else
 #define JIT_EX_DATA_DECL
 #define JIT_EX_DATA extern
+
 #endif // WIN_VERSION
 
 #define C74_MAX
-
-#ifdef MAC
-#include "jit.mac.h"
-#else
-#define PREFER_POST_INC
-#endif
 
 // weak link macros
 #ifdef __APPLE_CC__
@@ -81,7 +49,9 @@
 #define JIT_CAN_ALTIVEC 0
 JIT_EX_DATA long _jit_altivec;
 
-//speed macros
+//speed macros -- we currently always use post inc
+
+#define PREFER_POST_INC
 #ifdef PREFER_POST_INC
 #define FAST_INC_SETUP(x)			// nothing
 #define FAST_INC(x)			((x)++)
@@ -105,11 +75,12 @@ JIT_EX_DATA long _jit_altivec;
 
 #ifdef WIN_VERSION
 #define	hypot _hypot
-// not sure that we want to define pascal to be nothing
-// windef.h defines it to be __stdcall but that gives an error
-// when used like: pascal void foo() as it is expecting
-//  void __stdcall foo()
-#define pascal
 #endif
 
-#endif
+#ifdef MAC_VERSION
+
+#include <AvailabilityMacros.h>
+
+#endif // #ifdef MAC_VERSION
+
+#endif // #ifndef __JIT_PLATFORM_H__

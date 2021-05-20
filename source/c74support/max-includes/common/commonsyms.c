@@ -9,9 +9,9 @@
 #include "ext.h"
 #include "commonsyms.h"
 
-t_common_symbols_table *_common_symbols=NULL;
+C74_HIDDEN t_common_symbols_table *_common_symbols=NULL;
 
-void common_symbols_init(void) 
+C74_HIDDEN void common_symbols_init(void)
 {
 	_common_symbols = common_symbols_gettable();
 }

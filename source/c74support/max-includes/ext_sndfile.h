@@ -1,6 +1,10 @@
 #ifndef _EXT_SNDFILE_H_
 #define _EXT_SNDFILE_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_sysfile.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

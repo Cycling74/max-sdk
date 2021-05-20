@@ -31,7 +31,7 @@ static t_symbol *ps_modified;
 
 
 /************************************************************************************/
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class	*c = class_new("dict.strip", (method)dict_strip_new, (method)dict_strip_free, sizeof(t_dict_strip), (method)NULL, A_GIMME, 0);
 

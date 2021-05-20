@@ -20,12 +20,12 @@ void max_jit_coerce_mproc(t_max_jit_coerce *x, void *mop);
 
 t_messlist *max_jit_coerce_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_coerce_init();
-	setup(&max_jit_coerce_class, max_jit_coerce_new, (method)max_jit_coerce_free, (short)sizeof(t_max_jit_coerce),
+	setup(&max_jit_coerce_class, (method)max_jit_coerce_new, (method)max_jit_coerce_free, (short)sizeof(t_max_jit_coerce),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_coerce,obex));

@@ -7,17 +7,14 @@
 #ifndef _EXT_DATABASE_H_
 #define _EXT_DATABASE_H_
 
-#if !defined( DEBUG ) && !defined ( NDEBUG ) && !defined (_MAXCOMMON_H_)
+#if !defined( DEBUG ) && !defined ( NDEBUG ) && !defined (_MAX_CORE_H_)
 #include "ext.h"
 #include "ext_obex.h"
 #endif
 
-#ifdef WIN_VERSION
-#ifndef snprintf
-#define snprintf _snprintf
-#endif
-#endif
-
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "stdarg.h"
 
 /**	A database object.  
 	Use db_open() and db_close() to create and free database objects.
@@ -93,6 +90,19 @@ t_max_err db_close(t_database **db);
 	@param		...			If an sprintf() formatting codes are used in the sql string, these values will be interpolated into the sql string.
 	@return					An error code.		*/
 t_max_err db_query(t_database *db, t_db_result **dbresult, const char *sql, ...);
+
+
+/**	Execute a SQL query on the database.
+	@ingroup	database
+	@param		db			The #t_database pointer for your database instance.
+	@param		dbresult	The address of a #t_db_result pointer.
+							If the pointer is passed-in set to NULL then a new dbresult will be created.
+							If the pointer is not NULL then it is assumed to be a valid dbresult, which will be filled in with the query results.
+							When you are done with the dbresult you should free it with object_free().
+	@param		sql			A C-string containing a valid SQL query, possibly with sprintf() formatting codes.
+	@param		ap			va_list containing any additional arguments necessary for sprintf()-format processing of the sql string.
+	@return					An error code.		*/
+t_max_err db_vquery(t_database *db, t_db_result **dbresult, const char *s, va_list ap);
 
 
 /**	Execute a SQL query on the database.

@@ -9,7 +9,7 @@ var group__class__old =
     [ "alias", "group__class__old.html#gad8f119f6232340c85b3bb358227576b3", null ],
     [ "class_setname", "group__class__old.html#gafb05186b12fb0dceeb3185b2f59b6307", null ],
     [ "egetfn", "group__class__old.html#ga96dfd8b6f4c7111c34f1c2103fbdcdf0", null ],
-    [ "freeobject", "group__class__old.html#gadf30646e52376a37b93cc20efac65636", null ],
+    [ "freeobject", "group__class__old.html#gabc32625be7059b1423cbb672635336d9", null ],
     [ "getfn", "group__class__old.html#gafa477f96b3a02c0ecbca2b5aa14b9ecb", null ],
     [ "newinstance", "group__class__old.html#ga4c1f100a92d6f519ba4e93665ff54998", null ],
     [ "newobject", "group__class__old.html#ga053f428d5edcc7d663980330848e73a6", null ],

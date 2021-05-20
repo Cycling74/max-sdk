@@ -9,6 +9,8 @@
 #ifndef __JIT_ERROR_H__
 #define __JIT_ERROR_H__
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
 #include "jit.byteorder.h"
 
 typedef t_atom_long t_jit_err;

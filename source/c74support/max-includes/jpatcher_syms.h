@@ -1,6 +1,9 @@
 #ifndef _JPATCHER_SYMS_H_
 #define _JPATCHER_SYMS_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 void jpatcher_syms_init(void);
@@ -40,6 +43,8 @@ extern t_symbol *ps_textcolor;
 extern t_symbol *ps_color; 
 extern t_symbol *ps_grabfocus; 
 extern t_symbol *ps_inletoutlet;
+extern t_symbol *ps_fontchanged;
+extern t_symbol *ps_fontcolor;
 extern t_symbol *ps_bfixwidth; 
 extern t_symbol *ps_showcaption;
 extern t_symbol *ps_hidecaption;
@@ -120,6 +125,7 @@ extern t_symbol *ps_architecture;
 extern t_symbol *ps_x86;
 extern t_symbol *ps_x64;
 extern t_symbol *ps_modernui;
+extern t_symbol *ps_dynamiccolor;
 
 // Attributes of the Maxobj class
 extern t_symbol *ps_rect;

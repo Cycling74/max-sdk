@@ -8,6 +8,9 @@
 #ifndef _EXT_OBSTRING_H_
 #define _EXT_OBSTRING_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH

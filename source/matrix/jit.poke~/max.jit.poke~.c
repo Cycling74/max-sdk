@@ -38,7 +38,7 @@ void *max_jit_poke_class;
 
 t_symbol *ps_done;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	long attrflags;
 	void *p,*attr;

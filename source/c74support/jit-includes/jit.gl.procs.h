@@ -52,6 +52,10 @@
 	typedef void* AGLPbuffer;
 #endif
 
+#include "jit.gl.h"
+#include "jit.glext.h"
+#include "jit.glext_nv.h"
+
 /****************************************************************************/
 
 #ifdef __cplusplus

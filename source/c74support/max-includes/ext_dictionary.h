@@ -3,6 +3,11 @@
 #ifndef __EXT_DICTIONARY_H__
 #define __EXT_DICTIONARY_H__
 
+#include "ext_prefix.h"
+
+#include "max_types.h"
+#include "ext_hashtab.h"
+#include "ext_mess.h"
 
 BEGIN_USING_C_LINKAGE
 
@@ -36,8 +41,10 @@ typedef struct _dictionary_entry {
 typedef struct _dictionary
 {
 	t_object		d_obj;
-	t_hashtab		*d_hashtab; 
-	t_linklist		*d_linklist; 
+	t_hashtab		*d_hashtab;
+	t_linklist		*d_linklist;
+	void			*d_transaction_mutex; // currently having header inclusion issues this is a t_systhread_mutex
+	char			d_use_transaction;  // always lock transaction mutex with low level dictionary calls
 } t_dictionary; 
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -58,11 +65,6 @@ typedef struct _dictionary
 	@see				object_free()
 */
 t_dictionary* dictionary_new(void);
-
-
-// private
-t_dictionary* dictionary_prototypefromclass(t_class *c);
-
 
 /**
 	Add a long integer value to the dictionary.
@@ -125,7 +127,7 @@ t_max_err dictionary_appendattribute(t_dictionary *d, t_symbol *key, t_symbol *a
 
 
 /**
-	Add a C-string to the dictionary.  Internally this uses the #t_symbol object.
+	Add a C-string to the dictionary.  Internally this uses the #t_string object.
 	It is useful to use the #t_string in dictionaries rather than the #t_symbol
 	to avoid bloating Max's symbol table unnecessarily.
 	
@@ -542,6 +544,7 @@ t_dictionary *dictionary_clone(t_dictionary *d);
 t_max_err dictionary_clone_to_existing(const t_dictionary *d, t_dictionary *dc);
 t_max_err dictionary_copy_to_existing(const t_dictionary *d, t_dictionary *dc);
 t_max_err dictionary_merge_to_existing(const t_dictionary *d, t_dictionary *dc);
+t_max_err dictionary_copy_nonunique_to_existing(const t_dictionary *d, t_dictionary *dc);
 
 
 // funall will pass the t_dictionary_entry pointer to the fun
@@ -823,98 +826,50 @@ t_dictionary *dictionary_sprintf(C74_CONST char *fmt, ...);
 
 
 /**
-	Create a new object in a specified patcher with values using a combination of attribute and sprintf syntax.
+	Take a lock on a dictionary for preventing dictionary lock for transactions
+	across multiple calls, or holding on to internal dictionary element pointers
+	for complex operations.
 	
-	@ingroup		obj
-	@param	patcher	An instance of a patcher object.
-	@param	fmt		An sprintf-style format string specifying key-value pairs with attribute nomenclature.
-	@param	...		One or more arguments which are to be substituted into the format string. 
-	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
+	@ingroup		dictionary
+	@param	d		The dictionary to lock
+	@return			A Max error code.
 	
-	@remark			Max attribute syntax is used to define key-value pairs.  For example,
-	@code
-	"@key1 value @key2 another_value"
-	@endcode
-	
-	@remark			The example below creates a new object that in a patcher whose
-					object pointer is stored in a variable called "aPatcher".
-	@code
-	t_object *my_comment;
-	char text[4];
-	
-	strncpy_zero(text, "foo", 4);
-
-	my_comment = newobject_sprintf(aPatcher, "@maxclass comment @varname _name \
-		@text \"%s\" @patching_rect %.2f %.2f %.2f %.2f \
-		@fontsize %f @textcolor %f %f %f 1.0 \
-		@fontname %s @bgcolor 0.001 0.001 0.001 0.",
-		text, 20.0, 20.0, 200.0, 24.0,
-		18, 0.9, 0.9, 0.9, "Arial");
-	@endcode
-	
-	@see			dictionary_sprintf()
-	@see			newobject_fromdictionary()
-	@see			atom_setparse()
-*/
-t_object *newobject_sprintf(t_object *patcher, C74_CONST char *fmt, ...);
-
+	@see			dictionary_transaction_unlock()
+ */
+long dictionary_transaction_lock(t_dictionary *d);
 
 /**
-	Create an object from the passed in text.
-	The passed in text is in the same format as would be typed into an object box.
-	It can be used for UI objects or text objects so this is the simplest way to create objects from C.
- 
-	@ingroup		obj
-	@param	patcher	An instance of a patcher object.
-	@param	text	The text as if typed into an object box.
-	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
+	Release a lock on a dictionary for preventing dictionary lock for transactions
+	across multiple calls, or holding on to internal dictionary element pointers
+	for complex operations.
+	
+	@ingroup		dictionary
+	@param	d		The dictionary to unlock
+	@return			A Max error code.
+	
+	@see			dictionary_transaction_lock()
+ */
+long dictionary_transaction_unlock(t_dictionary *d);
 
-	@see newobject_sprintf()
-*/
-t_object *newobject_fromboxtext(t_object *patcher, const char *text);
+/**	Read the specified JSON file and return a #t_dictionary object.
+ You are responsible for freeing the dictionary with object_free(),
+ subject to the caveats explained in @ref when_to_free_a_dictionary.
+ @ingroup			dictionary
+ @param	filename	The name of the file.
+ @param	path		The path of the file.
+ @param	d			The address of a #t_dictionary pointer that will be set to the newly created dictionary.
+ @return				A Max error code
+ */
+t_max_err dictionary_read(const char *filename, short path, t_dictionary **d);
 
-
-/**
-	Place a new object into a patcher.  The new object will be created based on a specification
-	contained in a @ref dictionary.
-	
-	Create a new dictionary populated with values using a combination of attribute and sprintf syntax.
-	
-	@ingroup		obj
-	@param	patcher	An instance of a patcher object.
-	@param	d		A dictionary containing an object specification. 
-	@return			A pointer to the newly created object instance, or NULL if creation of the object fails.
-	
-	@remark			Max attribute syntax is used to define key-value pairs.  For example,
-	@code
-	"@key1 value @key2 another_value"
-	@endcode
-	
-	@remark			The example below creates a new object that in a patcher whose
-					object pointer is stored in a variable called "aPatcher".
-	@code
-	t_dictionary *d;
-	t_object *o;
-	char text[4];
-	
-	strncpy_zero(text, "foo", 4);
-
-	d = dictionary_sprintf("@maxclass comment @varname _name \
-		@text \"%s\" @patching_rect %.2f %.2f %.2f %.2f \
-		@fontsize %f @textcolor %f %f %f 1.0 \
-		@fontname %s @bgcolor 0.001 0.001 0.001 0.",
-		text, 20.0, 20.0, 200.0, 24.0,
-		18, 0.9, 0.9, 0.9, "Arial");
-	
-	o = newobject_fromdictionary(aPatcher, d);
-	@endcode
-	
-	@see			newobject_sprintf()
-	@see			newobject_fromdictionary()
-	@see			atom_setparse()
-*/
-t_object *newobject_fromdictionary(t_object *patcher, t_dictionary *d);
-
+/**	Serialize the specified #t_dictionary object to a JSON file.
+ @ingroup			dictionary
+ @param	d			The dictionary to serialize into JSON format and write to disk.
+ @param	filename	The name of the file to write.
+ @param	path		The path to which the file should be written.
+ @return				A Max error code.
+ */
+t_max_err dictionary_write(t_dictionary *d, const char *filename, short path);
 
 END_USING_C_LINKAGE
 

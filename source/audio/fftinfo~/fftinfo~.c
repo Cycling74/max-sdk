@@ -40,7 +40,7 @@ void *fftinfo_class;
 int fftinfo_warning;	// so it only posts a warning once to the Max window if not inside a pfft
 
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -57,7 +57,7 @@ void ext_main(void *r)
 	ps_spfft = gensym("__pfft~__");	// owning pfft~ is bound to this while patch is loaded
 	fftinfo_warning = 1;
 
-	return 0;
+	return;
 }
 
 void fftinfo_bang(t_fftinfo *x)

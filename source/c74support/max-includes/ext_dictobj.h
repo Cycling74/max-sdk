@@ -7,6 +7,9 @@
 #ifndef __EXT_DICTOBJ_H__
 #define __EXT_DICTOBJ_H__
 
+#include "ext_prefix.h"
+#include "ext_dictionary.h"
+
 BEGIN_USING_C_LINKAGE
 
 /**	Register a #t_dictionary with the dictionary passing system and map it to a unique name.
@@ -225,7 +228,9 @@ t_max_err dictobj_dictionaryfromatoms_extended(t_dictionary **d, const t_symbol 
 	@param		d		The dictionary to serialize.
 	@param		argc	The address of a variable to hold the number of atoms allocated upon return.
 	@param		argv	The address of a t_atom pointer which will point to the first atom 
-						(of an array of argc atoms) upon return.
+						(of an array of argc atoms) upon return. You are responsible for freeing the pointer
+						returned with sysmem_freeptr() when you are done with it. If you pass in existing memory,
+						it must be memory allocated using sysmem_newptr() and the pointer may be resized.
 
 	@return		A Max error code.
 	@see		#dictobj_dictionaryfromatoms()

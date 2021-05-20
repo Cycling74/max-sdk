@@ -1,4 +1,10 @@
 // public fftpatcher struct
+#ifndef _R_PFFT_H_
+#define _R_PFFT_H_
+
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "z_dsp.h"
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
@@ -28,3 +34,4 @@ typedef struct _pfftpub {
     #pragma pack()
 #endif
 
+#endif

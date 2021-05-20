@@ -1,13 +1,32 @@
-#ifndef _SYSPROCESS_H_
-#define _SYSPROCESS_H_
+#ifndef _EXT_SYSPROCESS_H_
+#define _EXT_SYSPROCESS_H_
+
+#include "ext_prefix.h"
+#include "ext_mess.h"
 
 BEGIN_USING_C_LINKAGE
 
-// returns non-zero if process is still running
-long sysprocess_isrunning(long id);   
+enum {
+	SYSPROCESS_LAUNCHFLAGS_NONE = 0,
+	SYSPROCESS_LAUNCHFLAGS_NOWINDOW					= 0x01,
+	SYSPROCESS_LAUNCHFLAGS_NOWINDOW_ALLOWDIALOGS	= 0x02
+};
 
 // returns process id or 0 on error
-long sysprocess_launch(const char *utf8path, const char *utf8commandline);  
+long sysprocess_launch(const char *utf8path, const char *utf8commandline);
+
+// returns process id or 0 on error
+long sysprocess_launch_withflags(const char *utf8path, const char *utf8commandline, long flags);
+
+// returns non-zero if process is still running
+long sysprocess_isrunning(long id);
+
+// returns non-zero if process is still running, optional non-running process return value in 'retval' argument
+// note that return value will only work reliably the first time the function is called on a terminated process
+long sysprocess_isrunning_with_returnvalue(long id, long *retval);
+
+// kill a running process (SIGKILL), returns 0 if successful
+long sysprocess_kill(long id);
 
 // returns 0 if successful
 long sysprocess_activate(long id);
@@ -32,4 +51,4 @@ long sysprocess_fitsarch(long id);
 
 END_USING_C_LINKAGE
 
-#endif // _SYSPROCESS_H_
+#endif // _EXT_SYSPROCESS_H_

@@ -2,6 +2,10 @@
 #ifndef __QUICKMAP_H__
 #define __QUICKMAP_H__
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_hashtab.h"
+
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
 #elif C74_PRAGMA_STRUCT_PACK

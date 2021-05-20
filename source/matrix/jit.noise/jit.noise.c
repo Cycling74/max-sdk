@@ -16,6 +16,7 @@ typedef struct _jit_noise_vecdata
 typedef struct _jit_noise
 {
 	t_object		ob;
+    long            seed;
 } t_jit_noise;
 
 void *_jit_noise_class;
@@ -34,16 +35,23 @@ void jit_noise_vector_float64	(long n, t_jit_noise_vecdata *vecdata, t_jit_op_in
 
 t_jit_err jit_noise_init(void)
 {
-	void *mop;
-
+    void *mop;
+    long attrflags;
+    t_jit_object *attr;
+    
 	_jit_noise_class = jit_class_new("jit_noise",(method)jit_noise_new,(method)jit_noise_free,
 									 sizeof(t_jit_noise),0L);
 
-	//add mop
-	mop = jit_object_new(_jit_sym_jit_mop,0,1);
-	jit_class_addadornment(_jit_noise_class,mop);
-	//add methods
-	jit_class_addmethod(_jit_noise_class, (method)jit_noise_matrix_calc, 		"matrix_calc", 		A_CANT, 0L);
+    //add mop
+    mop = jit_object_new(_jit_sym_jit_mop,0,1);
+    jit_class_addadornment(_jit_noise_class,mop);
+    //add methods
+    jit_class_addmethod(_jit_noise_class, (method)jit_noise_matrix_calc,         "matrix_calc",         A_CANT, 0L);
+
+    attrflags = JIT_ATTR_GET_DEFER_LOW | JIT_ATTR_SET_USURP_LOW;
+    attr = jit_object_new(_jit_sym_jit_attr_offset, "seed", _jit_sym_long, attrflags, (method)0L, (method)0L, calcoffset(t_jit_noise, seed));
+    jit_class_addattr(_jit_noise_class, attr);
+    object_addattr_parse(attr,"label",_jit_sym_symbol,0,"\"Seed Value\"");
 
 	jit_class_register(_jit_noise_class);
 
@@ -88,11 +96,17 @@ t_jit_err jit_noise_matrix_calc(t_jit_noise *x, void *inputs, void *outputs)
 		for (i=0; i<dimcount; i++) {
 			dim[i] = out_minfo.dim[i];
 		}
-
-		jit_noise_getvecdata(x,&vecdata);
-		jit_parallel_ndim_simplecalc1((method)jit_noise_calculate_ndim,
-									  &vecdata, dimcount, dim, planecount, &out_minfo, out_bp,
-									  0 /* flags1 */);
+		
+        if(x->seed == 0) {
+            jit_noise_getvecdata(x,&vecdata);
+            jit_parallel_ndim_simplecalc1((method)jit_noise_calculate_ndim,&vecdata, dimcount, dim, planecount, &out_minfo, out_bp, 0);
+        }
+        else {
+            jit_rand_setseed(x->seed);
+            jit_noise_getvecdata(x,&vecdata);
+            jit_noise_calculate_ndim(&vecdata, dimcount, dim, planecount, &out_minfo, out_bp);
+        }
+        
 	} else {
 		return JIT_ERR_INVALID_PTR;
 	}
@@ -271,6 +285,7 @@ t_jit_noise *jit_noise_new(void)
 	t_jit_noise *x;
 
 	if (x=(t_jit_noise *)jit_object_alloc(_jit_noise_class)) {
+        x->seed = 0;
 		//nada
 	} else {
 		x = NULL;

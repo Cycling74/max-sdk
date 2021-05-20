@@ -8,6 +8,10 @@
 #ifndef _EXT_PARAMETER_H_
 #define _EXT_PARAMETER_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_dictionary.h"
+#include "jpatcher_api.h"
 
 BEGIN_USING_C_LINKAGE
 
@@ -16,6 +20,9 @@ BEGIN_USING_C_LINKAGE
 #define PARAMETER_METHOD_FLAG_POST        (1L << 1L) // user-defined post-processing function for standard method
 #define PARAMETER_METHOD_FLAG_FULL        (1L << 2L) // user-defined override method
 #define PARAMETER_METHOD_FLAG_DONOTHING   (1L << 15L) // don't override at all
+
+#define PARAMETER_COLOR_FLAG_DEFAULT      (0L)
+#define PARAMETER_COLOR_FLAG_STYLE        (1L << 0L) // use style system for color rather than defaults system
 
 #define PARAMETER_GESTURE_INDEX			  999999
 
@@ -35,9 +42,15 @@ typedef enum {
 } PARAM_TYPE;
 
 typedef enum {
+	PARAM_FLAGS_NONE = 0,
+	PARAM_FLAGS_FORCE_TYPE = 0x1,
+} PARAM_FLAGS;
+
+typedef enum {
 	PARAM_TYPE_ENABLE_OFF,	// parameter type menu not available in the inspector
 	PARAM_TYPE_ENABLE_ON,	// enables basic parameter types Int, Float, Enum in the parameter type menu
 	PARAM_TYPE_ENABLE_BLOB,	// and additionally Blob
+	PARAM_TYPE_ENABLE_BLOB_ONLY,
 } PARAM_TYPE_ENABLE;
 
 typedef enum {
@@ -103,8 +116,12 @@ typedef enum {
 	PARAM_DATA_TYPE_FILEREF_DISPLAYNAME,
 	PARAM_DATA_TYPE_DEVICESTATE, // read-only
 	PARAM_DATA_TYPE_DEFER,
-	PARAM_DATA_TYPE_MAPPING_INDEX,
+	PARAM_DATA_TYPE_MAPPING_INDEX, // deprecated, do not use
 	PARAM_DATA_TYPE_NOBLOBCACHE,
+	PARAM_DATA_TYPE_RANGE,
+	PARAM_DATA_TYPE_REALVAL,
+	PARAM_DATA_TYPE_DISTANCEVAL,
+	PARAM_DATA_TYPE_LINEARVAL,
 } PARAM_DATA_TYPE;
 
 typedef enum {
@@ -155,15 +172,29 @@ typedef struct _parameter_notify_data {
 } t_parameter_notify_data;
 
 typedef struct _param_class_defcolor_data {
-	t_class				*c;
+	t_symbol			*classname;
 	t_symbol			*attrname;
 	t_symbol			*colorname;
+	long				flags;
 } t_param_class_defcolor_data;
+
+enum {
+	PARAM_VALUECHANGED_UNDEFINED	= 0x00,
+	PARAM_VALUECHANGED_VISIBLE		= 0x01
+};
+
+enum {
+	PARAM_VISIBILITY_VISIBLE = 0,
+	PARAM_VISIBILITY_STOREONLY, // no automation, only store (in blob)
+	PARAM_VISIBILITY_HIDDEN
+};
 
 // call in main function
 t_max_err class_parameter_init(t_class *c);
 // call in new function
 t_max_err object_parameter_init(t_object *x, PARAM_TYPE type);
+// call in new function
+t_max_err object_parameter_init_flags(t_object *x, PARAM_TYPE type, PARAM_FLAGS flags);
 // call at end of new function, passing in object dictionary
 t_max_err object_parameter_dictionary_process(t_object *x, t_dictionary *d);
 // call in free function
@@ -203,6 +234,7 @@ t_max_err parameter_default_float(t_object *x, double d);
 t_max_err parameter_default_anything(t_object *x, t_symbol *s, long ac, t_atom *av);
 
 t_max_err class_parameter_register_default_color(t_class *c, t_symbol *attrname, t_symbol *colorname);
+t_max_err class_parameter_register_default_color_flags(t_class *c, t_symbol *attrname, t_symbol *colorname, long flags);
 
 t_bool object_parameter_is_initialized(t_object *x);
 t_bool object_parameter_is_in_Live(t_object *x);
@@ -212,59 +244,89 @@ t_max_err object_parameter_wants_focus(t_object *x);
 t_bool object_parameter_is_parameter(t_object *x);
 t_atom_long object_parameter_get_order(t_object *x);
 
+typedef enum {
+	PARAMETER_ENABLE_SAVESTATE_UNSAVED = -1,
+	PARAMETER_ENABLE_SAVESTATE_OFF = 0,
+	PARAMETER_ENABLE_SAVESTATE_ON
+} PARAMETER_ENABLE_SAVESTATE;
 
-// available colors
-#define ps_surface_bg			gensym("surface_bg")
-#define ps_control_bg			gensym("control_bg")
-#define ps_control_text_bg		gensym("control_text_bg")
-#define ps_control_fg			gensym("control_fg")
-#define ps_control_fg_on		gensym("control_fg_on")
-#define ps_control_fg_off		gensym("control_fg_off")
-#define ps_control_selection	gensym("control_selection")
-#define ps_control_zombie		gensym("control_zombie")
-#define ps_value_arc			gensym("value_arc")
-#define ps_value_bar			gensym("value_bar")
-#define ps_active_automation	gensym("active_automation")
-#define ps_inactive_automation	gensym("inactive_automation")
-#define ps_macro_assigned		gensym("macro_assigned")
-#define ps_contrast_frame		gensym("contrast_frame")
-#define ps_key_assignment		gensym("key_assignment")
-#define ps_midi_assignment		gensym("midi_assignment")
-#define ps_macro_assignment		gensym("macro_assignment")
-#define ps_assignment_text_bg	gensym("assignment_text_bg")
-#define ps_control_fg_zombie	gensym("control_fg_zombie")
-#define ps_value_arc_zombie		gensym("value_arc_zombie")
-#define ps_numbox_triangle		gensym("numbox_triangle")
-#define ps_macro_title			gensym("macro_title")
-#define ps_selection			gensym("selection")
-#define ps_led_bg				gensym("led_bg")
+PARAMETER_ENABLE_SAVESTATE object_parameter_getenable_savestate(t_object *x);
 
-#define PARAM_COLOR_SURFACE_BG				"0.552941 0.552941 0.552941 1."
-#define PARAM_COLOR_CONTROL_BG				"0.6 0.6 0.6 1."
-#define PARAM_COLOR_CONTROL_TEXT_BG			"0.74902 0.74902 0.74902 1."
-#define PARAM_COLOR_CONTROL_FG				"0. 0.019608 0.078431 1."
-#define PARAM_COLOR_CONTROL_FG_ON			"0. 0. 0. 1."
-#define PARAM_COLOR_CONTROL_FG_OFF			"0. 0. 0. 1."
-#define PARAM_COLOR_CONTROL_SELECTION		"1. 0.788235 0.027451 1."
-#define PARAM_COLOR_CONTROL_ZOMBIE			"0.490196 0.482353 0.478431 1."
-#define PARAM_COLOR_VALUE_ARC				"0.94902 0.376471 0. 1."
-#define PARAM_COLOR_VALUE_BAR				"0.94902 0.376471 0. 1."
-#define PARAM_COLOR_ACTIVE_AUTOMATION		"1. 0.070588 0. 1."
-#define PARAM_COLOR_INACTIVE_AUTOMATION		"0.329412 0.329412 0.329412 1."
-#define PARAM_COLOR_MACRO_ASSIGNED			"0. 0.854902 0.282353 1."
-#define PARAM_COLOR_CONTRAST_FRAME			"0.196078 0.196078 0.196078 1."
-#define PARAM_COLOR_KEY_ASSIGNMENT			"1. 0.392157 0. 1."
-#define PARAM_COLOR_MIDI_ASSIGNMENT			"0.25098 0.203922 0.937255 1."
-#define PARAM_COLOR_MACRO_ASSIGNMENT		"0. 0.854902 0.282353 1."
-#define PARAM_COLOR_ASSIGNMENT_TEXT_BG		"0.709804 0.698039 0.694118 1."
-#define PARAM_COLOR_CONTROL_FG_ZOMBIE		"0.321569 0.321569 0.321569 1."
-#define PARAM_COLOR_VALUE_ARC_ZOMBIE		"0.752941 0.784314 0.839216 1."
-#define PARAM_COLOR_NUMBOX_TRIANGLE			"1. 0.380392 0. 1."
-#define PARAM_COLOR_MACRO_TITLE				"0.709804 0.698039 0.694118 1."
-#define PARAM_COLOR_SELECTION				"0.498039 1. 1. 1."
-#define PARAM_COLOR_LED_BG					"0.4 0.4 0.4 1."
+enum {
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_NONE = 0,
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_TOGGLE_ZEROONE	= 0x01,	// this object is a toggle with values 0 and 1 (will be locked to enum)
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_TOGGLE_OFFON 	= 0x02,	// this object is a toggle with values off and on (will be locked to enum)
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_ENUM			= 0x03,	// this object is an enum and will require an override to specify the range
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_INT_MIDI		= 0x04, // this object is an int (0 - 127)
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_INT_FULL		= 0x05, // this object is an int (0 - 255)
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_INT				= 0x06, // this object is an int and will require an override to specify the range
 
-#define PARAM_COLOR_COUNT 24
+	PARAMETER_MAPPABLE_CONFIG_FLAGS_WANTSOVERRIDE	= 0x10	// this object uses a known pattern ('min'/'max' or 'size'), the kernel should autogenerate overrides
+};
+
+enum {
+	PARAMETER_MAPPABLE_CONFIG_NOOVERRIDE = 0,
+	PARAMETER_MAPPABLE_CONFIG_OVERRIDE_MINMAX, // the object already has individual attributes for min/max
+	PARAMETER_MAPPABLE_CONFIG_OVERRIDE_SIZE, // the object already has an individual size attribute (min = 0, max = size - 1)
+	PARAMETER_MAPPABLE_CONFIG_OVERRIDE_OBJ // object will implement minmax getter/setter methods if necessary
+};
+
+typedef t_bool (*t_hasminmax_getmethod)(void *);
+typedef t_max_err (*t_hasminmax_setmethod)(void *, t_bool);
+
+typedef t_max_err (*t_minmax_getmethod)(void *, double *, double *);
+typedef t_max_err (*t_minmax_setmethod)(void *, double, double);
+
+typedef t_max_err (*t_enum_getmethod)(void *, long *, t_atom **);
+typedef t_max_err (*t_enum_setmethod)(void *, long, t_atom *);
+
+typedef struct _parameter_mappable_override_minmax {
+	t_symbol *minimum;
+	t_symbol *maximum;
+	t_bool readonly; // do not allow the parameter to change the min/max
+} t_parameter_mappable_override_minmax;
+
+typedef struct _parameter_mappable_override_size {
+	t_symbol *size;
+	t_bool readonly; // do not allow the parameter to change the size
+} t_parameter_mappable_override_size;
+
+typedef struct _parameter_mappable_override_obj {
+	t_minmax_getmethod getmethod;
+	t_minmax_setmethod setmethod;
+	t_symbol *watchattr; // when this attr changes, we need to pull the new range
+} t_parameter_mappable_override_obj;
+
+typedef union _parameter_mappable_override {
+	t_parameter_mappable_override_minmax minmax;
+	t_parameter_mappable_override_size size;
+	t_parameter_mappable_override_obj obj;
+} t_parameter_mappable_override;
+
+typedef struct _parameter_mappable_hasminmax {
+	t_hasminmax_getmethod getmethod;
+	t_hasminmax_setmethod setmethod;
+} t_parameter_mappable_hasminmax;
+
+typedef struct _parameter_mappable_enum {
+	t_enum_getmethod getmethod;
+	t_enum_setmethod setmethod;
+} t_parameter_mappable_enum;
+
+typedef struct _parameter_mappable_config {
+	long 							flags;
+	long							override_type;
+	t_parameter_mappable_override	override_value;
+	t_parameter_mappable_hasminmax	hasminmax;
+	t_parameter_mappable_enum		enuminfo;
+} t_parameter_mappable_config;
+
+t_bool object_parameter_hasminmax_false(void *x);
+t_bool object_parameter_hasminmax_true(void *x);
+
+void class_parameter_mappable(t_class *c, t_parameter_mappable_config *config);
+t_max_err class_parameter_setinfo(t_class *c, PARAM_DATA_TYPE type, long ac, t_atom *av);
+t_max_err class_parameter_getinfo(t_class *c, PARAM_DATA_TYPE type, long *ac, t_atom **av);
 
 END_USING_C_LINKAGE
 

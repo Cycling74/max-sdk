@@ -38,6 +38,7 @@ t_jit_err jit_ob3d_set_context(void *x);
 t_jit_err jit_ob3d_draw_chunk(void *ob3d, t_jit_glchunk * chunk);
 void jit_ob3d_set_viewport(void *v, long x, long y, long width, long height);
 
+void * ob3d_maxob_get(void *v);
 void * ob3d_jitob_get(void *v);
 void * ob3d_patcher_get(void *v);
 long ob3d_auto_get(void *v);
@@ -60,6 +61,10 @@ t_jit_err ob3d_draw_end(void *ob3d, long setup);
 t_jit_err ob3d_draw_preamble(void *ob3d);
 
 t_symbol * jit_ob3d_init_jpatcher_render(void *jitob);
+
+t_jit_err jit_ob3d_dest_name_set(t_jit_object *x, void *attr, long argc, t_atom *argv);
+t_jit_err jit_gl_vbo_create(void *x, GLenum target, GLenum usage);
+t_jit_err jit_gl_vbo_submit(void *x, long size, const void *data);
 
 /****************************************************************************/
 

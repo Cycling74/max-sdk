@@ -3,6 +3,9 @@
 #ifndef _EXT_EXPR_H_
 #define _EXT_EXPR_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -38,9 +41,9 @@ typedef enum {
 */
 typedef struct ex_ex {
 	union {
-		long v_int;
+		t_atom_long v_int;
 		double v_flt;
-		long op;
+		t_atom_long op;
 		char **ptr;
 	} ex_cont;			///< content
 	long ex_type;		///< type of the node

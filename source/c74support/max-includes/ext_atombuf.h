@@ -1,6 +1,9 @@
 #ifndef _EXT_ATOMBUF_H_
 #define _EXT_ATOMBUF_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 /** The atombuf struct provides a way to pass a collection of atoms.
 	@ingroup atombuf
 */
@@ -47,10 +50,17 @@ void atombuf_free(t_atombuf *x);
 */
 void atombuf_text(t_atombuf **x, char **text, long size);
 
+// undocumented
+
 short atombuf_totext(t_atombuf *x, char **text, long *size);
 short atombuf_count(t_atombuf *x);
 void atombuf_set(t_atombuf *x, long start, long num);
 long atombuf_replacepoundargs(t_atombuf *x, long argc, t_atom *argv);
+short atombuf_next(t_atombuf* x, long* count, t_atom* atom);
+void atombuf_replace(t_atombuf** x, t_symbol* s, long ac, t_atom* av);
+void atombuf_prepend(t_atombuf** x, t_symbol* s, long ac, t_atom* av);
+void atombuf_append(t_atombuf** x, t_symbol* s, long ac, t_atom* av);
+void* atombuf_eval(t_atombuf* x, long ac, t_atom* av, t_object* to);
 
 END_USING_C_LINKAGE
 

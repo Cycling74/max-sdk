@@ -10,7 +10,6 @@ BEGIN_USING_C_LINKAGE
 */
 typedef void *t_systhread;
 
-
 /** An opaque mutex handle. 
 	@ingroup threading
 */
@@ -38,7 +37,11 @@ typedef enum {
 typedef enum {
 	SYSTHREAD_PRIORITY_MIN = -30,
 	SYSTHREAD_PRIORITY_DEFAULT = 0,
+#ifndef LINUX_VERSION
 	SYSTHREAD_PRIORITY_MAX = 30
+#else
+	SYSTHREAD_PRIORITY_MAX = 0 // Linux does not have high prio non-rt threads
+#endif
 } e_max_systhread_priority; 
 
 typedef enum {
@@ -128,6 +131,16 @@ long systhread_detach(t_systhread thread);
 t_systhread systhread_self(void);
 
 /**
+	Compare two threads to see if they reference the same thread. 
+	The t_systhread type is opaque and two should not be compared directly.
+	@ingroup	threading
+	@param		thread1		the first thread to be compared
+	@param		thread2		the second thread to be compared
+	@return		nonzero if the two parameters reference the same thread
+*/
+long systhread_equal(t_systhread thread1, t_systhread thread2);
+
+/**
 	Set the thread priority for the given thread. 
 	@ingroup	threading
 	@param		thread 			The thread for which to set the priority.
@@ -144,14 +157,6 @@ void systhread_setpriority(t_systhread thread, int priority);
 int systhread_getpriority(t_systhread thread); 
 
 char *systhread_getstackbase(void);
-
-
-// private
-void systhread_init(void);
-void systhread_mainstacksetup(void);
-void systhread_timerstacksetup(void);
-short systhread_stackcheck(void);
-
 
 /** Check to see if the function currently being executed is in the main thread.
 	@ingroup	threading
@@ -174,6 +179,14 @@ short systhread_istimerthread(void);
 
 short systhread_isaudiothread(void);
 
+/**
+	Set the name of the current thread, for debugging purposes.
+	Recommended to call from the top of the entryproc passed to systhread_create
+
+	@ingroup threading
+	@param	name	The name to be given.
+*/
+void systhread_set_name(const char* name);
 
 /**
 	Create a new mutex, which can be used to place thread locks around critical code.
@@ -261,6 +274,7 @@ long systhread_key_create(t_systhread_key *key, void (*destructor)(void*));
 long systhread_key_delete(t_systhread_key key); 
 void* systhread_getspecific(t_systhread_key key);
 long systhread_setspecific(t_systhread_key key, const void *value); 
+void systhread_eliminatedenormals(void);
 
 END_USING_C_LINKAGE
 

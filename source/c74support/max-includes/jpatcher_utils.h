@@ -1,6 +1,9 @@
 #ifndef _JPATCHER_UTILS_H_
 #define _JPATCHER_UTILS_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 /**	Copy an array of atoms.

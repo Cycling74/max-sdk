@@ -87,6 +87,14 @@ typedef enum {
 	VIEW_TAG_NORMAL,
 	VIEW_TAG_COLOR,
 	VIEW_TAG_INDEX,
+	VIEW_TAG_SPECULAR,
+	VIEW_TAG_EDGEFLAG,
+	VIEW_TAG_TANGENT,
+	VIEW_TAG_VERTEX_ATTR,
+	VIEW_TAG_VATTR0,
+	VIEW_TAG_VATTR1,
+	VIEW_TAG_VATTR2,
+	VIEW_TAG_VATTR3,
 
 	// buffer types
 	VIEW_TAG_CHAR,
@@ -106,6 +114,9 @@ long jit_gl_buffer_data_create_from_matrix_data(t_jit_gl_buffer_data *x, t_jit_m
 void jit_gl_buffer_data_create_instances(t_jit_gl_buffer_data *x, e_view_tag view_type, int count, long size, char *ptr);
 void jit_gl_buffer_data_destroy_tagged(t_jit_gl_buffer_data * x);
 
+t_symbol * jit_gl_buffer_name_from_tag(e_view_tag view_tag);
+e_view_tag jit_gl_view_tag_for_minfo(t_jit_matrix_info *minfo);
+	
 /** Immediate mode simulating functions
 	
 	Example usage:
@@ -155,6 +166,7 @@ typedef enum {
 	JIT_STATE_FRONT_AND_BACK,
 	JIT_STATE_FRONT,
 	JIT_STATE_BACK,
+	JIT_STATE_2PASS,
 	JIT_STATE_CULL_FACE,
 	JIT_STATE_EMISSION,
 	JIT_STATE_AMBIENT,
@@ -210,9 +222,9 @@ typedef enum {
 
 /** Apply updates on the rendering state
 */
-void jit_gl_materialf(e_jit_state face, e_jit_state pname, float v);
+void jit_gl_materialf(e_jit_state face, e_jit_state pname, double v);
 void jit_gl_materialfv(e_jit_state face, e_jit_state pname, float *v);
-void jit_gl_lightf(e_jit_state light, e_jit_state pname, float v);
+void jit_gl_lightf(e_jit_state light, e_jit_state pname, double v);
 void jit_gl_lightfv(e_jit_state light, e_jit_state pname, float *v);
 void jit_gl_light_modeli(e_jit_state pname, int v);
 void jit_gl_light_modelfv(e_jit_state pname, float *v);
@@ -222,11 +234,11 @@ void jit_gl_polygon_mode(e_jit_state face, e_jit_state mode);
 void jit_gl_cull_face(e_jit_state mode);
 void jit_gl_shade_model(e_jit_state mode);
 void jit_gl_colorfv(float *c);
-void jit_gl_colorf(float r, float g, float b, float a);
+void jit_gl_colorf(double r, double g, double b, double a);
 void jit_gl_color(t_jit_vec4 *c);
 void jit_gl_color_material(e_jit_state face, e_jit_state mode);
 void jit_gl_fogi(e_jit_state pname, long v);
-void jit_gl_fogf(e_jit_state pname, float v);
+void jit_gl_fogf(e_jit_state pname, double v);
 void jit_gl_fogfv(e_jit_state pname, float *v);
 void jit_gl_matrix_mode(e_jit_state mode);
 t_jit_mat4 * jit_gl_get_matrix();
@@ -236,22 +248,22 @@ void jit_gl_push_matrix();
 void jit_gl_pop_matrix();
 void jit_gl_load_identity();
 void jit_gl_load_matrix(t_jit_mat4 *m);
-void jit_gl_translate(float x, float y, float z);
-void jit_gl_rotate(float angle, float x, float y, float z);
-void jit_gl_scale(float x, float y, float z);
+void jit_gl_translate(double x, double y, double z);
+void jit_gl_rotate(double angle, double x, double y, double z);
+void jit_gl_scale(double x, double y, double z);
 void jit_gl_ortho(double left, double right, double bottom, double top, double zNear, double zFar);
 void jit_gl_set_shader(void *shader);
 void jit_gl_bind_texture(long unit, void *texture);
 void jit_gl_unbind_texture(long unit, void *texture);
 void jit_gl_immediate_begin(e_jit_state primitive);
 void jit_gl_immediate_end();
-void jit_gl_immediate_vertex2f(float x, float y);
-void jit_gl_immediate_vertex3f(float x, float y, float z);
-void jit_gl_immediate_texcoord2f(float x, float y);
-void jit_gl_immediate_texcoord3f(float x, float y, float z);
-void jit_gl_immediate_normal3f(float x, float y, float z);
-void jit_gl_immediate_color3f(float r, float g, float b);
-void jit_gl_immediate_color4f(float r, float g, float b, float a);
+void jit_gl_immediate_vertex2f(double x, double y);
+void jit_gl_immediate_vertex3f(double x, double y, double z);
+void jit_gl_immediate_texcoord2f(double x, double y);
+void jit_gl_immediate_texcoord3f(double x, double y, double z);
+void jit_gl_immediate_normal3f(double x, double y, double z);
+void jit_gl_immediate_color3f(double r, double g, double b);
+void jit_gl_immediate_color4f(double r, double g, double b, double a);
 void *jit_gl_immediate_getgeometry();
 
 void *jit_ob3d_state_get(t_jit_object *x);
@@ -279,6 +291,8 @@ typedef struct _jit_gl_texture_ex {
 	method				bindmeth;
 	method				unbindmeth;
 } t_jit_gl_texture_ex;
+	
+t_jit_err jit_gl_texture_ex_set_transform(t_jit_gl_texture_ex *x, void *state, long unit);
 	
 #ifdef __cplusplus
 }

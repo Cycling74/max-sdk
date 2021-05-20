@@ -5,6 +5,8 @@
 #define JIT_PARALLEL_NDIM_MAX_IO				32
 #define JIT_PARALLEL_NDIM_FLAGS_FULL_MATRIX		0x00000001
 
+#include "jit.common.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

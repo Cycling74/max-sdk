@@ -2,6 +2,10 @@
 #ifndef _EXT_ATOMARRAY_H_
 #define _EXT_ATOMARRAY_H_
 
+#include "max_types.h"
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
 #elif C74_PRAGMA_STRUCT_PACK
@@ -21,7 +25,7 @@
 
 union word64			
 {
-	long w_long;
+	t_int64 w_long;
 	double w_float;
 	struct symbol *w_sym;
 	struct object *w_obj;

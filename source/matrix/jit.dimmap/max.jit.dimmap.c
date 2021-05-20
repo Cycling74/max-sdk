@@ -18,12 +18,12 @@ void *max_jit_dimmap_new(t_symbol *s, long argc, t_atom *argv);
 void max_jit_dimmap_free(t_max_jit_dimmap *x);
 t_messlist *max_jit_dimmap_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_dimmap_init();
-	setup(&max_jit_dimmap_class, max_jit_dimmap_new, (method)max_jit_dimmap_free, (short)sizeof(t_max_jit_dimmap),
+	setup(&max_jit_dimmap_class, (method)max_jit_dimmap_new, (method)max_jit_dimmap_free, (short)sizeof(t_max_jit_dimmap),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_dimmap,obex));

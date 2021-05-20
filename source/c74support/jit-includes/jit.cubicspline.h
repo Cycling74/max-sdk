@@ -11,6 +11,10 @@
 
 // --------------------------------------------------------------------------
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "jit.error.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,6 +1,10 @@
 #ifndef _EXT_STRINGS_H_
 #define _EXT_STRINGS_H_
 
+#include <stddef.h>
+
+#include "ext_prefix.h"
+
 BEGIN_USING_C_LINKAGE
 
 #ifndef strncpy_zero

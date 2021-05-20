@@ -1,6 +1,11 @@
 #ifndef _EXT_XMLTREE_H_
 #define _EXT_XMLTREE_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_linklist.h"
+#include "ext_sysfile.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

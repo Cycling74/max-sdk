@@ -27,7 +27,7 @@ void *max_jit_3m_class;
 
 t_symbol *ps_getmin,*ps_getmean,*ps_getmax;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 

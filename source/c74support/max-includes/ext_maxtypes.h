@@ -4,6 +4,9 @@
 #ifndef _EXT_MAXTYPES_H_
 #define _EXT_MAXTYPES_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -25,18 +28,6 @@ typedef t_object t_patcher;
 	@ingroup patcher
 */
 typedef t_object t_box;
-
-
-/** A clock. 
-	@ingroup	clocks
-*/
-typedef t_object t_clock;
-
-
-/** A qelem. 
-	@ingroup	qelems
-*/
-typedef void* t_qelem;
 
 
 /** patcher iteration flags 

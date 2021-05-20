@@ -1,6 +1,8 @@
-
 #ifndef _JGRAPHICS_H_
 #define _JGRAPHICS_H_
+
+#include "ext_prefix.h"
+#include "jpatcher_api.h"
 
 BEGIN_USING_C_LINKAGE
 
@@ -23,6 +25,7 @@ struct t_jdesktopui;
 struct t_jpopupmenu; 
 struct t_jsvg;
 struct t_jsvg_remap;
+struct t_dpi_awareness_context;
 #else 
 typedef struct _jgraphics	t_jgraphics;	///< An instance of a jgraphics drawing context.	@ingroup jgraphics
 typedef struct _jpath		t_jpath;		///< An instance of a jgraphics path.				@ingroup jgraphics
@@ -35,6 +38,7 @@ typedef struct _jdesktopui	t_jdesktopui;	///< An instance of a transparent UI wi
 typedef struct _jpopupmenu	t_jpopupmenu;	///< An instance of a pop-up menu.					@ingroup jgraphics
 typedef struct _jsvg		t_jsvg; 		///< An instance of an SVG object.					@ingroup jgraphics
 typedef struct _jsvg_remap	t_jsvg_remap;	///< An object used for remapping colors in a t_svg.	@ingroup jgraphics
+typedef struct _dpi_awareness_context t_dpi_awareness_context; 
 #endif
 
 
@@ -108,8 +112,6 @@ typedef enum _jgraphics_path_elemtype {
 	@param	d	floating-point input.
 	@return		rounded int output.	*/
 int jgraphics_round(double d); 
-
-
 
 // surfaces
 
@@ -466,6 +468,16 @@ t_jsvg_remap *jsvg_remap_create(t_jsvg *svg);
 void jsvg_remap_addcolor(t_jsvg_remap *r, t_jrgba *src, t_jrgba *dst);
 void jsvg_remap_perform(t_jsvg_remap *r, t_jsvg **remapped);
 void jsvg_remap_destroy(t_jsvg_remap *r);
+void jsvg_remap_addsinglecolor(t_jsvg_remap *r, t_jrgba *dst);
+
+// this enum is anonymous because jgraphics_draw_jsvg takes an int flags argument
+
+enum {
+	JGRAPHICS_JSVG_IMAGE_EFFECT = 1,				///< Not working quite yet
+	JGRAPHICS_JSVG_USE_CONTENT_AREA = 2				///< Use the content area (viewBox) instead of the default JUCE SVG bounds
+	
+	// more flags possible for centering etc.
+};
 
 void jgraphics_draw_jsvg(t_jgraphics *g, t_jsvg *svg, t_rect *r, int flags, double opacity);
 
@@ -793,7 +805,7 @@ void		jgraphics_ellipse(t_jgraphics *g,
  @param cornersize	Body rounded corners
  @param arrowtipx	X position of arrow tip
  @param arrowtipy	Y position of arrow tip
- @param whichside	side to connect arrow, 0 = top, 1 = left, 2 = bottom, 3 = right, 
+ @param whichside	side to connect arrow, see above definition of t_jgraphics_bubble_side enum, 
  @param arrowedgeprop	Arrow proportion along edge (0-1) 
  @param arrowwidth	Arrow base width
 */
@@ -946,13 +958,25 @@ t_jfont*	jfont_create_from_maxfont(short number, short size);
 	@param	slant	The type of slant for the font.
 	@param	weight	The type of weight for the font.
 	@param	size	The size of the font.
-	@return			The new font object.	*/
+	@return			The new font object. Needs to be freed via jfont_destroy() when done.
+*/
 t_jfont*	jfont_create(const char *family,
 						 t_jgraphics_font_slant slant,
 					     t_jgraphics_font_weight weight,
 						 double size); 
 						
-						
+/** Create a new font object using a style instead of style flags.
+	@ingroup jfont
+	@param family	The name of the font family (e.g. Arial).
+	@param stylename	The name of the font style (e.g. Narrow Bold Italic).
+	@param size		The size of the font.
+	@return			The new font object. Needs to be freed via jfont_destroy() when done. 
+*/
+t_jfont*	jfont_create_withstylename(const char *family,
+									   const char *stylename,
+									   double size);
+
+
 /**	Create new reference to an existing font object.
 	@ingroup jfont
 	@param	font	The font object for which to obtain a reference.
@@ -984,6 +1008,20 @@ void        jfont_set_family(t_jfont *font, t_symbol *family);
     @param      font    The font object.
     @return             A t_symbol representing the name of the font family. */
 t_symbol* jfont_get_family(t_jfont *font);
+
+/** Set the style of a font family (e.g. Narrow Bold Italic).
+	@ingroup	jfont
+	@param		font	The font object.
+	@param		style	The desired style. 
+*/
+void jfont_set_style(t_jfont *font, t_symbol *style);
+
+/** Get the style of the given font (e.g. Narrow Bold Italic).
+	@ingroup	jfont
+	@param		font	The font object. 
+	@return				A t_symbol representing the name of the font style. 
+*/
+t_symbol* jfont_get_style(t_jfont *font);
 
 /** Set the slant of the font. 
     @ingroup    jfont
@@ -1073,16 +1111,37 @@ void		jfont_text_measuretext_wrapped(t_jfont *font, const char *utf8, double wra
 	@param	height	The address of a variable to hold the height upon return.	*/
 void		jfont_get_em_dimensions(t_jfont *font, double *width, double *height); 
 
-/**	Get a list of font names.
+/**	Get a list of font names. Note, this includes each font style in each font family.
 	@ingroup		jfont
-	@param	count	The addres of a variable to hold the count of font names in list upon return.
+	@param	count	The address of a variable to hold the count of font names in list upon return.
 	@param	list	The address of a #t_symbol** initialized to NULL.
 					Upon return this will be set to an array of count #t_symbol pointers.
 					This array should be freed using sysmem_freeptr() when you are done with it.
 	@return			A Max error code.	*/
 t_max_err	jfont_getfontlist(long *count, t_symbol ***list);
 
-long jfont_isfixedwidth(const char *name); 
+/** Get a list of font styles available for a given font face.
+	@ingroup			jfont
+	@param fontanme		A symbol with the name of the font whose styles are to be retrieved.
+	@param count		The address of a variable to hold the count of font styles in the list upon return.
+	@param list			The address of a #t_symbol** initialized to NULL. 
+						Upon return this will be set to an array of count #t_symbol pointers. 
+						This array should b freed using sysmem_freptr() when you are done with it. 
+	@return				A Max error code. 
+*/
+t_max_err	jfont_getfontstylenames(t_symbol *fontname, long *count, t_symbol ***stylenames);
+
+/** Given a font name with style appended separate into the component parts. (e.g. "Arial Narrow Bold Italic" -> "Arial" and "Narrow Bold Italic".
+	@ingroup					jfont
+	@param fontfacewithstyle	The name with style appended (e.g. "Arial Narrow Bold Italic")
+	@param fontface				The address of a #t_symbol*. On return is set to the name of the font (e.g. "Arial")
+	@param style				The address of a #t_symbol*. On return is set to the name of the font style (e.g. "Narrow Bold Italic")
+*/
+void jfont_normalizefontname(t_symbol *fontfacewithstyle, t_symbol **fontface, t_symbol **style);
+
+long jfont_isfixedwidth(const char *name);
+
+void jfont_ellipsifytext(t_jfont *font, char *text, long maxcharbuflen, double maxwidth);
 
 const char *jfont_get_default_fixedwidth_name(void);
 
@@ -1099,16 +1158,12 @@ void		jfont_copy_juce_fallback_fontname(char *s, long maxlen);
  	you are rendering text on a transparent background. 
 	@ingroup	jgraphics
 	@return		Non-zero if you can anti-alias text to a transparent background.	*/
-long jgraphics_system_canantialiastexttotransparentbg(void); 
-
-
-long jgraphics_fontname_hasglyph(char *name, long code);
-
+long jgraphics_system_canantialiastexttotransparentbg(); 
 
 /**	Create a new textlayout object.
 	@ingroup	textlayout
 	@return		The new textlayout object.	*/
-t_jtextlayout*	jtextlayout_create(void); 
+t_jtextlayout*	jtextlayout_create(); 
 
 
 /**	Create a new textlayout object.
@@ -1625,6 +1680,9 @@ void jgraphics_jrgba_gethsb(t_jrgba *c, double *h, double *s, double *b);
 t_jrgba jgraphics_jrgba_fromhsb(double h, double s, double b, double a);
 
 long jcolor_getcolor(t_symbol *name, t_jrgba *on, t_jrgba *off);
+void jcolor_linkcolor(t_object *x, t_symbol *colorname, t_symbol *attrname);
+void jcolor_unlinkcolor(t_object *x, t_symbol *colorname, t_symbol *attrname);
+char *jgraphics_jrgba_tohexstring(t_jrgba *c, long includealpha);
 
 // popup menu API so externals can create popup menus that can also be drawn into
 
@@ -1632,7 +1690,7 @@ long jcolor_getcolor(t_symbol *name, t_jrgba *on, t_jrgba *off);
 	Free this pop-up menu using jpopupmenu_destroy().
 	@ingroup	jpopupmenu
 	@return		A pointer to the newly created jpopupmenu object. */
-t_jpopupmenu* jpopupmenu_create(void); 
+t_jpopupmenu* jpopupmenu_create(); 
 
 /**	Free a pop-up menu created with jpopupmenu_create().
 	@ingroup		jpopupmenu
@@ -1643,6 +1701,13 @@ void jpopupmenu_destroy(t_jpopupmenu *menu);
 	@ingroup		jpopupmenu
 	@param	menu	The pop-up menu whose contents will be cleared.	*/
 void jpopupmenu_clear(t_jpopupmenu *menu);
+
+typedef struct _jpopupmenu_options {
+  bool zoomwithview;
+  int defitemid;
+} t_jpopupmenu_options;
+
+t_jpopupmenu_options jpopupmenu_default_options();
 
 // Internal use only
 void jpopupmenu_setitemcallback(method fun, void *arg);
@@ -1688,6 +1753,9 @@ void jpopupmenu_additem(t_jpopupmenu *menu,
 								   t_jsurface *icon);
 
 /**	Add a pop-menu to another pop-menu as a submenu.
+    Note that the submenu contents are copied at the time of this call.
+    So, any changes to the submenu after this returns won't have an effect. 
+    Also, it is safe to destroy the submenu after this function returns. 
 	@ingroup			jpopupmenu
 	@param	menu		The pop-up menu to which a menu will be added as a submenu.
 	@param	utf8Name	The name of the menu item.
@@ -1701,7 +1769,8 @@ void jpopupmenu_addsubmenu(t_jpopupmenu *menu,
 /**	Add a separator to a pop-menu.
 	@ingroup			jpopupmenu
 	@param	menu		The pop-up menu to which the separator will be added.	*/
-void jpopupmenu_addseperator(t_jpopupmenu *menu); 
+void jpopupmenu_addseparator(t_jpopupmenu *menu);
+void jpopupmenu_addseperator(t_jpopupmenu *menu); // [sic]
 
 // Internal use only (header functions are not exported)
 void jpopupmenu_addheader(t_jpopupmenu *menu, const char *utf8Text);
@@ -1745,6 +1814,16 @@ int jpopupmenu_popup_nearbox(t_jpopupmenu *menu,
 										 t_object *box, t_object *view,
 										 int defitemid); 
 
+/**	Tell a menu to display near a given box in a patcher with options.
+	@ingroup			jpopupmenu
+	@param	menu		The pop-up menu to display.
+	@param	box			The box above which to display the menu.
+	@param	view		The patcherview for the box in which to display the menu.
+	@param	opts		The jpopupmenu options
+	@return				The item id for the item in the menu choosen by the user.	*/
+int jpopupmenu_popup_nearbox_with_options(t_jpopupmenu *menu,
+										 t_object *box, t_object *view,
+										 t_jpopupmenu_options opts);
 
 /**	Tell a menu to display below a given rectangle in a patcher.
 	@ingroup			jpopupmenu
@@ -1764,21 +1843,30 @@ int jpopupmenu_popup_aboverect(t_jpopupmenu *menu, t_rect rect, int defitemid);
 
 int jpopupmenu_popup_leftofpt(t_jpopupmenu *menu, t_pt pt, int defitemid, int flags);
 
+int jpopupmenu_popup_centered(t_jpopupmenu *menu,
+							  t_pt screen,
+							  int defitemid);		// initial item id
+
 void jpopupmenu_estimatesize(t_jpopupmenu *menu, int *width, int *height);
 void jpopupmenu_setitemtooltip(void *itemref, char *tip);
+void jpopupmenu_setfixedwidth(t_jpopupmenu *menu, int width);
+void jpopupmenu_additemwithshortcut(t_jpopupmenu *menu, int itemid,
+									const char *utf8Text,
+									t_jrgba *textColor,
+									int checked, int disabled,
+									t_jsurface *icon, t_jsvg *svg, char *shortcut);
 
 enum {
-	JPOPUPMENU_DARKSTYLE = 1
+	JPOPUPMENU_DARKSTYLE = 1,
+	JPOPUPMENU_FLATSTYLE = 2
 };
 
 void jpopupmenu_setstandardstyle(t_jpopupmenu *menu, long styleindex, double fontsize, int margin);
 
-void jpopupmenu_setstandardstyle_forjucemenu(void *jpm, long styleindex, double fontsize, t_jrgba *headertextcolor);
-
 
 /** Tell any open popup menus to go away. 
 */
-void jpopupmenu_closeall(void); 
+void jpopupmenu_closeall(); 
 
 // unused by any C74 code
 // you can draw to a surface and then turn that into a cursor
@@ -1810,6 +1898,7 @@ void jgraphics_jrgba_set_brightness(t_jrgba *c, double amt);
 
 // don't call these two functions directly, instead use the macros below...
 t_max_err jgraphics_attr_setrgba(t_object *x, t_object *attr, long argc, t_atom *argv);
+t_max_err jgraphics_attr_getrgba(t_object *x, t_object *attr, long *argc, t_atom **argv); // only used fo debugging
 t_max_err jgraphics_attr_setrgb_alias(t_object *x, t_object *attr, long argc, t_atom *argv);
 
 
@@ -1825,7 +1914,7 @@ t_max_err jgraphics_attr_setrgb_alias(t_object *x, t_object *attr, long argc, t_
 */
 #define CLASS_ATTR_RGBA(c,attrname,flags,structname,structmember) \
 	{	CLASS_ATTR_DOUBLE_ARRAY(c,attrname,flags,structname,structmember,4); \
-		CLASS_ATTR_ACCESSORS(c,attrname,NULL,jgraphics_attr_setrgba); \
+		CLASS_ATTR_ACCESSORS(c,attrname,jgraphics_attr_getrgba,jgraphics_attr_setrgba); \
 		CLASS_ATTR_PAINT(c,attrname,0); }
 
 
@@ -2040,6 +2129,19 @@ void jgraphics_position_one_rect_near_another_rect_but_keep_inside_a_third_rect(
 	*/
 void jgraphics_clip(t_jgraphics *g, double x, double y, double width, double height);
 
+
+typedef enum _jgraphics_dpi_awareness {
+	JGRAPHICS_DPI_AWARENESS_DEFAULT,			// will be aware if Max has hi dpi enabled
+	JGRAPHICS_DPI_AWARENESS_UNAWARE,
+	JGRAPHICS_DPI_AWARENESS_SYSTEM_AWARE,
+	JGRAPHICS_DPI_AWARENESS_PER_MONITOR_AWARE,
+	JGRAPHICS_DPI_AWARENESS_PER_MONITOR_AWARE_V2
+} t_jgraphics_dpi_awareness;
+
+
+
+t_dpi_awareness_context* jgraphics_enterdpiawarenesscontext(t_jgraphics_dpi_awareness awareness);
+void jgraphics_exitdpiawarenesscontext(t_dpi_awareness_context *context);
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(pop)

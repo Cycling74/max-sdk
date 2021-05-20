@@ -42,7 +42,7 @@ void *max_jit_peek_class;
 
 t_symbol *ps_done;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	long attrflags;
 	void *p,*attr;
@@ -83,7 +83,6 @@ void ext_main(void *r)
 
 	max_jit_classex_standard_wrap(p,NULL,0);
 	addmess((method)max_jit_peek_assist, "assist", A_CANT,0);
-	return 0;
 }
 
 t_int *max_jit_peek_perform(t_int *w)

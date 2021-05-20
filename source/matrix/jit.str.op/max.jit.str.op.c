@@ -20,12 +20,12 @@ void max_jit_str_op_mproc(t_max_jit_str_op *x, void *mop);
 void max_jit_str_op_free(t_max_jit_str_op *x);
 t_messlist *max_jit_str_op_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_str_op_init();
-	setup(&max_jit_str_op_class, max_jit_str_op_new, (method)max_jit_str_op_free, (short)sizeof(t_max_jit_str_op),
+	setup(&max_jit_str_op_class, (method)max_jit_str_op_new, (method)max_jit_str_op_free, (short)sizeof(t_max_jit_str_op),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_str_op,obex));
@@ -97,7 +97,7 @@ t_jit_err max_jit_str_op_jit_matrix(void *x, t_symbol *s, long argc, t_atom *arg
 						(m=jit_object_method(p,_jit_sym_getmatrix)))
 				{
 					if (ioproc=(method)jit_object_method(p,_jit_sym_getioproc))
-						(*ioproc)(mop,p,matrix);
+						CALL_METHOD((*ioproc), mop,p,matrix);
 					else
 						jit_object_method(m,_jit_sym_frommatrix,matrix,NULL);
 				} else {
@@ -126,7 +126,7 @@ t_jit_err max_jit_str_op_jit_matrix(void *x, t_symbol *s, long argc, t_atom *arg
 					if ((p=jit_object_method(mop,_jit_sym_getoutput,1))&&
 							(ioproc=(method)jit_object_method(p,_jit_sym_getioproc)))
 					{
-						(*ioproc)(mop,p,matrix);
+						CALL_METHOD((*ioproc), mop,p,matrix);
 					}
 					p = jit_object_method(mop,_jit_sym_getinput,1);
 					jit_object_method(p,_jit_sym_matrix,matrix);

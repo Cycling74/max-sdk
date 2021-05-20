@@ -30,5 +30,6 @@ var group__database =
     [ "db_view_create", "group__database.html#ga70b24ae188489537db137f67f5d01388", null ],
     [ "db_view_getresult", "group__database.html#ga40de375c540b3551ba42d7a2643aa89f", null ],
     [ "db_view_remove", "group__database.html#ga0e0c3cfbb3459545a4868630cf6e8807", null ],
-    [ "db_view_setquery", "group__database.html#ga0474ea3231e953760e5a32a277c0279d", null ]
+    [ "db_view_setquery", "group__database.html#ga0474ea3231e953760e5a32a277c0279d", null ],
+    [ "db_vquery", "group__database.html#ga97fac037cdd29b2c83db53079ba57708", null ]
 ];

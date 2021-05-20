@@ -4,6 +4,9 @@
 #ifndef _EXT_WIND_H_
 #define _EXT_WIND_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 /** Returned values from wind_advise()

@@ -3,9 +3,7 @@
 
 #define C74_MAX_SDK_VERSION 0x0701
 
-#if !defined(WIN_VERSION) && !defined(MAC_VERSION)
-#define MAC_VERSION 1 // we'll assume that if we aren't requesting the windows version, that we build the mac version(s) of the product
-#endif  // WIN_VERSION
+#include "ext_infer_system.h"
 
 #include "ext_common.h"
 
@@ -14,13 +12,11 @@
 #include "ext_prefix.h"	
 
 #include "ext_mess.h"
+#include "ext_assist.h"
 
 #define clock_free freeobject
 #define binbuf_free freeobject
 #define wind_free freeobject
-
-#define ASSIST_INLET 1
-#define ASSIST_OUTLET 2
 
 /**
 	This macro being defined means that getbytes and sysmem APIs for memory management are unified.
@@ -55,6 +51,8 @@
 #include "ext_drag.h"
 #include "jpatcher_api.h"
 #include "ext_charset.h"
+#include "ext_typelist.h"
+#include "ext_post.h"
 
 // the old post() and error() functions should be avoided since their names are generic and
 // could be overloaded by earlier-loading frameworks/dlls in the plugin context.

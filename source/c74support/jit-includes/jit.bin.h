@@ -19,6 +19,11 @@
 #ifndef _JIT_BIN_H_
 #define _JIT_BIN_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_sysfile.h"
+#include "max_types.h"
+#include "jit.error.h"
 
 #ifdef __cplusplus
 extern "C" {

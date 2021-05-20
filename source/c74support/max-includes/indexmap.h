@@ -3,6 +3,10 @@
 #ifndef _INDEXMAP_H_
 #define _INDEXMAP_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+#include "ext_hashtab.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if !defined( _EXT_SYSTHREAD_H_ ) && !defined ( _SYSTHREAD_H_ )
@@ -161,6 +165,8 @@ void indexmap_clear(t_indexmap *x);
 	@see	linklist_sort()
 */
 void indexmap_sort(t_indexmap *x, t_cmpfn fn);
+
+void indexmap_insert(t_indexmap *x, long index, void *data);
 
 
 END_USING_C_LINKAGE

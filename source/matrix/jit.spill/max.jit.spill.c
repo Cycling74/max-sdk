@@ -26,12 +26,12 @@ t_messlist *max_jit_spill_class;
 
 t_symbol *ps_getspill;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_spill_init();
-	setup(&max_jit_spill_class, max_jit_spill_new, (method)max_jit_spill_free, (short)sizeof(t_max_jit_spill),
+	setup(&max_jit_spill_class, (method)max_jit_spill_new, (method)max_jit_spill_free, (short)sizeof(t_max_jit_spill),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_spill,obex));

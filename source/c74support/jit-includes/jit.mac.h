@@ -1,6 +1,10 @@
 #ifndef __JIT_MAC_H__
 #define __JIT_MAC_H__
 
+#include "ext_prefix.h"
+
+#if MAC_VERSION
+
 #ifndef TRUE
 #define TRUE 	1
 #endif
@@ -18,4 +22,5 @@ OSErr jit_mac_gestalt(OSType selector, long *response);
 }
 #endif
 
+#endif // MAC_VERSION
 #endif //__JIT_MAC_H__

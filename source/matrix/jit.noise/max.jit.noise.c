@@ -19,12 +19,12 @@ void max_jit_noise_free(t_max_jit_noise *x);
 void max_jit_noise_outputmatrix(t_max_jit_noise *x);
 t_messlist *max_jit_noise_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_noise_init();
-	setup(&max_jit_noise_class, max_jit_noise_new, (method)max_jit_noise_free, (short)sizeof(t_max_jit_noise),
+	setup(&max_jit_noise_class, (method)max_jit_noise_new, (method)max_jit_noise_free, (short)sizeof(t_max_jit_noise),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_noise,obex));

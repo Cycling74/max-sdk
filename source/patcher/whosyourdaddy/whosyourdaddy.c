@@ -86,7 +86,7 @@ void whosyourdaddy_bang(t_whosyourdaddy *x)
 		object_method(jp, gensym("getassoc"), &target);
 		if (target) {
 			if ((m = zgetfn(target, gensym("parentpatcher"))))
-				(*m)(target, &p2);
+				CALL_METHOD(m, target, &p2);
 			if (p2) {
 				nextbox = jpatcher_get_firstobject(p2);
 				while (nextbox) {

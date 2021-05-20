@@ -30,7 +30,7 @@ void *filedate_new(void);
 
 t_symbol *ps_nothing, *ps_list;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -43,7 +43,7 @@ void ext_main(void *r)
 	ps_nothing = gensym("");
 	ps_list = gensym("list");
 
-	return (0);
+	return;
 }
 
 void filedate_assist(t_filedate *x, void *b, long m, long a, char *s)

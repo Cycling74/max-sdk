@@ -9,6 +9,13 @@
 #ifndef __JIT_FIXMATH_H__
 #define __JIT_FIXMATH_H__
 
+#include "jit.error.h"
+#include "max_types.h"
+
+#if MAC_VERSION
+#include <CoreServices/CoreServices.h> // we redefine some CarbonCore/FixMath.h symbols, so include early to avoid clashes
+#endif
+
 /* the following is to account for duplicates in GXMath.h */
 
 #ifdef fixed1

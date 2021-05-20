@@ -3,6 +3,9 @@
 #ifndef _EXT_PROTO_H_
 #define _EXT_PROTO_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 #ifdef WIN_VERSION
 #include "ext_proto_win.h"
 #endif
@@ -141,7 +144,7 @@ C74_DEPRECATED ( void *newobject(void *maxclass) );
 	@see newobject()
 	@see object_free()
 */
-void freeobject(t_object *op);
+void freeobject(void *op);
 
 
 /** Make a new instance of an existing Max class.
@@ -167,13 +170,13 @@ void freeobject(t_object *op);
 	tables. See the source code for the coll object for an example of using a 
 	privately defined class. 
 */
-void *newinstance(const t_symbol *s, short argc, const t_atom *argv);
+void *newinstance(t_symbol *s, short argc, t_atom *argv);
 
 
 /**
 	@ingroup class_old
 */
-void finder_addclass(char *category, char *classString);
+C74_DEPRECATED (void finder_addclass(char *category, char *classString));
 
 
 /**
@@ -183,7 +186,7 @@ void finder_addclass(char *category, char *classString);
 	@ingroup class_old
 	@param	name	An alternative name for the user to use to make an object of your class. 
 */
-void alias(char *name);
+C74_DEPRECATED (void alias(char *name) );
 
 
 /**
@@ -200,7 +203,7 @@ void class_noinlet(t_messlist *m);
 	@param	obname		A character string with the name of your object class as it appears in Max. 
 	@param	filename	A character string with the name of your external's file as it appears on disk. 
 */
-void class_setname(const char *obname, const char *filename);
+void class_setname(char *obname, char *filename);
 
 
 short force_install(char *classname);
@@ -261,18 +264,18 @@ void freebytes16(char *mem, t_getbytes_size size);
 
 
 /**
-	Allocate relocatable memory.
+	Allocate relocatable memory. Deprecated, use sysmem_newhandle instead
 	
 	@ingroup memory
 	@param	size	The size to allocate in bytes.
 	@return			The allocated handle.
 	@see			sysmem_newhandle()
 */
-char **newhandle(long size);
+C74_DEPRECATED (char **newhandle(long size));
 
 
 /**
-	Change the size of a handle. 
+	Change the size of a handle. Deprecated, use sysmem_resizehandle instead
 	
 	@ingroup memory
 	@param	h		The handle to resize.
@@ -280,17 +283,17 @@ char **newhandle(long size);
 	@return			Ignored.
 	@see			sysmem_resizehandle()
 */
-short growhandle(void *h, long size);
+C74_DEPRECATED (short growhandle(void *h, long size));
 
 
 /**
-	Free the memory used by a handle you no longer need.
+	Free the memory used by a handle you no longer need. Deprecated, use sysmem_freehandle instead
 	
 	@ingroup memory
 	@param	h		The handle to dispose.
 	@see			sysmem_freehandle()
 */
-void disposhandle(char **h);
+C74_DEPRECATED (void disposhandle(char **h));
 
 #ifdef MM_UNIFIED // sysmem and getbytes are unified
 #define getbytes(size) ((char *)sysmem_newptr((t_ptr_size)(size)))
@@ -340,251 +343,8 @@ int sprintf_tr(char *d, const char *fmt, ...);
 
 char *mayquote(char *s);
 	
-/**
-	Print text to the Max window.
-	Max 5 introduced object_post(), which provides several enhancements to post()
-	where a valid #t_object pointer is available.
-	
-	post() is a printf() for the Max window. It even works from non-main threads, 
-	queuing up multiple lines of text to be printed when the main thread processing resumes. 
-	post() can be quite useful in debugging your external object.
-	
-	@ingroup console
-	@param	fmt		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-	
-	@remark		Note that post only passes 16 bytes of arguments to sprintf, so if 
-				you want additional formatted items on a single line, use postatom().
-				 
-				Example: 
-	@code
-	short whatIsIt; 
-
-	whatIsIt = 999; 
-	post ("the variable is %ld",(long)whatIsIt); 
-	@endcode
-	
-	@remark		The Max Window output when this code is executed. 
-	@code
-	the variable is 999
-	@endcode
-	
-	@see object_post()
-	@see error()
-	@see cpost()
-*/
-void post(C74_CONST char *fmt, ...);
-
-
-/**
-	Print text to the system console.
-	On the Mac this post will be visible by launching Console.app in the /Applications/Utilities folder.
-	On Windows this post will be visible by launching the dbgView.exe program, which is a free download
-	as a part of Microsoft's SysInternals.
-	
-	@ingroup console
-	@param	fmt		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-	
-	@remark			Particularly on MacOS 10.5, posting to Console.app can be a computationally expensive operation.
-					Use with care.
-					
-	@see post()
-	@see object_post()
-*/
-void cpost(C74_CONST char *fmt, ...);
-
-
-/**
-	Print an error to the Max window.
-	Max 5 introduced object_error(), which provides several enhancements to error()
-	where a valid #t_object pointer is available.
-	
-	error() is very similar to post(), thought it offers two additional features:
-	- the post to the Max window is highlighted (with a red background).
-	- the post can be trapped with the error object in a patcher.
-		
-	@ingroup console
-	@param	fmt		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-		
-	@see object_post()
-	@see post()
-	@see cpost()
-*/
-void error(C74_CONST char *fmt, ...);
-
-/**
-	Put up an error or advisory alert box on the screen.
-
-	Don't use this function.  Instead use error(), object_error(), or object_error_obtrusive().
-	
-	This function performs an sprintf() on fmtstring and items, then 
-	puts up an alert box. ouchstring() will queue the message to a lower 
-	priority level if it's called in an interrupt and there is no alert box 
-	request already pending.
-	
-	@ingroup console
-	@param	s		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-	
-	@see	error()
-	@see	object_error()
-	@see	object_error_obtrusive()
-*/
-void ouchstring(C74_CONST char *s, ...);
-short advise(char *s, ...);
-short advise_explain(char *note, char *explanation, char *b1, char *b2, char *b3);
-
-/**
-	Print multiple items in the same line of text in the Max window.
-	This function prints a single #t_atom on a line in the Max window 
-	without a carriage return afterwards, as post() does. Each #t_atom printed 
-	is followed by a space character. 
-
-	@ingroup console
-	@param	ap		The address of a #t_atom to print.
-
-	@see object_post()
-	@see post()
-	@see cpost()
-
-*/
-void postatom(t_atom *ap);
-
-void assist_string(short id,long msg,long arg, short firstin, short firstout,char *dst,...);
-
-void stdinletinfo(t_object *s, void *b, long a, char *t);
-
-void debug_printf(C74_CONST char *,...);
-
-
-/**	Receive messages from the error handler.
-	@ingroup misc
-	@param	x	The object to be subscribed to the error handler.
-	
-	@remark		error_subscribe() enables your object to receive a message (error), 
-				followed by the list of atoms in the error message posted to the Max 
-				window. 
-	
-				Prior to calling error_subscribe(), you should bind the error 
-				message to an internal error handling routine: 
-	@code
-	addmess((method)myobject_error, "error", A_GIMME, 0);
-	@endcode
-				Your error handling routine should be declared as follows:
-	@code
-	void myobject_error(t_myobject *x, t_symbol *s, short argc, t_atom *argv);
-	@endcode
-*/
-void error_subscribe(t_object *x);
-
-
-/** Remove an object as an error message recipient.
-	@ingroup misc
-	@param	x	The object to unsubscribe. 
-*/
-void error_unsubscribe(t_object *x);
-
-
-void xsetpost();
-void post_getpos(short *row, short *col);
-void poststring(char *s);
-// not sure where to put these...
-
-enum {
-	POSTROW_POST = 0,
-	POSTROW_ERROR = 1,
-	POSTROW_WARNING = 2,
-	POSTROW_BUG = 3
-};
-
-enum {
-	JMAXWINDOW_ADVANCE = 1,
-	JMAXWINDOW_APPEND = 2,
-	JMAXWINDOW_WRITE = 4,
-	JMAXWINDOW_UNIQUE = 8
-};
-
-
-/**
-	Print text to the Max window, linked to an instance of your object.
-
-	Max window rows which are generated using object_post() or object_error() can be
-	double-clicked by the user to have Max assist with locating the object in a patcher.
-	Rows created with object_post() and object_error() will also automatically provide
-	the name of the object's class in the correct column in the Max window.
-		
-	@ingroup console
-	@param	x		A pointer to your object.
-	@param	s		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-	
-	@remark			Example: 
-	@code
-	void myMethod(myObject *x, long someArgument)
-	{
-		object_post((t_object*)x, "This is my argument: %ld", someArgument);
-	}
-	@endcode
-		
-	@see object_error()
-*/
-void object_post(t_object *x, C74_CONST char *s, ...);
-
-
-/**
-	Print text to the Max window, linked to an instance of your object,
-	and flagged as an error (highlighted with a red background).
-
-	Max window rows which are generated using object_post() or object_error() can be
-	double-clicked by the user to have Max assist with locating the object in a patcher.
-	Rows created with object_post() and object_error() will also automatically provide
-	the name of the object's class in the correct column in the Max window.
-		
-	@ingroup console
-	@param	x		A pointer to your object.
-	@param	s		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-		
-	@see object_post()
-	@see object_warn()
-*/
-void object_error(t_object *x, C74_CONST char *s, ...);
-
-
-/**
-	Print text to the Max window, linked to an instance of your object,
-	and flagged as a warning (highlighted with a yellow background).
-
-	Max window rows which are generated using object_post(), object_error(), or object_warn can be
-	double-clicked by the user to have Max assist with locating the object in a patcher.
-	Rows created with object_post(), object_error(), or object_warn() will also automatically provide
-	the name of the object's class in the correct column in the Max window.
-		
-	@ingroup console
-	@param	x		A pointer to your object.
-	@param	s		A C-string containing text and printf-like codes 
-					specifying the sizes and formatting of the additional arguments.
-	@param	...		Arguments of any type that correspond to the format codes in fmtString.
-			
-	@see object_post()
-	@see object_error()
-*/
-void object_warn(t_object *x, C74_CONST char *s, ...);
-
-// ?
-void object_bug(t_object *x, C74_CONST char *s, ...);
-
-// private?
-void object_poststring(t_object *ob, long kind, long flags, char *text);
-
+short advise(const char *s, ...);
+short advise_explain(const char *note, const char *explanation, const char *b1, const char *b2, const char *b3);
 
 /**
 	Print text to the Max window, linked to an instance of your object,
@@ -606,7 +366,7 @@ void object_poststring(t_object *ob, long kind, long flags, char *text);
 void object_error_obtrusive(t_object *x, C74_CONST char *s, ...);
 
 
-long jdialog_showtext(char *prompt, char *deftext, long flags, char **text);
+long jdialog_showtext(const char *prompt, const char *deftext, long flags, const char **text);
 
 
 // inlet/outlet functions
@@ -678,6 +438,7 @@ void *floatin(void *x, short n);
 
 // for dynamic inlets
 void *inlet_append(t_object *op, void *who, t_symbol *s1, t_symbol *s2);
+void *inlet_insert_after(t_object *op,void *who, t_symbol *s1, t_symbol *s2, void *previous_inlet);
 void inlet_delete(void *x);
 void *inlet_nth(t_object *x, long n);
 long inlet_count(t_object *x);
@@ -764,7 +525,7 @@ void *listout(void *x);
 	@param	o	Outlet that will send the message.
 	@return		Returns 0 if a stack overflow occurred, otherwise returns 1.
 */
-void *outlet_bang(void *o);
+void *outlet_bang(t_outlet *x);
 
 
 /**
@@ -776,7 +537,7 @@ void *outlet_bang(void *o);
 	@return		Returns 0 if a stack overflow occurred, otherwise returns 1.
 */
 #ifndef outlet_int
-void *outlet_int(void *o, t_atom_long n);
+void *outlet_int(t_outlet *x, t_atom_long n);
 #endif
 
 
@@ -789,7 +550,7 @@ void *outlet_int(void *o, t_atom_long n);
 	@return		Returns 0 if a stack overflow occurred, otherwise returns 1.
 */
 #ifndef outlet_float
-void *outlet_float(void *o, double f);
+void *outlet_float(t_outlet *x, double f);
 #endif
 
 
@@ -798,7 +559,7 @@ void *outlet_float(void *o, double f);
 
 	@ingroup inout
 	@param	o		Outlet that will send the message.
-	@param	s		Should be the symbol "list".
+	@param	s		Should be NULL, but can be the _sym_list.
 	@param	ac		Number of elements in the list in argv. 
 	@param	av		Atoms constituting the list. 
 	@return			Returns 0 if a stack overflow occurred, otherwise returns 1.
@@ -806,23 +567,22 @@ void *outlet_float(void *o, double f);
 	@remark			outlet_list() sends the list specified by argv and argc out the 
 					specified outlet. The outlet must have been created with listout or 
 					outlet_new in your object creation function (see above). You create 
-					the list as an array of atoms, but the first item in the list should be an
+					the list as an array of Atoms, but the first item in the list must be an 
 					integer or float.
 					
 					Here's an example of sending a list of three numbers. 
 	@code
-	t_atom  myList[3];
-	long    theNumbers[3];
-	short   i;
+	t_atom myList[3]; 
+	long theNumbers[3]; 
+	short i; 
 	
 	theNumbers[0] = 23; 
 	theNumbers[1] = 12; 
 	theNumbers[2] = 5;
-
 	for (i=0; i < 3; i++) { 
-		atom_setlong(myList+i, theNumbers[i]);
+		atom_setlong(myList+i,theNumbers[i]);
 	} 
-	outlet_list(myOutlet, 0L, 3, myList);
+	outlet_list(myOutlet,0L,3,&myList); 
 	@endcode
 
 	@remark			It's not a good idea to pass large lists to outlet_list that are 
@@ -832,7 +592,7 @@ void *outlet_float(void *o, double f);
 					object's data structure.	
 */
 #ifndef outlet_list
-void *outlet_list(void *o, t_symbol *s, short ac, t_atom *av);
+void *outlet_list(t_outlet *x, t_symbol *s, short ac, t_atom *av);
 #endif
 
 
@@ -874,20 +634,20 @@ void *outlet_list(void *o, t_symbol *s, short ac, t_atom *av);
 					the selector argument. Use the outlet_list() function instead. 
 */
 #ifndef outlet_anything
-void *outlet_anything(void *o, const t_symbol *s, short ac, const t_atom *av);
+void *outlet_anything(t_outlet *x, t_symbol *s, short ac, t_atom *av);
 #endif
 
 
 void *inlet4(void *x, void *w, char *s, char *s1);
 
 
-void inlet_to(void *x, void *w);
+void inlet_to(t_inlet *x, void *w);
 
 
-short outlet_add(void *x, void *ip);
+short outlet_add(t_outlet *x, t_inlet *ip);
 
 
-void outlet_rm(void *x, void *ip);
+void outlet_rm(t_outlet *x, t_inlet *ip);
 
 
 void outlet_atoms(void *out, short argc, t_atom *argv);
@@ -910,12 +670,11 @@ void outlet_atoms(void *out, short argc, t_atom *argv);
 					declared to take a single argument as shown in @ref clocks_using_clocks.
 	@return			A pointer to a newly created Clock object.
 */
-void *clock_new(void *obj, method fn);
+t_clock *clock_new(void *obj, method fn);
 
-void *clock_new_withscheduler(void *obj, method fn, void *s);
-	
-void clock_set(void *obj,long when);
+t_clock *clock_new_withscheduler(void *obj, method fn, t_scheduler *s);
 
+void clock_set(t_clock *x, long when);
 
 /**
 	Schedule the execution of a Clock.
@@ -927,7 +686,7 @@ void clock_set(void *obj,long when);
 	@param	n		Delay, in milliseconds, before the Clock will execute.
 	@see	clock_fdelay()
 */
-void clock_delay(void *x, long n);
+void clock_delay(t_clock *x, long n);
 
 
 /**
@@ -938,11 +697,7 @@ void clock_delay(void *x, long n);
 	@ingroup clocks
 	@param	x		Clock to cancel. 
 */
-void clock_unset(void *x);
-void clock_xdelay(void *x, long n);
-void clock_xset(void *x, long n);
-void clock_xunset(void *x);
-short clock_getextfmt(void);
+void clock_unset(t_clock *x);
 
 
 /**
@@ -955,11 +710,10 @@ short clock_getextfmt(void);
 	@param	time	Delay, in milliseconds, before the Clock will execute.
 	@see	clock_delay()
 */
-void clock_fdelay(void *c, double time);
-void clock_fset(void *x, double when);
-void clock_fset2(void *x, double when, double offset);
-void clock_fdelay(void *x, double f);
-void clock_fdelay2(void *x, double delay, double offset);
+void clock_fset(t_clock *x, double when);
+void clock_fset2(t_clock *x, double when, double offset);
+void clock_fdelay(t_clock *x, double f);
+void clock_fdelay2(t_clock *x, double delay, double offset);
 
 /**
 	Find out the current logical time of the scheduler in milliseconds
@@ -989,8 +743,7 @@ void clock_getftime(double *time);
 	@see	@ref 	setclock
 	@see			setclock_fdelay()
 */
-void setclock_delay(t_object *x, void *c, long time);
-
+void setclock_delay(t_setclock *x, t_clock *c, long when);
 
 /** Remove a Clock from a scheduler.
 	This function unschedules the Clock c in the list of Clocks in the 
@@ -1002,8 +755,7 @@ void setclock_delay(t_object *x, void *c, long time);
 	@param	c		Clock object to be removed from the scheduler.
 	@see	@ref	setclock
 */
-void setclock_unset(t_object *x, void *c);
-
+void setclock_unset(t_setclock *x, t_clock *c);
 
 /** Find out the current time value of a setclock object.
 	@ingroup clocks
@@ -1014,8 +766,7 @@ void setclock_unset(t_object *x, void *c);
 	@see	@ref	setclock
 	@see			setclock_getftime()
 */
-long setclock_gettime(t_object *x);
-
+long setclock_gettime(t_setclock *x);
 
 /**	Schedule a Clock on a scheduler, using a floating-point time argument.
 	@ingroup clocks
@@ -1026,8 +777,7 @@ long setclock_gettime(t_object *x);
 	@see	@ref	setclock
 	@see			setclock_delay()
 */
-void setclock_fdelay(t_object *s, void *c, double time);
-
+void setclock_fdelay(t_setclock *x, t_clock *c, double f);
 
 /** Find out the current time value of a setclock object in floating-point milliseconds.
 	@ingroup clocks
@@ -1036,9 +786,7 @@ void setclock_fdelay(t_object *s, void *c, double time);
 	@see	@ref	setclock
 	@see			setclock_gettime()
 */
-void setclock_getftime(t_object *s, double *time);
-
-
+void setclock_getftime(t_setclock *x, double *time);
 
 // real-time
 
@@ -1067,8 +815,6 @@ double systimer_gettime(void);
 long gettime(void);
 long getschedtime(void);
 long getexttime(void);
-void sched_suspend(void);
-void sched_resume(void);
 short sched_isinpoll(void);
 short sched_isinqueue(void);
 
@@ -1114,15 +860,12 @@ double gettime_forobject(t_object *x);
 void schedule(void *ob, method fun, long when, t_symbol *sym, short argc, t_atom *argv);
 void schedulef(void *ob, method fun, double when, t_symbol *sym, short argc, t_atom *argv);
 
-
-
-
 /**	Create a new local scheduler.
 	@ingroup		clocks
 	@return			A pointer to the newly created scheduler.
 	@see	@ref	creating_schedulers
 */
-void *scheduler_new(void);
+t_scheduler *scheduler_new(void);
 
 
 /**	Make a scheduler current, so that future related calls (such as 
@@ -1134,7 +877,7 @@ void *scheduler_new(void);
 					saved and restored when local scheduling is complete.
 	@see	@ref	creating_schedulers
 */
-void *scheduler_set(void *x);
+t_scheduler *scheduler_set(t_scheduler *x);
 
 /**	Get the currently set scheduler. 
 
@@ -1142,7 +885,7 @@ void *scheduler_set(void *x);
 	@return			This routine returns a pointer to the current scheduler, 
 	@see	@ref	creating_schedulers
 */
-void *scheduler_get();
+t_scheduler *scheduler_get(void);
 
 /**	Get the scheduler associated with a given object, if any. 
 
@@ -1151,7 +894,7 @@ void *scheduler_get();
 	@return			This routine returns a pointer to the scheduler or the passed in object, 
 	@see	@ref	creating_schedulers
 */
-void *scheduler_fromobject(t_object *o);
+t_scheduler *scheduler_fromobject(t_object *obj);
 
 /** Run scheduler events to a selected time.
 	@ingroup		clocks
@@ -1159,7 +902,7 @@ void *scheduler_fromobject(t_object *o);
 	@param	until	The ending time for this run (in milliseconds). 
 	@see	@ref	creating_schedulers
 */
-void scheduler_run(void *x, double until);
+void scheduler_run(t_scheduler *x, double until);
 
 
 /** Set the current time of the scheduler. 
@@ -1168,7 +911,7 @@ void scheduler_run(void *x, double until);
 	@param	time	The new current time for the selected scheduler (in milliseconds). 
 	@see	@ref	creating_schedulers
 */
-void scheduler_settime(void *x, double time);
+void scheduler_settime(t_scheduler *x, double time);
 
 
 /** Retrieve the current time of the selected scheduler.
@@ -1177,7 +920,7 @@ void scheduler_settime(void *x, double time);
 	@param	time	The current time of the selected scheduler.
 	@see	@ref	creating_schedulers
 */
-void scheduler_gettime(void *x, double *time);
+void scheduler_gettime(t_scheduler *x, double *time);
 
 /** Shift scheduler's current time and run time for all pending clock.
     Could be used to change scheduler's time reference without impacting current clocks.
@@ -1186,7 +929,7 @@ void scheduler_gettime(void *x, double *time);
 	@param	amount	Number of milliseconds to shift by.
 	@see	@ref	creating_schedulers
 */
-void scheduler_shift(void *x, double amount); 
+void scheduler_shift(t_scheduler *x, double amount);
 
 /**
 	Cause a function to be executed at the timer level at some time in the future specified by a delay offset.
@@ -1237,9 +980,6 @@ short lockout_set(short);
 				such as for other types of device drivers used in asynchronous mode, isr will return false.
 */
 long isr(void);
-short isr_set(short way);
-
-
 
 // queue functions
 
@@ -1273,7 +1013,7 @@ void *qelem_new(void *obj, method fn);
 				than can be drawn. A Qelem object is unset after its queue function has 
 				been called.
 */
-void qelem_set(void *q);
+void qelem_set(t_qelem *x);
 
 
 /**
@@ -1284,7 +1024,7 @@ void qelem_set(void *q);
 	@ingroup qelems
 	@param	q	The Qelem whose execution you wish to cancel.
 */
-void qelem_unset(void *q);
+void qelem_unset(t_qelem *x);
 
 
 /**
@@ -1294,7 +1034,7 @@ void qelem_unset(void *q);
 	@ingroup qelems
 	@param	x	The Qelem to destroy.
 */
-void qelem_free(void *x);
+void qelem_free(t_qelem *x);
 
 
 /**
@@ -1307,7 +1047,7 @@ void qelem_free(void *x);
 	@ingroup qelems
 	@param	x	The Qelem whose function will be executed in the main thread.
 */
-void qelem_front(void *x);
+void qelem_front(t_qelem *x);
 
 
 /**
@@ -1463,7 +1203,7 @@ void binbuf_vinsert(void *x, char *fmt, ...);
 	arguments; you will probably never save these symbols as part of 
 	anything you are doing.
 */
-void binbuf_insert(void *x, t_symbol *s, short argc, t_atom *argv);
+void binbuf_insert(t_binbuf *x, t_symbol *s, short argc, t_atom *argv);
 
 
 /**
@@ -1479,7 +1219,7 @@ void binbuf_insert(void *x, t_symbol *s, short argc, t_atom *argv);
 
 	@return		The result of sending the message.
 */
-void *binbuf_eval(void *x, short ac, t_atom *av, void *to);
+void *binbuf_eval(t_binbuf *x, short ac, t_atom *av, void *to);
 
 
 /**
@@ -1507,8 +1247,7 @@ void *binbuf_eval(void *x, short ac, t_atom *av, void *to);
 	}
 	@endcode
 */
-short binbuf_getatom(void *x, long *p1, long *p2, t_atom *ap);
-
+short binbuf_getatom(t_binbuf *x, long *p1, long *p2, t_atom *ap);
 
 /**
 	Use binbuf_text() to convert a text handle to a Binbuf.
@@ -1549,7 +1288,7 @@ short binbuf_getatom(void *x, long *p1, long *p2, t_atom *ap);
 					with a backslash (\\) character. The backslash character can be included 
 					by using two backslashes in a row.
 */
-short binbuf_text(void *x, char **srcText, long n);
+short binbuf_text(t_binbuf *x, char **srcText, long n);
 
 
 /**
@@ -1569,7 +1308,7 @@ short binbuf_text(void *x, char **srcText, long n);
 	@return			If binbuf_totext runs out of memory during its operation, it returns a non-zero result, 
 					otherwise it returns 0.
 */
-short binbuf_totext(void *x, char **dstText, t_ptr_size *sizep);
+short binbuf_totext(t_binbuf *x, char **dstText, t_ptr_size *sizep);
 
 
 /**
@@ -1582,7 +1321,7 @@ short binbuf_totext(void *x, char **dstText, t_ptr_size *sizep);
 	@param	argc	Count of items in the argv array.
 	@param	argv	Array of t_atoms to put in the Binbuf.
 */
-void binbuf_set(void *x, t_symbol *s, short argc, t_atom *argv);
+void binbuf_set(t_binbuf *x, t_symbol *s, short argc, t_atom *argv);
 
 
 /**
@@ -1593,13 +1332,13 @@ void binbuf_set(void *x, t_symbol *s, short argc, t_atom *argv);
 	@param	argc	Count of items in the argv array.
 	@param	argv	Array of atoms to add to the Binbuf.
 */
-void binbuf_append(void *x, t_symbol *s, short argc, t_atom *argv);
+void binbuf_append(t_binbuf *x, t_symbol *s, short argc, t_atom *argv);
 
-C74_DEPRECATED ( short binbuf_read(void *x, char *name, short volume, short binary) );
-C74_DEPRECATED ( short binbuf_write(void *x, char *fn, short vol, short binary) );
+C74_DEPRECATED ( short binbuf_read(t_binbuf *x, const char *name, short volume, short binary) );
+C74_DEPRECATED ( short binbuf_write(t_binbuf *x, char *fn, short vol, short binary) );
 
-void binbuf_delete(void *x, long fromType, long toType, long fromData, long toData);
-void binbuf_addtext(void *x, char **text, long size);
+void binbuf_delete(t_binbuf *x, long fromType, long toType, long fromData, long toData);
+short binbuf_addtext(t_binbuf *x, char **text, long n);
 
 
 /**
@@ -1632,6 +1371,7 @@ void binbuf_addtext(void *x, char **text, long size);
 					using binbuf_text(), then call binbuf_getatom() in a loop.
 */
 short readatom(char *outstr, char **text, long *n, long e, t_atom *ap);
+short readatom_flags(char *outstr, char **text, long *n, long e, t_atom *ap, long flags);
 char *atom_string(t_atom *a);
 
 // message functions
@@ -1761,7 +1501,6 @@ short table_dirty(t_symbol *s);
 */
 short readtohandle(C74_CONST char *name, short volume, char ***h, long *sizep);
 
-
 /** Load a patcher file by name and volume reference number.
 	@ingroup loading_max_files
 	@param	name	Filename of the patcher file to load (C string). 
@@ -1818,11 +1557,10 @@ void *intload(C74_CONST char *name, short volume, t_symbol *s, short ac, t_atom 
 void *stringload(C74_CONST char *name);
 
 void *resource_install(char *name, long rsrc);
-void *toolfile_new(char *name, short vol, t_fourcc type);
-long toolfile_fread(void *t, char *buf, long n);
-long toolfile_fwrite(void *t, char *buf, long n);
-short toolfile_getc(void *t);
-short collective_load(char *name, short vol, short argc, t_atom *argv);
+void *toolfile_new(const char *name, short vol, t_fourcc type);
+long toolfile_fread(t_toolfile *t, char *buf, long n);
+long toolfile_fwrite(t_toolfile *t, char *buf, long n);
+short toolfile_getc(t_toolfile *t);
 void *onecopy_fileload(C74_CONST char *s, short path);
 
 // preset functions
@@ -1905,8 +1643,7 @@ C74_DEPRECATED ( long evnum_get(void) );
 				guaranteed to be a correct indicator of the inlet in which a message was 
 				received. Use proxy_getinlet() to determine the inlet number. 	
 */
-void *proxy_new(void *x,long id,long *stuffloc);
-
+void *proxy_new(void *x, long id, long *stuffloc);
 
 /**
 	Use proxy_getinlet to get the inlet number in which a message was received.
@@ -1920,6 +1657,7 @@ long proxy_getinlet(t_object *master);
 
 // the following functions are only used by dynamic inlet/outlet code
 void *proxy_append(t_object *master, long id, long *stuffloc);
+void *proxy_insert(t_object *master, long id, long *stuffloc, void *previous_proxy);
 void *proxy_new_forinlet(t_object *master, long id, long *stuffloc, void *inlet); // create a new proxy for inlet
 void proxy_delete(void *xx); // calls inlet_delete()
 void proxy_setinletptr(void *xx, void *inlet); // associates proxy with inlet, removes any previous association
@@ -2033,7 +1771,7 @@ void saveasdialog_pathset(short path, short force);
 void dialog_poll(short dosched, short doevent, unsigned short evtMask);
 void forecolor(short index, short way);
 void backcolor(short index, short way);
-void *tabfromhandle(long **handle, long size);
+void *tabfromhandle(t_handle h, long n);
 void stdlist(t_object *x, t_symbol *s, short ac, t_atom *av);
 void assist_queue(t_object *x, method fun);
 void inspector_open(t_object *x, void *p, void *b);
@@ -2077,7 +1815,7 @@ void filewatcher_stop(void *x);
 	@param	name	The name of the file.
 	@param	path	The path of the file to add.
 */
-void fileusage_addfile(void *w, long flags, C74_CONST char *name, C74_CONST short path);
+void fileusage_addfile(void *w, long flags, C74_CONST char *name, short path);
 
 void fileusage_addfilename(void *w, long flags, C74_CONST char *name);
 
@@ -2089,11 +1827,19 @@ void fileusage_addfilename(void *w, long flags, C74_CONST char *name);
 								Pass NULL to include the entire package contents.
 	@version					Introduced in Max 7.0.4
  */
-void fileusage_addpackage(void *w, C74_CONST char *name, t_object *subfoldernames);
-
+void fileusage_addpackage(void *w, C74_CONST char *name, t_atomarray *subfoldernames);
 void fileusage_addpathname(void *w, long flags, C74_CONST char *name);
 void fileusage_copyfolder(void *w, C74_CONST char *name, long recursive);
 void fileusage_makefolder(void *w, C74_CONST char *name);
+
+/**	Add a folder to a standalone.
+ @ingroup					files
+ @param	w					Handle for the standalone builder
+ @param	path				Path of the folder
+ @param	recursive			Add the contents of the folder recursively (respected only when building standalones)
+ @version					Introduced in Max 8.0.2
+ */
+void fileusage_addfolder(void *w, short path, long recursive);
 
 #ifdef MAC_VERSION
 long fontinfo_getencoding(long id);
@@ -2213,12 +1959,8 @@ short saveas_dialog(char *filename, short *path, short *binptr);
  */
 short saveasdialog_extended(char *name, short *vol, t_fourcc *type, t_fourcc *typelist, short numtypes);
 
-void saveas_autoextension(char way);
+void saveas_autoextension(t_bool way);
 void saveas_setselectedtype(t_fourcc type);
-
-void typelist_make(t_fourcc *types, long include, short *numtypes);
-
-
 
 short preferences_path(C74_CONST char *name, short create, short *path);
 short preferences_subpath(C74_CONST char *name, short path, short create, short *subpath);

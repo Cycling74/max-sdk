@@ -25,7 +25,8 @@ var group__class =
       [ "CLASS_FLAG_OBJECT_METHOD", "group__class.html#gga124a08e1744d9e999211abaa9df9f556aa4be223531ae66209bf2d37a1c18dd79", null ],
       [ "CLASS_FLAG_VISUALIZER", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a356b54df0591c99bbe66077a5425e783", null ],
       [ "CLASS_FLAG_USES_PROXIES", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a2d4de577798aa59ca3d04f01de80fb62", null ],
-      [ "CLASS_FLAG_OWN_DATA", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a82669475c4156b1050623dd6ade65510", null ]
+      [ "CLASS_FLAG_OWN_DATA", "group__class.html#gga124a08e1744d9e999211abaa9df9f556a82669475c4156b1050623dd6ade65510", null ],
+      [ "CLASS_FLAG_DYNAMICCOLOR", "group__class.html#gga124a08e1744d9e999211abaa9df9f556ae39c64c4147673ed3967c88683103555", null ]
     ] ],
     [ "class_addattr", "group__class.html#ga2289eb7e26b552be6e015c2f9912a9ac", null ],
     [ "class_addmethod", "group__class.html#gaab2e3c25868317c8a9c216bbca2c040d", null ],

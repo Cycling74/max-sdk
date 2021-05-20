@@ -7,5 +7,5 @@ var group__symobject =
       [ "thing", "structt__symobject.html#a5c2e6a714af33eee38dac5a9261dfa23", null ]
     ] ],
     [ "symobject_linklist_match", "group__symobject.html#gaff1afdf1da1b882e7314874bbf44921e", null ],
-    [ "symobject_new", "group__symobject.html#gac66ae5925bb38fa0914f14dcc8172e2d", null ]
+    [ "symobject_new", "group__symobject.html#ga44b3668163b17099b664545f238db785", null ]
 ];

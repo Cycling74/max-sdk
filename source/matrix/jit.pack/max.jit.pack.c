@@ -24,14 +24,14 @@ void setOutputPlanes(t_max_jit_pack *x);
 
 t_messlist *max_jit_pack_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 //	long attrflags;
 //	void *attr;
 
 	jit_pack_init();
-	setup(&max_jit_pack_class, max_jit_pack_new, (method)max_jit_pack_free, (short)sizeof(t_max_jit_pack),
+	setup(&max_jit_pack_class, (method)max_jit_pack_new, (method)max_jit_pack_free, (short)sizeof(t_max_jit_pack),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_pack,obex));
@@ -57,7 +57,7 @@ t_jit_err max_jit_pack_assist(t_max_jit_pack *x, void *b, long m, long a, char *
 	if (m == 1) { //input
 		sprintf(s,"(matrix) in");
 		if (a>0)
-			sprintf(s,"%s%d",s,a+1);
+			snprintf_zero(s,ASSIST_MAX_STRING_LEN,"%s%d",s,a+1);
 	} else {	//output
 		max_jit_mop_assist(x,b,m,a,s);
 	}

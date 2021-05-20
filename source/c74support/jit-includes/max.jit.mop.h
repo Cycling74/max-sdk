@@ -6,6 +6,8 @@
 	
 */
 
+#include "jit.common.h"
+
 #ifndef __MAX_JIT_MOP_H__
 #define __MAX_JIT_MOP_H__
 //flags for greater control
@@ -97,6 +99,8 @@ t_jit_err max_jit_mop_setup_simple(void *x, void *o, long argc, t_atom *argv);
 	max_jit_mop_classex_mproc 
 
 */
+
+t_jit_err max_jit_mop_setup_probing(t_class *mclass);
 
 #ifdef __cplusplus
 }

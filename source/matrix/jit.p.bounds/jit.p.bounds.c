@@ -50,7 +50,7 @@ float jit_p_bounds_random_num(t_jit_p_bounds *x);
 void jit_p_bounds_rotation_to_direction(float pitch, float yaw, float *direction);
 t_jit_err jit_p_bounds_init(void);
 
-const long HALF_RAND = (MAX_RANDOM / 2);
+static const long HALF_RAND = (MAX_RANDOM / 2);
 
 t_jit_err jit_p_bounds_init(void)
 {

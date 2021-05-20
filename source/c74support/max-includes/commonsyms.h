@@ -6,6 +6,9 @@
 #ifndef __COMMON_SYMBOLS_H__
 #define __COMMON_SYMBOLS_H__
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #define COMMON_SYMBOLS_VERSION_5_0_0	500 // Max 5

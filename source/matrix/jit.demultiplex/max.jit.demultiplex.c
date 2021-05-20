@@ -18,12 +18,12 @@ void *max_jit_demultiplex_new(t_symbol *s, long argc, t_atom *argv);
 void max_jit_demultiplex_free(t_max_jit_demultiplex *x);
 t_messlist *max_jit_demultiplex_class;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q;
 
 	jit_demultiplex_init();
-	setup(&max_jit_demultiplex_class, max_jit_demultiplex_new, (method)max_jit_demultiplex_free, (short)sizeof(t_max_jit_demultiplex),
+	setup(&max_jit_demultiplex_class, (method)max_jit_demultiplex_new, (method)max_jit_demultiplex_free, (short)sizeof(t_max_jit_demultiplex),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_demultiplex,obex));

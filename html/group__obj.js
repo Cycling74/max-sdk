@@ -10,10 +10,10 @@ var group__obj =
       [ "t_messlist", "structt__tinyobject.html#a9c84a65d0f833bca63712f335d6305fd", null ]
     ] ],
     [ "t_object", "structt__object.html", [
-      [ "o_inlet", "structt__object.html#aa992ab915e7383768f2e0c661156634c", null ],
+      [ "o_inlet", "structt__object.html#a80014edb3f6f2cb48042135f3c0d2320", null ],
       [ "o_magic", "structt__object.html#a12694f853b41cc5ec7edd20042f71096", null ],
       [ "o_messlist", "structt__object.html#a79f4251061edbe1b55db6fb8b572f2e0", null ],
-      [ "o_outlet", "structt__object.html#af63eed332b4b9921acc6b63051c9936f", null ]
+      [ "o_outlet", "structt__object.html#a1ed8a7245487cfa708f24018519d1b87", null ]
     ] ],
     [ "MAGIC", "group__obj.html#ga94630370ae389fb1189282fa0742f310", null ],
     [ "MSG_MAXARG", "group__obj.html#gad098f6e3ad3ab917b2bf59c402c4cf3f", null ],

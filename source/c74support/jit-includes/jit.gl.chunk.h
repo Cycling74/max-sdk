@@ -52,6 +52,8 @@ t_jit_glchunk * jit_glchunk_grid_new(t_symbol * prim, int planes, int width, int
 void jit_glchunk_delete(t_jit_glchunk * x);
 t_jit_err jit_glchunk_copy(t_jit_glchunk ** newcopy, t_jit_glchunk * orig);
 
+t_jit_glchunk * jit_glchunk_new_frommatrix(t_symbol * prim, void *vm, void *im);
+	
 /****************************************************************************/
 
 // flags for chunk creation

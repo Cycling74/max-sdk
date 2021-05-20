@@ -6,6 +6,8 @@
 #ifndef __COMMON_SYMBOLS_H__
 #define __COMMON_SYMBOLS_H__
 
+#include "ext_mess.h"
+
 #ifdef __cplusplus
 	extern "C" {
 #endif // __cplusplus

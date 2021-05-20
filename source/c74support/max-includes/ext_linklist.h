@@ -1,7 +1,9 @@
 #ifndef _EXT_LINKLIST_H_
 #define _EXT_LINKLIST_H_
 
+#include "ext_prefix.h"
 #include "ext_atomic.h"
+#include "ext_mess.h"
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
     #pragma pack(push, 2)
@@ -44,6 +46,7 @@ typedef struct _linklist
 	t_llelem	*pending;		// used to help prevent accessing deleted elements during complex list traversal (methodall, etc) 
 	t_uint32_atomic iterating;
 	long		sweep;
+	long		locktype;
 } t_linklist;
 
 #if C74_PRAGMA_STRUCT_PACKPUSH

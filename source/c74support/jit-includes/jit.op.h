@@ -29,8 +29,14 @@ typedef struct _jit_op_info
 	long 	stride;		///< stride between elements (in type, not bytes)
 } t_jit_op_info;
 
-typedef void (*t_jit_op_fn)(long, ...);
-typedef void *(*t_jit_op_fn_rv)(long, ...);
+typedef void (*t_jit_op_fn)(long); // NO LONGER VAR ARG TO PREVENT ISSUES UNDER APPLE SILICON. MUST TYPES BELOW TO CALL
+typedef void (*t_jit_op_fn_unary)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *out);
+typedef void (*t_jit_op_fn_binary)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *in1, t_jit_op_info *out);
+typedef void (*t_jit_op_fn_ternary)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *in1, t_jit_op_info *in2, t_jit_op_info *out);
+typedef void *(*t_jit_op_fn_rv)(long); // NO LONGER VAR ARG TO PREVENT ISSUES UNDER APPLE SILICON. MUST TYPES BELOW TO CALL
+typedef void *(*t_jit_op_fn_unary_rv)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *out);
+typedef void *(*t_jit_op_fn_binary_rv)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *in1, t_jit_op_info *out);
+typedef void *(*t_jit_op_fn_ternary_rv)(long, void *vecdata, t_jit_op_info *in0, t_jit_op_info *in1, t_jit_op_info *in2, t_jit_op_info *out);
 
 typedef struct _jit_op_fn_object
 {

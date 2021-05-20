@@ -13,3 +13,8 @@ build
 *.xcworkspace
 xcuserdata
 .DS_Store
+
+latex/
+*.map
+*.md5
+

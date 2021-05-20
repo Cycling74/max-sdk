@@ -19,7 +19,7 @@ typedef struct vexpr
 	char v_scalarmode;
 } t_vexpr;
 
-void ext_main(void *r);
+C74_EXPORT void ext_main(void *r);
 void vexpr_bang (t_vexpr *x);
 void vexpr_scalarbang(t_vexpr *x);
 void vexpr_vectorbang(t_vexpr *x);
@@ -33,7 +33,7 @@ void vexpr_free (t_vexpr *x);
 void *vexpr_new (t_symbol *s, short ac, t_atom *av);
 
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -53,7 +53,7 @@ void ext_main(void *r)
 	class_register(CLASS_BOX, c);
 	vexpr_class = c;
 
-	return 0;
+	return;
 }
 
 void vexpr_bang(t_vexpr *x)
@@ -246,7 +246,7 @@ void *vexpr_new(t_symbol *s, short argc, t_atom *argv)
 					x->v_proxy = (void **)getbytes(i * sizeof(void *));
 					x->v_numargs = i;
 				}
-				x->v_proxy[i-1] = proxy_new((Object *)x,(long)i,NULL);
+				x->v_proxy[i-1] = proxy_new(x,(long)i,NULL);
 			} else if (i < x->v_numargs) {
 				x->v_proxy[i-1] = NULL;
 			}

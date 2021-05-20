@@ -33,7 +33,7 @@ void index_dblclick(t_index *x);
 static t_class *index_class;
 
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c = class_new("index~", (method)index_new, (method)index_free, sizeof(t_index), 0L, A_SYM, A_DEFLONG, 0);
 

@@ -3,6 +3,11 @@
 #ifndef _EXT_PATH_H_
 #define _EXT_PATH_H_
 
+#include "ext_prefix.h"
+#include "ext_common.h"
+#include "ext_mess.h"
+#include "ext_sysfile.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -71,7 +76,10 @@ typedef enum {
 	PATH_TYPE_DESKTOP,			///< desktop
 	PATH_TYPE_TILDE,			///< "home"
 	PATH_TYPE_TEMPFOLDER,		///< /tmp
-	PATH_TYPE_MAXDB				///< combi: try PATH_TYPE_C74, PATH_TYPE_TILDE, PATH_TYPE_RELATIVE, PATH_TYPE_ABSOLUTE in that order
+	PATH_TYPE_USERMAX,			///< ~/Documents/Max 8
+	PATH_TYPE_MAXDB,			///< combi: try PATH_TYPE_C74, PATH_TYPE_TILDE, PATH_TYPE_RELATIVE, PATH_TYPE_ABSOLUTE in that order
+	PATH_TYPE_PLUGIN,			///< AudioUnit/VST plugin (an .auinfo or .vstinfo file in AppSupport)
+	PATH_TYPE_PACKAGE
 } e_max_path_types;
 
 
@@ -130,10 +138,12 @@ typedef enum {
 #define ACTION_PATH		PATH_ACTION_PATH		// for backwards compatibility
 #define HELP_PATH		PATH_HELP_PATH			// for backwards compatibility
 
-
-#define COLLECTIVE_FILECOPY 1	// flag for copying an object-used file to support path
-#define COLLECTIVE_COPYTOMADEFOLDER 2 // flag to copying to the folder you made
-
+enum {
+	COLLECTIVE_NONE = 0,
+	COLLECTIVE_FILECOPY = 1,			// flag for copying an object-used file to support path
+	COLLECTIVE_COPYTOMADEFOLDER = 2,	// flag to copying to the folder you made
+	COLLECTIVE_EXTRACTTOTEMPFOLDER = 4	// flag to extract to the temp folder (works for collectives, m4l devices, too)
+};
 
 #define TYPELIST_SIZE 	32 //maximum number of types returned
 
@@ -189,8 +199,9 @@ typedef struct _pathlink {
 
 // flags for t_searchpath
 typedef enum {
-	PATH_FLAGS_RECURSIVE	= 0x001,
-	PATH_FLAGS_READONLY		= 0x010
+	PATH_FLAGS_RECURSIVE			= 0x001,
+	PATH_FLAGS_READONLY				= 0x010,
+	PATH_FLAGS_INCLUDEINCOLLECTIVE	= 0x100
 } e_max_searchpath_flags;
 
 
@@ -207,7 +218,7 @@ short path_getsupportpath(void);
 typedef struct FSRef                    FSRef;
 
 short path_tofsref(C74_CONST short path, C74_CONST char *filename, FSRef *ref);
-short path_fromfsref(FSRef *ref);
+short path_fromfsref(FSRef *ref); 
 #endif // MAC_VERSION
 
 void path_namefrompathname(char *pathname, char *name);
@@ -345,11 +356,11 @@ short path_usermaxfolder(void);
 short path_createfolder(C74_CONST short path, C74_CONST char *name, short *newpath);
 
 // internal use only -- not exported -- use path_createfolder()
-short path_createnewfolder(short path, char *name, short *newpath);
+short path_createnewfolder(short path, const char *name, short *newpath);
 
 short path_copyfile(short srcpath, char *srcname, short dstpath, char *dstname);
 short path_copytotempfile(short srcpath, char *srcname, short *outpath, char *outname);
-short path_copyfolder(short srcpath, short dstpath, char *dstname, long recurse, short *newpath);
+short path_copyfolder(short srcpath, short dstpath, const char *dstname, long recurse, short *newpath);
 short C74_MUST_CHECK path_getpath(short path, const char *name, short *outpath);
 short path_getname(short path, char *name, short *outpath);
 
@@ -450,10 +461,10 @@ short path_getfilecreationdate(C74_CONST char *filename, C74_CONST short path, t
 short path_getfilesize(char *filename, short path, t_ptr_size *size);
 long path_listcount(t_pathlink *list);
 
-short nameinpath(char *name, short *ref);					// <-- use path_nameinpath()
+short nameinpath(const char *name, short *ref);					// <-- use path_nameinpath()
 short path_nameinpath(C74_CONST char *name, C74_CONST short path, short *ref);
 
-short path_sysnameinpath(char *name, short *ref);
+short path_sysnameinpath(const char *name, short *ref);
 
 
 /**
@@ -601,17 +612,26 @@ t_max_err path_toabsolutesystempath(const short in_path, const char *in_filename
  */
 t_max_err path_absolutepath(t_symbol **returned_path, const t_symbol *s, const t_fourcc *filetypelist, short numtypes);
 
+/**
+	 Determine if a path/filename combination exists on disk.
 
+	 @ingroup files
+	 @param	path			The Max path reference.
+	 @param filename		The name of the file in that path to test.
+	 @return				1 = the specified file exists, 0 = the specified file does not exist.
+
+	 @see path_topathname()
+	 @see path_topotentialname()
+
+ */
+long path_exists(short path, const char *filename);
 void path_addsearchpath(short path, short parent);
 void path_addnamed(long pathtype, char *name, short recursive, short permanent);
-
 void path_removefromlist(t_pathlink **list, short parent);
-
 
 // private: internal use only
 short path_collpathnamefrompath(short vol, short *collvol, char *filename);
-
-
+char path_inpath(short testvol, short topvol);
 
 short defvolume(void);			// <--  use path_getdefault()
 

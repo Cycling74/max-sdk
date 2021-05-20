@@ -1,6 +1,9 @@
 #ifndef _BYTEORDER_H_
 #define _BYTEORDER_H_
 
+#include "ext_prefix.h"
+#include "ext_common.h"
+
 #ifdef MAC_VERSION
 #if TARGET_RT_LITTLE_ENDIAN
 #define C74_LITTLE_ENDIAN 1
@@ -9,6 +12,11 @@
 #define C74_LITTLE_ENDIAN 0
 #define C74_BIG_ENDIAN 1
 #endif
+
+#elif defined (__BYTE_ORDER__)
+
+#define C74_LITTLE_ENDIAN (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#define C74_BIG_ENDIAN (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
 
 #else // WIN_VERSION
 
@@ -88,8 +96,8 @@
 // To be documented
 #define BYTEORDER_SWAPF32_PTR(x) 			byteorder_swap_pointer_32((unsigned char*)(x))
 #define BYTEORDER_SWAPF64_PTR(x) 			byteorder_swap_pointer_64((unsigned char*)(x))
-#define BYTEORDER_SWAPF32_PTR_TO_PTR(x) 	byteorder_swap_pointer_32_copy((unsigned char*)(x))
-#define BYTEORDER_SWAPF64_PTR_TO_PTR(x) 	byteorder_swap_pointer_64_copy((unsigned char*)(x))
+#define BYTEORDER_SWAPF32_PTR_TO_PTR(x, y) 	byteorder_swap_pointer_32_copy((unsigned char*)(x), (unsigned char*)(y))
+#define BYTEORDER_SWAPF64_PTR_TO_PTR(x, y) 	byteorder_swap_pointer_64_copy((unsigned char*)(x), (unsigned char*)(y))
 #define BYTEORDER_SWAPF32_FROM_PTR(x) 		byteorder_swap_pointer_32_to_float32((unsigned char*)(x))
 #define BYTEORDER_SWAPF64_FROM_PTR(x) 		byteorder_swap_pointer_64_to_float64((unsigned char*)(x))
 
@@ -98,8 +106,10 @@ BEGIN_USING_C_LINKAGE
 
 // Undocumented, use the above macros.
 // OBSOLETE. don't use. not safe to pass byteswapped floats in registers
-float swapf32(float f);
-double swapf64(double f);
+C74_DEPRECATED( float byteorder_swapf32(float f) );
+C74_DEPRECATED( double byteorder_swapf64(double f) );
+C74_DEPRECATED( float swapf32(float f) );
+C74_DEPRECATED( double swapf64(double f) );
 
 // these functions are inplace
 void byteorder_swap_pointer_16(unsigned char *p);

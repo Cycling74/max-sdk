@@ -9,6 +9,10 @@
 #ifndef __JIT_SYMBOLS_H__
 #define __JIT_SYMBOLS_H__
 
+#include "jit.common.h"
+#include "jit.platform.h"
+
+
 JIT_EX_DATA t_symbol *_jit_sym_nothing;                              ///< cached #t_symbol @ingroup jitter
 JIT_EX_DATA t_symbol *_jit_sym_new;                                  ///< cached #t_symbol @ingroup jitter
 JIT_EX_DATA t_symbol *_jit_sym_free;                                 ///< cached #t_symbol @ingroup jitter

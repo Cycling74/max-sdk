@@ -27,12 +27,12 @@ t_messlist *max_jit_iter_class;
 
 t_symbol *ps_done;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	long attrflags;
 	void *p,*attr;
 
-	setup(&max_jit_iter_class, max_jit_iter_new, (method)max_jit_iter_free, (short)sizeof(t_max_jit_iter),
+	setup(&max_jit_iter_class, (method)max_jit_iter_new, (method)max_jit_iter_free, (short)sizeof(t_max_jit_iter),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_iter,obex));

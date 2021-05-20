@@ -2,6 +2,9 @@
 #ifndef _EXT_SYSMEM_H_
 #define _EXT_SYSMEM_H_
 
+#include "ext_prefix.h"
+#include "max_types.h"
+
 BEGIN_USING_C_LINKAGE
 
 #ifndef sysmem_newptr
@@ -14,7 +17,8 @@ BEGIN_USING_C_LINKAGE
 	@param	size	The amount of memory to allocate.
 	@return			A pointer to the allocated memory, or NULL if the allocation fails.
 */
-extern t_ptr sysmem_newptr(long size);
+t_ptr sysmem_newptr(t_ptr_size size);
+
 #endif
 
 
@@ -28,7 +32,7 @@ extern t_ptr sysmem_newptr(long size);
 	@param	size	The amount of memory to allocate.
 	@return			A pointer to the allocated memory, or NULL if the allocation fails.
 */
-extern t_ptr sysmem_newptrclear(long size);
+t_ptr sysmem_newptrclear(t_ptr_size size);
 
 
 /**
@@ -41,18 +45,18 @@ extern t_ptr sysmem_newptrclear(long size);
 	@param	newsize	The new size of the pointer in bytes.
 	@return			A pointer to the resized memory, or NULL if the allocation fails.
 */
-extern t_ptr sysmem_resizeptr(void *ptr, long newsize);
+t_ptr sysmem_resizeptr(void *ptr, t_ptr_size newsize);
 
 
 /**
-	Resize an existing pointer and clear it. 
+	Resize an existing pointer and clear the newly allocated memory, if any. 
 
 	@ingroup memory
 	@param	ptr		The pointer to the memory that will be resized.
 	@param	newsize	The new size of the pointer in bytes.
 	@return			A pointer to the resized memory, or NULL if the allocation fails.
 */
-extern t_ptr sysmem_resizeptrclear(void *ptr, long newsize);
+t_ptr sysmem_resizeptrclear(void *ptr, t_ptr_size newsize);
 
 
 /**
@@ -62,7 +66,7 @@ extern t_ptr sysmem_resizeptrclear(void *ptr, long newsize);
 	@param	ptr		The pointer whose size will be queried
 	@return			The number of bytes allocated to the pointer specified.
 */
-extern long sysmem_ptrsize(void *ptr);
+t_ptr_size sysmem_ptrsize(void *ptr);
 
 
 /**
@@ -73,8 +77,7 @@ extern long sysmem_ptrsize(void *ptr);
 	@ingroup memory
 	@param	ptr		The pointer whose memory will be freed.
 */
-extern void sysmem_freeptr(void *ptr);
-
+void sysmem_freeptr(void *ptr);
 
 #ifndef sysmem_copyptr
 /**
@@ -87,7 +90,8 @@ extern void sysmem_freeptr(void *ptr);
 	@param	dst		A pointer to the memory where the data will be copied.
 	@param	bytes	The size in bytes of the data to be copied.
 */
-extern void sysmem_copyptr(const void *src, void *dst, long bytes);
+void sysmem_copyptr(const void *src, void *dst, t_ptr_size bytes);
+
 #endif
 
 
@@ -100,7 +104,7 @@ extern void sysmem_copyptr(const void *src, void *dst, long bytes);
 	@param	size	The size of the handle in bytes that will be allocated. 
 	@return			A new #t_handle.
 */
-extern t_handle sysmem_newhandle(long size);
+t_handle sysmem_newhandle(t_ptr_size size);
 
 
 /**
@@ -111,7 +115,7 @@ extern t_handle sysmem_newhandle(long size);
 	@return			A new #t_handle.
 	@see			sysmem_newhandle()
 */
-extern t_handle sysmem_newhandleclear(unsigned long size); 
+t_handle sysmem_newhandleclear(t_ptr_size size);
 
 
 /**
@@ -124,7 +128,7 @@ extern t_handle sysmem_newhandleclear(unsigned long size);
 	@param	newsize	The new size of the handle in bytes. 
 	@return			The number of bytes allocated to the specified handle.
 */
-extern long sysmem_resizehandle(t_handle handle, long newsize);
+t_max_err sysmem_resizehandle(t_handle handle, t_ptr_size newsize);
 
 
 /**
@@ -135,7 +139,7 @@ extern long sysmem_resizehandle(t_handle handle, long newsize);
 	@param	handle	The handle whose size will be queried.
 	@return			The number of bytes allocated to the specified handle.
 */
-extern long sysmem_handlesize(t_handle handle);
+t_ptr_size sysmem_handlesize(t_handle handle);
 
 
 /**
@@ -144,7 +148,7 @@ extern long sysmem_handlesize(t_handle handle);
 	@ingroup memory
 	@param	handle	The handle whose memory will be freed.
 */
-extern void sysmem_freehandle(t_handle handle);
+void sysmem_freehandle(t_handle handle);
 
 
 /**
@@ -157,7 +161,7 @@ extern void sysmem_freehandle(t_handle handle);
 	@param	lock	The new lock state of the handle. 
 	@return			The previous lock state.
 */
-extern long sysmem_lockhandle(t_handle handle, long lock);
+int sysmem_lockhandle(t_handle handle, int lock);
 
 
 /**
@@ -172,7 +176,7 @@ extern long sysmem_lockhandle(t_handle handle, long lock);
 	@param	size	The size in bytes that will be added to the handle.
 	@return			The number of bytes allocated to the specified handle.
 */
-extern long sysmem_ptrandhand(void *p, t_handle h, long size);
+t_max_err sysmem_ptrandhand(void *p, t_handle h, t_ptr_size size);
 
 
 /**	Add memory to an existing handle and copy memory to the resized portion from a pointer.
@@ -184,7 +188,7 @@ extern long sysmem_ptrandhand(void *p, t_handle h, long size);
 	@param	size	The size in bytes that will be added to the handle.
 	@return			An error code.
 */
-extern long sysmem_ptrbeforehand(void *p, t_handle h, unsigned long size);
+t_max_err sysmem_ptrbeforehand(void *p, t_handle h, t_ptr_size size);
 
 
 /**	Add a null terminator to a handle.
@@ -192,7 +196,7 @@ extern long sysmem_ptrbeforehand(void *p, t_handle h, unsigned long size);
 	@param	h		A handle to null terminate.
 	@return			An error code.
 */
-extern long sysmem_nullterminatehandle(t_handle h);
+t_max_err sysmem_nullterminatehandle(t_handle h);
 
 
 END_USING_C_LINKAGE

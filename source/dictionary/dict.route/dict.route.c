@@ -27,7 +27,7 @@ static t_symbol	*ps_dictionary;
 
 
 /************************************************************************************/
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class	*c;
 
@@ -76,7 +76,7 @@ void *dict_route_new(t_symbol *s, long argc, t_atom *argv)
 void dict_route_free(t_dict_route *x)
 {
 	object_free(x->schema_dict);
-    object_free(x->inlet_tomatch);
+	object_free(x->inlet_tomatch);
 }
 
 

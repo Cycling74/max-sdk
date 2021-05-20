@@ -24,12 +24,12 @@ t_messlist *max_jit_scissors_class;
 
 t_symbol *ps_output, *ps_rows, *ps_columns;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p, *q;
 
 	jit_scissors_init();
-	setup(&max_jit_scissors_class, max_jit_scissors_new, (method)max_jit_scissors_free, (short)sizeof(t_max_jit_scissors),
+	setup(&max_jit_scissors_class, (method)max_jit_scissors_new, (method)max_jit_scissors_free, (short)sizeof(t_max_jit_scissors),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_scissors, obex));
@@ -64,7 +64,7 @@ void max_jit_scissors_assist(t_max_jit_scissors *x, void *b, long m, long a, cha
 		if (a<(x->maxn)) {
 			sprintf(s, "(matrix) out");
 			if (a>0)
-				sprintf(s, "%s%d", s, a+1);
+				snprintf_zero(s, ASSIST_MAX_STRING_LEN, "%s%d", s, a+1);
 		} else {
 			sprintf(s, "dumpout");
 		}

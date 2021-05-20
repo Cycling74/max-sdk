@@ -3,6 +3,10 @@
 
 #include "jit.common.h"
 
+#ifdef MAC_VERSION
+#include <CoreGraphics/CoreGraphics.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -108,6 +112,7 @@ typedef struct {
 	t_atom		mouseatoms[8];	///< h, v, (up/down), cmdKey, shiftKey, alphaLock, option, control.
 	int			argc;			///< argument count
 	t_symbol 	*mousesymbol;	///< mouse event type
+	double		scalefactor;
 }  t_wind_mouse_info;
 
 typedef struct {
@@ -183,7 +188,7 @@ typedef void*						t_jit_gl_native_pixelformat;	// NSOpenGLPixelFormat *
 
 #endif
 
-extern t_symbol *ps_draw, *ps_get_state, *ps_matrixoutput, *ps_get_geometry, *ps_boundcalc, *ps_calcbounds;
+extern t_symbol *ps_draw, *ps_get_state, *ps_matrixoutput, *ps_get_geometry, *ps_boundcalc, *ps_calcbounds, *ps_setdata;
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
 #pragma pack(pop)

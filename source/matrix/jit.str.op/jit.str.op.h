@@ -26,7 +26,7 @@ typedef struct _jit_str_op
 
 typedef struct _jit_str_op_vecdata
 {
-	t_jit_op_fn	opfn;
+	t_jit_op_fn_binary	opfn;
 	char		outputtype;
 	long		in1_len;
 	long		in2_len;
@@ -55,6 +55,6 @@ void jit_str_op_end_set(t_jit_str_op *x, void *attr, long ac, t_atom *av);
 
 long jit_str_op_checklen(long n, t_jit_op_info *in1);
 void jit_str_op_vector_ignore(long n, void *vecdata, t_jit_op_info *in1, t_jit_op_info *in2, t_jit_op_info *out);
-method jit_str_op_sym2fn(t_symbol *opsym);
+t_jit_op_fn_binary jit_str_op_sym2fn(t_symbol *opsym);
 
 #endif

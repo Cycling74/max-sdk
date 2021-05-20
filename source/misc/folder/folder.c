@@ -43,7 +43,7 @@ void folder_action(t_folder *x);
 t_symbol *ps_clear,*ps_append;
 long debug;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -61,7 +61,7 @@ void ext_main(void *r)
 	ps_append = gensym("append");
 	debug = 0;
 
-	return 0;
+	return;
 }
 
 void folder_action(t_folder *x)

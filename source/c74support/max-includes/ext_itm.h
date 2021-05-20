@@ -3,6 +3,9 @@
 #ifndef __EXT_ITM_H__
 #define __EXT_ITM_H__
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 
@@ -10,10 +13,11 @@ BEGIN_USING_C_LINKAGE
 	@ingroup	time
 	@see		#t_timeobject
 	@see		@ref chapter_itm	*/
-typedef t_object t_itm;
-
+typedef struct _itm t_itm;
 
 // private -- internal use only
+typedef struct _itmclock t_itmclock;
+
 typedef struct _clocksource
 {
 	t_object c_ob;
@@ -35,26 +39,46 @@ typedef struct _tschange {
 	long c_tsbasebars;		// bars at last ts change (use -1 for "unknown")
 } t_tschange;
 
+// private, used for the "notifymult" notification (to notify multiple values at once)
+
+typedef enum _itm_notification_flags
+{
+	ITM_NOTIFY_NONE			= 0x00,
+	ITM_NOTIFY_TEMPO		= 0x01,
+	ITM_NOTIFY_UPDATESTATE	= 0x02,
+	ITM_NOTIFY_SEEK			= 0x04,
+	ITM_NOTIFY_TIMESIG		= 0x08
+} t_itm_notification_flags;
+
+typedef struct _itm_notification_info
+{
+	long		flags;
+	double		tempo;			// ITM_NOTIFICATION_TEMP
+	double		location[2];	// ITM_NOTIFICATION_SEEK
+	long		transport;		// ITM_NOTIFICATION_UPDATESTATE
+	t_tschange	*timesig;		// ITM_NOTIFICATION_TIMESIG
+} t_itm_notification_info;
+
+
 /**	Flags that determine attribute and time object behavior
 	@ingroup time	*/
 enum {
-	TIME_FLAGS_LOCATION = 1,			///< 1 1 0 location-based bar/beat/unit values (as opposed to interval values, which are 0 0 0 relative)
-	TIME_FLAGS_TICKSONLY = 2,			///< only ticks-based values (not ms) are acceptable
-	TIME_FLAGS_FIXEDONLY = 4,			///< only fixed values (ms, hz, samples) are acceptable
-	TIME_FLAGS_LOOKAHEAD = 8,			///< add lookahead attribute (unsupported)
-	TIME_FLAGS_USECLOCK = 16,			///< this time object will schedule events, not just hold a value
-	TIME_FLAGS_USEQELEM = 32,			///< this time object will defer execution of scheduled events to low priority thread
-	TIME_FLAGS_FIXED = 64,				///< will only use normal clock (i.e., will never execute out of ITM)
-	TIME_FLAGS_PERMANENT = 128,			///< event will be scheduled in the permanent list (tied to a specific time)
-	TIME_FLAGS_TRANSPORT = 256,			///< add a transport attribute
-	TIME_FLAGS_EVENTLIST = 512,			///< add an eventlist attribute (unsupported)
-	TIME_FLAGS_CHECKSCHEDULE = 1024,	///< internal use only
-	TIME_FLAGS_LISTENTICKS = 2048,		///< flag for time_listen: only get notifications if the time object holds tempo-relative values
-	TIME_FLAGS_NOUNITS = 4096,			///< internal use only
-	TIME_FLAGS_BBUSOURCE = 8192,		///< source time was in bar/beat/unit values, need to recalculate when time sig changes
-	TIME_FLAGS_POSITIVE = 16384			///< constrain any values < 0 to 0
+	TIME_FLAGS_LOCATION			= 0x0001,	///< 1 1 0 location-based bar/beat/unit values (as opposed to interval values, which are 0 0 0 relative)
+	TIME_FLAGS_TICKSONLY		= 0x0002,	///< only ticks-based values (not ms) are acceptable
+	TIME_FLAGS_FIXEDONLY		= 0x0004,	///< only fixed values (ms, hz, samples) are acceptable
+	TIME_FLAGS_LOOKAHEAD 		= 0x0008,	///< add lookahead attribute (unsupported)
+	TIME_FLAGS_USECLOCK			= 0x0010,	///< this time object will schedule events, not just hold a value
+	TIME_FLAGS_USEQELEM			= 0x0020,	///< this time object will defer execution of scheduled events to low priority thread
+	TIME_FLAGS_FIXED			= 0x0040,	///< will only use normal clock (i.e., will never execute out of ITM)
+	TIME_FLAGS_PERMANENT		= 0x0080,	///< event will be scheduled in the permanent list (tied to a specific time)
+	TIME_FLAGS_TRANSPORT		= 0x0100,	///< add a transport attribute
+	TIME_FLAGS_EVENTLIST		= 0x0200,	///< add an eventlist attribute (unsupported)
+	TIME_FLAGS_CHECKSCHEDULE	= 0x0400,	///< internal use only
+	TIME_FLAGS_LISTENTICKS		= 0x0800,	///< flag for time_listen: only get notifications if the time object holds tempo-relative values
+	TIME_FLAGS_NOUNITS			= 0x1000,	///< internal use only
+	TIME_FLAGS_BBUSOURCE		= 0x2000,	///< source time was in bar/beat/unit values, need to recalculate when time sig changes
+	TIME_FLAGS_POSITIVE			= 0x4000	///< constrain any values <= 0 to a minimum value (default: 0)
 };
-
 
 /*******************************************************************************/
 
@@ -243,13 +267,10 @@ void itm_format(t_itm *x, double ms, double ticks, long flags, t_symbol *unit, l
 	@return			Zero if the unit is fixed (milliseconds, for example) or non-zero if it is flexible (ticks, for example).	*/
 long itm_isunitfixed(t_symbol *u);
 
-
-
-void itmclock_delay(t_object *x, t_itm *m, t_symbol *eventlist, double delay, long quantization);
+void itmclock_delay(t_itmclock *x, t_itm *m, t_symbol *eventlist, double delay, long quantization);
 void *itmclock_new(t_object *owner, t_object *timeobj, method task, method killer, long permanent);
-void itmclock_set(t_object *x, t_itm *m, t_symbol *eventlist, double time);
-void itmclock_unset(t_object *x);
-
+void itmclock_set(t_itmclock *x, t_itm *m, t_symbol *eventlist, double time);
+void itmclock_unset(t_itmclock *x);
 
 // private -- internal use only
 void *itm_clocksource_getnamed(t_symbol *name, long create);

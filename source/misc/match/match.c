@@ -12,40 +12,39 @@
 #include "ext_critical.h"
 
 #define ANYONE MAGIC
-#define NOVALUE 0x80000000
 
 typedef struct match
 {
 	t_object m_ob;
 	t_atom *m_seen,*m_want;
-	short m_size;
-	short m_where;
+	long m_size;
+	long m_where;
 	void *m_out;
 	t_critical m_critical;
 } t_match;
 
-void *match_class;
+static t_class *s_match_class;
 
 void match_assist(t_match *x, void *b, long m, long a, char *s);
 void match_freebytes(t_match *x);
-void match_int(t_match *x, long n);
+void match_int(t_match *x, t_atom_long n);
 void match_float(t_match *x, double f);
 void match_list(t_match *x, t_symbol *s, short argc, t_atom *argv);
 void match_anything(t_match *x, t_symbol *s, short argc, t_atom *argv);
 void match_atom(t_match *x, t_atom *a);
-void atom_compare(t_match *x);
-t_bool atom_equal(t_atom *a, t_atom *b);
-void outlet_atomlist(void *out, long argc, t_atom *argv);
+static void atom_compare(t_match *x);
+static t_bool atom_equal(t_atom *a, t_atom *b);
+static void outlet_atomlist(void *out, long argc, t_atom *argv);
 void match_clear(t_match *x);
-void match_set(t_match *x, t_symbol *s, short ac, t_atom *av);
-void match_setwant(t_atom *temp, short ac, t_atom *av);
+void match_set(t_match *x, t_symbol *s, long ac, t_atom *av);
+void match_setwant(t_atom *temp, long ac, t_atom *av);
 void match_free(t_match *x);
-void *match_new(t_symbol *s, short ac, t_atom *av);
+void *match_new(t_symbol *s, long ac, t_atom *av);
 
-t_atom atom_novalue = { A_LONG, {NOVALUE}  };
+t_atom atom_novalue = { A_NOTHING, {0} };
 t_symbol *ps_nn, *ps_list;
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	t_class *c;
 
@@ -59,12 +58,10 @@ void ext_main(void *r)
 	class_addmethod(c, (method)match_clear,	"clear", 	0);
 	class_addmethod(c, (method)match_assist,	"assist",A_CANT,0);
 	class_register(CLASS_BOX, c);
-	match_class = c;
+	s_match_class = c;
 
 	ps_nn = gensym("nn");
 	ps_list = gensym("list");
-
-	return 0;
 }
 
 void match_assist(t_match *x, void *b, long m, long a, char *s)
@@ -83,7 +80,7 @@ void match_freebytes(t_match *x)
 		sysmem_freeptr(x->m_want);;
 }
 
-void match_int(t_match *x, long n)
+void match_int(t_match *x, t_atom_long n)
 {
 	t_atom a;
 
@@ -96,7 +93,6 @@ void match_int(t_match *x, long n)
 void match_float(t_match *x, double f)
 {
 	t_atom a;
-
 
 	atom_setfloat(&a, f);
 	if (x->m_size)
@@ -121,7 +117,6 @@ void match_anything(t_match *x, t_symbol *s, short argc, t_atom *argv)
 	if (!x->m_size)
 		return;
 
-
 	atom_setsym(&a, s);
 	match_atom(x,&a);
 	match_list(x,s,argc,argv);
@@ -137,7 +132,7 @@ void match_atom(t_match *x, t_atom *a)
 	atom_compare(x);
 }
 
-void atom_compare(t_match *x)
+static void atom_compare(t_match *x)
 {
 	long i;
 
@@ -148,7 +143,7 @@ void atom_compare(t_match *x)
 	outlet_atomlist(x->m_out,x->m_size,x->m_seen);
 }
 
-t_bool atom_equal(t_atom *a, t_atom *b)
+static t_bool atom_equal(t_atom *a, t_atom *b)
 {
 	if (atom_gettype(b) == A_SYM) {
 		if(atom_getsym(b) == ps_nn) // wild card match
@@ -167,17 +162,17 @@ t_bool atom_equal(t_atom *a, t_atom *b)
 		else
 			return false;
 	} else if (atom_gettype(a) == A_FLOAT && atom_gettype(b) == A_LONG) {	// different types
-		float temp = atom_getfloat(a);
-		long itemp = (long)temp;
-		if (temp == (float)itemp) {
+		double temp = atom_getfloat(a);
+		t_atom_long itemp = (t_atom_long)temp;
+		if (temp == (double)itemp) {
 			if (itemp == atom_getlong(b))
 				return true;
 		}
 		return false;
 	} else if (atom_gettype(b) == A_FLOAT && atom_gettype(a) == A_LONG) {
-		float temp = atom_getfloat(b);
-		long itemp = (long)temp;
-		if (temp == (float)itemp) {
+		double temp = atom_getfloat(b);
+		t_atom_long itemp = (t_atom_long)temp;
+		if (temp == (double)itemp) {
 			if (itemp == atom_getlong(a))
 				return true;
 		}
@@ -186,7 +181,7 @@ t_bool atom_equal(t_atom *a, t_atom *b)
 		return false;
 }
 
-void outlet_atomlist(void *out, long argc, t_atom *argv)
+static void outlet_atomlist(void *out, long argc, t_atom *argv)
 {
 	if (argc == 1) {
 		if (atom_gettype(argv) == A_LONG)
@@ -209,7 +204,7 @@ void match_clear(t_match *x)
 		x->m_seen[i] = atom_novalue;
 }
 
-void match_set(t_match *x, t_symbol *s, short ac, t_atom *av)
+void match_set(t_match *x, t_symbol *s, long ac, t_atom *av)
 {
 	t_atom *temp;
 
@@ -232,7 +227,7 @@ void match_set(t_match *x, t_symbol *s, short ac, t_atom *av)
 	critical_exit(x->m_critical);
 }
 
-void match_setwant(t_atom *temp, short ac, t_atom *av)
+void match_setwant(t_atom *temp, long ac, t_atom *av)
 {
 	long i;
 
@@ -246,17 +241,17 @@ void match_free(t_match *x)
 	critical_free(x->m_critical);
 }
 
-void *match_new(t_symbol *s, short ac, t_atom *av)
+void *match_new(t_symbol *s, long ac, t_atom *av)
 {
 	t_match *x;
 
-	x = object_alloc(match_class);
+	x = object_alloc(s_match_class);
 	x->m_out = outlet_new((t_object *)x,0);
 	critical_new(&x->m_critical);
 	if (ac) {
-		x->m_want = (t_atom *)sysmem_newptr((long)ac * sizeof(t_atom));
+		x->m_want = (t_atom *)sysmem_newptr(ac * sizeof(t_atom));
 		match_setwant(x->m_want,ac,av);
-		x->m_seen = (t_atom *)sysmem_newptr((long)ac * sizeof(t_atom));
+		x->m_seen = (t_atom *)sysmem_newptr(ac * sizeof(t_atom));
 		x->m_size = ac;
 		match_clear(x);
 	} else {

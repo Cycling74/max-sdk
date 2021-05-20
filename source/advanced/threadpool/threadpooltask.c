@@ -151,11 +151,11 @@ long threadpooltask_getrequest(t_threadpooltask **task)
 void threadpooltask_completerequest(t_threadpooltask *task)
 {
 	if (task&&task->cbtask) {
-		(*((method)task->cbtask))(task->owner,task->args,task);
+		CALL_METHOD(task->cbtask,task->owner,task->args,task);
 	}
 	task->state = THREADPOOLTASK_REQ_COMPLETE; // redundant to set state
 	if (task&&task->cbcomplete) {
-		(*((method)task->cbcomplete))(task->owner,task->args,task);
+		CALL_METHOD(task->cbcomplete,task->owner,task->args,task);
 	}
 
 	THREADPOOLTASK_MUTEX_LOCK;

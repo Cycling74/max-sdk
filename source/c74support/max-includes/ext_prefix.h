@@ -42,92 +42,10 @@
 #define END_USING_C_LINKAGE
 #endif // __cplusplus
 
-#ifdef C74_X64
-// anything we want to define only for x64 builds here? 
-#else
-// not x64? let's enable quicktime, if it was asked for 
-// but note that only on windows do we explicitly ask for it
-#if defined(USE_QTML) || defined(INCLUDE_APPLE_HEADERS) || defined(MAC_VERSION)
-#define C74_USING_QUICKTIME 1
-#endif
-
-#endif
-
-#ifdef calcoffset
-	// The ifdefs for this macro have been set up like this so that Doxygen can document this macro on a Mac [TAP]
-#else
-	/** 
-		Find byte offset of a named member of a struct, relative to the beginning of that struct.
-		@ingroup misc
-		@param	x	The name of the struct
-		@param	y	The name of the member
-		@return		A pointer-sized integer representing the number of bytes into the struct where the member begins.
-	*/
-	#define calcoffset(x,y) ((t_ptr_int)(&(((x *)0L)->y)))
-#endif
-
-#ifdef structmembersize
-	// The ifdefs for this macro have been set up like this so that Doxygen can document this macro on a Mac [TAP]
-#else
-	/** 
-		Find size of a named member of a struct.
-		@ingroup misc
-		@param	structname	The name of the struct
-		@param	membername	The name of the member
-		@return		The size of the member of the struct.
-	*/
-	#define structmembersize(structname, membername) (sizeof(((structname*)0)->membername))
-#endif
-
-#ifdef WIN_VERSION
-
-// the maxcrt is now deprecated
-// we recommend you link dynamically to the VS2013 CRT as this is what max currently uses
-#define MAXAPI_MAXCRT_DEPRECATED
-
-#if !defined(MAXAPI_USE_MSCRT) && !defined(MAXAPI_MAXCRT_DEPRECATED)
-
-#ifndef _CRT_NOFORCE_MANIFEST
-#define _CRT_NOFORCE_MANIFEST
-#endif
-
-#ifndef _STL_NOFORCE_MANIFEST
-#define _STL_NOFORCE_MANIFEST
-#endif
-
-#ifndef _DEBUG
-// for debug use the standard microsoft C runtime
-
-#pragma comment(linker,"/NODEFAULTLIB:msvcrt.lib")
-#pragma comment(lib,"maxcrt.lib")
-#pragma comment(linker,"/NODEFAULTLIB:msvcprt.lib")
-#pragma comment(lib,"maxcrt_p.lib")
-#endif
-
-#endif // #if !defined(MAXAPI_USE_MSCRT) && !defined(MAXAPI_MAXCRT_DEPRECATED)
-
-#endif // #ifdef WIN_VERSION
-
 ////////////////////////////////////////////////////////////////////////////////
 // Mac Target
 
 #ifdef MAC_VERSION
-#ifndef powerc
-#pragma d0_pointers on
-#endif
-#define _K( k )	
-
-#define INCLUDE_APPLE_HEADERS
-
-#if !TARGET_API_MAC_CARBON
-#define GRAFPORT_IN_WIND
-#endif
-
-#if 1 // defined( __MOTO__ ) && !defined( __cplusplus )
-#define FPTR_ELLIPSES		0
-#else 
-#define FPTR_ELLIPSES		1
-#endif
 
 // the C74_PRAGMA_STRUCT_PACK* macros are used to ensure that 
 // Win32 builds of Max externals use a 2 byte struct packing 
@@ -148,20 +66,29 @@
 #ifndef __MACTYPES__
 #include <MacTypes.h>
 #endif
+
 #include <sys/types.h>
 
 #endif // MAC_VERSION
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Linux Target
+
+#ifdef LINUX_VERSION
+
+#define C74_PRAGMA_STRUCT_PACKPUSH	0
+#define C74_PRAGMA_STRUCT_PACK		0
+#define C74_STRUCT_PACK_SIZE		4
+
+#endif // LINUX_VERSION
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Win32 Target
 
 #ifdef WIN_VERSION
-
-#if !defined( __cplusplus )
-#define FPTR_ELLIPSES		0
-#else
-#define FPTR_ELLIPSES		1
-#endif
 
 #ifndef C74_X64
 
@@ -217,49 +144,66 @@
 #define _SCL_SECURE_NO_WARNINGS
 #endif 
 
-// crtl
-#include <malloc.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <ctype.h>
-#include <math.h>
-#include <string.h>
-#include <setjmp.h>
-#include <assert.h>
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 
-// windows
+#include <malloc.h>
 #include <windows.h>
 #include <richedit.h>
 #include <commctrl.h>
 
-#if (defined(USE_QTML) || defined(C74_USING_QUICKTIME) || defined(INCLUDE_APPLE_HEADERS))&& !defined(C74_X64)
-
-#ifndef INCLUDE_APPLE_HEADERS
-#define INCLUDE_APPLE_HEADERS
-#endif	
-
-#include "qtml.h"
-
-#else
-
-#if ((defined(USE_QTML) || defined(C74_USING_QUICKTIME) || defined(INCLUDE_APPLE_HEADERS)) && C74_x64)
-#pragma message ("QuickTime is not supported for x64!")
-#endif
-
-#ifndef __cplusplus 
-#define bool int
-#define false ((int)0)
-#define true ((int)1)
-#endif
-
-#endif  // #ifdef USE_QTML
-
 #endif // WIN_VERSION
 
+// c standard library
+#include <assert.h>
+#include <ctype.h>
+#include <float.h>
+#include <math.h>
+#include <setjmp.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+
+#ifdef calcoffset
+	// The ifdefs for this macro have been set up like this so that Doxygen can document this macro on a Mac [TAP]
+#else
+	/**
+		Find byte offset of a named member of a struct, relative to the beginning of that struct.
+		@ingroup misc
+		@param	x	The name of the struct
+		@param	y	The name of the member
+		@return		A pointer-sized integer representing the number of bytes into the struct where the member begins.
+	*/
+#define calcoffset(x,y) offsetof(x, y)
+#endif
+
+#ifdef structmembersize
+	// The ifdefs for this macro have been set up like this so that Doxygen can document this macro on a Mac [TAP]
+#else
+	/**
+		Find size of a named member of a struct.
+		@ingroup misc
+		@param	structname	The name of the struct
+		@param	membername	The name of the member
+		@return		The size of the member of the struct.
+	*/
+#define structmembersize(structname, membername) (sizeof(((structname*)0)->membername))
+#endif
+
 // debug support
-#ifdef MAC_VERSION
+#if defined (__GNUC__) && defined(C74_X64)
+#ifndef C74DebugBreak
+#ifdef __x86_64__
 #define C74DebugBreak asm("int3")
+#elif defined(__aarch64__)
+#define C74DebugBreak __asm__ volatile(".inst 0xd4200000")
+#else
+#warning implement me
+#endif
+#endif
 #endif
 
 #ifdef WIN_VERSION
@@ -293,12 +237,17 @@
 #define C74_ASSERT_FITS_PTR_INT(x)	 C74_ASSERT(((t_ptr_int)(x)) == (long long) (x))
 #define C74_ASSERT_FITS_PTR_UINT(x)	 C74_ASSERT(((t_ptr_uint)(x)) == (unsigned long long) (x))
 
-// C74_STATIC_ASSERT: generates a compile error if expression e is false 
-#ifdef _DEBUG
-#define ENABLE_STATIC_ASSERT
+// C74_STATIC_ASSERT: generates a compile error if expression e is false
+// Can be disabled by defining C74_ENABLE_STATIC_ASSERT to be 0 before including max headers
+#if defined(_DEBUG) && !defined(C74_ENABLE_STATIC_ASSERT)
+#define C74_ENABLE_STATIC_ASSERT 1
 #endif
-#ifdef ENABLE_STATIC_ASSERT
-#define C74_STATIC_ASSERT(e, m) typedef char __C74_STATIC_ASSERT__[(e)?1:-1]
+#if C74_ENABLE_STATIC_ASSERT
+#if (__cplusplus >= 201103L)
+#define C74_STATIC_ASSERT(e, m) static_assert(e, m)
+#else
+#define C74_STATIC_ASSERT(e, m) extern char __C74_STATIC_ASSERT__[(e)?1:-1];
+#endif
 #else
 #define C74_STATIC_ASSERT(e, m)
 #endif

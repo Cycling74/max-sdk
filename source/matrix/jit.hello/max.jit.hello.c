@@ -11,7 +11,7 @@ typedef struct _max_jit_hello
 	void			*obex;
 } t_max_jit_hello;
 
-t_messlist *class_max_jit_hello;
+t_messlist *max_jit_hello_class;
 
 void max_jit_hello_assist(t_max_jit_hello *x, void *b, long m, long a, char *s);
 void *max_jit_hello_new(t_symbol *s, long argc, t_atom *argv);
@@ -20,13 +20,13 @@ void max_jit_hello_free(t_max_jit_hello *x);
 //from jit.hello.c
 t_jit_err jit_hello_init(void);
 
-void ext_main(void *r)
+C74_EXPORT void ext_main(void *r)
 {
 	void *p,*q,*attr;
 	long attrflags;
 
 	jit_hello_init();
-	setup(&class_max_jit_hello, max_jit_hello_new, (method)max_jit_hello_free, (short)sizeof(t_max_jit_hello),
+	setup(&max_jit_hello_class, (method)max_jit_hello_new, (method)max_jit_hello_free, (short)sizeof(t_max_jit_hello),
 		  0L, A_GIMME, 0);
 
 	p = max_jit_classex_setup(calcoffset(t_max_jit_hello,obex));
@@ -53,7 +53,7 @@ void *max_jit_hello_new(t_symbol *s, long argc, t_atom *argv)
 	t_symbol *text=gensym("Hello World!");
 	void *o;
 
-	if (x = (t_max_jit_hello *)max_jit_obex_new(class_max_jit_hello,gensym("jit_hello"))) {
+	if (x = (t_max_jit_hello *)max_jit_obex_new(max_jit_hello_class,gensym("jit_hello"))) {
 		max_jit_obex_dumpout_set(x, outlet_new(x,0L)); //general purpose outlet(rightmost)
 
 		//get normal args

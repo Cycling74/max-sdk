@@ -2,6 +2,9 @@
 #ifndef _EXT_SYSMIDI_H_
 #define _EXT_SYSMIDI_H_
 
+#include "ext_prefix.h"
+#include "ext_mess.h"
+
 BEGIN_USING_C_LINKAGE
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
@@ -25,7 +28,6 @@ typedef struct midistate
 	t_uint8 *data;
 } t_midistate;
 
-
 typedef struct _midiportinfo {
 	t_symbol *p_name;
 	struct _sysmididriver *p_driver;
@@ -41,6 +43,7 @@ typedef struct _midiportinfo {
 	long p_data2;
 	void *p_wait;
 	t_midistate p_state;
+	char p_mappingenabled;
 } t_midiportinfo;
 
 typedef struct _sysmididriver {
@@ -52,7 +55,6 @@ typedef struct _sysmididriver {
 	method d_bytesreceivedmethod;
 	// driver-specific info follows
 } t_sysmididriver;
-
 
 void sysmidi_enqbigpacket(t_midiportinfo *port, t_uint8 *data, double ts, long len, long contFlags);
 long sysmidi_numinports(void);
