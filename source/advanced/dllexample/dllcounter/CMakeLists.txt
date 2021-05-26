@@ -26,6 +26,7 @@ add_library(
 
 target_link_libraries(
 	${PROJECT_NAME}
+	PUBLIC
 	mydll # add project to ensure that it's a dependency
 )
 

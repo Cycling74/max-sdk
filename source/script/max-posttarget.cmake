@@ -49,6 +49,9 @@ elseif (WIN32)
 	# warning about constexpr not being const in c++14
 	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/wd4814")
 
+	# allow parallel builds
+	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/MP")
+
 	# do not generate ILK files
 	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
