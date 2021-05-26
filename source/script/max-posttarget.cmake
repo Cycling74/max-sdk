@@ -24,8 +24,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${EXTERN_OUTPUT_NA
 
 ### Output ###
 if (APPLE)
+    find_library(MSP_LIBRARY "MaxAudioAPI" HINTS "${MAX_SDK_MSP_INCLUDES}")
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${MSP_LIBRARY})
+
 	if ("${PROJECT_NAME}" MATCHES "jit.*")
-    	find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}"  )
+    	find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}")
     	target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
 		if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
 			target_link_libraries(${PROJECT_NAME} PUBLIC "-framework OpenGL")
