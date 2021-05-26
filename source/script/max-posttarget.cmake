@@ -42,8 +42,13 @@ if (APPLE)
 elseif (WIN32)
 	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAPI_LIB})
 	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAudio_LIB})
-	target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
-	
+	if ("${PROJECT_NAME}" MATCHES "jit.*")
+		target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
+		if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
+			target_link_libraries(${PROJECT_NAME} PUBLIC opengl32 glu32)
+		endif()
+	endif()
+
 	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mxe64")
 
 	# warning about constexpr not being const in c++14
