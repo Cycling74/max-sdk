@@ -1,7 +1,7 @@
 #ifndef _EXT_H_
 #define _EXT_H_
 
-#define C74_MAX_SDK_VERSION 0x0701
+#define C74_MAX_SDK_VERSION 0x0820
 
 #include "ext_infer_system.h"
 

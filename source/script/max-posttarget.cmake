@@ -63,6 +63,9 @@ elseif (WIN32)
 	# do not generate ILK files
 	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
+	# silence deprecation warnings
+	target_compile_definitions(${PROJECT_NAME} PUBLIC _CRT_SECURE_NO_WARNINGS)
+
 	if (EXCLUDE_FROM_COLLECTIVES STREQUAL "yes")
 		target_compile_definitions(${PROJECT_NAME} PRIVATE "-DEXCLUDE_FROM_COLLECTIVES")
 	endif()
