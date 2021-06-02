@@ -1898,7 +1898,6 @@ void jgraphics_jrgba_set_brightness(t_jrgba *c, double amt);
 
 // don't call these two functions directly, instead use the macros below...
 t_max_err jgraphics_attr_setrgba(t_object *x, t_object *attr, long argc, t_atom *argv);
-t_max_err jgraphics_attr_getrgba(t_object *x, t_object *attr, long *argc, t_atom **argv); // only used fo debugging
 t_max_err jgraphics_attr_setrgb_alias(t_object *x, t_object *attr, long argc, t_atom *argv);
 
 
@@ -1914,7 +1913,7 @@ t_max_err jgraphics_attr_setrgb_alias(t_object *x, t_object *attr, long argc, t_
 */
 #define CLASS_ATTR_RGBA(c,attrname,flags,structname,structmember) \
 	{	CLASS_ATTR_DOUBLE_ARRAY(c,attrname,flags,structname,structmember,4); \
-		CLASS_ATTR_ACCESSORS(c,attrname,jgraphics_attr_getrgba,jgraphics_attr_setrgba); \
+		CLASS_ATTR_ACCESSORS(c,attrname,NULL,jgraphics_attr_setrgba); \
 		CLASS_ATTR_PAINT(c,attrname,0); }
 
 
