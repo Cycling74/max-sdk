@@ -21,15 +21,18 @@ BEGIN_USING_C_LINKAGE
 	The size you should use when allocating strings for full paths.
 	@ingroup files
 */
-#define MAX_PATH_CHARS		2048
+enum {
+	MAX_PATH_CHARS = 2048
+};
 
 /**
 	The size you should use when allocating strings for filenames.
 	At the time of this writing it supports up to 256 UTF chars
 	@ingroup files
 */
-#define MAX_FILENAME_CHARS	512
-
+enum {
+	MAX_FILENAME_CHARS = 512
+};
 
 typedef short FILE_REF;
 
@@ -123,7 +126,9 @@ typedef enum {
 #define WRITE_PERM		PATH_WRITE_PERM		// for backwards compatibility
 #define RW_PERM			PATH_RW_PERM		// for backwards compatibility
 
-#define PATH_DEFAULT_PATHNAME_COUNT 16
+enum {
+	PATH_DEFAULT_PATHNAME_COUNT = 16
+};
 
 // indices allow for fast access
 typedef enum {	
@@ -145,7 +150,9 @@ enum {
 	COLLECTIVE_EXTRACTTOTEMPFOLDER = 4	// flag to extract to the temp folder (works for collectives, m4l devices, too)
 };
 
-#define TYPELIST_SIZE 	32 //maximum number of types returned
+enum {
+	TYPELIST_SIZE = 32 //maximum number of types returned
+};
 
 typedef enum {
 	TYPELIST_MAXFILES		= 1,

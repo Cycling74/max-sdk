@@ -10,7 +10,9 @@ BEGIN_USING_C_LINKAGE
 
 typedef void *t_sysshmem; 
 
-#define SYSSHMEM_FLAGS_READONLY				(0x00000001)
+enum t_sysshmem_flag {
+	SYSSHMEM_FLAGS_READONLY = 0x00000001
+};
 
 t_max_err sysshmem_alloc(t_sysshmem *x, const char *name, long size, long flags);	// allocate memory that can be shared
 t_max_err sysshmem_open(t_sysshmem *x, const char *name, long flags);				// open memory allocated elsewhere

@@ -16,7 +16,9 @@
 
 	@ingroup hashtab
 */
-#define HASH_DEFSLOTS	59 // 
+enum {
+	HASH_DEFSLOTS = 59
+};
 
 
 /** A hashtab entry. This struct is provided for debugging convenience, 

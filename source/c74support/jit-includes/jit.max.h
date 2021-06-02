@@ -38,8 +38,10 @@ typedef t_messlist 	t_max_messlist;
 #define A_DEFER_LOW		0x43
 #define A_USURP_LOW		0x44
 
-#define MAX_JIT_CLASS_FLAGS_GIMMEBACK_WRAP		0x00000001L		// uses standard dumpout A_DEFER_LOW method 
-	
+enum {
+	MAX_JIT_CLASS_FLAGS_GIMMEBACK_WRAP		= 0x00000001L		// uses standard dumpout A_DEFER_LOW method
+};
+
 // BEGIN LEGACY API FOR MAX WRAPPER OBJECTS	USING setup()
 C74_DEPRECATED( void *max_jit_obex_new(void *mc, t_symbol *classname) );
 C74_DEPRECATED( void max_jit_obex_free(void *x) );

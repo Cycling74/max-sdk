@@ -5,11 +5,15 @@
 #include "ext_prefix.h"
 #include "ext_mess.h"
 
-#define ASSIST_INLET 1
-#define ASSIST_OUTLET 2
+enum t_assist_function {
+	ASSIST_INLET = 1,
+	ASSIST_OUTLET
+};
 
-// external object assist methods should limit returned string lengths to this 
-#define ASSIST_MAX_STRING_LEN 500
+enum {
+	// external object assist methods should limit returned string lengths to this
+	ASSIST_MAX_STRING_LEN = 500
+};
 
 BEGIN_USING_C_LINKAGE
 

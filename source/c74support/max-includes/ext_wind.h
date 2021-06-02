@@ -20,17 +20,18 @@ typedef enum {
 	
 
 // advise returns...
-	
-#define ADVISE_SAVE		1
-#define aaSave			ADVISE_SAVE
-#define ADVISE_DISCARD	2
-#define aaDiscard		ADVISE_DISCARD
-#define ADVISE_CANCEL	3
-#define aaCancel		ADVISE_CANCEL
-#define ADVISE_FIRST	ADVISE_SAVE
-#define ADVISE_SECOND	ADVISE_DISCARD
-#define ADVISE_THIRD	ADVISE_CANCEL
 
+enum {
+	ADVISE_SAVE		= 1,
+	aaSave			= ADVISE_SAVE,
+	ADVISE_DISCARD	= 2,
+	aaDiscard		= ADVISE_DISCARD,
+	ADVISE_CANCEL	= 3,
+	// aaCancel		= ADVISE_CANCEL, // see above
+	ADVISE_FIRST	= ADVISE_SAVE,
+	ADVISE_SECOND	= ADVISE_DISCARD,
+	ADVISE_THIRD	= ADVISE_CANCEL
+};
 
 
 /**	Throw a dialog which may have text and up to three buttons.  

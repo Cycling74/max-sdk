@@ -10,26 +10,31 @@
 
 #ifndef __MAX_JIT_MOP_H__
 #define __MAX_JIT_MOP_H__
-//flags for greater control
-#define MAX_JIT_MOP_FLAGS_NONE					0x00000000            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_ALL				0x0FFFFFFF            ///< mop flag @ingroup jitter
-                                                                     
-#define MAX_JIT_MOP_FLAGS_OWN_JIT_MATRIX		0x00000001            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_BANG				0x00000002            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_OUTPUTMATRIX		0x00000004            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_NAME				0x00000008            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_TYPE				0x00000010            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_DIM				0x00000020            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_PLANECOUNT		0x00000040            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_CLEAR				0x00000080            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_NOTIFY			0x00000100            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_ADAPT				0x00000200            ///< mop flag @ingroup jitter
-#define MAX_JIT_MOP_FLAGS_OWN_OUTPUTMODE		0x00000400            ///< mop flag @ingroup jitter
 
-#define MAX_JIT_MOP_FLAGS_ONLY_MATRIX_PROBE 	0x10000000            ///< mop flag @ingroup jitter
-                                                                 
-#define JIT_MOP_INPUT 	1                                         ///< mop flag @ingroup jitter
-#define JIT_MOP_OUTPUT	2                                         ///< mop flag @ingroup jitter
+//flags for greater control
+enum t_max_jit_mop_flag {
+	MAX_JIT_MOP_FLAGS_NONE					= 0x00000000,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_ALL				= 0x0FFFFFFF,            ///< mop flag @ingroup jitter
+
+	MAX_JIT_MOP_FLAGS_OWN_JIT_MATRIX		= 0x00000001,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_BANG				= 0x00000002,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_OUTPUTMATRIX		= 0x00000004,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_NAME				= 0x00000008,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_TYPE				= 0x00000010,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_DIM				= 0x00000020,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_PLANECOUNT		= 0x00000040,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_CLEAR				= 0x00000080,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_NOTIFY			= 0x00000100,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_ADAPT				= 0x00000200,            ///< mop flag @ingroup jitter
+	MAX_JIT_MOP_FLAGS_OWN_OUTPUTMODE		= 0x00000400,            ///< mop flag @ingroup jitter
+
+	MAX_JIT_MOP_FLAGS_ONLY_MATRIX_PROBE 	= 0x10000000             ///< mop flag @ingroup jitter
+};
+
+enum {
+	JIT_MOP_INPUT 		= 1,                                         ///< mop flag @ingroup jitter
+	JIT_MOP_OUTPUT		= 2                                          ///< mop flag @ingroup jitter
+};
 
 //outputmode: 0=no output, 1=calc, 2=input(no calc), 3=output(no calc)
 

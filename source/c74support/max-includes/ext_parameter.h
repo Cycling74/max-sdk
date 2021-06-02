@@ -15,16 +15,22 @@
 
 BEGIN_USING_C_LINKAGE
 
-#define PARAMETER_METHOD_FLAG_OVERRIDE    (0L) // default is to override normal method with standard method
-#define PARAMETER_METHOD_FLAG_PRE         (1L << 0L) // user-defined pre-processing function for standard method
-#define PARAMETER_METHOD_FLAG_POST        (1L << 1L) // user-defined post-processing function for standard method
-#define PARAMETER_METHOD_FLAG_FULL        (1L << 2L) // user-defined override method
-#define PARAMETER_METHOD_FLAG_DONOTHING   (1L << 15L) // don't override at all
+enum t_parameter_method_flag {
+	PARAMETER_METHOD_FLAG_OVERRIDE 	= 0,
+	PARAMETER_METHOD_FLAG_PRE 		= (1L << 0L),
+	PARAMETER_METHOD_FLAG_POST		= (1L << 1L),
+	PARAMETER_METHOD_FLAG_FULL		= (1L << 2L),
+	PARAMETER_METHOD_FLAG_DONOTHING	= (1L << 15L),
+};
 
-#define PARAMETER_COLOR_FLAG_DEFAULT      (0L)
-#define PARAMETER_COLOR_FLAG_STYLE        (1L << 0L) // use style system for color rather than defaults system
+enum t_parameter_color_flag {
+	PARAMETER_COLOR_FLAG_DEFAULT	= 0,
+	PARAMETER_COLOR_FLAG_STYLE		= (1L << 0L)
+};
 
-#define PARAMETER_GESTURE_INDEX			  999999
+enum {
+	PARAMETER_GESTURE_INDEX = 999999
+};
 
 typedef enum {
 	PARAM_TYPE_INVALID = -1,

@@ -43,21 +43,23 @@ long sndfile_writeheader(t_filehandle fh, t_fourcc type, long size, long nchans,
     #pragma pack()
 #endif
 
-#define SF_FILETYPE_AIFF 		FOUR_CHAR_CODE('AIFF')
-#define SF_FILETYPE_SD2 		FOUR_CHAR_CODE('Sd2f')
-#define SF_FILETYPE_WAVE 		FOUR_CHAR_CODE('WAVE')
-#define SF_FILETYPE_AU 			FOUR_CHAR_CODE('ULAW')
-#define SF_FILETYPE_RAW 		FOUR_CHAR_CODE('DATA')
+enum t_sf_filetype {
+	SF_FILETYPE_AIFF		= FOUR_CHAR_CODE('AIFF'),
+	SF_FILETYPE_SD2 		= FOUR_CHAR_CODE('Sd2f'),
+	SF_FILETYPE_WAVE 		= FOUR_CHAR_CODE('WAVE'),
+	SF_FILETYPE_AU 			= FOUR_CHAR_CODE('ULAW'),
+	SF_FILETYPE_RAW 		= FOUR_CHAR_CODE('DATA')
+};
 
-#define SF_SAMPTYPE_INT			FOUR_CHAR_CODE('NONE')
-#define SF_SAMPTYPE_UINT		FOUR_CHAR_CODE('UNSN')
-#define SF_SAMPTYPE_FL32		FOUR_CHAR_CODE('FL32')
-#define SF_SAMPTYPE_FL64		FOUR_CHAR_CODE('FL64')
-#define SF_SAMPTYPE_MULAW		FOUR_CHAR_CODE('ULAW')
-#define SF_SAMPTYPE_ALAW		FOUR_CHAR_CODE('ALAW')
-
-#define SF_SAMPTYPE_LE			FOUR_CHAR_CODE('sowt')		// little endian twos backwards
-
+enum t_sf_samptype {
+	SF_SAMPTYPE_INT			= FOUR_CHAR_CODE('NONE'),
+	SF_SAMPTYPE_UINT		= FOUR_CHAR_CODE('UNSN'),
+	SF_SAMPTYPE_FL32		= FOUR_CHAR_CODE('FL32'),
+	SF_SAMPTYPE_FL64		= FOUR_CHAR_CODE('FL64'),
+	SF_SAMPTYPE_MULAW		= FOUR_CHAR_CODE('ULAW'),
+	SF_SAMPTYPE_ALAW		= FOUR_CHAR_CODE('ALAW'),
+	SF_SAMPTYPE_LE			= FOUR_CHAR_CODE('sowt') // little endian twos backwards
+};
 
 #ifdef __cplusplus
 }
