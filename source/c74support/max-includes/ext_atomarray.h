@@ -19,7 +19,9 @@
 	@ingroup atomarray
 */
 
-#define ATOMARRAY_FLAG_FREECHILDREN		(1)
+enum t_atomarray_flags {
+	ATOMARRAY_FLAG_FREECHILDREN = 1
+};
 
 #ifndef C74_X64
 
@@ -39,7 +41,7 @@ typedef struct atom64
 
 #else
 
-#define t_atom64 t_atom
+typedef t_atom t_atom64;
 
 #endif
 

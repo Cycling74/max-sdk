@@ -26,12 +26,14 @@ extern "C" {
 
 /****************************************************************************/
 
-#define JIT_GL_MESH_CACHE_NONE				0
-#define JIT_GL_MESH_CACHE_AUTO				1
-#define JIT_GL_MESH_CACHE_DISPLAYLIST		2
-#define JIT_GL_MESH_CACHE_VERTEXARRAY		3
-#define JIT_GL_MESH_CACHE_VERTEXBUFFER		4
-#define JIT_GL_MESH_CACHE_DEFAULT_GROW		64
+enum t_jit_gl_mesh_cache_type {
+	JIT_GL_MESH_CACHE_NONE				= 0,
+	JIT_GL_MESH_CACHE_AUTO				= 1,
+	JIT_GL_MESH_CACHE_DISPLAYLIST		= 2,
+	JIT_GL_MESH_CACHE_VERTEXARRAY		= 3,
+	JIT_GL_MESH_CACHE_VERTEXBUFFER		= 4,
+	JIT_GL_MESH_CACHE_DEFAULT_GROW		= 64
+};
 
 #define JIT_SYM_IF(x) ((x) && (x) != _jit_sym_nothing && (x)->s_name)
 #define JIT_SYM_SAFECSTR(x) ((JIT_SYM_IF(x)) ? (x)->s_name : "<null>" )

@@ -12,20 +12,22 @@
 
 BEGIN_USING_C_LINKAGE
 
-#define SYSPARALLEL_PRIORITY_DEFAULT		0x00
-#define SYSPARALLEL_PRIORITY_LOW			0x00
-#define SYSPARALLEL_PRIORITY_MEDIUM			0x04
-#define SYSPARALLEL_PRIORITY_HIGH			0x08
-#define SYSPARALLEL_PRIORITY_TASK_LOCAL		0xa0
+enum t_sysparallel_priority {
+	SYSPARALLEL_PRIORITY_DEFAULT		= 0x00,
+	SYSPARALLEL_PRIORITY_LOW			= 0x00,
+	SYSPARALLEL_PRIORITY_MEDIUM			= 0x04,
+	SYSPARALLEL_PRIORITY_HIGH			= 0x08,
+	SYSPARALLEL_PRIORITY_TASK_LOCAL		= 0xa0
+};
 
-#define SYSPARALLEL_MAX_WORKERS			64
-
-#define SYSPARALLEL_STATE_IDLE			0
-#define SYSPARALLEL_STATE_RUN			1
-#define SYSPARALLEL_STATE_DONE			0		// changed to be the same as IDLE since it means the same thing
-#define SYSPARALLEL_STATE_QUIT			3
-
-#define SYSPARALLEL_TASK_FLAG_WORKERTRIGGERS		(0x00000001)		// first worker signals other works as necessary
+enum {
+	SYSPARALLEL_MAX_WORKERS				= 64,
+	SYSPARALLEL_STATE_IDLE				= 0,
+	SYSPARALLEL_STATE_RUN				= 1,
+	SYSPARALLEL_STATE_DONE				= 0, // changed to be the same as IDLE since it means the same thing
+	SYSPARALLEL_STATE_QUIT				= 3,
+	SYSPARALLEL_TASK_FLAG_WORKERTRIGGERS = 0x00000001, // first worker signals other works as necessary
+};
 		
 typedef struct _sysparallel_task
 {

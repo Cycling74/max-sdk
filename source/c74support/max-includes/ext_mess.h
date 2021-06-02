@@ -135,9 +135,10 @@ C74_DEPRECATED( typedef struct symbol Symbol );
 /**	Magic number used to determine if memory pointed to by a #t_object* is valid.	
 	@ingroup obj
 */
-#define MAGIC 1758379419L	/* random (but odd) */
-	
-#define OB_MAGIC MAGIC
+enum {
+	MAGIC = 1758379419L,	/* random (but odd) */
+	OB_MAGIC = MAGIC
+};
 
 /** function version of NOGOOD test is potentially more reliable
 */
@@ -165,7 +166,9 @@ long object_isnogood(void *x);
 /**	Maximum number of arguments that can be passed as a typed-list rather than using #A_GIMME.  It is generally recommended to use #A_GIMME. 
 	@ingroup obj
 */
-#define MSG_MAXARG 7
+enum {
+	MSG_MAXARG = 7
+};
 
 
 /** A list of symbols and their corresponding methods,
@@ -319,7 +322,9 @@ typedef enum {
 
 /**	Defines the largest possible string size for an atom
 	@ingroup atom */
-#define ATOM_MAX_STRLEN		(32768)
+enum {
+	ATOM_MAX_STRLEN = 32768
+};
 
 /** Union for packing any of the datum defined in #e_max_atomtypes.
 	@ingroup atom

@@ -2,7 +2,7 @@
 // jit.window.h
 //
 // author: randall jones
-// © 2001 cycling '74
+// ï¿½ 2001 cycling '74
 
 #ifndef __JIT_WINDOW_H__
 #define __JIT_WINDOW_H__
@@ -15,12 +15,15 @@
 #endif
 
 // t_jit_window flags
-#define JIT_WINDOW_USING_GL                     1 << 0
-#define JIT_WINDOW_NO_ACCEL                     1 << 1
+enum t_jit_window_flag {
+	JIT_WINDOW_USING_GL		= 1 << 0,
+	JIT_WINDOW_NO_ACCEL		= 1 << 1
+};
 
-#define MIN_WIND_DIM    9
-#define MAX_WIND_COORD  8192
-
+enum t_jit_window_constants {
+	MIN_WIND_DIM    = 9,
+	MAX_WIND_COORD  = 8192
+};
 
 #ifdef __cplusplus
 extern "C" {

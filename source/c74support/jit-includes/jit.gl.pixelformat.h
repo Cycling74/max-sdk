@@ -29,26 +29,34 @@ extern "C" {
 
 /****************************************************************************/
 
-#define JIT_GL_PF_MAX_ATTRIBCOUNT				(512)
+enum {
+	JIT_GL_PF_MAX_ATTRIBCOUNT				= 512
+};
 
-#define JIT_GL_PF_TARGET_DRAW_TO_WINDOW			(0)	// render to window
-#define JIT_GL_PF_TARGET_DRAW_TO_BITMAP			(1)	// render to memory
-#define JIT_GL_PF_TARGET_DRAW_TO_PBUFFER		(2)	// render to pbuffer (offscreen drawable)
+enum t_jit_gl_pf_target {
+	JIT_GL_PF_TARGET_DRAW_TO_WINDOW			= 0,	// render to window
+	JIT_GL_PF_TARGET_DRAW_TO_BITMAP			= 1,	// render to memory
+	JIT_GL_PF_TARGET_DRAW_TO_PBUFFER		= 2		// render to pbuffer (offscreen drawable)
+};
 
-#define JIT_GL_PF_PIXELTYPE_INDEXED				(0)
-#define JIT_GL_PF_PIXELTYPE_R					(1)	// only for BIND_TO_TEXTURE
-#define JIT_GL_PF_PIXELTYPE_RG					(2) // only for BIND_TO_TEXTURE
-#define JIT_GL_PF_PIXELTYPE_RGB					(3) 
-#define JIT_GL_PF_PIXELTYPE_RGBA				(4)
-#define JIT_GL_PF_PIXELTYPE_DEPTH				(5) // only for BIND_TO_TEXTURE
+enum t_jit_gl_pf_pixeltype {
+	JIT_GL_PF_PIXELTYPE_INDEXED				= 0,
+	JIT_GL_PF_PIXELTYPE_R					= 1,	// only for BIND_TO_TEXTURE
+	JIT_GL_PF_PIXELTYPE_RG					= 2, 	// only for BIND_TO_TEXTURE
+	JIT_GL_PF_PIXELTYPE_RGB					= 3,
+	JIT_GL_PF_PIXELTYPE_RGBA				= 4,
+	JIT_GL_PF_PIXELTYPE_DEPTH				= 5 	// only for BIND_TO_TEXTURE
+};
 
-#define JIT_GL_PF_PIXEL_FLOAT_ARB				(1 << 0)
-#define JIT_GL_PF_PIXEL_FLOAT_NV				(1 << 1)
-#define JIT_GL_PF_PIXEL_FLOAT_ATI				(1 << 2)
-#define JIT_GL_PF_PIXEL_FLOAT_APPLE				(1 << 3)
-#define JIT_GL_PF_FLAG_TEXTURE_RECTANGLE		(1 << 4)
-#define JIT_GL_PF_FLAG_TEXTURE_DEPTH			(1 << 5)
-#define JIT_GL_PF_FLAG_BIND_TO_TEXTURE			(1 << 6)	// render to texture
+enum t_jit_gl_pf_flag {
+	JIT_GL_PF_PIXEL_FLOAT_ARB				= 1 << 0,
+	JIT_GL_PF_PIXEL_FLOAT_NV				= 1 << 1,
+	JIT_GL_PF_PIXEL_FLOAT_ATI				= 1 << 2,
+	JIT_GL_PF_PIXEL_FLOAT_APPLE				= 1 << 3,
+	JIT_GL_PF_FLAG_TEXTURE_RECTANGLE		= 1 << 4,
+	JIT_GL_PF_FLAG_TEXTURE_DEPTH			= 1 << 5,
+	JIT_GL_PF_FLAG_BIND_TO_TEXTURE			= 1 << 6	// render to texture
+};
 
 #ifdef MAC_VERSION
 

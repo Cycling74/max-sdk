@@ -35,34 +35,43 @@
 #define FALSE 	0
 #endif
 
-#define JIT_ATTR_GET_OPAQUE			0x00000001	///< private getter (all)          @ingroup jitter
-#define JIT_ATTR_SET_OPAQUE			0x00000002	///< private setter (all)          @ingroup jitter
-#define JIT_ATTR_GET_OPAQUE_USER	0x00000100	///< private getter (user)         @ingroup jitter
-#define JIT_ATTR_SET_OPAQUE_USER	0x00000200	///< private setter (user)         @ingroup jitter
-#define JIT_ATTR_GET_DEFER			0x00010000	///< defer getter (deprecated)     @ingroup jitter
-#define JIT_ATTR_GET_USURP			0x00020000	///< usurp getter (deprecated)     @ingroup jitter
-#define JIT_ATTR_GET_DEFER_LOW		0x00040000	///< defer getter                  @ingroup jitter
-#define JIT_ATTR_GET_USURP_LOW		0x00080000	///< usurp getter                  @ingroup jitter
-#define JIT_ATTR_SET_DEFER			0x01000000	///< defer setter (deprecated)     @ingroup jitter
-#define JIT_ATTR_SET_USURP			0x02000000	///< usurp setter (deprecated)     @ingroup jitter
-#define JIT_ATTR_SET_DEFER_LOW		0x04000000	///< defer setter                  @ingroup jitter
-#define JIT_ATTR_SET_USURP_LOW		0x08000000	///< usurp setter                  @ingroup jitter
+enum t_jit_attr_flags {
+	JIT_ATTR_GET_OPAQUE			= 0x00000001,	///< private getter (all)          @ingroup jitter
+	JIT_ATTR_SET_OPAQUE			= 0x00000002,	///< private setter (all)          @ingroup jitter
+	JIT_ATTR_GET_OPAQUE_USER	= 0x00000100,	///< private getter (user)         @ingroup jitter
+	JIT_ATTR_SET_OPAQUE_USER	= 0x00000200,	///< private setter (user)         @ingroup jitter
+	JIT_ATTR_GET_DEFER			= 0x00010000,	///< defer getter (deprecated)     @ingroup jitter
+	JIT_ATTR_GET_USURP			= 0x00020000,	///< usurp getter (deprecated)     @ingroup jitter
+	JIT_ATTR_GET_DEFER_LOW		= 0x00040000,	///< defer getter                  @ingroup jitter
+	JIT_ATTR_GET_USURP_LOW		= 0x00080000,	///< usurp getter                  @ingroup jitter
+	JIT_ATTR_SET_DEFER			= 0x01000000,	///< defer setter (deprecated)     @ingroup jitter
+	JIT_ATTR_SET_USURP			= 0x02000000,	///< usurp setter (deprecated)     @ingroup jitter
+	JIT_ATTR_SET_DEFER_LOW		= 0x04000000,	///< defer setter                  @ingroup jitter
+	JIT_ATTR_SET_USURP_LOW		= 0x08000000	///< usurp setter                  @ingroup jitter
+};
 
-// t_jit_matrix_info flags
-#define JIT_MATRIX_DATA_HANDLE		0x00000002	///< data is handle                                                   @ingroup jitter
-#define JIT_MATRIX_DATA_REFERENCE	0x00000004 	///< data is reference to outside memory                              @ingroup jitter
-#define JIT_MATRIX_DATA_PACK_TIGHT	0x00000008 	///< data is tightly packed (doesn't use standard 16 byte alignment)  @ingroup jitter
-#define JIT_MATRIX_DATA_FLAGS_USE	0x00008000 	/**< necessary if using handle/reference data flags when creating     @ingroup jitter
-												 * jit_matrix, however, it is never stored in matrix */ 
-                                                                                                        
-#define JIT_MATRIX_MAX_DIMCOUNT		32 			///< maximum dimension count                                          @ingroup jitter
-#define JIT_MATRIX_MAX_PLANECOUNT	32 			///< maximum plane count                                              @ingroup jitter
-                                                                                                        
+
+enum t_jit_matrix_info_flags {
+	// t_jit_matrix_info flags
+	JIT_MATRIX_DATA_HANDLE		= 0x00000002,	///< data is handle                                                   @ingroup jitter
+	JIT_MATRIX_DATA_REFERENCE	= 0x00000004, 	///< data is reference to outside memory                              @ingroup jitter
+	JIT_MATRIX_DATA_PACK_TIGHT	= 0x00000008, 	///< data is tightly packed (doesn't use standard 16 byte alignment)  @ingroup jitter
+	JIT_MATRIX_DATA_FLAGS_USE	= 0x00008000 	/**< necessary if using handle/reference data flags when creating     @ingroup jitter
+													 * jit_matrix, however, it is never stored in matrix */
+};
+
+enum {
+	JIT_MATRIX_MAX_DIMCOUNT		= 32, 			///< maximum dimension count                                          @ingroup jitter
+	JIT_MATRIX_MAX_PLANECOUNT	= 32 			///< maximum plane count                                              @ingroup jitter
+};
+
 // t_matrix_conv_info flags                                                                                           @ingroup jitter
-#define JIT_MATRIX_CONVERT_CLAMP	0x00000001  ///< not currently used                                               @ingroup jitter
-#define JIT_MATRIX_CONVERT_INTERP	0x00000002	///< use interpolation                                                @ingroup jitter
-#define JIT_MATRIX_CONVERT_SRCDIM	0x00000004	///< use source dimensions                                            @ingroup jitter
-#define JIT_MATRIX_CONVERT_DSTDIM	0x00000008	///< use destination dimensions                                       @ingroup jitter
+enum t_matrix_conv_info_flags {
+	JIT_MATRIX_CONVERT_CLAMP	= 0x00000001,	///< not currently used                                               @ingroup jitter
+	JIT_MATRIX_CONVERT_INTERP	= 0x00000002,	///< use interpolation                                                @ingroup jitter
+	JIT_MATRIX_CONVERT_SRCDIM	= 0x00000004,	///< use source dimensions                                            @ingroup jitter
+	JIT_MATRIX_CONVERT_DSTDIM	= 0x00000008	///< use destination dimensions                                       @ingroup jitter
+};
 
 typedef unsigned long 	ulong;
 typedef unsigned int 	uint;

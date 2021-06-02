@@ -121,59 +121,63 @@ void jit_gl_support_free(t_jit_gl_support *x);
 
 /****************************************************************************/
 
-// backend targets
-#define JIT_GL_ARB											(5)
-#define JIT_GL_NV											(6)
-#define JIT_GL_APPLE										(7)
-#define JIT_GL_EXT											(8)
-#define JIT_GL_FBO											(9)
-#define JIT_GL_PBUFFER										(10)
-#define JIT_GL_NONE											(-1)
+enum t_jit_gl_target {
+	// backend targets
+	JIT_GL_ARB											= 5,
+	JIT_GL_NV											= 6,
+	JIT_GL_APPLE										= 7,
+	JIT_GL_EXT											= 8,
+	JIT_GL_FBO											= 9,
+	JIT_GL_PBUFFER										= 10,
+	JIT_GL_NONE											= -1,
 
-// float targets
-#define JIT_GL_FLOAT_NONE									(0)
-#define JIT_GL_FLOAT_ARB									(1)
-#define JIT_GL_FLOAT_ATI									(2)
-#define JIT_GL_FLOAT_NV										(3)
-#define JIT_GL_FLOAT_APPLE									(4)
+	// float targets
+	JIT_GL_FLOAT_NONE									= 0,
+	JIT_GL_FLOAT_ARB									= 1,
+	JIT_GL_FLOAT_ATI									= 2,
+	JIT_GL_FLOAT_NV										= 3,
+	JIT_GL_FLOAT_APPLE									= 4
+};
 
-// format flags
-#define JIT_GL_LUMINANCE									(1 << 0)
-#define JIT_GL_INTENSITY									(1 << 1)
-#define JIT_GL_ALPHA										(1 << 2)
-#define JIT_GL_LUMINANCE_ALPHA								(1 << 3)
-#define JIT_GL_RGB											(1 << 4)
-#define JIT_GL_RGBA											(1 << 5)
-#define JIT_GL_DEPTH										(1 << 6)
-#define JIT_GL_UYVY											(1 << 7)
 
-// float flags
-#define JIT_GL_FLOAT16										(1 << 8)
-#define JIT_GL_FLOAT32										(1 << 9)
+enum t_jit_gl_flag {
+	// format flags
+	JIT_GL_LUMINANCE									= 1 << 0,
+	JIT_GL_INTENSITY									= 1 << 1,
+	JIT_GL_ALPHA										= 1 << 2,
+	JIT_GL_LUMINANCE_ALPHA								= 1 << 3,
+	JIT_GL_RGB											= 1 << 4,
+	JIT_GL_RGBA											= 1 << 5,
+	JIT_GL_DEPTH										= 1 << 6,
+	JIT_GL_UYVY											= 1 << 7,
 
-// compression flags
-#define JIT_GL_DXT1											(1 << 10)
-#define JIT_GL_DXT3											(1 << 11)
-#define JIT_GL_DXT5											(1 << 12)
+	// float flags
+	JIT_GL_FLOAT16										= 1 << 8,
+	JIT_GL_FLOAT32										= 1 << 9,
 
-// clamp flags
-#define JIT_GL_CLAMP										(1 << 13)
-#define JIT_GL_CLAMP_TO_EDGE								(1 << 14)
+	// compression flags
+	JIT_GL_DXT1											= 1 << 10,
+	JIT_GL_DXT3											= 1 << 11,
+	JIT_GL_DXT5											= 1 << 12,
 
-// filter flags
-#define JIT_GL_NEAREST										(1 << 15)
-#define JIT_GL_LINEAR										(1 << 16)
-#define JIT_GL_NEAREST_MIPMAP_NEAREST						(1 << 17)
-#define JIT_GL_LINEAR_MIPMAP_NEAREST						(1 << 18)
-#define JIT_GL_LINEAR_MIPMAP_LINEAR							(1 << 19)
+	// clamp flags
+	JIT_GL_CLAMP										= 1 << 13,
+	JIT_GL_CLAMP_TO_EDGE								= 1 << 14,
 
-// anisotropy flags
-#define JIT_GL_ANISOTROPY1									(1 << 20)
-#define JIT_GL_ANISOTROPY2									(1 << 21)
-#define JIT_GL_ANISOTROPY4									(1 << 22)
-#define JIT_GL_ANISOTROPY8									(1 << 23)
-#define JIT_GL_ANISOTROPY16									(1 << 24)
+	// filter flags
+	JIT_GL_NEAREST										= 1 << 15,
+	JIT_GL_LINEAR										= 1 << 16,
+	JIT_GL_NEAREST_MIPMAP_NEAREST						= 1 << 17,
+	JIT_GL_LINEAR_MIPMAP_NEAREST						= 1 << 18,
+	JIT_GL_LINEAR_MIPMAP_LINEAR							= 1 << 19,
 
+	// anisotropy flags
+	JIT_GL_ANISOTROPY1									= 1 << 20,
+	JIT_GL_ANISOTROPY2									= 1 << 21,
+	JIT_GL_ANISOTROPY4									= 1 << 22,
+	JIT_GL_ANISOTROPY8									= 1 << 23,
+	JIT_GL_ANISOTROPY16									= 1 << 24
+};
 
 /****************************************************************************/
 

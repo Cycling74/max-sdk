@@ -22,11 +22,12 @@
 
 // return codes for renderer
 typedef t_atom_long t_jit_gl_context_status;
-#define JIT_GL_VIEW_AVAILABLE		0
-#define JIT_GL_VIEW_UNAVAILABLE		1
-#define JIT_GL_VIEW_ERROR			2
-	
 
+enum t_jit_gl_view_status {
+	JIT_GL_VIEW_AVAILABLE		= 0,
+	JIT_GL_VIEW_UNAVAILABLE		= 1,
+	JIT_GL_VIEW_ERROR			= 2
+};
 
 // attributes of t_jit_gl_context_view to cache when recreating
 typedef struct _jit_gl_context_view_cache {

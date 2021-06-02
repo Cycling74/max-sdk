@@ -57,10 +57,12 @@ t_jit_glchunk * jit_glchunk_new_frommatrix(t_symbol * prim, void *vm, void *im);
 /****************************************************************************/
 
 // flags for chunk creation
-#define JIT_GL_CHUNK_IGNORE_TEXTURES		1 << 0
-#define JIT_GL_CHUNK_IGNORE_NORMALS			1 << 1
-#define JIT_GL_CHUNK_IGNORE_COLORS			1 << 2
-#define JIT_GL_CHUNK_IGNORE_EDGES			1 << 3
+enum t_jit_gl_chunk_flags {
+	JIT_GL_CHUNK_IGNORE_TEXTURES		= 1 << 0,
+	JIT_GL_CHUNK_IGNORE_NORMALS			= 1 << 1,
+	JIT_GL_CHUNK_IGNORE_COLORS			= 1 << 2,
+	JIT_GL_CHUNK_IGNORE_EDGES			= 1 << 3
+};
 
 /****************************************************************************/
 

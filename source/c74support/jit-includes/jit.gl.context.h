@@ -79,19 +79,23 @@ char jit_gl_is_extension_supported(t_jit_gl_context ctx, const char* ext);
 /****************************************************************************/
 
 // context flags
-#define JIT_GL_CTX_DOUBLEBUF		0x00000001
-#define JIT_GL_CTX_DEPTHBUF			0x00000002
-#define JIT_GL_CTX_ACCELERATED		0x00000004
-#define JIT_GL_CTX_FSAA				0x00000008
-#define JIT_GL_CTX_HINT_QUALITY		0x00000010
-#define JIT_GL_CTX_STEREO			0x00000020
+enum t_jit_gl_context_flag {
+	JIT_GL_CTX_DOUBLEBUF		= 0x00000001,
+	JIT_GL_CTX_DEPTHBUF			= 0x00000002,
+	JIT_GL_CTX_ACCELERATED		= 0x00000004,
+	JIT_GL_CTX_FSAA				= 0x00000008,
+	JIT_GL_CTX_HINT_QUALITY		= 0x00000010,
+	JIT_GL_CTX_STEREO			= 0x00000020
+};
 
-// target types	
-#define JIT_GL_TARGET_WINDOW		0x00000000
-#define	JIT_GL_TARGET_MATRIX		0x00000001
-#define JIT_GL_TARGET_PWINDOW		0x00000002
-#define JIT_GL_TARGET_TEXTURE		0x00000003
-#define JIT_GL_TARGET_ROOT_SHARED	0x00000004
+// target types
+enum t_jit_gl_target_type {
+	JIT_GL_TARGET_WINDOW		= 0x00000000,
+	JIT_GL_TARGET_MATRIX		= 0x00000001,
+	JIT_GL_TARGET_PWINDOW		= 0x00000002,
+	JIT_GL_TARGET_TEXTURE		= 0x00000003,
+	JIT_GL_TARGET_ROOT_SHARED	= 0x00000004
+};
 
 /****************************************************************************/
 
