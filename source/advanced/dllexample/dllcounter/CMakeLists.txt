@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-pretarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../../../script/max-pretarget.cmake)
 
 #############################################################
 # MAX EXTERNAL
@@ -34,4 +34,4 @@ target_link_libraries(
 	mydll # add project to ensure that it's a dependency
 )
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-posttarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../../../script/max-posttarget.cmake)

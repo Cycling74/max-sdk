@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../script/max-pretarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-pretarget.cmake)
 
 #############################################################
 # MAX EXTERNAL
@@ -22,4 +22,4 @@ add_library(
 	${MAX_SDK_INCLUDES}/common/commonsyms.c
 )
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../script/max-posttarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-posttarget.cmake)
