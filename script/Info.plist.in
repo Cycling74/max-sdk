@@ -25,11 +25,11 @@
 	</dict>
 	
 	<key>CFBundleVersion</key>
-	<string>@GIT_VERSION_MAJ@.@GIT_VERSION_MIN@.@GIT_VERSION_SUB@</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>@GIT_VERSION_MAJ@.@GIT_VERSION_MIN@.@GIT_VERSION_SUB@</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleLongVersionString</key>
-	<string>${MACOSX_BUNDLE_EXECUTABLE_NAME} @GIT_VERSION_MAJ@.@GIT_VERSION_MIN@.@GIT_VERSION_SUB@ - @COPYRIGHT_STRING@</string>
+	<string>${MACOSX_BUNDLE_EXECUTABLE_NAME} @PACKAGE_VERSION@ - @COPYRIGHT_STRING@</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>@COPYRIGHT_STRING@</string>
 	

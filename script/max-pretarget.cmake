@@ -9,26 +9,40 @@ if (WIN32)
 	# These must be prior to the "project" command
 	# https://stackoverflow.com/questions/14172856/compile-with-mt-instead-of-md-using-cmake
 
-    set(CMAKE_C_FLAGS_DEBUG            "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
-    set(CMAKE_C_FLAGS_MINSIZEREL       "/MT /O1 /Ob1 /D NDEBUG")
-    set(CMAKE_C_FLAGS_RELEASE          "/MT /O2 /Ob2 /D NDEBUG")
-    set(CMAKE_C_FLAGS_RELWITHDEBINFO   "/MT /Zi /O2 /Ob1 /D NDEBUG")
+	if (CMAKE_GENERATOR MATCHES "Visual Studio")
+		set(CMAKE_C_FLAGS_DEBUG            "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
+		set(CMAKE_C_FLAGS_MINSIZEREL       "/MT /O1 /Ob1 /D NDEBUG")
+		set(CMAKE_C_FLAGS_RELEASE          "/MT /O2 /Ob2 /D NDEBUG")
+		set(CMAKE_C_FLAGS_RELWITHDEBINFO   "/MT /Zi /O2 /Ob1 /D NDEBUG")
 
-    set(CMAKE_CXX_FLAGS_DEBUG          "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
-    set(CMAKE_CXX_FLAGS_MINSIZEREL     "/MT /O1 /Ob1 /D NDEBUG")
-    set(CMAKE_CXX_FLAGS_RELEASE        "/MT /O2 /Ob2 /D NDEBUG")
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/MT /Zi /O2 /Ob1 /D NDEBUG")
+		set(CMAKE_CXX_FLAGS_DEBUG          "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
+		set(CMAKE_CXX_FLAGS_MINSIZEREL     "/MT /O1 /Ob1 /D NDEBUG")
+		set(CMAKE_CXX_FLAGS_RELEASE        "/MT /O2 /Ob2 /D NDEBUG")
+		set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/MT /Zi /O2 /Ob1 /D NDEBUG")
+	else()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
+	endif ()
 endif ()
 
 project(${THIS_FOLDER_NAME})
 
+if ("${PROJECT_NAME}" MATCHES ".*_tilde")
+	string(REGEX REPLACE "_tilde" "~" EXTERN_OUTPUT_NAME_DEFAULT "${PROJECT_NAME}")
+else ()
+	set(EXTERN_OUTPUT_NAME_DEFAULT "${PROJECT_NAME}")
+endif ()
+set("${PROJECT_NAME}_EXTERN_OUTPUT_NAME" "${EXTERN_OUTPUT_NAME_DEFAULT}" CACHE STRING "The name to give to the external output file/directory")
+mark_as_advanced("${PROJECT_NAME}_EXTERN_OUTPUT_NAME")
+
 if (NOT DEFINED C74_SUPPORT_DIR)
-	set(C74_SUPPORT_DIR ${CMAKE_CURRENT_LIST_DIR}/../c74support)
+	set(C74_SUPPORT_DIR ${CMAKE_CURRENT_LIST_DIR}/../source/c74support)
 endif ()
 
 set(MAX_SDK_INCLUDES "${C74_SUPPORT_DIR}/max-includes")
 set(MAX_SDK_MSP_INCLUDES "${C74_SUPPORT_DIR}/msp-includes")
 set(MAX_SDK_JIT_INCLUDES "${C74_SUPPORT_DIR}/jit-includes")
+
+set(C74_SCRIPTS "${CMAKE_CURRENT_LIST_DIR}")
 
 set(C74_CXX_STANDARD 0)
 
@@ -39,7 +53,13 @@ if (APPLE)
 	set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE STRING "Minimum OS X deployment version" FORCE)
 endif ()
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../externals")
+if (NOT DEFINED CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+	if (NOT DEFINED C74_BUILD_MAX_EXTENSION)
+		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../externals")
+	else ()
+		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../extensions")
+	endif ()
+endif()
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
@@ -60,7 +80,7 @@ if (WIN32)
 		-D_USE_MATH_DEFINES
 	)
 else ()
-	file (STRINGS "${CMAKE_CURRENT_LIST_DIR}/max-linker-flags.txt" C74_SYM_MAX_LINKER_FLAGS)
+	file (TO_NATIVE_PATH "${CMAKE_CURRENT_LIST_DIR}/max-linker-flags.txt" C74_SYM_MAX_LINKER_FLAGS)
 
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${C74_SYM_MAX_LINKER_FLAGS}")
 	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${C74_SYM_MAX_LINKER_FLAGS}")
