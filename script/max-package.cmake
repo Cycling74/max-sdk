@@ -14,7 +14,6 @@ set(ADD_VERINFO YES)
 
 # Update package-info.json, if present
 if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/package-info.json.in")
-	message("Building _____ ${GIT_TAG} _____")
 	set(C74_PACKAGE_NAME "${THIS_FOLDER_NAME}")
 	configure_file("${CMAKE_CURRENT_SOURCE_DIR}/package-info.json.in" "${CMAKE_CURRENT_SOURCE_DIR}/package-info.json" @ONLY)
 
@@ -23,6 +22,11 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/package-info.json.in")
 	file(READ "${CMAKE_CURRENT_SOURCE_DIR}/package-info.json" PKGINFOFILE)
 
 	string(JSON AUTHOR GET ${PKGINFOFILE} "author")
+
+	string(JSON PACKAGE_VERSION ERROR_VARIABLE PKG_ERROR GET ${PKGINFOFILE} "version")
+	if (PACKAGE_VERSION MATCHES "-NOTFOUND")
+		set(PACKAGE_VERSION "${GIT_VERSION_MAJ}.${GIT_VERSION_MIN}.${GIT_VERSION_SUB}")
+	endif ()
 	
 	string(JSON PKG_EXTRA_STR ERROR_VARIABLE PKG_ERROR GET ${PKGINFOFILE} "package_extra")
 
@@ -45,6 +49,8 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/package-info.json.in")
 	if (EXCLUDE_FROM_COLLECTIVES MATCHES "-NOTFOUND")
 		set(EXCLUDE_FROM_COLLECTIVES "no")
 	endif ()
+
+	message("Building _____ ${PACKAGE_VERSION} _____")
 endif ()
 
 
@@ -59,6 +65,7 @@ endif ()
 if (WIN32 AND ADD_VERINFO)
 	message("Generating verinfo.rc")
 
+	string(REPLACE "." "," PACKAGE_VERSION ${PACKAGE_VERSION})
 	configure_file("${CMAKE_CURRENT_LIST_DIR}/verinfo.rc.in" "${CMAKE_CURRENT_LIST_DIR}/verinfo.rc" @ONLY)
 endif()
 

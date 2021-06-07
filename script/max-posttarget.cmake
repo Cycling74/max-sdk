@@ -12,29 +12,36 @@ else ()
 	set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 endif ()
 
-if ("${PROJECT_NAME}" MATCHES ".*_tilde")
-	string(REGEX REPLACE "_tilde" "~" EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
-else ()
-	set(EXTERN_OUTPUT_NAME "${PROJECT_NAME}")
-endif ()
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${${PROJECT_NAME}_EXTERN_OUTPUT_NAME}")
+#remove the 'lib' prefix for some generators
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${EXTERN_OUTPUT_NAME}")
 
-#add_library("${MAX_SDK_INCLUDES}/common/commonsyms.c")
 
 ### Output ###
 if (APPLE)
-    find_library(MSP_LIBRARY "MaxAudioAPI" HINTS "${MAX_SDK_MSP_INCLUDES}")
-    target_link_libraries(${PROJECT_NAME} PUBLIC ${MSP_LIBRARY})
-
-	if ("${PROJECT_NAME}" MATCHES "jit.*")
-    	find_library(JITTER_LIBRARY "JitterAPI" HINTS "${MAX_SDK_JIT_INCLUDES}")
-    	target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
-		if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
-			target_link_libraries(${PROJECT_NAME} PUBLIC "-framework OpenGL")
-		endif()
-	endif()
-	
+	find_library(
+		MSP_LIBRARY "MaxAudioAPI"
+		REQUIRED
+		PATHS "${MAX_SDK_MSP_INCLUDES}"
+		NO_DEFAULT_PATH
+		#only use the specific path above, don't look in system root
+		#this enables cross compilation to provide an alternative root
+		#but also find this specific path
+		NO_CMAKE_FIND_ROOT_PATH
+	)
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${MSP_LIBRARY})
+	find_library(
+		JITTER_LIBRARY "JitterAPI"
+		REQUIRED
+		PATHS "${MAX_SDK_JIT_INCLUDES}"
+		NO_DEFAULT_PATH
+		NO_CMAKE_FIND_ROOT_PATH
+	)
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${JITTER_LIBRARY})
+	if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
+		target_link_libraries(${PROJECT_NAME} PUBLIC "-framework OpenGL")
+	endif()	
 	set_property(TARGET ${PROJECT_NAME}
 				 PROPERTY BUNDLE True)
 	set_property(TARGET ${PROJECT_NAME}
@@ -43,28 +50,31 @@ if (APPLE)
 	set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${GIT_VERSION_TAG}")
     set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_LIST_DIR}/Info.plist.in)
 elseif (WIN32)
-	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAPI_LIB})
-	target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAudio_LIB})
-	if ("${PROJECT_NAME}" MATCHES "jit.*")
-		target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
+    if ("${PROJECT_NAME}" MATCHES "_test")
+    else ()
 		if ("${PROJECT_NAME}" MATCHES "jit.gl.*")
-			target_link_libraries(${PROJECT_NAME} PUBLIC opengl32 glu32)
+			find_package(OpenGL REQUIRED)
+			include_directories(${OPENGL_INCLUDE_DIR})
+			target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENGL_LIBRARIES})
 		endif()
-	endif()
 
+		target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAPI_LIB})
+		target_link_libraries(${PROJECT_NAME} PUBLIC ${MaxAudio_LIB})
+		target_link_libraries(${PROJECT_NAME} PUBLIC ${Jitter_LIB})
+	endif ()
+	
 	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mxe64")
 
-	# warning about constexpr not being const in c++14
-	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/wd4814")
+	if (CMAKE_GENERATOR MATCHES "Visual Studio")
+		# warning about constexpr not being const in c++14
+		set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/wd4814")
 
-	# allow parallel builds
-	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/MP")
+		# do not generate ILK files
+		set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
-	# do not generate ILK files
-	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
-
-	# silence deprecation warnings
-	target_compile_definitions(${PROJECT_NAME} PUBLIC _CRT_SECURE_NO_WARNINGS)
+		# allow parallel builds
+		set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/MP")
+	endif ()
 
 	if (EXCLUDE_FROM_COLLECTIVES STREQUAL "yes")
 		target_compile_definitions(${PROJECT_NAME} PRIVATE "-DEXCLUDE_FROM_COLLECTIVES")
@@ -77,11 +87,12 @@ endif ()
 
 
 ### Post Build ###
-if (APPLE)
+
+if (APPLE AND NOT "${PROJECT_NAME}" MATCHES "_test")
 	add_custom_command( 
 		TARGET ${PROJECT_NAME} 
 		POST_BUILD 
-		COMMAND cp "${CMAKE_CURRENT_LIST_DIR}/PkgInfo" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${EXTERN_OUTPUT_NAME}.mxo/Contents/PkgInfo" 
+		COMMAND cp "${CMAKE_CURRENT_LIST_DIR}/PkgInfo" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${${PROJECT_NAME}_EXTERN_OUTPUT_NAME}.mxo/Contents/PkgInfo" 
 		COMMENT "Copy PkgInfo" 
 	)
 endif ()
