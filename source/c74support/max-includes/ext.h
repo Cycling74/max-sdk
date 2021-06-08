@@ -6,7 +6,7 @@
 #ifdef C74_MIN_API
 #define C74_INHERITS_FROM_OBJECT :public t_object
 #else
-#define C74_INHERITS_FROM_OBJECT :public t_object
+#define C74_INHERITS_FROM_OBJECT
 #endif
 
 #include "ext_infer_system.h"
