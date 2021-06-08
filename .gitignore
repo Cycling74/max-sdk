@@ -6,7 +6,8 @@ sysbuild
 log.txt
 externals
 support
-build
+build/
+build-*/
 *.o
 *.dylib
 
