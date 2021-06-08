@@ -38,7 +38,7 @@ typedef struct _dictionary_entry {
 	@ingroup dictionary
 	@see t_dictionary
 */
-typedef struct _dictionary
+typedef struct _dictionary C74_INHERITS_FROM_OBJECT
 {
 	t_object		d_obj;
 	t_hashtab		*d_hashtab;

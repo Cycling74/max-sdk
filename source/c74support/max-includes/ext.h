@@ -1,7 +1,13 @@
 #ifndef _EXT_H_
 #define _EXT_H_
 
-#define C74_MAX_SDK_VERSION 0x0701
+#define C74_MAX_SDK_VERSION 0x0820
+
+#ifdef C74_MIN_API
+#define C74_INHERITS_FROM_OBJECT :public t_object
+#else
+#define C74_INHERITS_FROM_OBJECT
+#endif
 
 #include "ext_infer_system.h"
 
@@ -54,11 +60,13 @@
 #include "ext_typelist.h"
 #include "ext_post.h"
 
+#ifdef C74_LEGACY_DEFINES
 // the old post() and error() functions should be avoided since their names are generic and
 // could be overloaded by earlier-loading frameworks/dlls in the plugin context.
 // for now, we simply redefine post() and error() usage to the object_ variation. See #4779.
 #define post(...)	object_post(NULL, __VA_ARGS__)
 #define error(...)	object_error(NULL, __VA_ARGS__)
+#endif
 
 BEGIN_USING_C_LINKAGE
 /**	ext_main() is the entry point for an extern to be loaded, which all externs must implement

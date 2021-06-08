@@ -59,7 +59,7 @@ if (APPLE)
 	message("Generating Info.plist")
 	
 	set(BUNDLE_IDENTIFIER "\${PRODUCT_NAME:rfc1034identifier}")
-	configure_file("${CMAKE_CURRENT_LIST_DIR}/Info.plist.in" "${CMAKE_CURRENT_LIST_DIR}/Info.plist" @ONLY)
+	#configure_file("${CMAKE_CURRENT_LIST_DIR}/Info.plist.in" "${CMAKE_CURRENT_LIST_DIR}/Info.plist" @ONLY)
 endif ()
 
 if (WIN32 AND ADD_VERINFO)

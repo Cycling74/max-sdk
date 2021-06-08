@@ -9,7 +9,12 @@ namespace c74 {
 namespace max {
 
 #include "max-includes/ext.h"
+#include "max-includes/ext_dictobj.h"
+#include "max-includes/ext_time.h"
 #include "max-includes/commonsyms.h"
+#include "max-includes/jgraphics.h"
+#include "max-includes/ext_parameter.h"
+#include "max-includes/ext_boxstyle.h"
 
 }
 }
