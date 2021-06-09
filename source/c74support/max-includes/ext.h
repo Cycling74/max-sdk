@@ -3,12 +3,6 @@
 
 #define C74_MAX_SDK_VERSION 0x0820
 
-#ifdef C74_MIN_API
-#define C74_CPP_CAST_TO_OBJECT operator t_object*() { return (t_object *)&this; }
-#else
-#define C74_CPP_CAST_TO_OBJECT
-#endif
-
 #include "ext_infer_system.h"
 
 #include "ext_common.h"
