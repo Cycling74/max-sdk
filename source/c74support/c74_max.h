@@ -8,6 +8,8 @@
 namespace c74 {
 namespace max {
 
+#define calcoffset(x,y) ((c74::max::t_ptr_int)(&(((x *)0L)->y)))
+
 #include "max-includes/ext.h"
 #include "max-includes/ext_dictobj.h"
 #include "max-includes/ext_time.h"
