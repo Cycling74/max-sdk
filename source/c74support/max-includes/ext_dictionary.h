@@ -45,7 +45,6 @@ typedef struct _dictionary
 	t_linklist		*d_linklist;
 	void			*d_transaction_mutex; // currently having header inclusion issues this is a t_systhread_mutex
 	char			d_use_transaction;  // always lock transaction mutex with low level dictionary calls
-	C74_CPP_CAST_TO_OBJECT
 } t_dictionary; 
 
 #if C74_PRAGMA_STRUCT_PACKPUSH
