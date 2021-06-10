@@ -18,6 +18,9 @@ namespace max {
 #include "max-includes/ext_parameter.h"
 #include "max-includes/ext_boxstyle.h"
 
+#undef min
+#undef max
+
 }
 }
 
