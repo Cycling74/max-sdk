@@ -19,3 +19,4 @@ latex/
 *.map
 *.md5
 
+script/verinfo.rc

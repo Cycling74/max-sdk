@@ -6,7 +6,9 @@ cmake_minimum_required(VERSION 3.19)
 string(REGEX REPLACE "(.*)/" "" THIS_FOLDER_NAME "${CMAKE_CURRENT_SOURCE_DIR}")
 project(${THIS_FOLDER_NAME})
 
-
+set(GIT_VERSION_MAJ 0)
+set(GIT_VERSION_MIN 0)
+set(GIT_VERSION_SUB 0)
 # Set version variables based on the current Git tag
 include("${CMAKE_CURRENT_LIST_DIR}/git-rev.cmake")
 
