@@ -61,14 +61,6 @@
 #define C74_PRAGMA_STRUCT_PACK		0
 #define C74_STRUCT_PACK_SIZE		4
 
-// If the prefix header containing #include <Carbon/Carbon.h> is not present, then we include 
-// a minimal set of required headers here.
-#ifndef __MACTYPES__
-#include <MacTypes.h>
-#endif
-
-#include <sys/types.h>
-
 #endif // MAC_VERSION
 
 
@@ -82,8 +74,6 @@
 #define C74_STRUCT_PACK_SIZE		4
 
 #endif // LINUX_VERSION
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Win32 Target
@@ -136,36 +126,9 @@
 #pragma warning( disable : 4305 ) // truncation from 'type1' to 'type2' (e.g. double->float)
 #endif 
 
-#ifndef _CRT_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
-#endif 
-
-#ifndef _SCL_SECURE_NO_WARNINGS
-#define _SCL_SECURE_NO_WARNINGS
-#endif 
-
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#include <malloc.h>
-#include <windows.h>
-#include <richedit.h>
-#include <commctrl.h>
-
 #endif // WIN_VERSION
 
-// c standard library
-#include <assert.h>
-#include <ctype.h>
-#include <float.h>
-#include <math.h>
-#include <setjmp.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
+#include "ext_prefix_includes.h"
 
 #ifdef calcoffset
 	// The ifdefs for this macro have been set up like this so that Doxygen can document this macro on a Mac [TAP]
@@ -269,5 +232,13 @@ C74_STATIC_ASSERT( (calcoffset(t_testpackingstruct, secondmember) - calcoffset(t
 
 #define C74_EXTERNAL_NOT_ON_X64(name) void ext_main(void *r) { error("%s: not supported on x64", name); }
 #define C74_EXTERNAL_NOT_ON_X64_QUIET void ext_main(void *r) { return; }
+
+#ifdef C74_POISON_FLAVOUR_MACROS
+
+#ifndef WIN_VERSION
+#pragma GCC poison RT PLUG MFL
+#endif
+
+#endif // #ifdef C74_POISON_FLAVOUR_MACROS
 
 #endif // _EXT_PREFIX_H_

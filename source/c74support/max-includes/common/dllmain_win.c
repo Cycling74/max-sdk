@@ -13,7 +13,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved )
 			// we don't need to actually receive those calls. The below call tells the OS to
 			// optimize those out.
 			DisableThreadLibraryCalls(hinstDLL);
-#ifdef _DEBUG
+#if defined(_DEBUG) && defined(PRINT_DLL_PROCESS_ATTACH_MESSAGES)
 			{
 				char buff[_MAX_PATH];
 				OutputDebugStringA("DLL_PROCESS_ATTACH: ");

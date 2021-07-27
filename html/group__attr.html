@@ -453,7 +453,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga26e3d2d547a494e2dbb994cff446a1d2"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga26e3d2d547a494e2dbb994cff446a1d2">object_attr_get</a> (void *x, <a class="el" href="structt__symbol.html">t_symbol</a> *attrname)</td></tr>
 <tr class="memdesc:ga26e3d2d547a494e2dbb994cff446a1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the pointer to an attribute, given its name.  <a href="group__attr.html#ga26e3d2d547a494e2dbb994cff446a1d2">More...</a><br /></td></tr>
 <tr class="separator:ga26e3d2d547a494e2dbb994cff446a1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f3c64b07f0bef74e968f41925d2a595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga6f3c64b07f0bef74e968f41925d2a595">object_attr_method</a> (void *x, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname, void **attr, long *get)</td></tr>
+<tr class="memitem:ga6f3c64b07f0bef74e968f41925d2a595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga6f3c64b07f0bef74e968f41925d2a595">object_attr_method</a> (void *x, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname, void **attr, long *get)</td></tr>
 <tr class="memdesc:ga6f3c64b07f0bef74e968f41925d2a595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the method of an attribute's <code>get</code> or <code>set</code> function, as well as a pointer to the attribute itself, from a message name.  <a href="group__attr.html#ga6f3c64b07f0bef74e968f41925d2a595">More...</a><br /></td></tr>
 <tr class="separator:ga6f3c64b07f0bef74e968f41925d2a595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac37ffb3ff9cfe4840c351ce2387c5f9e"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#gac37ffb3ff9cfe4840c351ce2387c5f9e">object_attr_usercanset</a> (void *x, <a class="el" href="structt__symbol.html">t_symbol</a> *s)</td></tr>
@@ -483,13 +483,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6818c20859f69d6c4acd289e07340db1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga6818c20859f69d6c4acd289e07340db1">attr_args_process</a> (void *x, short ac, <a class="el" href="structt__atom.html">t_atom</a> *av)</td></tr>
 <tr class="memdesc:ga6818c20859f69d6c4acd289e07340db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an atom list and properly set any attributes described within.  <a href="group__attr.html#ga6818c20859f69d6c4acd289e07340db1">More...</a><br /></td></tr>
 <tr class="separator:ga6818c20859f69d6c4acd289e07340db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga892780e09a91e9f59144e06edb3447aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga892780e09a91e9f59144e06edb3447aa">attribute_new</a> (C74_CONST char *name, <a class="el" href="structt__symbol.html">t_symbol</a> *type, long flags, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mget, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mset)</td></tr>
+<tr class="memitem:ga892780e09a91e9f59144e06edb3447aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga892780e09a91e9f59144e06edb3447aa">attribute_new</a> (C74_CONST char *name, <a class="el" href="structt__symbol.html">t_symbol</a> *type, long flags, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mget, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mset)</td></tr>
 <tr class="memdesc:ga892780e09a91e9f59144e06edb3447aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new attribute.  <a href="group__attr.html#ga892780e09a91e9f59144e06edb3447aa">More...</a><br /></td></tr>
 <tr class="separator:ga892780e09a91e9f59144e06edb3447aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7c4cd4ddd08e25c3f50b910095282bf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">attr_offset_new</a> (C74_CONST char *name, C74_CONST <a class="el" href="structt__symbol.html">t_symbol</a> *type, long flags, C74_CONST <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mget, C74_CONST <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mset, long offset)</td></tr>
+<tr class="memitem:ga7c4cd4ddd08e25c3f50b910095282bf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">attr_offset_new</a> (C74_CONST char *name, C74_CONST <a class="el" href="structt__symbol.html">t_symbol</a> *type, long flags, C74_CONST <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mget, C74_CONST <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mset, long offset)</td></tr>
 <tr class="memdesc:ga7c4cd4ddd08e25c3f50b910095282bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new attribute.  <a href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">More...</a><br /></td></tr>
 <tr class="separator:ga7c4cd4ddd08e25c3f50b910095282bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf8b3abba64e1694410fed090d4170219"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">attr_offset_array_new</a> (C74_CONST char *name, <a class="el" href="structt__symbol.html">t_symbol</a> *type, long size, long flags, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mget, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mset, long offsetcount, long offset)</td></tr>
+<tr class="memitem:gaf8b3abba64e1694410fed090d4170219"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__object.html">t_object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">attr_offset_array_new</a> (C74_CONST char *name, <a class="el" href="structt__symbol.html">t_symbol</a> *type, long size, long flags, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mget, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mset, long offsetcount, long offset)</td></tr>
 <tr class="memdesc:gaf8b3abba64e1694410fed090d4170219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new attribute.  <a href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">More...</a><br /></td></tr>
 <tr class="separator:gaf8b3abba64e1694410fed090d4170219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacad3e07c0e64908280b975883a115237"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gadc4636574e13a47cc6dc4f9b6622ab9f">t_atom_long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#gacad3e07c0e64908280b975883a115237">object_attr_getlong</a> (void *x, <a class="el" href="structt__symbol.html">t_symbol</a> *s)</td></tr>
@@ -558,10 +558,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6ffcfda1ba4d552122e2cb1c5e10ebf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga6ffcfda1ba4d552122e2cb1c5e10ebf6">attr_addfilter_clip_scale</a> (void *x, double scale, double min, double max, long usemin, long usemax)</td></tr>
 <tr class="memdesc:ga6ffcfda1ba4d552122e2cb1c5e10ebf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches a clip/scale filter to an attribute.  <a href="group__attr.html#ga6ffcfda1ba4d552122e2cb1c5e10ebf6">More...</a><br /></td></tr>
 <tr class="separator:ga6ffcfda1ba4d552122e2cb1c5e10ebf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d6d07565f278c27dd34824e253b9eb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga1d6d07565f278c27dd34824e253b9eb7">attr_addfilterset_proc</a> (void *x, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> proc)</td></tr>
+<tr class="memitem:ga1d6d07565f278c27dd34824e253b9eb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga1d6d07565f278c27dd34824e253b9eb7">attr_addfilterset_proc</a> (void *x, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> proc)</td></tr>
 <tr class="memdesc:ga1d6d07565f278c27dd34824e253b9eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches a custom filter method to an attribute.  <a href="group__attr.html#ga1d6d07565f278c27dd34824e253b9eb7">More...</a><br /></td></tr>
 <tr class="separator:ga1d6d07565f278c27dd34824e253b9eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga154ccd467976ee75a53ee312e9d1b3fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga154ccd467976ee75a53ee312e9d1b3fc">attr_addfilterget_proc</a> (void *x, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> proc)</td></tr>
+<tr class="memitem:ga154ccd467976ee75a53ee312e9d1b3fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#ga154ccd467976ee75a53ee312e9d1b3fc">attr_addfilterget_proc</a> (void *x, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> proc)</td></tr>
 <tr class="memdesc:ga154ccd467976ee75a53ee312e9d1b3fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches a custom filter method to an attribute.  <a href="group__attr.html#ga154ccd467976ee75a53ee312e9d1b3fc">More...</a><br /></td></tr>
 <tr class="separator:ga154ccd467976ee75a53ee312e9d1b3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad9de140db1dba2fe588019866a048bc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attr.html#gad9de140db1dba2fe588019866a048bc6">attr_args_dictionary</a> (<a class="el" href="structt__dictionary.html">t_dictionary</a> *x, short ac, <a class="el" href="structt__atom.html">t_atom</a> *av)</td></tr>
@@ -649,7 +649,7 @@ Writing a custom Attribute Getter</h2>
 <div class="ttc" id="agroup__misc_html_gaace8607dfb500e6dcca022a35fcb8386"><div class="ttname"><a href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a></div><div class="ttdeci">t_atom_long t_max_err</div><div class="ttdoc">an integer value suitable to be returned as an error code</div><div class="ttdef"><b>Definition:</b> max_types.h:78</div></div>
 <div class="ttc" id="agroup__misc_html_gga0764dd6c02b76cca7d053ae50555d69da5415d3c3fa523e0bb2ed1edfdbfce9be"><div class="ttname"><a href="group__misc.html#gga0764dd6c02b76cca7d053ae50555d69da5415d3c3fa523e0bb2ed1edfdbfce9be">MAX_ERR_OUT_OF_MEM</a></div><div class="ttdeci">@ MAX_ERR_OUT_OF_MEM</div><div class="ttdoc">Out of memory.</div><div class="ttdef"><b>Definition:</b> max_types.h:122</div></div>
 <div class="ttc" id="agroup__misc_html_gga0764dd6c02b76cca7d053ae50555d69da6d22f77fef8b1e1b074cef5d29d935fd"><div class="ttname"><a href="group__misc.html#gga0764dd6c02b76cca7d053ae50555d69da6d22f77fef8b1e1b074cef5d29d935fd">MAX_ERR_NONE</a></div><div class="ttdeci">@ MAX_ERR_NONE</div><div class="ttdoc">No error.</div><div class="ttdef"><b>Definition:</b> max_types.h:118</div></div>
-<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:293</div></div>
+<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:323</div></div>
 </div><!-- fragment --><p>Note that getters require memory to be allocated, if there is not memory passed into the getter. Also the attr argument is the class' attribute object and can be queried using object_method for things like the attribute flags, names, filters, etc..</p>
 <h2><a class="anchor" id="attribute_accessors_setter"></a>
 Writing a custom Attribute Setter</h2>
@@ -4095,11 +4095,11 @@ Attribute Notificaton</h1>
   </table>
   </dd>
 </dl>
-<dl class="section remark"><dt>Remarks</dt><dd>An example which makes a method invisible to users: <div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)my_foo, <span class="stringliteral">&quot;foo&quot;</span>, 0);</div>
+<dl class="section remark"><dt>Remarks</dt><dd>An example which makes a method invisible to users: <div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)my_foo, <span class="stringliteral">&quot;foo&quot;</span>, 0);</div>
 <div class="line"><a class="code" href="group__attr.html#ga389ea581eb9aece1a2c159bf1480a138">CLASS_METHOD_ATTR_PARSE</a>(c, <span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;undocumented&quot;</span>, <a class="code" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym</a>(<span class="stringliteral">&quot;long&quot;</span>), 0, <span class="stringliteral">&quot;1&quot;</span>);</div>
 <div class="ttc" id="agroup__attr_html_ga389ea581eb9aece1a2c159bf1480a138"><div class="ttname"><a href="group__attr.html#ga389ea581eb9aece1a2c159bf1480a138">CLASS_METHOD_ATTR_PARSE</a></div><div class="ttdeci">#define CLASS_METHOD_ATTR_PARSE(c, methodname, attrname, type, flags, parsestring)</div><div class="ttdoc">Define and add attributes to class methods.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1502</div></div>
 <div class="ttc" id="agroup__class_html_gaab2e3c25868317c8a9c216bbca2c040d"><div class="ttname"><a href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a></div><div class="ttdeci">t_max_err class_addmethod(t_class *c, C74_CONST method m, C74_CONST char *name,...)</div><div class="ttdoc">Adds a method to a previously defined object class.</div></div>
-<div class="ttc" id="agroup__datatypes_html_ga2c3805706f85c0e789f59a1f1da080c8"><div class="ttname"><a href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *,...)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:23</div></div>
+<div class="ttc" id="agroup__datatypes_html_ga482c97424132ea0bcb931d42fca5be78"><div class="ttname"><a href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:25</div></div>
 <div class="ttc" id="agroup__symbol_html_ga5d8db08b384aeb76eaee85a15f46fbcb"><div class="ttname"><a href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym</a></div><div class="ttdeci">t_symbol * gensym(C74_CONST char *s)</div><div class="ttdoc">Given a C-string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if...</div></div>
 </div><!-- fragment --> </dd></dl>
 
@@ -4314,10 +4314,10 @@ Attribute Notificaton</h1>
 <div class="line"><a class="code" href="group__attr.html#gadf3ca4c22b0273a96f5644788489970b">CLASS_STICKY_ATTR_CLEAR</a>(c, <span class="stringliteral">&quot;category&quot;</span>);</div>
 <div class="ttc" id="agroup__attr_html_ga155d0006cea5a22fe0832a9fa52b2814"><div class="ttname"><a href="group__attr.html#ga155d0006cea5a22fe0832a9fa52b2814">CLASS_ATTR_CHAR</a></div><div class="ttdeci">#define CLASS_ATTR_CHAR(c, attrname, flags, structname, structmember)</div><div class="ttdoc">Create a char attribute and add it to a Max class.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:50</div></div>
 <div class="ttc" id="agroup__attr_html_ga1a55732bfe15aff297a7a025ce578d6e"><div class="ttname"><a href="group__attr.html#ga1a55732bfe15aff297a7a025ce578d6e">CLASS_ATTR_STYLE_LABEL</a></div><div class="ttdeci">#define CLASS_ATTR_STYLE_LABEL(c, attrname, flags, stylestr, labelstr)</div><div class="ttdoc">A convenience wrapper for CLASS_ATTR_STYLE, and CLASS_ATTR_LABEL.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1431</div></div>
-<div class="ttc" id="agroup__attr_html_ga51ce88a6d20e819ad703514e583e5562"><div class="ttname"><a href="group__attr.html#ga51ce88a6d20e819ad703514e583e5562">CLASS_STICKY_ATTR</a></div><div class="ttdeci">#define CLASS_STICKY_ATTR(c, name, flags, parsestr)</div><div class="ttdoc">Create an attribute, and add it to all following attribute declarations.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1722</div></div>
+<div class="ttc" id="agroup__attr_html_ga51ce88a6d20e819ad703514e583e5562"><div class="ttname"><a href="group__attr.html#ga51ce88a6d20e819ad703514e583e5562">CLASS_STICKY_ATTR</a></div><div class="ttdeci">#define CLASS_STICKY_ATTR(c, name, flags, parsestr)</div><div class="ttdoc">Create an attribute, and add it to all following attribute declarations.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1728</div></div>
 <div class="ttc" id="agroup__attr_html_ga99c033bd774138a770c3b638ef475d1f"><div class="ttname"><a href="group__attr.html#ga99c033bd774138a770c3b638ef475d1f">CLASS_ATTR_DOUBLE</a></div><div class="ttdeci">#define CLASS_ATTR_DOUBLE(c, attrname, flags, structname, structmember)</div><div class="ttdoc">Create a 64-bit float attribute and add it to a Max class.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:141</div></div>
 <div class="ttc" id="agroup__attr_html_gad46aeee11e8b4786332ce4ff43963326"><div class="ttname"><a href="group__attr.html#gad46aeee11e8b4786332ce4ff43963326">CLASS_ATTR_LABEL</a></div><div class="ttdeci">#define CLASS_ATTR_LABEL(c, attrname, flags, labelstr)</div><div class="ttdoc">Add a new attribute to the specified attribute to specify an a human-friendly label for the Max inspe...</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1328</div></div>
-<div class="ttc" id="agroup__attr_html_gadf3ca4c22b0273a96f5644788489970b"><div class="ttname"><a href="group__attr.html#gadf3ca4c22b0273a96f5644788489970b">CLASS_STICKY_ATTR_CLEAR</a></div><div class="ttdeci">#define CLASS_STICKY_ATTR_CLEAR(c, name)</div><div class="ttdoc">Close a CLASS_STICKY_ATTR block.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1734</div></div>
+<div class="ttc" id="agroup__attr_html_gadf3ca4c22b0273a96f5644788489970b"><div class="ttname"><a href="group__attr.html#gadf3ca4c22b0273a96f5644788489970b">CLASS_STICKY_ATTR_CLEAR</a></div><div class="ttdeci">#define CLASS_STICKY_ATTR_CLEAR(c, name)</div><div class="ttdoc">Close a CLASS_STICKY_ATTR block.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1740</div></div>
 </div><!-- fragment --></dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__attr.html#gadf3ca4c22b0273a96f5644788489970b" title="Close a CLASS_STICKY_ATTR block.">CLASS_STICKY_ATTR_CLEAR</a> </dd></dl>
 
@@ -4417,8 +4417,8 @@ Attribute Notificaton</h1>
 <div class="line"><span class="comment">// generator will ignore these methods.</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="group__attr.html#gaa7a445747716396d70d8fa6fb65861dc">CLASS_STICKY_METHOD_CLEAR</a>(c, <span class="stringliteral">&quot;undocumented&quot;</span>);</div>
-<div class="ttc" id="agroup__attr_html_ga864386ce13dd707052d2fef6bc927576"><div class="ttname"><a href="group__attr.html#ga864386ce13dd707052d2fef6bc927576">CLASS_STICKY_METHOD</a></div><div class="ttdeci">#define CLASS_STICKY_METHOD(c, name, flags, parsestr)</div><div class="ttdoc">Create an attribute, and add it to all following method declarations.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1765</div></div>
-<div class="ttc" id="agroup__attr_html_gaa7a445747716396d70d8fa6fb65861dc"><div class="ttname"><a href="group__attr.html#gaa7a445747716396d70d8fa6fb65861dc">CLASS_STICKY_METHOD_CLEAR</a></div><div class="ttdeci">#define CLASS_STICKY_METHOD_CLEAR(c, name)</div><div class="ttdoc">Close a CLASS_STICKY_METHOD block.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1777</div></div>
+<div class="ttc" id="agroup__attr_html_ga864386ce13dd707052d2fef6bc927576"><div class="ttname"><a href="group__attr.html#ga864386ce13dd707052d2fef6bc927576">CLASS_STICKY_METHOD</a></div><div class="ttdeci">#define CLASS_STICKY_METHOD(c, name, flags, parsestr)</div><div class="ttdoc">Create an attribute, and add it to all following method declarations.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1771</div></div>
+<div class="ttc" id="agroup__attr_html_gaa7a445747716396d70d8fa6fb65861dc"><div class="ttname"><a href="group__attr.html#gaa7a445747716396d70d8fa6fb65861dc">CLASS_STICKY_METHOD_CLEAR</a></div><div class="ttdeci">#define CLASS_STICKY_METHOD_CLEAR(c, name)</div><div class="ttdoc">Close a CLASS_STICKY_METHOD block.</div><div class="ttdef"><b>Definition:</b> ext_obex_util.h:1783</div></div>
 </div><!-- fragment --></dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__attr.html#gaa7a445747716396d70d8fa6fb65861dc" title="Close a CLASS_STICKY_METHOD block.">CLASS_STICKY_METHOD_CLEAR</a> </dd></dl>
 
@@ -6933,7 +6933,7 @@ Attribute Notificaton</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>proc</em>&#160;</td>
         </tr>
         <tr>
@@ -7100,7 +7100,7 @@ Attribute Notificaton</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>proc</em>&#160;</td>
         </tr>
         <tr>
@@ -7302,7 +7302,7 @@ Attribute Notificaton</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__attr_html_ga6818c20859f69d6c4acd289e07340db1"><div class="ttname"><a href="group__attr.html#ga6818c20859f69d6c4acd289e07340db1">attr_args_process</a></div><div class="ttdeci">void attr_args_process(void *x, short ac, t_atom *av)</div><div class="ttdoc">Takes an atom list and properly set any attributes described within.</div></div>
 <div class="ttc" id="agroup__obj_html_gacb89ef27c34b45e9037d877375804284"><div class="ttname"><a href="group__obj.html#gacb89ef27c34b45e9037d877375804284">object_alloc</a></div><div class="ttdeci">void * object_alloc(t_class *c)</div><div class="ttdoc">Allocates the memory for an instance of an object class and initialize its object header.</div></div>
-<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:77</div></div>
+<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:102</div></div>
 </div><!-- fragment --> </dd></dl>
 
 </div>
@@ -7418,13 +7418,13 @@ Attribute Notificaton</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mget</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mset</em>, </td>
         </tr>
         <tr>
@@ -7463,10 +7463,10 @@ Attribute Notificaton</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function returns the new attribute's object pointer if successful, or NULL if unsuccessful.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>For instance, to create a new attribute which references an array of 10 t_atoms (<code>atm</code>; the current number of "active" elements in the array is held in the variable <code>atmcount</code>) in an object class's data structure: <div class="fragment"><div class="line"><a class="code" href="structt__object.html">t_object</a> *attr = <a class="code" href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">attr_offset_array_new</a>(<span class="stringliteral">&quot;myattrarray&quot;</span>, _sym_atom / * matches data size * /, 10 / * max * /, 0 / * no flags * /, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)0L, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)0L, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, atmcount) / * count * /, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, atm) / * data * /);</div>
+<dl class="section remark"><dt>Remarks</dt><dd>For instance, to create a new attribute which references an array of 10 t_atoms (<code>atm</code>; the current number of "active" elements in the array is held in the variable <code>atmcount</code>) in an object class's data structure: <div class="fragment"><div class="line"><a class="code" href="structt__object.html">t_object</a> *attr = <a class="code" href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">attr_offset_array_new</a>(<span class="stringliteral">&quot;myattrarray&quot;</span>, _sym_atom / * matches data size * /, 10 / * max * /, 0 / * no flags * /, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)0L, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)0L, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, atmcount) / * count * /, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, atm) / * data * /);</div>
 <div class="ttc" id="agroup__attr_html_gaf8b3abba64e1694410fed090d4170219"><div class="ttname"><a href="group__attr.html#gaf8b3abba64e1694410fed090d4170219">attr_offset_array_new</a></div><div class="ttdeci">t_object * attr_offset_array_new(C74_CONST char *name, t_symbol *type, long size, long flags, method mget, method mset, long offsetcount, long offset)</div><div class="ttdoc">Create a new attribute.</div></div>
-<div class="ttc" id="agroup__misc_html_gaad95899dfbc7b5b8fe11921643ef46f0"><div class="ttname"><a href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a></div><div class="ttdeci">#define calcoffset(x, y)</div><div class="ttdoc">Find byte offset of a named member of a struct, relative to the beginning of that struct.</div><div class="ttdef"><b>Definition:</b> ext_prefix.h:180</div></div>
-<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:163</div></div>
+<div class="ttc" id="agroup__misc_html_gaad95899dfbc7b5b8fe11921643ef46f0"><div class="ttname"><a href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a></div><div class="ttdeci">#define calcoffset(x, y)</div><div class="ttdoc">Find byte offset of a named member of a struct, relative to the beginning of that struct.</div><div class="ttdef"><b>Definition:</b> ext_prefix.h:143</div></div>
+<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:191</div></div>
 </div><!-- fragment --> </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="group__class.html#ga2fa22e46d14006d0de5cde70af1f6221">ext_main()</a>.</p>
@@ -7500,13 +7500,13 @@ Attribute Notificaton</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">C74_CONST <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">C74_CONST <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mget</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">C74_CONST <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">C74_CONST <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mset</em>, </td>
         </tr>
         <tr>
@@ -7537,7 +7537,7 @@ Attribute Notificaton</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function returns the new attribute's object pointer if successful, or NULL if unsuccessful.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>For instance, to create a new attribute which references the value of a double variable (<code>val</code>) in an object class's data structure: <div class="fragment"><div class="line"><a class="code" href="structt__object.html">t_object</a> *attr = <a class="code" href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">attr_offset_new</a>(<span class="stringliteral">&quot;myattr&quot;</span>, _sym_float64 / * matches data size * /, 0 / * no flags * /, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)0L, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)0L, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, val));</div>
+<dl class="section remark"><dt>Remarks</dt><dd>For instance, to create a new attribute which references the value of a double variable (<code>val</code>) in an object class's data structure: <div class="fragment"><div class="line"><a class="code" href="structt__object.html">t_object</a> *attr = <a class="code" href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">attr_offset_new</a>(<span class="stringliteral">&quot;myattr&quot;</span>, _sym_float64 / * matches data size * /, 0 / * no flags * /, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)0L, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)0L, <a class="code" href="group__misc.html#gaad95899dfbc7b5b8fe11921643ef46f0">calcoffset</a>(t_myobject, val));</div>
 <div class="ttc" id="agroup__attr_html_ga7c4cd4ddd08e25c3f50b910095282bf0"><div class="ttname"><a href="group__attr.html#ga7c4cd4ddd08e25c3f50b910095282bf0">attr_offset_new</a></div><div class="ttdeci">t_object * attr_offset_new(C74_CONST char *name, C74_CONST t_symbol *type, long flags, C74_CONST method mget, C74_CONST method mset, long offset)</div><div class="ttdoc">Create a new attribute.</div></div>
 </div><!-- fragment --> </dd></dl>
 
@@ -7572,13 +7572,13 @@ Attribute Notificaton</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mget</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mset</em>&#160;</td>
         </tr>
         <tr>
@@ -8398,7 +8398,7 @@ Implementation will vary, of course, but need to follow the following basic mode
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> object_attr_method </td>
+          <td class="memname"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> object_attr_method </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>x</em>, </td>

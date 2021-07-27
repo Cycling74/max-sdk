@@ -55,15 +55,19 @@ void *dict_route_new(t_symbol *s, long argc, t_atom *argv)
 		x->outlet_dict = outlet_new(x, "dictionary");
 		x->inlet_tomatch = proxy_new(x, 1, NULL);
 
-		if (attrstart)
+		if (attrstart) {
 			dictobj_dictionaryfromatoms(&d, attrstart, argv);
+			if (!d) {
+				object_error((t_object *)x, "could not parse argument");
+			}
+		}
 		if (!d) {
 			char		errorstring[256];
 			t_max_err	err;
 
 			err = dictobj_dictionaryfromstring(&d, "{ \"schema\" : \"*\" }", true, errorstring);
 			if (err)
-				error("dict.route: %s", errorstring);
+				object_error((t_object *)x, "%s", errorstring);
 		}
 		x->schema_dict = dictobj_register(d, &x->schema_name);
 

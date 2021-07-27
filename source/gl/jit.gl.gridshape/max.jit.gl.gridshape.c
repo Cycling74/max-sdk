@@ -20,7 +20,7 @@ C74_EXPORT void ext_main(void *r)
 	maxclass = class_new("jit.gl.gridshape", (method)max_jit_gl_gridshape_new, (method)max_jit_gl_gridshape_free, sizeof(t_max_jit_gl_gridshape), NULL, A_GIMME, 0);
 	max_jit_class_obex_setup(maxclass, calcoffset(t_max_jit_gl_gridshape, obex));
 	jitclass = jit_class_findbyname(gensym("jit_gl_gridshape"));
-	max_jit_class_wrap_standard(maxclass, jitclass, 0);
+	max_jit_class_wrap_ob3d_inletinfo(maxclass, jitclass, 0);
 	
 	class_addmethod(maxclass, (method)max_jit_ob3d_assist, "assist", A_CANT, 0);
 	class_addmethod(maxclass, (method)max_jit_ob3d_acceptsdrag, "acceptsdrag_unlocked", A_CANT, 0);

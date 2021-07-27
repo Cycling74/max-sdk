@@ -16,64 +16,42 @@ BEGIN_USING_C_LINKAGE
 
 /* mess.h -- define a symbol table and message-passing system.  */
 
-// CALL_METHOD() macros rely on __typeof which is not supported on Windows
-// The "safe" versions are necessary for ARM but should be fine on Intel mac as well.
-// Enabling on Intel mac so we get broader testing.
-#ifndef WIN_VERSION
-#define USE_SAFE_METHOD_CALL
-#endif
 
 /**	Function pointer type for generic methods.
 	@ingroup datatypes
 */
 
-#ifdef USE_SAFE_METHOD_CALL
+
 typedef void *(*method)(void *);
-#else
-typedef void *(*method)(void *, ...);
-#endif
 
+typedef long (*t_intmethod)(void *);
 
+// First cast to void* to trigger errors if arg is float, double, or larger than a pointer.
+// Then cast to t_ptr_int as that's the type we specify for each arg, avoid warnings.
+#define CALL_METHOD_ARG(p) (t_ptr_int)(void*)(p)
 /**	Function pointer type for methods returning a long.
 	@ingroup datatypes
 */
-#ifdef USE_SAFE_METHOD_CALL
-typedef long (*t_intmethod)(void *);
-#else
-typedef long (*t_intmethod)(void *, ...);
-#endif
+#define CALL_METHOD_0(m) ((void*(*)())(m))()
+#define CALL_METHOD_1(m, p1) ((void*(*)(t_ptr_int))(m))(CALL_METHOD_ARG(p1))
+#define CALL_METHOD_2(m, p1, p2) ((void*(*)(t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2))
+#define CALL_METHOD_3(m, p1, p2, p3) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3))
+#define CALL_METHOD_4(m, p1, p2, p3, p4) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4))
+#define CALL_METHOD_5(m, p1, p2, p3, p4, p5) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5))
+#define CALL_METHOD_6(m, p1, p2, p3, p4, p5, p6) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5), CALL_METHOD_ARG(p6))
+#define CALL_METHOD_7(m, p1, p2, p3, p4, p5, p6, p7) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5), CALL_METHOD_ARG(p6), CALL_METHOD_ARG(p7))
+#define CALL_METHOD_8(m, p1, p2, p3, p4, p5, p6, p7, p8) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5), CALL_METHOD_ARG(p6), CALL_METHOD_ARG(p7), CALL_METHOD_ARG(p8))
+#define CALL_METHOD_9(m, p1, p2, p3, p4, p5, p6, p7, p8, p9) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5), CALL_METHOD_ARG(p6), CALL_METHOD_ARG(p7), CALL_METHOD_ARG(p8), CALL_METHOD_ARG(p9))
+#define CALL_METHOD_10(m, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) ((void*(*)(t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int, t_ptr_int))(m))(CALL_METHOD_ARG(p1), CALL_METHOD_ARG(p2), CALL_METHOD_ARG(p3), CALL_METHOD_ARG(p4), CALL_METHOD_ARG(p5), CALL_METHOD_ARG(p6), CALL_METHOD_ARG(p7), CALL_METHOD_ARG(p8), CALL_METHOD_ARG(p9), CALL_METHOD_ARG(p10))
 
-#define CALL_METHOD_0(rt, m, x) ((rt(*)(void*))(m))(x)
-#define CALL_METHOD_1(rt, m, x, p1) ((rt(*)(void*, __typeof(p1)))(m))(x, p1)
-#define CALL_METHOD_2(rt, m, x, p1,p2) ((rt(*)(void*, __typeof(p1),__typeof(p2) ))(m))(x, p1, p2)
-#define CALL_METHOD_3(rt, m, x, p1,p2,p3) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3) ))(m))(x, p1,p2,p3)
-#define CALL_METHOD_4(rt, m, x, p1,p2,p3,p4) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4) ))(m))(x, p1,p2,p3,p4)
-#define CALL_METHOD_5(rt, m, x, p1,p2,p3,p4,p5) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5) ))(m))(x, p1,p2,p3,p4,p5)
-#define CALL_METHOD_6(rt, m, x, p1,p2,p3,p4,p5,p6) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6) ))(m))(x, p1,p2,p3,p4,p5,p6)
-#define CALL_METHOD_7(rt, m, x, p1,p2,p3,p4,p5,p6,p7) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7) ))(m))(x, p1,p2,p3,p4,p5,p6,p7)
-#define CALL_METHOD_8(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8)
-#define CALL_METHOD_9(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8,p9) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8),__typeof(p9) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8,p9)
-
-#define _GET_CALL_METHOD_MACRO_INDEX(_method, _object, _1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
-#define GET_CALL_METHOD_MACRO_INDEX(...) C74_EXPAND(_GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
+#define _GET_CALL_METHOD_MACRO_INDEX(_method, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
+#define GET_CALL_METHOD_MACRO_INDEX(...) C74_EXPAND(_GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
 
 #define GET_CALL_METHOD_MACRO_NAME(...) C74_JOIN_2(CALL_METHOD_, GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__))
 
-// for now only use special macro for ARM
-// we want to avoid casting all args to void* on intel
-// and ultimately should come up with a better approach on ARM as well
+#define CALL_METHOD(...) C74_EXPAND(GET_CALL_METHOD_MACRO_NAME(__VA_ARGS__) ( __VA_ARGS__ ))
 
-#ifdef USE_SAFE_METHOD_CALL
-
-#define CALL_INTMETHOD(...) C74_EXPAND(GET_CALL_METHOD_MACRO_NAME(__VA_ARGS__) ( long, __VA_ARGS__ ))
-#define CALL_METHOD(...) C74_EXPAND(GET_CALL_METHOD_MACRO_NAME(__VA_ARGS__) ( void*, __VA_ARGS__ ))
-
-#else
-
-#define CALL_INTMETHOD(m, ...) (*m)(__VA_ARGS__)
-#define CALL_METHOD(m, ...) (*m)(__VA_ARGS__)
-
-#endif
+#define CALL_METHOD_SAFE(rt, sig, m, ...) (((rt (*)sig)m)(__VA_ARGS__))
 
 // Forward declarations of important Max types
 

@@ -84,7 +84,6 @@ $(document).ready(function(){initNavTree('group__files.html',''); initResizable(
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -108,16 +107,6 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pathlink data structure.  <a href="structt__pathlink.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga513fe2710e225c840d9295fb9884607b"><td class="memItemLeft" align="right" valign="top"><a id="ga513fe2710e225c840d9295fb9884607b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a></td></tr>
-<tr class="memdesc:ga513fe2710e225c840d9295fb9884607b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size you should use when allocating strings for full paths. <br /></td></tr>
-<tr class="separator:ga513fe2710e225c840d9295fb9884607b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga481556de2ccf516a499525edebc45ee8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__files.html#ga481556de2ccf516a499525edebc45ee8">MAX_FILENAME_CHARS</a></td></tr>
-<tr class="memdesc:ga481556de2ccf516a499525edebc45ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size you should use when allocating strings for filenames.  <a href="group__files.html#ga481556de2ccf516a499525edebc45ee8">More...</a><br /></td></tr>
-<tr class="separator:ga481556de2ccf516a499525edebc45ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga97be3130fc4b5da33f4b69ce9dedd5af"><td class="memItemLeft" align="right" valign="top">typedef t_filestruct *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__files.html#ga97be3130fc4b5da33f4b69ce9dedd5af">t_filehandle</a></td></tr>
@@ -126,6 +115,12 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:gaaf105ae5beaca1dee30ae54530691fce"><td class="memItemLeft" align="right" valign="top"><a id="gaaf105ae5beaca1dee30ae54530691fce"></a>enum &#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:gaaf105ae5beaca1dee30ae54530691fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size you should use when allocating strings for full paths. <br /></td></tr>
+<tr class="separator:gaaf105ae5beaca1dee30ae54530691fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga80155586fa275b28773c9b203f52caba"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:ga80155586fa275b28773c9b203f52caba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size you should use when allocating strings for filenames.  <a href="group__files.html#ga80155586fa275b28773c9b203f52caba">More...</a><br /></td></tr>
+<tr class="separator:ga80155586fa275b28773c9b203f52caba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaaf8f3fbe8b4ab0b73258a6b782461867"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__files.html#gaaf8f3fbe8b4ab0b73258a6b782461867">e_max_path_styles</a> { <br />
 &#160;&#160;<a class="el" href="group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867a765ba1acf48b931a40a8e9a6bd451c76">PATH_STYLE_MAX</a>
 , <a class="el" href="group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a">PATH_STYLE_NATIVE</a>
@@ -381,33 +376,15 @@ File Path Names</h2>
 </ul>
 <h1><a class="anchor" id="fileusage"></a>
 Collectives and Fileusage</h1>
-<p>Use the fileusage routines to add files to a collective when a user chooses to build a collective. Your object can respond to a "fileusage" message, which is sent by Max when the collective builder is building a collective using the following: </p><div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)my_fileusage,    <span class="stringliteral">&quot;fileusage&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0L);</div>
-<div class="ttc" id="agroup__atom_html_gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a"><div class="ttname"><a href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a></div><div class="ttdeci">@ A_CANT</div><div class="ttdoc">cannot typecheck args</div><div class="ttdef"><b>Definition:</b> ext_mess.h:259</div></div>
+<p>Use the fileusage routines to add files to a collective when a user chooses to build a collective. Your object can respond to a "fileusage" message, which is sent by Max when the collective builder is building a collective using the following: </p><div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)my_fileusage,    <span class="stringliteral">&quot;fileusage&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0L);</div>
+<div class="ttc" id="agroup__atom_html_gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a"><div class="ttname"><a href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a></div><div class="ttdeci">@ A_CANT</div><div class="ttdoc">cannot typecheck args</div><div class="ttdef"><b>Definition:</b> ext_mess.h:287</div></div>
 <div class="ttc" id="agroup__class_html_gaab2e3c25868317c8a9c216bbca2c040d"><div class="ttname"><a href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a></div><div class="ttdeci">t_max_err class_addmethod(t_class *c, C74_CONST method m, C74_CONST char *name,...)</div><div class="ttdoc">Adds a method to a previously defined object class.</div></div>
-<div class="ttc" id="agroup__datatypes_html_ga2c3805706f85c0e789f59a1f1da080c8"><div class="ttname"><a href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *,...)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:23</div></div>
+<div class="ttc" id="agroup__datatypes_html_ga482c97424132ea0bcb931d42fca5be78"><div class="ttname"><a href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:25</div></div>
 </div><!-- fragment --><p> Where my file usage has the prototype: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_fileusage(t_myObject *x, <span class="keywordtype">void</span> *w);</div>
 </div><!-- fragment --><p>Then you can use <a class="el" href="group__files.html#ga22650a972a3fa4abf20232b49c9ad23a" title="Add a file to a collective.">fileusage_addfile()</a> to add any requisite files to the collective.</p>
 <h1><a class="anchor" id="filewatchers"></a>
 Filewatchers</h1>
 <p>Your object can watch a file or folder and be notified of changes. Use <a class="el" href="group__files.html#ga33c89670cc5866ce21a8a9546d9c4e97" title="Create a new filewatcher.">filewatcher_new()</a>, filewatcher_start(), and filewatcher_stop() to implement this functionality. You may wish to use filewatchers sparingly as they can potentially incur computational overhead in the background. </p>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga481556de2ccf516a499525edebc45ee8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga481556de2ccf516a499525edebc45ee8">&#9670;&nbsp;</a></span>MAX_FILENAME_CHARS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAX_FILENAME_CHARS</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The size you should use when allocating strings for filenames. </p>
-<p>At the time of this writing it supports up to 256 UTF chars </p>
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga97be3130fc4b5da33f4b69ce9dedd5af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga97be3130fc4b5da33f4b69ce9dedd5af">&#9670;&nbsp;</a></span>t_filehandle</h2>
@@ -427,6 +404,23 @@ Filewatchers</h1>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga80155586fa275b28773c9b203f52caba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga80155586fa275b28773c9b203f52caba">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The size you should use when allocating strings for filenames. </p>
+<p>At the time of this writing it supports up to 256 UTF chars </p>
+
+</div>
+</div>
 <a id="gaad4b197d6bb36cf68616a756fa85f1be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaad4b197d6bb36cf68616a756fa85f1be">&#9670;&nbsp;</a></span>e_max_fileinfo_flags</h2>
 
@@ -929,10 +923,9 @@ Filewatchers</h1>
 <dl class="section return"><dt>Returns</dt><dd>If a file is found with the name specified by filename, locatefile returns 0, otherwise it returns non-zero.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__files.html#ga6be29f366820a4cd2aa4f77bcfad362e" title="Retrieve the Path ID of the default search path.">path_getdefault()</a>.</dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>The old file search routines <a class="el" href="group__files.html#ga62afd78207189cc22bf2f48d36e986a6" title="Find a Max document by name in the search path.">locatefile()</a> and <a class="el" href="group__files.html#gaa4091dd5f04a90e4ad538d46dc4df1b2" title="Find a Max document by name in the search path.">locatefiletype()</a> are still supported in Max 4, but the use of a new routine <a class="el" href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd" title="Find a file by name.">locatefile_extended()</a> is highly recommended. However, <a class="el" href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd" title="Find a file by name.">locatefile_extended()</a> has an important difference from <a class="el" href="group__files.html#ga62afd78207189cc22bf2f48d36e986a6" title="Find a Max document by name in the search path.">locatefile()</a> and <a class="el" href="group__files.html#gaa4091dd5f04a90e4ad538d46dc4df1b2" title="Find a Max document by name in the search path.">locatefiletype()</a> that may require some rewriting of your code. <em>It modifies its name parameter</em> in certain cases, while <a class="el" href="group__files.html#ga62afd78207189cc22bf2f48d36e986a6" title="Find a Max document by name in the search path.">locatefile()</a> and <a class="el" href="group__files.html#gaa4091dd5f04a90e4ad538d46dc4df1b2" title="Find a Max document by name in the search path.">locatefiletype()</a> do not. The two cases where it could modify the incoming filename string are 1) when an alias is specified, the file pointed to by the alias is returned; and 2) when a full path is specified, the output is the filename plus the path number of the folder it's in.</dd></dl>
-<p>This is important because many people pass the s_name field of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> to <a class="el" href="group__files.html#ga62afd78207189cc22bf2f48d36e986a6" title="Find a Max document by name in the search path.">locatefile()</a>. If the name field of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> were to be modified, the symbol table would be corrupted. To avoid this problem, use <a class="el" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446" title="Copy the contents of one string to another, in a manner safer than the standard strcpy() or strncpy()...">strncpy_zero()</a> to copy the contents of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> to a character string first, as shown below: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> filename[<a class="code" href="group__files.html#ga481556de2ccf516a499525edebc45ee8">MAX_FILENAME_CHARS</a>]; </div>
-<div class="line"><a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename,str-&gt;s_name, <a class="code" href="group__files.html#ga481556de2ccf516a499525edebc45ee8">MAX_FILENAME_CHARS</a>); </div>
+<p>This is important because many people pass the s_name field of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> to <a class="el" href="group__files.html#ga62afd78207189cc22bf2f48d36e986a6" title="Find a Max document by name in the search path.">locatefile()</a>. If the name field of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> were to be modified, the symbol table would be corrupted. To avoid this problem, use <a class="el" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446" title="Copy the contents of one string to another, in a manner safer than the standard strcpy() or strncpy()...">strncpy_zero()</a> to copy the contents of a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> to a character string first, as shown below: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> filename[MAX_FILENAME_CHARS]; </div>
+<div class="line"><a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename,str-&gt;s_name, MAX_FILENAME_CHARS); </div>
 <div class="line">result = <a class="code" href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a>(filename,&amp;path,&amp;type,typelist,1); </div>
-<div class="ttc" id="agroup__files_html_ga481556de2ccf516a499525edebc45ee8"><div class="ttname"><a href="group__files.html#ga481556de2ccf516a499525edebc45ee8">MAX_FILENAME_CHARS</a></div><div class="ttdeci">#define MAX_FILENAME_CHARS</div><div class="ttdoc">The size you should use when allocating strings for filenames.</div><div class="ttdef"><b>Definition:</b> ext_path.h:31</div></div>
 <div class="ttc" id="agroup__files_html_gace9f6c70d9d937bd157f5c382618c5fd"><div class="ttname"><a href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a></div><div class="ttdeci">short locatefile_extended(char *name, short *outvol, t_fourcc *outtype, C74_CONST t_fourcc *filetypelist, short numtypes)</div><div class="ttdoc">Find a file by name.</div></div>
 <div class="ttc" id="agroup__misc_html_ga9c07aa8c37f8fc3180911f94091e7446"><div class="ttname"><a href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE char * strncpy_zero(char *dst, const char *src, long size)</div><div class="ttdoc">Copy the contents of one string to another, in a manner safer than the standard strcpy() or strncpy()...</div></div>
 </div><!-- fragment --> 
@@ -1041,7 +1034,7 @@ Filewatchers</h1>
 <p>The mapping of extensions to types is configured in the C74:/init/max-fileformats.txt file. The standard types to use for Max files are 'maxb' for old-format binary files, 'TEXT' for text files, and 'JSON' for newer format patchers or other .json files.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>A C-string that will receive the name of the file the user wants to open. The C-string should be allocated with a size of at least <a class="el" href="group__files.html#ga481556de2ccf516a499525edebc45ee8" title="The size you should use when allocating strings for filenames.">MAX_FILENAME_CHARS</a>. </td></tr>
+    <tr><td class="paramname">name</td><td>A C-string that will receive the name of the file the user wants to open. The C-string should be allocated with a size of at least #MAX_FILENAME_CHARS. </td></tr>
     <tr><td class="paramname">volptr</td><td>Receives the Path ID of the file the user wants to open. </td></tr>
     <tr><td class="paramname">typeptr</td><td>The file type of the file the user wants to open. </td></tr>
     <tr><td class="paramname">types</td><td>A list of file types to display. This is not limited to 4 types as in the SFGetFile() trap. Pass NULL to display all types. </td></tr>
@@ -1578,7 +1571,7 @@ Filewatchers</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An error code.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__files.html#ga513fe2710e225c840d9295fb9884607b" title="The size you should use when allocating strings for full paths.">MAX_PATH_CHARS</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>#MAX_PATH_CHARS </dd></dl>
 
 </div>
 </div>
@@ -1795,8 +1788,8 @@ Filewatchers</h1>
 <div class="line"><a class="code" href="group__files.html#ga159fef049b0fe83a4f08f4927f78c17d">path_nameconform</a>(filestring, sNativeQualifiedPathname, <a class="code" href="group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a">PATH_STYLE_NATIVE</a>, <a class="code" href="group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c">PATH_TYPE_PATH</a>);</div>
 <div class="ttc" id="agroup__files_html_ga03aa5b9c62941e9919b898c80a1896ac"><div class="ttname"><a href="group__files.html#ga03aa5b9c62941e9919b898c80a1896ac">path_toabsolutesystempath</a></div><div class="ttdeci">t_max_err path_toabsolutesystempath(const short in_path, const char *in_filename, char *out_filepath)</div><div class="ttdoc">Translates a Max path+filename combo into a correct POSIX absolute path that can be used to pass to l...</div></div>
 <div class="ttc" id="agroup__files_html_ga159fef049b0fe83a4f08f4927f78c17d"><div class="ttname"><a href="group__files.html#ga159fef049b0fe83a4f08f4927f78c17d">path_nameconform</a></div><div class="ttdeci">short path_nameconform(C74_CONST char *src, char *dst, long style, long type)</div><div class="ttdoc">Convert a source path string to destination path string using the specified style and type.</div></div>
-<div class="ttc" id="agroup__files_html_ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a"><div class="ttname"><a href="group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a">PATH_STYLE_NATIVE</a></div><div class="ttdeci">@ PATH_STYLE_NATIVE</div><div class="ttdoc">use PATH_STYLE_NATIVE_PLAT</div><div class="ttdef"><b>Definition:</b> ext_path.h:49</div></div>
-<div class="ttc" id="agroup__files_html_ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c"><div class="ttname"><a href="group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c">PATH_TYPE_PATH</a></div><div class="ttdeci">@ PATH_TYPE_PATH</div><div class="ttdoc">path</div><div class="ttdef"><b>Definition:</b> ext_path.h:75</div></div>
+<div class="ttc" id="agroup__files_html_ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a"><div class="ttname"><a href="group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a">PATH_STYLE_NATIVE</a></div><div class="ttdeci">@ PATH_STYLE_NATIVE</div><div class="ttdoc">use PATH_STYLE_NATIVE_PLAT</div><div class="ttdef"><b>Definition:</b> ext_path.h:52</div></div>
+<div class="ttc" id="agroup__files_html_ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c"><div class="ttname"><a href="group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea76c8d7d75dcb6ac1080713187390197c">PATH_TYPE_PATH</a></div><div class="ttdeci">@ PATH_TYPE_PATH</div><div class="ttdoc">path</div><div class="ttdef"><b>Definition:</b> ext_path.h:78</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1935,7 +1928,7 @@ Filewatchers</h1>
 <p>The mapping of extensions to types is configured in the C74:/init/max-fileformats.txt file. The standard types to use for Max files are 'maxb' for old-format binary files, 'TEXT' for text files, and 'JSON' for newer format patchers or other .json files.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>A C-string containing a default name for the file to save. If the user decides to save a file, its name is returned here. The C-string should be allocated with a size of at least <a class="el" href="group__files.html#ga481556de2ccf516a499525edebc45ee8" title="The size you should use when allocating strings for filenames.">MAX_FILENAME_CHARS</a>.</td></tr>
+    <tr><td class="paramname">filename</td><td>A C-string containing a default name for the file to save. If the user decides to save a file, its name is returned here. The C-string should be allocated with a size of at least #MAX_FILENAME_CHARS.</td></tr>
     <tr><td class="paramname">path</td><td>If the user decides to save the file, the Path ID of the location chosen is returned here.</td></tr>
     <tr><td class="paramname">binptr</td><td>Pass NULL for this parameter. This parameter was used in Max 4 to allow the choice of saving binary or text format patchers.</td></tr>
   </table>
@@ -2046,7 +2039,7 @@ Filewatchers</h1>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>A C-string containing a default name for the file to save. If the user decides to save a file, its name is returned here. The C-string should be allocated with a size of at least <a class="el" href="group__files.html#ga481556de2ccf516a499525edebc45ee8" title="The size you should use when allocating strings for filenames.">MAX_FILENAME_CHARS</a>.</td></tr>
+    <tr><td class="paramname">name</td><td>A C-string containing a default name for the file to save. If the user decides to save a file, its name is returned here. The C-string should be allocated with a size of at least #MAX_FILENAME_CHARS.</td></tr>
     <tr><td class="paramname">vol</td><td>If the user decides to save the file, the Path ID of the location chosen is returned here.</td></tr>
     <tr><td class="paramname">type</td><td>Returns the type of file chosen by the user. </td></tr>
     <tr><td class="paramname">typelist</td><td>The list of types provided to the user. </td></tr>

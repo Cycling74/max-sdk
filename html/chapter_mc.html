@@ -117,7 +117,7 @@ Channel Counting in the Perform Method</h1>
 <p>Most of what you have to do is related to being a bit more careful about what you might previously have been able to assume about your perform method.</p>
 <p>The prototype for your MSP perform method looks like this:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> myobject_perform64(t_myobject *x, <a class="code" href="structt__object.html">t_object</a> *dsp64, <span class="keywordtype">double</span> **ins, <span class="keywordtype">long</span> numins, <span class="keywordtype">double</span> **outs, <span class="keywordtype">long</span> numouts, <span class="keywordtype">long</span> sampleframes, <span class="keywordtype">long</span> flags, <span class="keywordtype">void</span> *userparam);</div>
-<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:163</div></div>
+<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:191</div></div>
 </div><!-- fragment --><p>Let’s say your object will have one multi-channel signal input and one multi-channel signal output. As you can probably guess, the numins parameter to the perform method will be the count of channels in the input and the numouts parameter will be the count of channels in the output. Now let’s consider some other cases because once we have more than one inlet and/or outlet, things get trickier.</p>
 <p>Consider an object with two multi-channel inputs. You don’t know in advance how many channels will be in each signal connected to your object. It could be 1 (if the user connects an old-style patch cord). It could be 100. It could be there is no connection at all to your object. What do you do?</p>
 <p>If you’re in this situation, you’ll need to ask MSP how many channels are in each input in your dsp64 method, which is called before the DSP is turned on. The prototype for your dsp64 method looks like this:</p>
@@ -137,7 +137,7 @@ Channel Counting in the Perform Method</h1>
 Specifying Output Channel Counts</h1>
 <p>The channel count for a multi-channel signal outlet is determined when MSP is building the DSP chain with the signal compiler. This means it can change each time the user turns the audio on if the graph has changed.</p>
 <p>In MC, it’s important to remember that outlets, not inlets, determine signal channel counts. You report the number of channels your object’s outlets will have by supporting the multichanneloutputs method.</p>
-<div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)myobject_multichanneloutputs, <span class="stringliteral">&quot;multichanneloutputs&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0);</div>
+<div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)myobject_multichanneloutputs, <span class="stringliteral">&quot;multichanneloutputs&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0);</div>
 <div class="line"> </div>
 <div class="line">...</div>
 <div class="line"> </div>
@@ -145,9 +145,9 @@ Specifying Output Channel Counts</h1>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">return</span> 4;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__atom_html_gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a"><div class="ttname"><a href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a></div><div class="ttdeci">@ A_CANT</div><div class="ttdoc">cannot typecheck args</div><div class="ttdef"><b>Definition:</b> ext_mess.h:259</div></div>
+<div class="ttc" id="agroup__atom_html_gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a"><div class="ttname"><a href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a></div><div class="ttdeci">@ A_CANT</div><div class="ttdoc">cannot typecheck args</div><div class="ttdef"><b>Definition:</b> ext_mess.h:287</div></div>
 <div class="ttc" id="agroup__class_html_gaab2e3c25868317c8a9c216bbca2c040d"><div class="ttname"><a href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a></div><div class="ttdeci">t_max_err class_addmethod(t_class *c, C74_CONST method m, C74_CONST char *name,...)</div><div class="ttdoc">Adds a method to a previously defined object class.</div></div>
-<div class="ttc" id="agroup__datatypes_html_ga2c3805706f85c0e789f59a1f1da080c8"><div class="ttname"><a href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *,...)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:23</div></div>
+<div class="ttc" id="agroup__datatypes_html_ga482c97424132ea0bcb931d42fca5be78"><div class="ttname"><a href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:25</div></div>
 </div><!-- fragment --><p>The above creates an outlet with four channels. Every time.</p>
 <h1><a class="anchor" id="chapter_mc_autoadapt"></a>
 How to Auto-Adapt</h1>
@@ -155,7 +155,7 @@ How to Auto-Adapt</h1>
 <p>Auto-adapting is a “conversational” protocol that involves both the inputchanged and multichanneloutputs methods.</p>
 <p>Here’s how it works:</p>
 <p>First, implement an the inputchanged method in addition to a multichannel outputs method:</p>
-<div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)myobject_inputchanged, <span class="stringliteral">&quot;inputchanged&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0);</div>
+<div class="fragment"><div class="line"><a class="code" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod</a>(c, (<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)myobject_inputchanged, <span class="stringliteral">&quot;inputchanged&quot;</span>, <a class="code" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, 0);</div>
 <div class="line"> </div>
 <div class="line">...</div>
 <div class="line"> </div>

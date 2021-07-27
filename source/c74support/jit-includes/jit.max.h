@@ -39,10 +39,11 @@ typedef t_messlist 	t_max_messlist;
 #define A_USURP_LOW		0x44
 
 enum {
-	MAX_JIT_CLASS_FLAGS_GIMMEBACK_WRAP		= 0x00000001L		// uses standard dumpout A_DEFER_LOW method
+	MAX_JIT_CLASS_FLAGS_GIMMEBACK_WRAP		= 0x00000001L,	// uses standard dumpout A_DEFER_LOW method
+	MAX_JIT_CLASS_FLAGS_OWN_INLETINFO		= 0x00000002L	// override stdinletinfo in class's main
 };
 
-// BEGIN LEGACY API FOR MAX WRAPPER OBJECTS	USING setup()
+// BEGIN LEGACY API FOR MAX WRAPPER OBJECTS USING setup()
 C74_DEPRECATED( void *max_jit_obex_new(void *mc, t_symbol *classname) );
 C74_DEPRECATED( void max_jit_obex_free(void *x) );
 C74_DEPRECATED( void *max_jit_classex_setup(long oboffset) );
@@ -65,6 +66,7 @@ t_jit_err max_jit_class_addattr(t_class *mclass, void *attr);
 void max_jit_class_wrap_standard(t_class *mclass, t_class *jclass, long flags);
 void max_jit_class_wrap_addmethods(t_class *mclass, t_class *jclass);
 void max_jit_class_wrap_addmethods_flags(t_class *mclass, t_class *jclass, long flags);
+void max_jit_class_wrap_ob3d_inletinfo(t_class *mclass, t_class *jclass, long flags);
 void max_jit_class_wrap_attrlist2methods(t_class *mclass, t_class *jclass);
 void max_jit_class_addmethod_defer(t_class *mclass, method m, char *s);
 void max_jit_class_addmethod_defer_low(t_class *mclass, method m, char *s);

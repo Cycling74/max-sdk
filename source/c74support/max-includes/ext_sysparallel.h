@@ -21,12 +21,15 @@ enum t_sysparallel_priority {
 };
 
 enum {
-	SYSPARALLEL_MAX_WORKERS				= 64,
 	SYSPARALLEL_STATE_IDLE				= 0,
 	SYSPARALLEL_STATE_RUN				= 1,
 	SYSPARALLEL_STATE_DONE				= 0, // changed to be the same as IDLE since it means the same thing
-	SYSPARALLEL_STATE_QUIT				= 3,
-	SYSPARALLEL_TASK_FLAG_WORKERTRIGGERS = 0x00000001, // first worker signals other works as necessary
+	SYSPARALLEL_STATE_QUIT				= 3
+};
+
+enum {
+	SYSPARALLEL_MAX_WORKERS				= 64,
+	SYSPARALLEL_TASK_FLAG_WORKERTRIGGERS = 0x00000001 // first worker signals other works as necessary
 };
 		
 typedef struct _sysparallel_task

@@ -84,7 +84,7 @@ $(document).ready(function(){initNavTree('group__atomarray.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Atom Array<div class="ingroups"><a class="el" href="group__datastore.html">Data Storage</a></div></div>  </div>
@@ -100,8 +100,8 @@ $(document).ready(function(){initNavTree('group__atomarray.html',''); initResiza
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__atomarray.png" border="0" usemap="#agroup____atomarray" alt=""/></div>
 <map name="agroup____atomarray" id="agroup____atomarray">
-<area shape="rect" title="Max&#39;s atomarray object is a container for an array of atoms with an interface for manipulating that a..." alt="" coords="152,5,239,31"/>
-<area shape="rect" href="group__datastore.html" title="Max provides a number of ways of storing and manipulating data at a high level." alt="" coords="5,5,104,31"/>
+<area shape="rect" title="Max&#39;s atomarray object is a container for an array of atoms with an interface for manipulating that a..." alt="" coords="153,5,241,31"/>
+<area shape="rect" href="group__datastore.html" title="Max provides a number of ways of storing and manipulating data at a high level." alt="" coords="5,5,105,31"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -111,11 +111,11 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The atomarray object.  <a href="structt__atomarray.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga9d4f9396731ae8115a08f99d02421d02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atomarray.html#ga9d4f9396731ae8115a08f99d02421d02">ATOMARRAY_FLAG_FREECHILDREN</a></td></tr>
-<tr class="memdesc:ga9d4f9396731ae8115a08f99d02421d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">The atomarray flags.  <a href="group__atomarray.html#ga9d4f9396731ae8115a08f99d02421d02">More...</a><br /></td></tr>
-<tr class="separator:ga9d4f9396731ae8115a08f99d02421d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gaf940052a0742e08204034817d6d21309"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atomarray.html#gaf940052a0742e08204034817d6d21309">t_atomarray_flags</a> </td></tr>
+<tr class="memdesc:gaf940052a0742e08204034817d6d21309"><td class="mdescLeft">&#160;</td><td class="mdescRight">The atomarray flags.  <a href="group__atomarray.html#gaf940052a0742e08204034817d6d21309">More...</a><br /></td></tr>
+<tr class="separator:gaf940052a0742e08204034817d6d21309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -161,7 +161,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga185b275ee3d94fa9a21d3ca6ece43c33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atomarray.html#ga185b275ee3d94fa9a21d3ca6ece43c33">atomarray_clear</a> (<a class="el" href="structt__atomarray.html">t_atomarray</a> *x)</td></tr>
 <tr class="memdesc:ga185b275ee3d94fa9a21d3ca6ece43c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the array.  <a href="group__atomarray.html#ga185b275ee3d94fa9a21d3ca6ece43c33">More...</a><br /></td></tr>
 <tr class="separator:ga185b275ee3d94fa9a21d3ca6ece43c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacfb767a18f14fb13a0952c6ed7903de1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atomarray.html#gacfb767a18f14fb13a0952c6ed7903de1">atomarray_funall</a> (<a class="el" href="structt__atomarray.html">t_atomarray</a> *x, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> fun, void *arg)</td></tr>
+<tr class="memitem:gacfb767a18f14fb13a0952c6ed7903de1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atomarray.html#gacfb767a18f14fb13a0952c6ed7903de1">atomarray_funall</a> (<a class="el" href="structt__atomarray.html">t_atomarray</a> *x, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> fun, void *arg)</td></tr>
 <tr class="memdesc:gacfb767a18f14fb13a0952c6ed7903de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the specified function for every item in the atom array.  <a href="group__atomarray.html#gacfb767a18f14fb13a0952c6ed7903de1">More...</a><br /></td></tr>
 <tr class="separator:gacfb767a18f14fb13a0952c6ed7903de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -169,15 +169,15 @@ Functions</h2></td></tr>
 <p>Max's atomarray object is a container for an array of atoms with an interface for manipulating that array. </p>
 <p>It can be useful for passing lists as a single atom, such as for the return value of an <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47ad150bf3de9c8dc2ddfa0ca0ca2382360" title="request that args be passed as an array, the routine will check the types itself. can return atom val...">A_GIMMEBACK</a> method. It also used frequently in when working with Max's <a class="el" href="structt__dictionary.html" title="The dictionary object.">t_dictionary</a> object.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__dictionary.html" title="Max 5, introduced the t_dictionary structure/object.">Dictionary</a> </dd></dl>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga9d4f9396731ae8115a08f99d02421d02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9d4f9396731ae8115a08f99d02421d02">&#9670;&nbsp;</a></span>ATOMARRAY_FLAG_FREECHILDREN</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gaf940052a0742e08204034817d6d21309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf940052a0742e08204034817d6d21309">&#9670;&nbsp;</a></span>t_atomarray_flags</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ATOMARRAY_FLAG_FREECHILDREN</td>
+          <td class="memname">enum <a class="el" href="group__atomarray.html#gaf940052a0742e08204034817d6d21309">t_atomarray_flags</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -422,7 +422,7 @@ Functions</h2></td></tr>
 <div class="line">}   </div>
 <div class="ttc" id="agroup__atomarray_html_gaec25ec428f6bb7b1a1c8092b5c01f2c2"><div class="ttname"><a href="group__atomarray.html#gaec25ec428f6bb7b1a1c8092b5c01f2c2">atomarray_copyatoms</a></div><div class="ttdeci">t_max_err atomarray_copyatoms(t_atomarray *x, long *ac, t_atom **av)</div><div class="ttdoc">Retrieve a copy of the atoms in the array.</div></div>
 <div class="ttc" id="agroup__memory_html_ga200c82639e547869db1f3887d17102d3"><div class="ttname"><a href="group__memory.html#ga200c82639e547869db1f3887d17102d3">sysmem_freeptr</a></div><div class="ttdeci">void sysmem_freeptr(void *ptr)</div><div class="ttdoc">Free memory allocated with sysmem_newptr().</div></div>
-<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:293</div></div>
+<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:323</div></div>
 </div><!-- fragment --></dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__atomarray.html#ga28824a30f15ddaec8b1a323f285fbe85" title="Retrieve a pointer to the first atom in the internal array of atoms.">atomarray_getatoms()</a> </dd></dl>
 
@@ -508,7 +508,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>fun</em>, </td>
         </tr>
         <tr>
@@ -529,7 +529,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>The atomarray instance. </td></tr>
-    <tr><td class="paramname">fun</td><td>The function to call, specified as function pointer cast to a Max <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8" title="Function pointer type for generic methods.">method</a>. </td></tr>
+    <tr><td class="paramname">fun</td><td>The function to call, specified as function pointer cast to a Max <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78" title="Function pointer type for generic methods.">method</a>. </td></tr>
     <tr><td class="paramname">arg</td><td>An argument that you would like to pass to the function being called. </td></tr>
   </table>
   </dd>

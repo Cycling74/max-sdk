@@ -247,7 +247,19 @@ void object_bug(t_object *x, C74_CONST char *s, ...);
 // private?
 void object_poststring(t_object *ob, long kind, long flags, char *text);
 
+#define STARTUP_CALL_MESSAGE(message, function_name, ...) \
+	{ \
+		t_bool log = gensym("g_max_startuplog")->s_thing ? TRUE : FALSE; \
+		double start = log ? systimer_gettime() : 0; \
+		/* print name before and after so if crashes we know who to blame */  \
+		/* print name both to minimize confusion for nested calls */ \
+		const char* msg = message;   /* create error if message isn't a string */ \
+		if (log) cpost("-> %s(%s)\n", #function_name, msg); \
+		function_name(__VA_ARGS__); \
+		if (log) cpost("<- %s(%s): %0.3f\n", #function_name, msg, systimer_gettime() - start); \
+	}
 
+#define STARTUP_CALL(function_name, ...) STARTUP_CALL_MESSAGE("", function_name, __VA_ARGS__)
 	
 END_USING_C_LINKAGE
 

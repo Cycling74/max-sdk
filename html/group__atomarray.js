@@ -1,7 +1,7 @@
 var group__atomarray =
 [
     [ "t_atomarray", "structt__atomarray.html", null ],
-    [ "ATOMARRAY_FLAG_FREECHILDREN", "group__atomarray.html#ga9d4f9396731ae8115a08f99d02421d02", null ],
+    [ "t_atomarray_flags", "group__atomarray.html#gaf940052a0742e08204034817d6d21309", null ],
     [ "atomarray_appendatom", "group__atomarray.html#gad2d3608a3089f42590d744814c6fee42", null ],
     [ "atomarray_appendatoms", "group__atomarray.html#gae604fed9f8ca266b1b0d080e8cc929c3", null ],
     [ "atomarray_chuckindex", "group__atomarray.html#gaf76d3ab0de8a7b6b0b0e32193608c2dd", null ],

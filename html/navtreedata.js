@@ -345,16 +345,16 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "chapter_ui_anatomy.html#chapter_ui_anatomy_updating",
-"group__attr.html#ga91cdbfa68b1aba7de92405221131d770",
-"group__clocks.html#gad967e79a2dd00fc54646527baa59eb99",
-"group__files.html#ggaaf8f3fbe8b4ab0b73258a6b782461867accd897b92c35c682adb9714ce41aea2a",
-"group__jgraphics.html#ga81465e1a6989399e343d081defd90dbe",
-"group__jmatrix.html#gafb24446d0616fbfca7d8bb96ba97b4ef",
-"group__mathmod.html#ga2187a488437b8bf2754eb096c032f85c",
-"group__msp.html#ga4912c64aec0c943b7985db6cb61ff83a",
-"group__opvecmod.html#gac88aff075d135ad68d64506f0127e788",
-"group__time.html#ggabc6126af1d45847bc59afa0aa3216b04a46a7548bed973b5cef7e6fcbb5883c4f",
-"structt__jit__attr.html#ae8018ca710848cb75b7e3c8f9bb9c428"
+"group__attr.html#ga92423948e8671cf9796a247f9caef706",
+"group__clocks.html#gaed8596bab34f8240fc689358e19c2cfc",
+"group__files.html#ggac6a8a4db7a7de5fbc21188399713c7eea0f9949f6b36f41512f2153430f1ad800",
+"group__jgraphics.html#ga91b780fe7e636c4497d0f8ab0ebfd41e",
+"group__jmonitor.html#ga13ca722c39aef7393d572790c01da558",
+"group__mathmod.html#ga2af7bdac7c3e46f8824c929b9f6c7ca5",
+"group__msp.html#ga598a3330b3c21701223ee0ca14316eca",
+"group__opvecmod.html#gad0984d6a7094705a0dc5aa10f890f8b9",
+"group__time.html#gga61dadd085c1777f559549e05962b2c9ea7ddd9e0fa3dc6a7b346fc3dcee5c5c81",
+"structt__jit__attr__filter__clip.html#a9a0dcf974fd6c6126efd13d2a83e73a9"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

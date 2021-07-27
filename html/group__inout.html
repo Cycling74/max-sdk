@@ -98,8 +98,8 @@ $(document).ready(function(){initNavTree('group__inout.html',''); initResizable(
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__inout.png" border="0" usemap="#agroup____inout" alt=""/></div>
 <map name="agroup____inout" id="agroup____inout">
-<area shape="rect" href="group__class.html" title="When a user types the name of your object into an object box, Max looks for an external of this name ..." alt="" coords="5,5,76,31"/>
-<area shape="rect" title="Routines for creating and communicating with inlets and outlets." alt="" coords="124,5,249,31"/>
+<area shape="rect" href="group__class.html" title="When a user types the name of your object into an object box, Max looks for an external of this name ..." alt="" coords="5,5,75,31"/>
+<area shape="rect" title="Routines for creating and communicating with inlets and outlets." alt="" coords="123,5,248,31"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -446,7 +446,7 @@ Proxies are an alternative method for general-purpose inlets that have a number 
 <div class="line"><a class="code" href="group__atom.html#ga68c9b634425c7e246734ef4ecd911d1c">atom_setlong</a>(&amp;myNumber, 432);</div>
 <div class="line"><a class="code" href="group__inout.html#ga9c1f1f87065d9548a836ca2d91aee2f6">outlet_anything</a>(myOutlet, <a class="code" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym</a>(<span class="stringliteral">&quot;int&quot;</span>), 1, &amp;myNumber);</div>
 <div class="ttc" id="agroup__atom_html_ga68c9b634425c7e246734ef4ecd911d1c"><div class="ttname"><a href="group__atom.html#ga68c9b634425c7e246734ef4ecd911d1c">atom_setlong</a></div><div class="ttdeci">t_max_err atom_setlong(t_atom *a, t_atom_long b)</div><div class="ttdoc">Inserts an integer into a t_atom and change the t_atom's type to A_LONG.</div></div>
-<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:293</div></div>
+<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:323</div></div>
 </div><!-- fragment --></dd>
 <dd>
 Notice that <a class="el" href="group__inout.html#ga9c1f1f87065d9548a836ca2d91aee2f6" title="Use outlet_anything() to send any message out an outlet.">outlet_anything()</a> expects the message argument as a <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a>*, so you must use <a class="el" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C-string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if...">gensym()</a> on a character string.</dd></dl>

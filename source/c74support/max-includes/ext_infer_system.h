@@ -23,7 +23,7 @@
 #if defined (__arm__) || defined (__arm64__)
 #define C74_ARM 1
 #else
-#define JUCE_INTEL 1
+#define C74_INTEL 1
 #endif
 
 #endif /* _EXT_INFER_SYSTEM_H_ */

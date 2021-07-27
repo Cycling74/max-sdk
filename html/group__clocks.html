@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('group__clocks.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga65e54252b4cc24c8b7e27bad81fd9a22"><td class="memItemLeft" align="right" valign="top">t_clock *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">clock_new</a> (void *obj, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> fn)</td></tr>
+<tr class="memitem:ga65e54252b4cc24c8b7e27bad81fd9a22"><td class="memItemLeft" align="right" valign="top">t_clock *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">clock_new</a> (void *obj, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> fn)</td></tr>
 <tr class="memdesc:ga65e54252b4cc24c8b7e27bad81fd9a22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new Clock object.  <a href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">More...</a><br /></td></tr>
 <tr class="separator:ga65e54252b4cc24c8b7e27bad81fd9a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga511c131106445371c69073365e580f10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__clocks.html#ga511c131106445371c69073365e580f10">clock_delay</a> (t_clock *x, long n)</td></tr>
@@ -185,20 +185,20 @@ Using Clocks</h1>
 <div class="line">    <span class="keywordtype">double</span> m_interval;</div>
 <div class="line">    <span class="keywordtype">void</span> *m_outlet;</div>
 <div class="line">} t_mymetro;</div>
-<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:163</div></div>
+<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:191</div></div>
 </div><!-- fragment --><p>We’ll assume that the class has been initialized already. Here’s the instance creation function that will allocate a new Clock.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> *mymetro_create (<span class="keywordtype">double</span> defaultInterval)</div>
 <div class="line">{</div>
 <div class="line">    t_mymetro *x;</div>
 <div class="line">    x = (t_mymetro *)<a class="code" href="group__class__old.html#ga053f428d5edcc7d663980330848e73a6">newobject</a>(mymetro_class); <span class="comment">// allocate space</span></div>
-<div class="line">    x-&gt;m_clock = <a class="code" href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">clock_new</a>(x,(<a class="code" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>)mymetro_tick); <span class="comment">// make a clock</span></div>
+<div class="line">    x-&gt;m_clock = <a class="code" href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">clock_new</a>(x,(<a class="code" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>)mymetro_tick); <span class="comment">// make a clock</span></div>
 <div class="line">    x-&gt;m_interval = defaultInterval; <span class="comment">// store the interval</span></div>
 <div class="line">    x-&gt;m_outlet = <a class="code" href="group__inout.html#ga69d26d4f2684aab7dbc1b2d18248eae5">bangout</a>(x); <span class="comment">// outlet for ticks</span></div>
 <div class="line">    <span class="keywordflow">return</span> x; <span class="comment">// return the new object</span></div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__class__old_html_ga053f428d5edcc7d663980330848e73a6"><div class="ttname"><a href="group__class__old.html#ga053f428d5edcc7d663980330848e73a6">newobject</a></div><div class="ttdeci">void * newobject(void *maxclass)</div><div class="ttdoc">Use newobject to allocate the space for an instance of your class and initialize its object header.</div></div>
 <div class="ttc" id="agroup__clocks_html_ga65e54252b4cc24c8b7e27bad81fd9a22"><div class="ttname"><a href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22">clock_new</a></div><div class="ttdeci">t_clock * clock_new(void *obj, method fn)</div><div class="ttdoc">Create a new Clock object.</div></div>
-<div class="ttc" id="agroup__datatypes_html_ga2c3805706f85c0e789f59a1f1da080c8"><div class="ttname"><a href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *,...)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:23</div></div>
+<div class="ttc" id="agroup__datatypes_html_ga482c97424132ea0bcb931d42fca5be78"><div class="ttname"><a href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE typedef void *(* method)(void *)</div><div class="ttdoc">Function pointer type for generic methods.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:25</div></div>
 <div class="ttc" id="agroup__inout_html_ga69d26d4f2684aab7dbc1b2d18248eae5"><div class="ttname"><a href="group__inout.html#ga69d26d4f2684aab7dbc1b2d18248eae5">bangout</a></div><div class="ttdeci">void * bangout(void *x)</div><div class="ttdoc">Use bangout() to create an outlet that will always send the bang message.</div></div>
 </div><!-- fragment --><p>Here’s the method written to respond to the bang message that starts the metronome.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> mymetro_bang (t_mymetro *x)</div>
@@ -239,7 +239,7 @@ Using the setclock Object Routines</h2>
 <div class="line">    <span class="keywordtype">void</span> *m_clock;</div>
 <div class="line">    <a class="code" href="structt__symbol.html">t_symbol</a> *m_setclock;</div>
 <div class="line">} t_metro;</div>
-<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:77</div></div>
+<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:102</div></div>
 </div><!-- fragment --><p>Here’s the implementation of the routines for turning the metronome on and off. Assume that in the instance creation function, the <a class="el" href="structt__symbol.html" title="The symbol.">t_symbol</a> m_setclock has been set to the empty symbol (gensym ("")) and m_clock has been created; the clock function metro_tick() is defined further on.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> metro_bang(Metro *x) <span class="comment">// turn metronome on</span></div>
 <div class="line">{</div>
@@ -282,7 +282,7 @@ Using the setclock Object Routines</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__class__old_html_ga54a45bcc841c2033467be14e6861b548"><div class="ttname"><a href="group__class__old.html#ga54a45bcc841c2033467be14e6861b548">zgetfn</a></div><div class="ttdeci">method zgetfn(t_object *op, t_symbol *msg)</div><div class="ttdoc">Use zgetfn() to send an untyped message to a Max object without error checking.</div></div>
 <div class="ttc" id="agroup__symbol_html_ga5d8db08b384aeb76eaee85a15f46fbcb"><div class="ttname"><a href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym</a></div><div class="ttdeci">t_symbol * gensym(C74_CONST char *s)</div><div class="ttdoc">Given a C-string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if...</div></div>
-<div class="ttc" id="astructt__symbol_html_abd835e42c1c3ef3ed958c22cc73c9e69"><div class="ttname"><a href="structt__symbol.html#abd835e42c1c3ef3ed958c22cc73c9e69">t_symbol::s_thing</a></div><div class="ttdeci">struct object * s_thing</div><div class="ttdoc">possible binding to a t_object</div><div class="ttdef"><b>Definition:</b> ext_mess.h:79</div></div>
+<div class="ttc" id="astructt__symbol_html_abd835e42c1c3ef3ed958c22cc73c9e69"><div class="ttname"><a href="structt__symbol.html#abd835e42c1c3ef3ed958c22cc73c9e69">t_symbol::s_thing</a></div><div class="ttdeci">struct object * s_thing</div><div class="ttdoc">possible binding to a t_object</div><div class="ttdef"><b>Definition:</b> ext_mess.h:104</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="creating_schedulers"></a>
 Creating Schedulers</h1>
 <p>If you want to schedule events independently of the time of the global Max scheduler, you can create your own scheduler with <a class="el" href="group__clocks.html#ga17d4942d16748fed10221d6139a63c90" title="Create a new local scheduler.">scheduler_new()</a>. By calling <a class="el" href="group__clocks.html#ga3804ff75fa57099ad0badc478828ad39" title="Make a scheduler current, so that future related calls (such as clock_delay()) will affect the approp...">scheduler_set()</a> with the newly created scheduler, calls to <a class="el" href="group__clocks.html#ga65e54252b4cc24c8b7e27bad81fd9a22" title="Create a new Clock object.">clock_new()</a> will create Clocks tied to your scheduler instead of Max’s global one. You can then control the time of the scheduler (using <a class="el" href="group__clocks.html#ga55cba1f1336528fcef4c269ca19d8a29" title="Set the current time of the scheduler.">scheduler_settime()</a>) as well as when it executes clock functions (using <a class="el" href="group__clocks.html#ga1c85d68d8f2bd4ed0d185b97d2fbb2f9" title="Run scheduler events to a selected time.">scheduler_run()</a>). This is a more general facility than the setclock object routines, but unlike using the time from a setclock object to determine when a Clock function runs, once a Clock is tied to a scheduler. </p>
@@ -411,7 +411,7 @@ Creating Schedulers</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>fn</em>&#160;</td>
         </tr>
         <tr>

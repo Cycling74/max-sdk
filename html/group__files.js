@@ -8,8 +8,6 @@ var group__files =
     ] ],
     [ "t_path", "structt__path.html", null ],
     [ "t_pathlink", "structt__pathlink.html", null ],
-    [ "MAX_FILENAME_CHARS", "group__files.html#ga481556de2ccf516a499525edebc45ee8", null ],
-    [ "MAX_PATH_CHARS", "group__files.html#ga513fe2710e225c840d9295fb9884607b", null ],
     [ "t_filehandle", "group__files.html#ga97be3130fc4b5da33f4b69ce9dedd5af", null ],
     [ "e_max_fileinfo_flags", "group__files.html#gaad4b197d6bb36cf68616a756fa85f1be", [
       [ "PATH_FILEINFO_ALIAS", "group__files.html#ggaad4b197d6bb36cf68616a756fa85f1bea2c5109b5474f11e41c65e2e57de79fdd", null ],

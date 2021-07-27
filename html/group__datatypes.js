@@ -18,10 +18,10 @@ var group__datatypes =
       [ "height", "structt__size.html#aa7ec2bdc3c47d9e01bffdab3c63b3112", null ],
       [ "width", "structt__size.html#ae9a82c72ca8a72cdf94685a9cb2e1ef6", null ]
     ] ],
+    [ "CALL_METHOD_0", "group__datatypes.html#ga49146653b181391d327c8e713c270ca2", null ],
     [ "gimmeback_meth", "group__datatypes.html#ga9942fa14a64084fb30a92a9ace57b3c9", null ],
     [ "one_meth", "group__datatypes.html#ga2fba91191d852d779ccafd7a0d808a96", null ],
-    [ "t_intmethod", "group__datatypes.html#gaa7a0a81f1e809866db67b43eb6a967a5", null ],
     [ "two_meth", "group__datatypes.html#ga0143376f695266d29a16170631267a3e", null ],
     [ "zero_meth", "group__datatypes.html#ga8552ad27c1d2770e99ae94a7cdc87d0e", null ],
-    [ "method", "group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8", null ]
+    [ "method", "group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78", null ]
 ];

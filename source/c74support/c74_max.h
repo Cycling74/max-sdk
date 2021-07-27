@@ -4,6 +4,11 @@
 #include <cwchar>
 #include <cmath>
 #include <cstring>
+#include <memory>
+
+// include this outside of the namespace, and
+// before any Max headers can include ext_prefix.h
+#include "ext_prefix_includes.h"
 
 namespace c74 {
 namespace max {

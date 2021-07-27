@@ -103,18 +103,18 @@ $(document).ready(function(){initNavTree('group__jgraphics.html',''); initResiza
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__jgraphics.png" border="0" usemap="#agroup____jgraphics" alt=""/></div>
 <map name="agroup____jgraphics" id="agroup____jgraphics">
-<area shape="rect" href="group__jpopupmenu.html" title="Popup menu API so externals can create popup menus that can also be drawn into." alt="" coords="346,5,449,31"/>
-<area shape="rect" href="group__color.html" title=" " alt="" coords="367,55,427,80"/>
-<area shape="rect" href="group__jpattern.html" title="A pattern is like a brush that is used to fill a path with." alt="" coords="362,104,433,129"/>
-<area shape="rect" href="group__styles.html" title="Styles provide a means by which to inherit attribute values from a patcher that are consistently used..." alt="" coords="368,153,427,179"/>
-<area shape="rect" href="group__textfield.html" title="The textfield is a high&#45;level text display object that may be used by a UI object to represent text i..." alt="" coords="360,203,435,228"/>
-<area shape="rect" title="JGraphics is the API for creating user interface objects introduced with Max 5." alt="" coords="159,252,240,277"/>
-<area shape="rect" href="group__jsvg.html" title=" " alt="" coords="312,252,483,277"/>
-<area shape="rect" href="group__boxlayer.html" title="The boxlayer functions provide way to make it easier to use cached offscreen images (layers) in your ..." alt="" coords="357,301,438,327"/>
-<area shape="rect" href="group__jsurface.html" title="A surface is an abstract base class for something you render to." alt="" coords="360,351,435,376"/>
-<area shape="rect" href="group__jmatrix.html" title="The t_jmatrix is one way to represent a transformation." alt="" coords="288,400,507,425"/>
-<area shape="rect" href="group__textlayout.html" title="A textlayout is lower&#45;level text rendering object used by higher&#45;level entities such as TextField." alt="" coords="354,449,441,475"/>
-<area shape="rect" href="group__jfont.html" title=" " alt="" coords="370,499,425,524"/>
+<area shape="rect" href="group__jpopupmenu.html" title="Popup menu API so externals can create popup menus that can also be drawn into." alt="" coords="348,5,452,31"/>
+<area shape="rect" href="group__color.html" title=" " alt="" coords="370,55,430,80"/>
+<area shape="rect" href="group__jpattern.html" title="A pattern is like a brush that is used to fill a path with." alt="" coords="364,104,436,129"/>
+<area shape="rect" href="group__styles.html" title="Styles provide a means by which to inherit attribute values from a patcher that are consistently used..." alt="" coords="371,153,429,179"/>
+<area shape="rect" href="group__textfield.html" title="The textfield is a high&#45;level text display object that may be used by a UI object to represent text i..." alt="" coords="362,203,438,228"/>
+<area shape="rect" title="JGraphics is the API for creating user interface objects introduced with Max 5." alt="" coords="159,252,241,277"/>
+<area shape="rect" href="group__jsvg.html" title=" " alt="" coords="314,252,486,277"/>
+<area shape="rect" href="group__boxlayer.html" title="The boxlayer functions provide way to make it easier to use cached offscreen images (layers) in your ..." alt="" coords="359,301,441,327"/>
+<area shape="rect" href="group__jsurface.html" title="A surface is an abstract base class for something you render to." alt="" coords="363,351,437,376"/>
+<area shape="rect" href="group__jmatrix.html" title="The t_jmatrix is one way to represent a transformation." alt="" coords="289,400,511,425"/>
+<area shape="rect" href="group__textlayout.html" title="A textlayout is lower&#45;level text rendering object used by higher&#45;level entities such as TextField." alt="" coords="357,449,443,475"/>
+<area shape="rect" href="group__jfont.html" title=" " alt="" coords="372,499,428,524"/>
 <area shape="rect" href="group__ui.html" title=" " alt="" coords="5,252,111,277"/>
 </map>
 </div>
@@ -1245,7 +1245,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section remark"><dt>Remarks</dt><dd>This example shows a common usage of <a class="el" href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2" title="Get a list of of filetypes appropriate for use with jgraphics surfaces.">jgraphics_getfiletypes()</a>. <div class="fragment"><div class="line">    <span class="keywordtype">char</span>       filename[<a class="code" href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a>];</div>
+<dl class="section remark"><dt>Remarks</dt><dd>This example shows a common usage of <a class="el" href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2" title="Get a list of of filetypes appropriate for use with jgraphics surfaces.">jgraphics_getfiletypes()</a>. <div class="fragment"><div class="line">    <span class="keywordtype">char</span>       filename[MAX_PATH_CHARS];</div>
 <div class="line">    <a class="code" href="group__misc.html#ga1fea4eebce8d3a1d7c0da7d4e1d7921d">t_fourcc</a>   *type = NULL;</div>
 <div class="line">    <span class="keywordtype">long</span>       ntype;</div>
 <div class="line">    <span class="keywordtype">long</span>       outtype;</div>
@@ -1261,7 +1261,7 @@ Functions</h2></td></tr>
 <div class="line">            <span class="keywordflow">goto</span> out;</div>
 <div class="line">    } </div>
 <div class="line">    <span class="keywordflow">else</span> {      </div>
-<div class="line">        <a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename, s-&gt;s_name, <a class="code" href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a>);</div>
+<div class="line">        <a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename, s-&gt;s_name, MAX_PATH_CHARS);</div>
 <div class="line">        err = <a class="code" href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a>(filename, &amp;path, &amp;outtype, type, ntype);</div>
 <div class="line">        <span class="keywordflow">if</span> (err)</div>
 <div class="line">            <span class="keywordflow">goto</span> out;</div>
@@ -1270,7 +1270,6 @@ Functions</h2></td></tr>
 <div class="line">out:</div>
 <div class="line">    <span class="keywordflow">if</span> (alloc)</div>
 <div class="line">        <a class="code" href="group__memory.html#ga200c82639e547869db1f3887d17102d3">sysmem_freeptr</a>((<span class="keywordtype">char</span> *)type);</div>
-<div class="ttc" id="agroup__files_html_ga513fe2710e225c840d9295fb9884607b"><div class="ttname"><a href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a></div><div class="ttdeci">#define MAX_PATH_CHARS</div><div class="ttdoc">The size you should use when allocating strings for full paths.</div><div class="ttdef"><b>Definition:</b> ext_path.h:24</div></div>
 <div class="ttc" id="agroup__files_html_ga94e5ab05c3fe5e968edc5b18a98f4556"><div class="ttname"><a href="group__files.html#ga94e5ab05c3fe5e968edc5b18a98f4556">open_dialog</a></div><div class="ttdeci">short open_dialog(char *name, short *volptr, t_fourcc *typeptr, t_fourcc *types, short ntypes)</div><div class="ttdoc">Present the user with the standard open file dialog.</div></div>
 <div class="ttc" id="agroup__files_html_gace9f6c70d9d937bd157f5c382618c5fd"><div class="ttname"><a href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a></div><div class="ttdeci">short locatefile_extended(char *name, short *outvol, t_fourcc *outtype, C74_CONST t_fourcc *filetypelist, short numtypes)</div><div class="ttdoc">Find a file by name.</div></div>
 <div class="ttc" id="agroup__jgraphics_html_gaed71626b356ca73913300d2e91bc17c2"><div class="ttname"><a href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2">jgraphics_getfiletypes</a></div><div class="ttdeci">void jgraphics_getfiletypes(void *dummy, long *count, t_fourcc **filetypes, char *alloc)</div><div class="ttdoc">Get a list of of filetypes appropriate for use with jgraphics surfaces.</div></div>

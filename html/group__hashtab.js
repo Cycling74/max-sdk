@@ -2,7 +2,6 @@ var group__hashtab =
 [
     [ "t_hashtab_entry", "structt__hashtab__entry.html", null ],
     [ "t_hashtab", "structt__hashtab.html", null ],
-    [ "HASH_DEFSLOTS", "group__hashtab.html#ga160118a25646d04cce8c75f6f3eb9207", null ],
     [ "hashtab_chuck", "group__hashtab.html#gac3203c76c8321cde39088beab8b4d2e8", null ],
     [ "hashtab_chuckkey", "group__hashtab.html#ga9bbf0199ef8b92a977b3bee5fd746799", null ],
     [ "hashtab_clear", "group__hashtab.html#gae7984db2865416d6da6ce20c76975321", null ],

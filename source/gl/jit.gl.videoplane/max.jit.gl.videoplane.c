@@ -28,7 +28,7 @@ C74_EXPORT void ext_main(void *r)
 	maxclass = class_new("jit.gl.videoplane", (method)max_jit_gl_videoplane_new, (method)max_jit_gl_videoplane_free, sizeof(t_max_jit_gl_videoplane), NULL, A_GIMME, 0);
 	max_jit_class_obex_setup(maxclass, calcoffset(t_max_jit_gl_videoplane, obex));
 	jitclass = jit_class_findbyname(gensym("jit_gl_videoplane"));
-	max_jit_class_wrap_standard(maxclass, jitclass, 0);
+	max_jit_class_wrap_ob3d_inletinfo(maxclass, jitclass, 0);
 
 	class_addmethod(maxclass, (method)max_jit_ob3d_assist, "assist", A_CANT, 0);
 

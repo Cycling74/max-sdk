@@ -18,7 +18,7 @@ static int s_count = 0;
 void mydll_init(void)
 {
 	if (!s_initialized) {
-		post("initialized mydll");
+		object_post(NULL, "initialized mydll");
 		s_initialized = true;
 	}
 }

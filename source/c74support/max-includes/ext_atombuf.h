@@ -53,7 +53,7 @@ void atombuf_text(t_atombuf **x, char **text, long size);
 // undocumented
 
 short atombuf_totext(t_atombuf *x, char **text, long *size);
-short atombuf_count(t_atombuf *x);
+long atombuf_count(t_atombuf *x);
 void atombuf_set(t_atombuf *x, long start, long num);
 long atombuf_replacepoundargs(t_atombuf *x, long argc, t_atom *argv);
 short atombuf_next(t_atombuf* x, long* count, t_atom* atom);

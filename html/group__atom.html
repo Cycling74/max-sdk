@@ -84,7 +84,6 @@ $(document).ready(function(){initNavTree('group__atom.html',''); initResizable()
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -111,13 +110,6 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__atom.html">t_atom</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An atom is a typed datum.  <a href="structt__atom.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga27eb80f98b4020e3ecab761d634a3876"><td class="memItemLeft" align="right" valign="top"><a id="ga27eb80f98b4020e3ecab761d634a3876"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atom.html#ga27eb80f98b4020e3ecab761d634a3876">ATOM_MAX_STRLEN</a></td></tr>
-<tr class="memdesc:ga27eb80f98b4020e3ecab761d634a3876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the largest possible string size for an atom. <br /></td></tr>
-<tr class="separator:ga27eb80f98b4020e3ecab761d634a3876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -149,6 +141,9 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga8aa6700e9f00b132eb376db6e39ade47"><td class="mdescLeft">&#160;</td><td class="mdescRight">the list of officially recognized types, including pseudotypes for commas and semicolons.  <a href="group__atom.html#ga8aa6700e9f00b132eb376db6e39ade47">More...</a><br /></td></tr>
 <tr class="separator:ga8aa6700e9f00b132eb376db6e39ade47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga385c44f6fb256e5716a2302a5b940388"><td class="memItemLeft" align="right" valign="top"><a id="ga385c44f6fb256e5716a2302a5b940388"></a>enum &#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:ga385c44f6fb256e5716a2302a5b940388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the largest possible string size for an atom. <br /></td></tr>
+<tr class="separator:ga385c44f6fb256e5716a2302a5b940388"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga42fa1c131691f55dbc781a0be60e3772"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__atom.html#ga42fa1c131691f55dbc781a0be60e3772">e_max_atom_gettext_flags</a> { <br />
 &#160;&#160;<a class="el" href="group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a2e8bad722419a8be35f8ef13364ddcc7">OBEX_UTIL_ATOM_GETTEXT_DEFAULT</a>
 , <a class="el" href="group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a433f595f519e0a4051d769db66b9b5d8">OBEX_UTIL_ATOM_GETTEXT_TRUNCATE_ZEROS</a>
@@ -666,8 +661,8 @@ Functions</h2></td></tr>
 <div class="ttc" id="agroup__atom_html_ga0e4598b63589540f6978affe5b21457b"><div class="ttname"><a href="group__atom.html#ga0e4598b63589540f6978affe5b21457b">atom_arg_getlong</a></div><div class="ttdeci">t_max_err atom_arg_getlong(t_atom_long *c, long idx, long ac, const t_atom *av)</div><div class="ttdoc">Retrieves the integer value of a particular t_atom from an atom list, if the atom exists.</div></div>
 <div class="ttc" id="agroup__console_html_gacf5ee98c48f04999675f58bc6470cdcc"><div class="ttname"><a href="group__console.html#gacf5ee98c48f04999675f58bc6470cdcc">post</a></div><div class="ttdeci">BEGIN_USING_C_LINKAGE void post(C74_CONST char *fmt,...)</div><div class="ttdoc">Print text to the Max window.</div></div>
 <div class="ttc" id="agroup__misc_html_gadc4636574e13a47cc6dc4f9b6622ab9f"><div class="ttname"><a href="group__misc.html#gadc4636574e13a47cc6dc4f9b6622ab9f">t_atom_long</a></div><div class="ttdeci">t_ptr_int t_atom_long</div><div class="ttdoc">the type that is an A_LONG in a t_atom</div><div class="ttdef"><b>Definition:</b> max_types.h:77</div></div>
-<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:293</div></div>
-<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:77</div></div>
+<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:323</div></div>
+<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:102</div></div>
 </div><!-- fragment --> </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="group__atommod.html#gabec1d1f329e0de98c3f3b6ee3c6b28c7">jit_atom_arg_getlong()</a>.</p>

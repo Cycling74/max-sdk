@@ -1854,7 +1854,7 @@ void jbox_grabfocus(t_jbox *b);
 void jbox_redrawpeers(t_jbox *b);
 long jbox_getinletindex(t_jbox *b, void *inlet);
 long jbox_getoutletindex(t_jbox *b, void *outlet);
-
+t_symbol *jbox_get_boxpath(t_object *b);
 
 void jbox_show_caption(t_jbox *b);
 void jbox_hide_caption(t_jbox *b);
@@ -2193,7 +2193,6 @@ long jpatcher_inc_maxsendcontext(void);
 
 // private -- internal use only
 long jbox_is_selected_in_view(t_object *box, t_object *view);
-t_symbol *jbox_get_boxpath(t_object *b);
 
 // private -- internal use only
 t_atom_long jpatcher_dictionary_modernui(t_dictionary *d);
