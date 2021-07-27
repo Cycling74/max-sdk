@@ -8,6 +8,10 @@
 #ifndef __EXT_PREFIX_INCLUDES_H__
 #define __EXT_PREFIX_INCLUDES_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifdef MAC_VERSION
 
 // If the prefix header containing #include <Carbon/Carbon.h> is not present, then we include
@@ -52,5 +56,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __EXT_PREFIX_INCLUDES_H__ */
