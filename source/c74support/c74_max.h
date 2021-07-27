@@ -4,6 +4,7 @@
 #include <cwchar>
 #include <cmath>
 #include <cstring>
+#include <memory>
 
 namespace c74 {
 namespace max {
