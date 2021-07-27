@@ -38,7 +38,7 @@ if (APPLE)
 	target_link_options(
 		mydll
 		PUBLIC
-		"-Wl,-U,_post"
+		"-Wl,-U,_object_post"
 		"-Wl,-install_name,@loader_path/../../../../support/mydll.dylib"
 	)
 else ()
