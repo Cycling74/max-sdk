@@ -1245,7 +1245,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section remark"><dt>Remarks</dt><dd>This example shows a common usage of <a class="el" href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2" title="Get a list of of filetypes appropriate for use with jgraphics surfaces.">jgraphics_getfiletypes()</a>. <div class="fragment"><div class="line">    <span class="keywordtype">char</span>       filename[<a class="code" href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a>];</div>
+<dl class="section remark"><dt>Remarks</dt><dd>This example shows a common usage of <a class="el" href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2" title="Get a list of of filetypes appropriate for use with jgraphics surfaces.">jgraphics_getfiletypes()</a>. <div class="fragment"><div class="line">    <span class="keywordtype">char</span>       filename[MAX_PATH_CHARS];</div>
 <div class="line">    <a class="code" href="group__misc.html#ga1fea4eebce8d3a1d7c0da7d4e1d7921d">t_fourcc</a>   *type = NULL;</div>
 <div class="line">    <span class="keywordtype">long</span>       ntype;</div>
 <div class="line">    <span class="keywordtype">long</span>       outtype;</div>
@@ -1261,7 +1261,7 @@ Functions</h2></td></tr>
 <div class="line">            <span class="keywordflow">goto</span> out;</div>
 <div class="line">    } </div>
 <div class="line">    <span class="keywordflow">else</span> {      </div>
-<div class="line">        <a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename, s-&gt;s_name, <a class="code" href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a>);</div>
+<div class="line">        <a class="code" href="group__misc.html#ga9c07aa8c37f8fc3180911f94091e7446">strncpy_zero</a>(filename, s-&gt;s_name, MAX_PATH_CHARS);</div>
 <div class="line">        err = <a class="code" href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a>(filename, &amp;path, &amp;outtype, type, ntype);</div>
 <div class="line">        <span class="keywordflow">if</span> (err)</div>
 <div class="line">            <span class="keywordflow">goto</span> out;</div>
@@ -1270,7 +1270,6 @@ Functions</h2></td></tr>
 <div class="line">out:</div>
 <div class="line">    <span class="keywordflow">if</span> (alloc)</div>
 <div class="line">        <a class="code" href="group__memory.html#ga200c82639e547869db1f3887d17102d3">sysmem_freeptr</a>((<span class="keywordtype">char</span> *)type);</div>
-<div class="ttc" id="agroup__files_html_ga513fe2710e225c840d9295fb9884607b"><div class="ttname"><a href="group__files.html#ga513fe2710e225c840d9295fb9884607b">MAX_PATH_CHARS</a></div><div class="ttdeci">#define MAX_PATH_CHARS</div><div class="ttdoc">The size you should use when allocating strings for full paths.</div><div class="ttdef"><b>Definition:</b> ext_path.h:24</div></div>
 <div class="ttc" id="agroup__files_html_ga94e5ab05c3fe5e968edc5b18a98f4556"><div class="ttname"><a href="group__files.html#ga94e5ab05c3fe5e968edc5b18a98f4556">open_dialog</a></div><div class="ttdeci">short open_dialog(char *name, short *volptr, t_fourcc *typeptr, t_fourcc *types, short ntypes)</div><div class="ttdoc">Present the user with the standard open file dialog.</div></div>
 <div class="ttc" id="agroup__files_html_gace9f6c70d9d937bd157f5c382618c5fd"><div class="ttname"><a href="group__files.html#gace9f6c70d9d937bd157f5c382618c5fd">locatefile_extended</a></div><div class="ttdeci">short locatefile_extended(char *name, short *outvol, t_fourcc *outtype, C74_CONST t_fourcc *filetypelist, short numtypes)</div><div class="ttdoc">Find a file by name.</div></div>
 <div class="ttc" id="agroup__jgraphics_html_gaed71626b356ca73913300d2e91bc17c2"><div class="ttname"><a href="group__jgraphics.html#gaed71626b356ca73913300d2e91bc17c2">jgraphics_getfiletypes</a></div><div class="ttdeci">void jgraphics_getfiletypes(void *dummy, long *count, t_fourcc **filetypes, char *alloc)</div><div class="ttdoc">Get a list of of filetypes appropriate for use with jgraphics surfaces.</div></div>

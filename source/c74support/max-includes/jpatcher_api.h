@@ -2193,7 +2193,6 @@ long jpatcher_inc_maxsendcontext(void);
 
 // private -- internal use only
 long jbox_is_selected_in_view(t_object *box, t_object *view);
-t_symbol *jbox_get_boxpath(t_object *b);
 
 // private -- internal use only
 t_atom_long jpatcher_dictionary_modernui(t_dictionary *d);

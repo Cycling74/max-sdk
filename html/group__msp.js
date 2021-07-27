@@ -38,7 +38,7 @@ var group__msp =
     [ "t_sample", "group__msp.html#ga5e66f28feb11aab496819aff810b0e31", null ],
     [ "t_vptr", "group__msp.html#ga38df0c7504dc66f6dde187ac80a4db4a", null ],
     [ "vptr", "group__msp.html#ga6ff70012dce98a61c680a920f660c210", [
-      [ "SYS_MAXBLKSIZE", "group__msp.html#gga0ed680fdb405e7195d9f14032851eebba29738f7ba126b5468181b4c017e573d0", null ]
+      [ "SYS_MAXBLKSIZE", "group__msp.html#ggac205be2172292384dd687b5471a87edda29738f7ba126b5468181b4c017e573d0", null ]
     ] ],
     [ "class_dspinit", "group__msp.html#ga7427ae73a2ad71a1b4ef1bee2fd432fc", null ],
     [ "class_dspinitjbox", "group__msp.html#gab9219b764ce65abb21bec0ea54538c14", null ],

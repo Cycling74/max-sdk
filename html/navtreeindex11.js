@@ -1,11 +1,5 @@
 var NAVTREEINDEX11 =
 {
-"structt__jit__attr.html#ae8018ca710848cb75b7e3c8f9bb9c428":[37,5,1,5,0],
-"structt__jit__attr.html#af03d3986f992c030a2bd56a7ac1c6b73":[37,5,1,5,2],
-"structt__jit__attr__filter__clip.html":[37,5,1,3],
-"structt__jit__attr__filter__clip.html#a2980fcf09ab4f0de22aea2eab8bfc1c5":[37,5,1,3,5],
-"structt__jit__attr__filter__clip.html#a2c635f15f8f856fcc0171d0c84ee92d9":[37,5,1,3,6],
-"structt__jit__attr__filter__clip.html#a54177edde40c30db7825abb1dc532870":[37,5,1,3,3],
 "structt__jit__attr__filter__clip.html#a9a0dcf974fd6c6126efd13d2a83e73a9":[37,5,1,3,7],
 "structt__jit__attr__filter__clip.html#ab4aa222485cb206383b0d945e942a288":[37,5,1,3,4],
 "structt__jit__attr__filter__clip.html#afb2b33aa27e603925ee29ac48c7c0a99":[37,5,1,3,0],

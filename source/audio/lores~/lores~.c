@@ -62,9 +62,12 @@ C74_EXPORT void ext_main(void *r)
 	CLASS_ATTR_DOUBLE(c, "cutoff", 0, t_lores, l_freq);
 	CLASS_ATTR_BASIC(c, "cutoff", 0);
 	CLASS_ATTR_LABEL(c, "cutoff", 0, "Cutoff Frequency");
+	CLASS_ATTR_ALIAS(c, "cutoff", "freq");
 	CLASS_ATTR_ACCESSORS(c, "cutoff", 0, lores_attr_setcutoff);
+
 	CLASS_ATTR_DOUBLE(c, "resonance", 0, t_lores, l_r);
 	CLASS_ATTR_BASIC(c, "resonance", 0);
+	CLASS_ATTR_ALIAS(c, "resonance", "q");
 	CLASS_ATTR_LABEL(c, "resonance", 0, "Resonance");
 	CLASS_ATTR_ACCESSORS(c, "resonance", 0, lores_attr_setresonance);
 	class_dspinit(c);
@@ -282,9 +285,11 @@ void lores_float(t_lores *x, double f)
 
 	if (in == 1) {
 		x->l_freq = f;
+		object_attr_touch((t_object *)x, gensym("cutoff"));
 		lores_calc(x);
 	} else if (in == 2) {
 		x->l_r = f >= 1.0 ? 1 - 1E-20 : f;
+		object_attr_touch((t_object *)x, gensym("resonance"));
 		lores_calc(x);
 	}
 }

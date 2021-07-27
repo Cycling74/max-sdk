@@ -270,4 +270,12 @@ C74_STATIC_ASSERT( (calcoffset(t_testpackingstruct, secondmember) - calcoffset(t
 #define C74_EXTERNAL_NOT_ON_X64(name) void ext_main(void *r) { error("%s: not supported on x64", name); }
 #define C74_EXTERNAL_NOT_ON_X64_QUIET void ext_main(void *r) { return; }
 
+#ifdef C74_POISON_FLAVOUR_MACROS
+
+#ifndef WIN_VERSION
+#pragma GCC poison RT PLUG MFL
+#endif
+
+#endif // #ifdef C74_POISON_FLAVOUR_MACROS
+
 #endif // _EXT_PREFIX_H_

@@ -7,7 +7,6 @@ var group__atom =
       [ "w_sym", "unionword.html#a979bae342fac8dbb9af68f15080bedbc", null ]
     ] ],
     [ "t_atom", "structt__atom.html", null ],
-    [ "ATOM_MAX_STRLEN", "group__atom.html#ga27eb80f98b4020e3ecab761d634a3876", null ],
     [ "e_max_atom_gettext_flags", "group__atom.html#ga42fa1c131691f55dbc781a0be60e3772", [
       [ "OBEX_UTIL_ATOM_GETTEXT_DEFAULT", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a2e8bad722419a8be35f8ef13364ddcc7", null ],
       [ "OBEX_UTIL_ATOM_GETTEXT_TRUNCATE_ZEROS", "group__atom.html#gga42fa1c131691f55dbc781a0be60e3772a433f595f519e0a4051d769db66b9b5d8", null ],

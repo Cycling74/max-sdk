@@ -9,7 +9,7 @@
 #include "ext.h"
 #include "commonsyms.h"
 
-C74_HIDDEN t_common_symbols_table *_common_symbols=NULL;
+C74_HIDDEN t_common_symbols_table *_common_symbols = NULL;
 
 C74_HIDDEN void common_symbols_init(void)
 {

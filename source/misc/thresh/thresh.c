@@ -13,7 +13,7 @@
 
 void *thresh_class;
 
-#define MAXSIZE 4096
+#define MAXSIZE 32767
 
 typedef struct thresh {
 	t_object t_ob;
@@ -61,7 +61,7 @@ void thresh_int(t_thresh *x, t_atom_long n)
 	if (proxy_getinlet((t_object *)x))
 		x->t_interval = n < 5? 5 : n;
 	else {
-		if (x->t_ac < MAXSIZE - 1) {
+		if (x->t_ac < MAXSIZE) {
 			x->t_time = gettime_forobject((t_object *)x);
 			atom_setlong(x->t_av+x->t_ac,n);
 			x->t_ac++;
@@ -75,7 +75,7 @@ void thresh_float(t_thresh *x, double f)
 	if (proxy_getinlet((t_object *)x))
 		x->t_interval = f < 5? 5 : f;
 	else {
-		if (x->t_ac < MAXSIZE - 1) {
+		if (x->t_ac < MAXSIZE) {
 			x->t_time = gettime_forobject((t_object *)x);
 			atom_setfloat(x->t_av+x->t_ac,f);
 			x->t_ac++;

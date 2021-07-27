@@ -15,8 +15,6 @@ var group__obj =
       [ "o_messlist", "structt__object.html#a79f4251061edbe1b55db6fb8b572f2e0", null ],
       [ "o_outlet", "structt__object.html#a1ed8a7245487cfa708f24018519d1b87", null ]
     ] ],
-    [ "MAGIC", "group__obj.html#ga94630370ae389fb1189282fa0742f310", null ],
-    [ "MSG_MAXARG", "group__obj.html#gad098f6e3ad3ab917b2bf59c402c4cf3f", null ],
     [ "NOGOOD", "group__obj.html#gabf8c1d20a4f4e731d185c02820c91593", null ],
     [ "object_method_direct", "group__obj.html#ga059445066cc5e1bb358db166e79b8d47", null ],
     [ "classname_openhelp", "group__obj.html#ga5de96f9ed649a42b2133d21c38e3476b", null ],

@@ -105,10 +105,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga719977b7d1d9ae82000cb19e1efddc0f">class_copy</a> (<a class="el" href="structt__symbol.html">t_symbol</a> *src_name_space, <a class="el" href="structt__symbol.html">t_symbol</a> *src_classname, <a class="el" href="structt__symbol.html">t_symbol</a> *dst_name_space, <a class="el" href="structt__symbol.html">t_symbol</a> *dst_classname)</td></tr>
 <tr class="memdesc:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicates a previously registered object class, and registers a copy of this class.  <a href="group__classmod.html#ga719977b7d1d9ae82000cb19e1efddc0f">More...</a><br /></td></tr>
 <tr class="separator:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">jit_class_new</a> (C74_CONST char *name, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mnew, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> mfree, long size,...)</td></tr>
+<tr class="memitem:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">jit_class_new</a> (C74_CONST char *name, method mnew, method mfree, long size,...)</td></tr>
 <tr class="memdesc:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new class with the name specified by the name argument.  <a href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">More...</a><br /></td></tr>
 <tr class="separator:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">jit_class_addmethod</a> (void *c, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> m, const char *name,...)</td></tr>
+<tr class="memitem:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">jit_class_addmethod</a> (void *c, method m, const char *name,...)</td></tr>
 <tr class="memdesc:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a named method to a class.  <a href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">More...</a><br /></td></tr>
 <tr class="separator:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga37e39db544b4d73596da1557e6c7563a"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga37e39db544b4d73596da1557e6c7563a">jit_class_addattr</a> (void *c, <a class="el" href="group__jitter.html#ga0eb2cd9c8e3b9803ba31069575a1ffb9">t_jit_object</a> *attr)</td></tr>
@@ -135,7 +135,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga1cf03eba09d7b3b53a8cde269c47765d">jit_class_register</a> (void *c)</td></tr>
 <tr class="memdesc:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers class in the class registry.  <a href="group__classmod.html#ga1cf03eba09d7b3b53a8cde269c47765d">More...</a><br /></td></tr>
 <tr class="separator:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga61fe690506e449d09569e3e8592b274c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">jit_class_method</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
+<tr class="memitem:ga61fe690506e449d09569e3e8592b274c"><td class="memItemLeft" align="right" valign="top">method&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">jit_class_method</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
 <tr class="memdesc:ga61fe690506e449d09569e3e8592b274c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves method function pointer for named method.  <a href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">More...</a><br /></td></tr>
 <tr class="separator:ga61fe690506e449d09569e3e8592b274c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa786dc731a24864a74f94e9b19aabdba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__messlist.html">t_messlist</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gaa786dc731a24864a74f94e9b19aabdba">jit_class_mess</a> (<a class="el" href="structt__class.html">t_jit_class</a> *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga63eb9d25f881cd6fba11e24f9ac9b02f">jit_class_findbyname</a> (<a class="el" href="structt__symbol.html">t_symbol</a> *classname)</td></tr>
 <tr class="memdesc:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves class pointer associated with name provided.  <a href="group__classmod.html#ga63eb9d25f881cd6fba11e24f9ac9b02f">More...</a><br /></td></tr>
 <tr class="separator:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac5594cb68b903b894e54ea9edb56ad61"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">jit_class_addtypedwrapper</a> (void *c, <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> m, char *name,...)</td></tr>
+<tr class="memitem:gac5594cb68b903b894e54ea9edb56ad61"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">jit_class_addtypedwrapper</a> (void *c, method m, char *name,...)</td></tr>
 <tr class="memdesc:gac5594cb68b903b894e54ea9edb56ad61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a typed wrapper method to a class.  <a href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">More...</a><br /></td></tr>
 <tr class="separator:gac5594cb68b903b894e54ea9edb56ad61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0486ba2dc02d1ff1358f0401956d3080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__messlist.html">t_messlist</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga0486ba2dc02d1ff1358f0401956d3080">jit_class_typedwrapper_get</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *s)</td></tr>
@@ -369,7 +369,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>t_jit_err error code </dd></dl>
 
-<p class="reference">References <a class="el" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym()</a>, <a class="el" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc">hashtab_funall()</a>, <a class="el" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264">hashtab_new()</a>, <a class="el" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1">hashtab_store()</a>, and <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>.</p>
+<p class="reference">References <a class="el" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym()</a>, <a class="el" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc">hashtab_funall()</a>, <a class="el" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264">hashtab_new()</a>, and <a class="el" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1">hashtab_store()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -402,7 +402,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">method&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
@@ -468,7 +468,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">method&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
@@ -725,7 +725,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a> jit_class_method </td>
+          <td class="memname">method jit_class_method </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>c</em>, </td>
@@ -926,13 +926,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">method&#160;</td>
           <td class="paramname"><em>mnew</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>&#160;</td>
+          <td class="paramtype">method&#160;</td>
           <td class="paramname"><em>mfree</em>, </td>
         </tr>
         <tr>
@@ -969,7 +969,7 @@ Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>In order for the Jitter class to be exposed to JavaScript and Java, it is important that the constructor is typed, even if no arguments are provided&ndash;i.e. do not use the older strategy of defining Jitter constructors as private and untyped with A_CANT.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>class pointer to be used in other class functions </dd></dl>
 
-<p class="reference">References <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47a81c1a8550f038db16a619167a70a79b6">A_GIMME</a>, <a class="el" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod()</a>, <a class="el" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7">class_new()</a>, <a class="el" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01">jit_object_exportattrs()</a>, <a class="el" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e">jit_object_importattrs()</a>, and <a class="el" href="group__datatypes.html#ga2c3805706f85c0e789f59a1f1da080c8">method</a>.</p>
+<p class="reference">References <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47a81c1a8550f038db16a619167a70a79b6">A_GIMME</a>, <a class="el" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod()</a>, <a class="el" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7">class_new()</a>, <a class="el" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01">jit_object_exportattrs()</a>, and <a class="el" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e">jit_object_importattrs()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">

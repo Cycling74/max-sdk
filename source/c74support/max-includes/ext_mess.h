@@ -16,16 +16,20 @@ BEGIN_USING_C_LINKAGE
 
 /* mess.h -- define a symbol table and message-passing system.  */
 
-// CALL_METHOD() macros rely on __typeof which is not supported on Windows
-// The "safe" versions are necessary for ARM but should be fine on Intel mac as well.
-// Enabling on Intel mac so we get broader testing.
-#ifndef WIN_VERSION
+// CALL_METHOD() macros, when compiling as C, rely on __typeof which is not supported on Windows
+#if !defined(WIN_VERSION) || defined(__cplusplus)
 #define USE_SAFE_METHOD_CALL
 #endif
 
 /**	Function pointer type for generic methods.
 	@ingroup datatypes
 */
+
+#ifdef __cplusplus
+#define C74_TYPEOF decltype
+#else
+#define C74_TYPEOF __typeof
+#endif
 
 #ifdef USE_SAFE_METHOD_CALL
 typedef void *(*method)(void *);
@@ -43,25 +47,21 @@ typedef long (*t_intmethod)(void *);
 typedef long (*t_intmethod)(void *, ...);
 #endif
 
-#define CALL_METHOD_0(rt, m, x) ((rt(*)(void*))(m))(x)
-#define CALL_METHOD_1(rt, m, x, p1) ((rt(*)(void*, __typeof(p1)))(m))(x, p1)
-#define CALL_METHOD_2(rt, m, x, p1,p2) ((rt(*)(void*, __typeof(p1),__typeof(p2) ))(m))(x, p1, p2)
-#define CALL_METHOD_3(rt, m, x, p1,p2,p3) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3) ))(m))(x, p1,p2,p3)
-#define CALL_METHOD_4(rt, m, x, p1,p2,p3,p4) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4) ))(m))(x, p1,p2,p3,p4)
-#define CALL_METHOD_5(rt, m, x, p1,p2,p3,p4,p5) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5) ))(m))(x, p1,p2,p3,p4,p5)
-#define CALL_METHOD_6(rt, m, x, p1,p2,p3,p4,p5,p6) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6) ))(m))(x, p1,p2,p3,p4,p5,p6)
-#define CALL_METHOD_7(rt, m, x, p1,p2,p3,p4,p5,p6,p7) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7) ))(m))(x, p1,p2,p3,p4,p5,p6,p7)
-#define CALL_METHOD_8(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8)
-#define CALL_METHOD_9(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8,p9) ((rt(*)(void*, __typeof(p1),__typeof(p2),__typeof(p3),__typeof(p4),__typeof(p5),__typeof(p6),__typeof(p7),__typeof(p8),__typeof(p9) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8,p9)
+#define CALL_METHOD_0(rt, m, x) ((rt(*)(C74_TYPEOF(x)))(m))(x)
+#define CALL_METHOD_1(rt, m, x, p1) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1)))(m))(x, p1)
+#define CALL_METHOD_2(rt, m, x, p1,p2) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2) ))(m))(x, p1, p2)
+#define CALL_METHOD_3(rt, m, x, p1,p2,p3) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3) ))(m))(x, p1,p2,p3)
+#define CALL_METHOD_4(rt, m, x, p1,p2,p3,p4) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4) ))(m))(x, p1,p2,p3,p4)
+#define CALL_METHOD_5(rt, m, x, p1,p2,p3,p4,p5) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4),C74_TYPEOF(p5) ))(m))(x, p1,p2,p3,p4,p5)
+#define CALL_METHOD_6(rt, m, x, p1,p2,p3,p4,p5,p6) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4),C74_TYPEOF(p5),C74_TYPEOF(p6) ))(m))(x, p1,p2,p3,p4,p5,p6)
+#define CALL_METHOD_7(rt, m, x, p1,p2,p3,p4,p5,p6,p7) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4),C74_TYPEOF(p5),C74_TYPEOF(p6),C74_TYPEOF(p7) ))(m))(x, p1,p2,p3,p4,p5,p6,p7)
+#define CALL_METHOD_8(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4),C74_TYPEOF(p5),C74_TYPEOF(p6),C74_TYPEOF(p7),C74_TYPEOF(p8) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8)
+#define CALL_METHOD_9(rt, m, x, p1,p2,p3,p4,p5,p6,p7,p8,p9) ((rt(*)(C74_TYPEOF(x), C74_TYPEOF(p1),C74_TYPEOF(p2),C74_TYPEOF(p3),C74_TYPEOF(p4),C74_TYPEOF(p5),C74_TYPEOF(p6),C74_TYPEOF(p7),C74_TYPEOF(p8),C74_TYPEOF(p9) ))(m))(x, p1,p2,p3,p4,p5,p6,p7,p8,p9)
 
 #define _GET_CALL_METHOD_MACRO_INDEX(_method, _object, _1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
 #define GET_CALL_METHOD_MACRO_INDEX(...) C74_EXPAND(_GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
 
 #define GET_CALL_METHOD_MACRO_NAME(...) C74_JOIN_2(CALL_METHOD_, GET_CALL_METHOD_MACRO_INDEX(__VA_ARGS__))
-
-// for now only use special macro for ARM
-// we want to avoid casting all args to void* on intel
-// and ultimately should come up with a better approach on ARM as well
 
 #ifdef USE_SAFE_METHOD_CALL
 

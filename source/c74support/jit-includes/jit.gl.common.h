@@ -99,7 +99,9 @@ enum t_jit_gl_view_key {
 
 extern t_symbol *_jit_glengine;
 
+long jit_gl_initialize(void);
 
+void max_jit_ob3d_init(void);
 
 void max_ob3d_setup(void);					// legacy api
 void max_jit_class_ob3d_wrap(t_class *c);	// newer api

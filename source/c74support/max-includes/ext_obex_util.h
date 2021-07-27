@@ -1687,6 +1687,12 @@ CLASS_METHOD_ATTR_PARSE(c,methodname,"introduced",USESYM(symbol),flags,str_tr(ve
 #define OBJ_ATTR_DEFAULT_SAVE(x,attrname,flags,parsestr) \
 	{ OBJ_ATTR_DEFAULT(x,attrname,flags,parsestr); OBJ_ATTR_SAVE(x,attrname,flags); }
 
+// used to transition former CLASS_ATTR_SAVE attrs mistakenly declared
+
+#define CLASS_ATTR_DONTSAVE(c,attrname,flags) \
+CLASS_ATTR_ATTR_PARSE(c,attrname,"dontsave",USESYM(long),flags,"1")
+
+
 
 // sticky macros for attribute attributes, and method attributes. Useful for defining attribute groups
 

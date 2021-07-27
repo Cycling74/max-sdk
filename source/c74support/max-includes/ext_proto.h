@@ -1443,7 +1443,7 @@ method zgetfn(t_object *op, t_symbol *msg);
 void patcher_eachdo(t_intmethod fun, void *arg);	// this one is still legit
 void loadbang_suspend(void);  // used by poly~ on windows
 void loadbang_resume(void);  // used by poly~ on windows
-
+char noloadbangdisable_get(void);
 
 // table functions
 

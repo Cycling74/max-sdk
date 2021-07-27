@@ -27,10 +27,10 @@ var group__jbox =
     [ "JBOX_TEXTFIELD", "group__jbox.html#ga1abed197d8348eb15df1a5c9d4bc368d", null ],
     [ "JBOX_TEXTJUSTIFICATIONATTR", "group__jbox.html#gacf2db7d7dcd4d5ea8c1a430a903a52b3", null ],
     [ "JBOX_TRANSPARENT", "group__jbox.html#ga3a5253e4b79d030934557351547c71ba", [
-      [ "JBOX_FONTFACE_REGULAR", "group__jbox.html#ggaabfcbcb5ac86a1edac4035264bc7d2b8a0071b2aa858b0b85866ec55f920661ea", null ],
-      [ "JBOX_FONTFACE_BOLD", "group__jbox.html#ggaabfcbcb5ac86a1edac4035264bc7d2b8a7c5afcc54470110f9adafe6643860e33", null ],
-      [ "JBOX_FONTFACE_ITALIC", "group__jbox.html#ggaabfcbcb5ac86a1edac4035264bc7d2b8a804e35b0947d1056b75c0b7416aed5f1", null ],
-      [ "JBOX_FONTFACE_BOLDITALIC", "group__jbox.html#ggaabfcbcb5ac86a1edac4035264bc7d2b8ac504521024538cbb38406272126cb30b", null ]
+      [ "JBOX_FONTFACE_REGULAR", "group__jbox.html#gga2970898e8a43ce21e1cc510d49f1b89da0071b2aa858b0b85866ec55f920661ea", null ],
+      [ "JBOX_FONTFACE_BOLD", "group__jbox.html#gga2970898e8a43ce21e1cc510d49f1b89da7c5afcc54470110f9adafe6643860e33", null ],
+      [ "JBOX_FONTFACE_ITALIC", "group__jbox.html#gga2970898e8a43ce21e1cc510d49f1b89da804e35b0947d1056b75c0b7416aed5f1", null ],
+      [ "JBOX_FONTFACE_BOLDITALIC", "group__jbox.html#gga2970898e8a43ce21e1cc510d49f1b89dac504521024538cbb38406272126cb30b", null ]
     ] ],
     [ "HitTestResult", "group__jbox.html#ga956a254a140565aa9ff36a514740e021", [
       [ "HitNothing", "group__jbox.html#gga956a254a140565aa9ff36a514740e021a3bb67caa8d046ec70d5f467d64a6a290", null ],
