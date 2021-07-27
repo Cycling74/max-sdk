@@ -1,5 +1,7 @@
 #pragma once
 
+#include "jit-includes/c74_max.h"
+
 namespace c74 {
 namespace max {
 
