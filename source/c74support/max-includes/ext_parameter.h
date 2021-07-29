@@ -16,16 +16,16 @@
 BEGIN_USING_C_LINKAGE
 
 enum t_parameter_method_flag {
-	PARAMETER_METHOD_FLAG_OVERRIDE 	= 0,
-	PARAMETER_METHOD_FLAG_PRE 		= (1L << 0L),
-	PARAMETER_METHOD_FLAG_POST		= (1L << 1L),
-	PARAMETER_METHOD_FLAG_FULL		= (1L << 2L),
-	PARAMETER_METHOD_FLAG_DONOTHING	= (1L << 15L),
+	PARAMETER_METHOD_FLAG_OVERRIDE 	= 0,			// default is to override normal method with standard method
+	PARAMETER_METHOD_FLAG_PRE 		= (1L << 0L),	// user-defined pre-processing function for standard method
+	PARAMETER_METHOD_FLAG_POST		= (1L << 1L),	// user-defined post-processing function for standard method
+	PARAMETER_METHOD_FLAG_FULL		= (1L << 2L),	// user-defined override method
+	PARAMETER_METHOD_FLAG_DONOTHING	= (1L << 15L),	// don't override at all
 };
 
 enum t_parameter_color_flag {
 	PARAMETER_COLOR_FLAG_DEFAULT	= 0,
-	PARAMETER_COLOR_FLAG_STYLE		= (1L << 0L)
+	PARAMETER_COLOR_FLAG_STYLE		= (1L << 0L)	// use style system for color rather than defaults system
 };
 
 enum {

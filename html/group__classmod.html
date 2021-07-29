@@ -105,10 +105,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga719977b7d1d9ae82000cb19e1efddc0f">class_copy</a> (<a class="el" href="structt__symbol.html">t_symbol</a> *src_name_space, <a class="el" href="structt__symbol.html">t_symbol</a> *src_classname, <a class="el" href="structt__symbol.html">t_symbol</a> *dst_name_space, <a class="el" href="structt__symbol.html">t_symbol</a> *dst_classname)</td></tr>
 <tr class="memdesc:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicates a previously registered object class, and registers a copy of this class.  <a href="group__classmod.html#ga719977b7d1d9ae82000cb19e1efddc0f">More...</a><br /></td></tr>
 <tr class="separator:ga719977b7d1d9ae82000cb19e1efddc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">jit_class_new</a> (C74_CONST char *name, method mnew, method mfree, long size,...)</td></tr>
+<tr class="memitem:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">jit_class_new</a> (C74_CONST char *name, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mnew, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> mfree, long size,...)</td></tr>
 <tr class="memdesc:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new class with the name specified by the name argument.  <a href="group__classmod.html#ga39c943d33b9aefa8deb83daa93bec1d1">More...</a><br /></td></tr>
 <tr class="separator:ga39c943d33b9aefa8deb83daa93bec1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">jit_class_addmethod</a> (void *c, method m, const char *name,...)</td></tr>
+<tr class="memitem:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">jit_class_addmethod</a> (void *c, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> m, const char *name,...)</td></tr>
 <tr class="memdesc:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a named method to a class.  <a href="group__classmod.html#ga3d3fb6b5f0696ac552b1b810a1656a73">More...</a><br /></td></tr>
 <tr class="separator:ga3d3fb6b5f0696ac552b1b810a1656a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga37e39db544b4d73596da1557e6c7563a"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga37e39db544b4d73596da1557e6c7563a">jit_class_addattr</a> (void *c, <a class="el" href="group__jitter.html#ga0eb2cd9c8e3b9803ba31069575a1ffb9">t_jit_object</a> *attr)</td></tr>
@@ -135,7 +135,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga1cf03eba09d7b3b53a8cde269c47765d">jit_class_register</a> (void *c)</td></tr>
 <tr class="memdesc:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers class in the class registry.  <a href="group__classmod.html#ga1cf03eba09d7b3b53a8cde269c47765d">More...</a><br /></td></tr>
 <tr class="separator:ga1cf03eba09d7b3b53a8cde269c47765d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga61fe690506e449d09569e3e8592b274c"><td class="memItemLeft" align="right" valign="top">method&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">jit_class_method</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
+<tr class="memitem:ga61fe690506e449d09569e3e8592b274c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">jit_class_method</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
 <tr class="memdesc:ga61fe690506e449d09569e3e8592b274c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves method function pointer for named method.  <a href="group__classmod.html#ga61fe690506e449d09569e3e8592b274c">More...</a><br /></td></tr>
 <tr class="separator:ga61fe690506e449d09569e3e8592b274c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa786dc731a24864a74f94e9b19aabdba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__messlist.html">t_messlist</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gaa786dc731a24864a74f94e9b19aabdba">jit_class_mess</a> (<a class="el" href="structt__class.html">t_jit_class</a> *c, <a class="el" href="structt__symbol.html">t_symbol</a> *methodname)</td></tr>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga63eb9d25f881cd6fba11e24f9ac9b02f">jit_class_findbyname</a> (<a class="el" href="structt__symbol.html">t_symbol</a> *classname)</td></tr>
 <tr class="memdesc:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves class pointer associated with name provided.  <a href="group__classmod.html#ga63eb9d25f881cd6fba11e24f9ac9b02f">More...</a><br /></td></tr>
 <tr class="separator:ga63eb9d25f881cd6fba11e24f9ac9b02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac5594cb68b903b894e54ea9edb56ad61"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">jit_class_addtypedwrapper</a> (void *c, method m, char *name,...)</td></tr>
+<tr class="memitem:gac5594cb68b903b894e54ea9edb56ad61"><td class="memItemLeft" align="right" valign="top">t_jit_err&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">jit_class_addtypedwrapper</a> (void *c, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> m, char *name,...)</td></tr>
 <tr class="memdesc:gac5594cb68b903b894e54ea9edb56ad61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a typed wrapper method to a class.  <a href="group__classmod.html#gac5594cb68b903b894e54ea9edb56ad61">More...</a><br /></td></tr>
 <tr class="separator:gac5594cb68b903b894e54ea9edb56ad61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0486ba2dc02d1ff1358f0401956d3080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__messlist.html">t_messlist</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__classmod.html#ga0486ba2dc02d1ff1358f0401956d3080">jit_class_typedwrapper_get</a> (void *c, <a class="el" href="structt__symbol.html">t_symbol</a> *s)</td></tr>
@@ -259,8 +259,8 @@ Functions</h2></td></tr>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga408738c800435bf50d092ce52b223327_cgraph.png" border="0" usemap="#agroup__classmod_ga408738c800435bf50d092ce52b223327_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga408738c800435bf50d092ce52b223327_cgraph" id="agroup__classmod_ga408738c800435bf50d092ce52b223327_cgraph">
-<area shape="rect" title="Adds an adornment to a class." alt="" coords="5,5,164,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="212,5,353,32"/>
+<area shape="rect" title="Adds an adornment to a class." alt="" coords="5,5,168,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="216,5,361,32"/>
 </map>
 </div>
 
@@ -310,9 +310,9 @@ Functions</h2></td></tr>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga37e39db544b4d73596da1557e6c7563a_cgraph.png" border="0" usemap="#agroup__classmod_ga37e39db544b4d73596da1557e6c7563a_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga37e39db544b4d73596da1557e6c7563a_cgraph" id="agroup__classmod_ga37e39db544b4d73596da1557e6c7563a_cgraph">
-<area shape="rect" title="Adds an attribute to a class." alt="" coords="5,31,123,57"/>
-<area shape="rect" href="group__class.html#ga2289eb7e26b552be6e015c2f9912a9ac" title="Adds an attribute to a previously defined object class." alt="" coords="191,5,291,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="171,56,312,83"/>
+<area shape="rect" title="Adds an attribute to a class." alt="" coords="5,31,124,57"/>
+<area shape="rect" href="group__class.html#ga2289eb7e26b552be6e015c2f9912a9ac" title="Adds an attribute to a previously defined object class." alt="" coords="194,5,295,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="172,56,317,83"/>
 </map>
 </div>
 
@@ -369,7 +369,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>t_jit_err error code </dd></dl>
 
-<p class="reference">References <a class="el" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym()</a>, <a class="el" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc">hashtab_funall()</a>, <a class="el" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264">hashtab_new()</a>, and <a class="el" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1">hashtab_store()</a>.</p>
+<p class="reference">References <a class="el" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb">gensym()</a>, <a class="el" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc">hashtab_funall()</a>, <a class="el" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264">hashtab_new()</a>, <a class="el" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1">hashtab_store()</a>, and <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -377,11 +377,11 @@ Functions</h2></td></tr>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga07e21d50dcd65d6c35680cd16846f413_cgraph.png" border="0" usemap="#agroup__classmod_ga07e21d50dcd65d6c35680cd16846f413_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga07e21d50dcd65d6c35680cd16846f413_cgraph" id="agroup__classmod_ga07e21d50dcd65d6c35680cd16846f413_cgraph">
-<area shape="rect" title="Adds an interface to a class." alt="" coords="5,81,153,108"/>
-<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="221,5,289,32"/>
-<area shape="rect" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc" title="Call the specified function for every item in the hashtab." alt="" coords="201,56,308,83"/>
-<area shape="rect" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264" title="Create a new hashtab object." alt="" coords="205,107,304,133"/>
-<area shape="rect" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1" title="Store an item in a hashtab with an associated key." alt="" coords="203,157,307,184"/>
+<area shape="rect" title="Adds an interface to a class." alt="" coords="5,81,156,108"/>
+<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="224,5,293,32"/>
+<area shape="rect" href="group__hashtab.html#ga37e7b5c20c9fc69e9435f788f35335dc" title="Call the specified function for every item in the hashtab." alt="" coords="204,56,313,83"/>
+<area shape="rect" href="group__hashtab.html#ga7a8d9e48772f47e238751af849c97264" title="Create a new hashtab object." alt="" coords="208,107,309,133"/>
+<area shape="rect" href="group__hashtab.html#gaa26ebe9ba21e84dd0dbb8d5aed12e5a1" title="Store an item in a hashtab with an associated key." alt="" coords="205,157,312,184"/>
 </map>
 </div>
 
@@ -402,7 +402,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">method&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
@@ -445,9 +445,9 @@ Functions</h2></td></tr>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga3d3fb6b5f0696ac552b1b810a1656a73_cgraph.png" border="0" usemap="#agroup__classmod_ga3d3fb6b5f0696ac552b1b810a1656a73_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga3d3fb6b5f0696ac552b1b810a1656a73_cgraph" id="agroup__classmod_ga3d3fb6b5f0696ac552b1b810a1656a73_cgraph">
-<area shape="rect" title="Adds a named method to a class." alt="" coords="5,31,147,57"/>
-<area shape="rect" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d" title="Adds a method to a previously defined object class." alt="" coords="203,5,327,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="195,56,336,83"/>
+<area shape="rect" title="Adds a named method to a class." alt="" coords="5,31,149,57"/>
+<area shape="rect" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d" title="Adds a method to a previously defined object class." alt="" coords="207,5,333,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="197,56,343,83"/>
 </map>
 </div>
 
@@ -468,7 +468,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">method&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
@@ -512,8 +512,8 @@ Functions</h2></td></tr>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_gac5594cb68b903b894e54ea9edb56ad61_cgraph.png" border="0" usemap="#agroup__classmod_gac5594cb68b903b894e54ea9edb56ad61_cgraph" alt=""/></div>
 <map name="agroup__classmod_gac5594cb68b903b894e54ea9edb56ad61_cgraph" id="agroup__classmod_gac5594cb68b903b894e54ea9edb56ad61_cgraph">
-<area shape="rect" title="Adds a typed wrapper method to a class." alt="" coords="5,5,181,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="229,5,371,32"/>
+<area shape="rect" title="Adds a typed wrapper method to a class." alt="" coords="5,5,185,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="233,5,379,32"/>
 </map>
 </div>
 
@@ -631,8 +631,8 @@ Functions</h2></td></tr>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga63eb9d25f881cd6fba11e24f9ac9b02f_cgraph.png" border="0" usemap="#agroup__classmod_ga63eb9d25f881cd6fba11e24f9ac9b02f_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga63eb9d25f881cd6fba11e24f9ac9b02f_cgraph" id="agroup__classmod_ga63eb9d25f881cd6fba11e24f9ac9b02f_cgraph">
-<area shape="rect" title="Retrieves class pointer associated with name provided." alt="" coords="5,5,149,32"/>
-<area shape="rect" href="group__class.html#ga11d93886daa53a3e0dea974176190301" title="Finds the class pointer for a class, given the class&#39;s namespace and name." alt="" coords="197,5,324,32"/>
+<area shape="rect" title="Retrieves class pointer associated with name provided." alt="" coords="5,5,151,32"/>
+<area shape="rect" href="group__class.html#ga11d93886daa53a3e0dea974176190301" title="Finds the class pointer for a class, given the class&#39;s namespace and name." alt="" coords="199,5,328,32"/>
 </map>
 </div>
 
@@ -672,9 +672,9 @@ Functions</h2></td></tr>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga2847462538894f23ae00b8265232db09_cgraph.png" border="0" usemap="#agroup__classmod_ga2847462538894f23ae00b8265232db09_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga2847462538894f23ae00b8265232db09_cgraph" id="agroup__classmod_ga2847462538894f23ae00b8265232db09_cgraph">
-<area shape="rect" title="Frees a class." alt="" coords="5,31,104,57"/>
-<area shape="rect" href="group__class.html#ga1df757149b7ad2f1d37178c5c184935f" title="Frees a previously defined object class." alt="" coords="181,5,264,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="152,56,293,83"/>
+<area shape="rect" title="Frees a class." alt="" coords="5,31,105,57"/>
+<area shape="rect" href="group__class.html#ga1df757149b7ad2f1d37178c5c184935f" title="Frees a previously defined object class." alt="" coords="185,5,267,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="153,56,299,83"/>
 </map>
 </div>
 
@@ -725,7 +725,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">method jit_class_method </td>
+          <td class="memname"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> jit_class_method </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>c</em>, </td>
@@ -808,9 +808,9 @@ Functions</h2></td></tr>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_gafcda1659cb3299a25f0f3f2a570a0d2f_cgraph.png" border="0" usemap="#agroup__classmod_gafcda1659cb3299a25f0f3f2a570a0d2f_cgraph" alt=""/></div>
 <map name="agroup__classmod_gafcda1659cb3299a25f0f3f2a570a0d2f_cgraph" id="agroup__classmod_gafcda1659cb3299a25f0f3f2a570a0d2f_cgraph">
-<area shape="rect" title="Marks a method as safe to call as an attribute style argument." alt="" coords="5,31,196,57"/>
-<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="281,5,349,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="244,56,385,83"/>
+<area shape="rect" title="Marks a method as safe to call as an attribute style argument." alt="" coords="5,31,201,57"/>
+<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="287,5,357,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="249,56,395,83"/>
 </map>
 </div>
 
@@ -862,8 +862,8 @@ Functions</h2></td></tr>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga5ace294def3c0e31d3890d2f9be1af68_cgraph.png" border="0" usemap="#agroup__classmod_ga5ace294def3c0e31d3890d2f9be1af68_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga5ace294def3c0e31d3890d2f9be1af68_cgraph" id="agroup__classmod_ga5ace294def3c0e31d3890d2f9be1af68_cgraph">
-<area shape="rect" title="Checks to see if symbol is safe to call as an attribute style argument." alt="" coords="5,5,200,32"/>
-<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="248,5,316,32"/>
+<area shape="rect" title="Checks to see if symbol is safe to call as an attribute style argument." alt="" coords="5,5,204,32"/>
+<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="252,5,321,32"/>
 </map>
 </div>
 
@@ -904,8 +904,8 @@ Functions</h2></td></tr>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga5af7e1d4e070475ad79840c0ca3e6f86_cgraph.png" border="0" usemap="#agroup__classmod_ga5af7e1d4e070475ad79840c0ca3e6f86_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga5af7e1d4e070475ad79840c0ca3e6f86_cgraph" id="agroup__classmod_ga5af7e1d4e070475ad79840c0ca3e6f86_cgraph">
-<area shape="rect" title="Retrieves the name of a class." alt="" coords="5,5,132,32"/>
-<area shape="rect" href="group__class.html#ga32dab29dac27195676d8edfed8e04798" title="Retrieves the name of a class, given the class&#39;s pointer." alt="" coords="180,5,291,32"/>
+<area shape="rect" title="Retrieves the name of a class." alt="" coords="5,5,135,32"/>
+<area shape="rect" href="group__class.html#ga32dab29dac27195676d8edfed8e04798" title="Retrieves the name of a class, given the class&#39;s pointer." alt="" coords="183,5,295,32"/>
 </map>
 </div>
 
@@ -926,13 +926,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">method&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mnew</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">method&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>mfree</em>, </td>
         </tr>
         <tr>
@@ -969,7 +969,7 @@ Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>In order for the Jitter class to be exposed to JavaScript and Java, it is important that the constructor is typed, even if no arguments are provided&ndash;i.e. do not use the older strategy of defining Jitter constructors as private and untyped with A_CANT.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>class pointer to be used in other class functions </dd></dl>
 
-<p class="reference">References <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47a81c1a8550f038db16a619167a70a79b6">A_GIMME</a>, <a class="el" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod()</a>, <a class="el" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7">class_new()</a>, <a class="el" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01">jit_object_exportattrs()</a>, and <a class="el" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e">jit_object_importattrs()</a>.</p>
+<p class="reference">References <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47af48193ec36e53b1507d81c49873c8d7a">A_CANT</a>, <a class="el" href="group__atom.html#gga8aa6700e9f00b132eb376db6e39ade47a81c1a8550f038db16a619167a70a79b6">A_GIMME</a>, <a class="el" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d">class_addmethod()</a>, <a class="el" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7">class_new()</a>, <a class="el" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01">jit_object_exportattrs()</a>, <a class="el" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e">jit_object_importattrs()</a>, and <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
@@ -978,28 +978,28 @@ Functions</h2></td></tr>
 <div class="center"><img src="group__classmod_ga39c943d33b9aefa8deb83daa93bec1d1_cgraph.png" border="0" usemap="#agroup__classmod_ga39c943d33b9aefa8deb83daa93bec1d1_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga39c943d33b9aefa8deb83daa93bec1d1_cgraph" id="agroup__classmod_ga39c943d33b9aefa8deb83daa93bec1d1_cgraph">
 <area shape="rect" title="Creates a new class with the name specified by the name argument." alt="" coords="5,157,107,184"/>
-<area shape="rect" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d" title="Adds a method to a previously defined object class." alt="" coords="164,81,288,108"/>
-<area shape="rect" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7" title="Initializes a class by informing Max of its name, instance creation and free functions,..." alt="" coords="184,132,268,159"/>
-<area shape="rect" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01" title="Exports object attributes to an XML file." alt="" coords="155,335,297,361"/>
-<area shape="rect" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e" title="Imports object attributes from an XML file." alt="" coords="155,183,297,209"/>
-<area shape="rect" href="group__memory.html#ga5520eadf3494221726cfaf3cbd35f8e9" title="Free memory allocated with getbytes()." alt="" coords="383,309,459,336"/>
-<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="387,208,455,235"/>
-<area shape="rect" href="group__atommod.html#ga8034b94e985f9c616c108fdf426ebcf4" title="Sets atom value to symbol." alt="" coords="361,411,480,437"/>
-<area shape="rect" href="group__objectmod.html#ga2d3302646e6bf59b4960dd0656632095" title="Retrieves an object&#39;s class name." alt="" coords="349,461,493,488"/>
-<area shape="rect" href="group__objectmod.html#ga64970b62e5afe7a2cbd57efd6e9e9f74" title="Frees an object." alt="" coords="369,259,472,285"/>
-<area shape="rect" href="group__attr.html#ga26e3d2d547a494e2dbb994cff446a1d2" title="Returns the pointer to an attribute, given its name." alt="" coords="367,512,475,539"/>
-<area shape="rect" href="group__misc.html#ga751e472fea0842d902012a41f79afcce" title="Performs an ASCII sort on an array of t_symbol *s." alt="" coords="359,360,482,387"/>
-<area shape="rect" href="group__atom.html#ga36c2619378802011ff0ff44bf74a807c" title="Inserts a t_symbol * into a t_atom and change the t_atom&#39;s type to A_SYM." alt="" coords="564,411,665,437"/>
-<area shape="rect" href="group__obj.html#gac4523e68b4be4deb6db0ea91948d3553" title="Retrieves an object instance&#39;s class name." alt="" coords="551,461,678,488"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="544,233,685,260"/>
-<area shape="rect" href="group__obj.html#ga3759846cb356195532c41e35b87522ee" title="Call the free function and release the memory for an instance of an internal object class previously ..." alt="" coords="571,284,658,311"/>
-<area shape="rect" href="group__linklistmod.html#gaba0236de39f684e338ae6bf5736ae4ad" title="Removes all objects from the linked list, without freeing any objects in list." alt="" coords="361,56,480,83"/>
-<area shape="rect" href="group__linklistmod.html#ga727e60be2a2ff3426661dbac83119599" title="Retrieves the object at the specified list index." alt="" coords="355,107,487,133"/>
-<area shape="rect" href="group__linklistmod.html#gae03f7737a78533c17ef1c82c3bf4073b" title="Retrieves the linked list size." alt="" coords="358,157,483,184"/>
-<area shape="rect" href="group__attr.html#ga95163d72f6b7500e5986af0f23743e4f" title="Sets the value of an object&#39;s attribute." alt="" coords="345,5,496,32"/>
-<area shape="rect" href="group__linklist.html#ga033f4bf2a9f806e168697b5ce0f6331e" title="Free a linklist, but don&#39;t free the items it contains." alt="" coords="564,56,665,83"/>
-<area shape="rect" href="group__linklist.html#ga4d64ccb54a70c0a2a9b3fb68e495d9f4" title="Return the item stored in a linklist at a specified index." alt="" coords="557,107,672,133"/>
-<area shape="rect" href="group__linklist.html#gafad75d68379bf283cdd1ffcfb6f8d2be" title="Return the number of items in a linklist object." alt="" coords="561,157,669,184"/>
+<area shape="rect" href="group__class.html#gaab2e3c25868317c8a9c216bbca2c040d" title="Adds a method to a previously defined object class." alt="" coords="164,81,291,108"/>
+<area shape="rect" href="group__class.html#ga3450d7e28cb57dc3819486ff49f019c7" title="Initializes a class by informing Max of its name, instance creation and free functions,..." alt="" coords="185,132,269,159"/>
+<area shape="rect" href="group__objectmod.html#ga62d196313913e245d4baa69ed2308f01" title="Exports object attributes to an XML file." alt="" coords="155,335,300,361"/>
+<area shape="rect" href="group__objectmod.html#ga29a1be851f1e88aa459689681d8b996e" title="Imports object attributes from an XML file." alt="" coords="155,183,300,209"/>
+<area shape="rect" href="group__memory.html#ga5520eadf3494221726cfaf3cbd35f8e9" title="Free memory allocated with getbytes()." alt="" coords="385,309,463,336"/>
+<area shape="rect" href="group__symbol.html#ga5d8db08b384aeb76eaee85a15f46fbcb" title="Given a C&#45;string, fetch the matching t_symbol pointer from the symbol table, generating the symbol if..." alt="" coords="389,208,459,235"/>
+<area shape="rect" href="group__atommod.html#ga8034b94e985f9c616c108fdf426ebcf4" title="Sets atom value to symbol." alt="" coords="365,411,483,437"/>
+<area shape="rect" href="group__objectmod.html#ga2d3302646e6bf59b4960dd0656632095" title="Retrieves an object&#39;s class name." alt="" coords="351,461,497,488"/>
+<area shape="rect" href="group__objectmod.html#ga64970b62e5afe7a2cbd57efd6e9e9f74" title="Frees an object." alt="" coords="371,259,477,285"/>
+<area shape="rect" href="group__attr.html#ga26e3d2d547a494e2dbb994cff446a1d2" title="Returns the pointer to an attribute, given its name." alt="" coords="369,512,479,539"/>
+<area shape="rect" href="group__misc.html#ga751e472fea0842d902012a41f79afcce" title="Performs an ASCII sort on an array of t_symbol *s." alt="" coords="362,360,486,387"/>
+<area shape="rect" href="group__atom.html#ga36c2619378802011ff0ff44bf74a807c" title="Inserts a t_symbol * into a t_atom and change the t_atom&#39;s type to A_SYM." alt="" coords="570,411,671,437"/>
+<area shape="rect" href="group__obj.html#gac4523e68b4be4deb6db0ea91948d3553" title="Retrieves an object instance&#39;s class name." alt="" coords="556,461,685,488"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="548,233,693,260"/>
+<area shape="rect" href="group__obj.html#ga3759846cb356195532c41e35b87522ee" title="Call the free function and release the memory for an instance of an internal object class previously ..." alt="" coords="577,284,665,311"/>
+<area shape="rect" href="group__linklistmod.html#gaba0236de39f684e338ae6bf5736ae4ad" title="Removes all objects from the linked list, without freeing any objects in list." alt="" coords="365,56,483,83"/>
+<area shape="rect" href="group__linklistmod.html#ga727e60be2a2ff3426661dbac83119599" title="Retrieves the object at the specified list index." alt="" coords="357,107,491,133"/>
+<area shape="rect" href="group__linklistmod.html#gae03f7737a78533c17ef1c82c3bf4073b" title="Retrieves the linked list size." alt="" coords="361,157,487,184"/>
+<area shape="rect" href="group__attr.html#ga95163d72f6b7500e5986af0f23743e4f" title="Sets the value of an object&#39;s attribute." alt="" coords="348,5,500,32"/>
+<area shape="rect" href="group__linklist.html#ga033f4bf2a9f806e168697b5ce0f6331e" title="Free a linklist, but don&#39;t free the items it contains." alt="" coords="571,56,671,83"/>
+<area shape="rect" href="group__linklist.html#ga4d64ccb54a70c0a2a9b3fb68e495d9f4" title="Return the item stored in a linklist at a specified index." alt="" coords="563,107,679,133"/>
+<area shape="rect" href="group__linklist.html#gafad75d68379bf283cdd1ffcfb6f8d2be" title="Return the number of items in a linklist object." alt="" coords="567,157,675,184"/>
 </map>
 </div>
 
@@ -1038,9 +1038,9 @@ Functions</h2></td></tr>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_ga1cf03eba09d7b3b53a8cde269c47765d_cgraph.png" border="0" usemap="#agroup__classmod_ga1cf03eba09d7b3b53a8cde269c47765d_cgraph" alt=""/></div>
 <map name="agroup__classmod_ga1cf03eba09d7b3b53a8cde269c47765d_cgraph" id="agroup__classmod_ga1cf03eba09d7b3b53a8cde269c47765d_cgraph">
-<area shape="rect" title="Registers class in the class registry." alt="" coords="5,31,125,57"/>
-<area shape="rect" href="group__class.html#ga0709af4aad9570f0cb91711a5c6d34d1" title="Registers a previously defined object class." alt="" coords="193,5,295,32"/>
-<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="173,56,315,83"/>
+<area shape="rect" title="Registers class in the class registry." alt="" coords="5,31,127,57"/>
+<area shape="rect" href="group__class.html#ga0709af4aad9570f0cb91711a5c6d34d1" title="Registers a previously defined object class." alt="" coords="195,5,299,32"/>
+<area shape="rect" href="group__utilitymod.html#gaf2e27f1ee2e100777d3f66fb81b309f0" title="Converts Max style error codes to Jitter style error codes." alt="" coords="175,56,320,83"/>
 </map>
 </div>
 
@@ -1090,9 +1090,9 @@ Functions</h2></td></tr>
 <div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__classmod_gaeca58f03626ad49dfc7997f979ce602f_cgraph.png" border="0" usemap="#agroup__classmod_gaeca58f03626ad49dfc7997f979ce602f_cgraph" alt=""/></div>
 <map name="agroup__classmod_gaeca58f03626ad49dfc7997f979ce602f_cgraph" id="agroup__classmod_gaeca58f03626ad49dfc7997f979ce602f_cgraph">
-<area shape="rect" title="Compares name of class with the name provided." alt="" coords="5,5,157,32"/>
-<area shape="rect" href="group__classmod.html#ga5af7e1d4e070475ad79840c0ca3e6f86" title="Retrieves the name of a class." alt="" coords="205,5,332,32"/>
-<area shape="rect" href="group__class.html#ga32dab29dac27195676d8edfed8e04798" title="Retrieves the name of a class, given the class&#39;s pointer." alt="" coords="380,5,491,32"/>
+<area shape="rect" title="Compares name of class with the name provided." alt="" coords="5,5,159,32"/>
+<area shape="rect" href="group__classmod.html#ga5af7e1d4e070475ad79840c0ca3e6f86" title="Retrieves the name of a class." alt="" coords="207,5,336,32"/>
+<area shape="rect" href="group__class.html#ga32dab29dac27195676d8edfed8e04798" title="Retrieves the name of a class, given the class&#39;s pointer." alt="" coords="384,5,496,32"/>
 </map>
 </div>
 

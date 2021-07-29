@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('group__dictionary.html',''); initResiz
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="group__dictionary.png" border="0" usemap="#agroup____dictionary" alt=""/></div>
 <map name="agroup____dictionary" id="agroup____dictionary">
-<area shape="rect" title="Max 5, introduced the t_dictionary structure/object." alt="" coords="152,5,233,31"/>
-<area shape="rect" href="group__datastore.html" title="Max provides a number of ways of storing and manipulating data at a high level." alt="" coords="5,5,104,31"/>
+<area shape="rect" title="Max 5, introduced the t_dictionary structure/object." alt="" coords="153,5,235,31"/>
+<area shape="rect" href="group__datastore.html" title="Max provides a number of ways of storing and manipulating data at a high level." alt="" coords="5,5,105,31"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -211,7 +211,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gafd9a85c38f7e6b1cd075664a5aa4cbc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__misc.html#gaace8607dfb500e6dcca022a35fcb8386">t_max_err</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dictionary.html#gafd9a85c38f7e6b1cd075664a5aa4cbc8">dictionary_clear</a> (<a class="el" href="structt__dictionary.html">t_dictionary</a> *d)</td></tr>
 <tr class="memdesc:gafd9a85c38f7e6b1cd075664a5aa4cbc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all values from a dictionary.  <a href="group__dictionary.html#gafd9a85c38f7e6b1cd075664a5aa4cbc8">More...</a><br /></td></tr>
 <tr class="separator:gafd9a85c38f7e6b1cd075664a5aa4cbc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga923b67932c8401f58dee86cfb3bb5110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dictionary.html#ga923b67932c8401f58dee86cfb3bb5110">dictionary_funall</a> (<a class="el" href="structt__dictionary.html">t_dictionary</a> *d, method fun, void *arg)</td></tr>
+<tr class="memitem:ga923b67932c8401f58dee86cfb3bb5110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dictionary.html#ga923b67932c8401f58dee86cfb3bb5110">dictionary_funall</a> (<a class="el" href="structt__dictionary.html">t_dictionary</a> *d, <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a> fun, void *arg)</td></tr>
 <tr class="memdesc:ga923b67932c8401f58dee86cfb3bb5110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the specified function for every entry in the dictionary.  <a href="group__dictionary.html#ga923b67932c8401f58dee86cfb3bb5110">More...</a><br /></td></tr>
 <tr class="separator:ga923b67932c8401f58dee86cfb3bb5110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga866aeb04d26740768790f64203f30b7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__symbol.html">t_symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dictionary.html#ga866aeb04d26740768790f64203f30b7c">dictionary_entry_getkey</a> (<a class="el" href="structt__dictionary__entry.html">t_dictionary_entry</a> *x)</td></tr>
@@ -375,8 +375,8 @@ Creating a Dictionary from JSON</h2>
 <div class="ttc" id="agroup__obj_html_ga020d01fb1a55690dc760450bac6a624a"><div class="ttname"><a href="group__obj.html#ga020d01fb1a55690dc760450bac6a624a">object_classname_compare</a></div><div class="ttdeci">long object_classname_compare(void *x, t_symbol *name)</div><div class="ttdoc">Determines if a particular object is an instance of a given class.</div></div>
 <div class="ttc" id="agroup__obj_html_gac4b370265c776db4f545d257089af1cf"><div class="ttname"><a href="group__obj.html#gac4b370265c776db4f545d257089af1cf">object_new</a></div><div class="ttdeci">void * object_new(t_symbol *name_space, t_symbol *classname,...)</div><div class="ttdoc">Allocates the memory for an instance of an object class and initialize its object header internal to ...</div></div>
 <div class="ttc" id="agroup__obj_html_gae740749094827ac5adc2b7145db1c596"><div class="ttname"><a href="group__obj.html#gae740749094827ac5adc2b7145db1c596">object_method</a></div><div class="ttdeci">void * object_method(void *x, t_symbol *s,...)</div><div class="ttdoc">Sends an untyped message to an object.</div></div>
-<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:345</div></div>
-<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:213</div></div>
+<div class="ttc" id="astructt__atom_html"><div class="ttname"><a href="structt__atom.html">t_atom</a></div><div class="ttdoc">An atom is a typed datum.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:323</div></div>
+<div class="ttc" id="astructt__object_html"><div class="ttname"><a href="structt__object.html">t_object</a></div><div class="ttdoc">The structure for the head of any object which wants to have inlets or outlets, or support attributes...</div><div class="ttdef"><b>Definition:</b> ext_mess.h:191</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="dictionaries_serialization"></a>
 Creating JSON from a Dictionary</h2>
 <p>The easiest way to get write a <a class="el" href="structt__dictionary.html" title="The dictionary object.">t_dictionary</a> to disk as JSON is to use the <a class="el" href="group__dictionary.html#ga6a9e5ffefdcb029ab0240bb9ec96c8f1" title="Serialize the specified t_dictionary object to a JSON file.">dictionary_write()</a> function. In some cases you may wish have more control, such as to generate JSON but not write it to disk. For that purpose you can create a jsonwriter object as demonstrated below.</p>
@@ -1464,7 +1464,7 @@ Creating JSON from a Dictionary</h2>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">method&#160;</td>
+          <td class="paramtype"><a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78">method</a>&#160;</td>
           <td class="paramname"><em>fun</em>, </td>
         </tr>
         <tr>
@@ -1485,7 +1485,7 @@ Creating JSON from a Dictionary</h2>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">d</td><td>The dictionary instance. </td></tr>
-    <tr><td class="paramname">fun</td><td>The function to call, specified as function pointer cast to a Max #method. </td></tr>
+    <tr><td class="paramname">fun</td><td>The function to call, specified as function pointer cast to a Max <a class="el" href="group__datatypes.html#ga482c97424132ea0bcb931d42fca5be78" title="Function pointer type for generic methods.">method</a>. </td></tr>
     <tr><td class="paramname">arg</td><td>An argument that you would like to pass to the function being called.</td></tr>
   </table>
   </dd>
@@ -1503,7 +1503,7 @@ Creating JSON from a Dictionary</h2>
 <div class="ttc" id="agroup__dictionary_html_ga55877f4d0fef0a8d0badf9afc95bb7d0"><div class="ttname"><a href="group__dictionary.html#ga55877f4d0fef0a8d0badf9afc95bb7d0">dictionary_entry_getvalue</a></div><div class="ttdeci">void dictionary_entry_getvalue(t_dictionary_entry *x, t_atom *value)</div><div class="ttdoc">Given a t_dictionary_entry*, return the value associated with that entry.</div></div>
 <div class="ttc" id="agroup__dictionary_html_ga866aeb04d26740768790f64203f30b7c"><div class="ttname"><a href="group__dictionary.html#ga866aeb04d26740768790f64203f30b7c">dictionary_entry_getkey</a></div><div class="ttdeci">t_symbol * dictionary_entry_getkey(t_dictionary_entry *x)</div><div class="ttdoc">Given a t_dictionary_entry*, return the key associated with that entry.</div></div>
 <div class="ttc" id="astructt__dictionary__entry_html"><div class="ttname"><a href="structt__dictionary__entry.html">t_dictionary_entry</a></div><div class="ttdoc">A dictionary entry.</div><div class="ttdef"><b>Definition:</b> ext_dictionary.h:27</div></div>
-<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:124</div></div>
+<div class="ttc" id="astructt__symbol_html"><div class="ttname"><a href="structt__symbol.html">t_symbol</a></div><div class="ttdoc">The symbol.</div><div class="ttdef"><b>Definition:</b> ext_mess.h:102</div></div>
 </div><!-- fragment --> </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__dictionary.html#ga866aeb04d26740768790f64203f30b7c" title="Given a t_dictionary_entry*, return the key associated with that entry.">dictionary_entry_getkey()</a> </dd>
 <dd>
