@@ -1,7 +1,7 @@
 project(dllexample)
 
 if (NOT DEFINED C74_SUPPORT_DIR)
-	set(C74_SUPPORT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../c74support)
+	set(C74_SUPPORT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../max-sdk-base/c74support)
 endif ()
 
 message(STATUS ${C74_SUPPORT_DIR})
