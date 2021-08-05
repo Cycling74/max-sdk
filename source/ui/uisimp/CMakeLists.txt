@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-pretarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmake)
 
 #############################################################
 # MAX EXTERNAL
@@ -21,4 +21,4 @@ add_library(
 	uisimp.c
 )
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../script/max-posttarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-posttarget.cmake)
