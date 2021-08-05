@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.19)
 string(REGEX REPLACE "(.*)/" "" THIS_FOLDER_NAME "${CMAKE_CURRENT_SOURCE_DIR}")
 project(${THIS_FOLDER_NAME})
 
+set(CMAKE_OSX_ARCHITECTURES x86_64;arm64)
+
 MACRO(SUBDIRLIST result curdir)
   FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
   SET(dirlist "")
