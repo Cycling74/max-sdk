@@ -1,12 +1,10 @@
+set(C74_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../../externals")
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../../max-sdk-base/script/max-pretarget.cmake)
 
 #############################################################
 # MAX EXTERNAL
 #############################################################
-
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../../externals")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 include_directories( 
 	"${MAX_SDK_INCLUDES}"
@@ -16,10 +14,10 @@ include_directories(
 )
 
 file(GLOB PROJECT_SRC
-     "../*.h"
-     "*.h"
+	"../*.h"
+	"*.h"
 	"*.c"
-     "*.cpp"
+	"*.cpp"
 )
 
 add_library( 
