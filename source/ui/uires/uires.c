@@ -30,7 +30,7 @@ void uires_initclass();
 t_uires *uires_new(t_symbol *s, short argc, t_atom *argv);
 void uires_free(t_uires *x);
 void uires_load_surfaces(t_uires *x);
-t_jsurface * uires_load_surface_from_name(char *name);
+t_jsurface * uires_load_surface_from_name(t_uires *, char *name);
 
 void uires_setmouse(t_uires *x, long which);
 void uires_mousedown(t_uires *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -113,14 +113,14 @@ t_uires *uires_new(t_symbol *s, short argc, t_atom *argv)
 void uires_load_surfaces(t_uires *x)
 {
 	if (x->j_idrewitmyself == NULL) {
-		x->j_idrewitmyself = uires_load_surface_from_name("idrewitmyself.png");
+		x->j_idrewitmyself = uires_load_surface_from_name(x, "idrewitmyself.png");
 	}
 	if (x->j_idrewitmyselftongue == NULL) {
-		x->j_idrewitmyselftongue = uires_load_surface_from_name("idrewitmyselftongue.png");
+		x->j_idrewitmyselftongue = uires_load_surface_from_name(x, "idrewitmyselftongue.png");
 	}
 }
 
-t_jsurface * uires_load_surface_from_name(char *name)
+t_jsurface * uires_load_surface_from_name(t_uires *x, char *name)
 {
 	short path;
 	t_fourcc outtype;
@@ -131,6 +131,7 @@ t_jsurface * uires_load_surface_from_name(char *name)
 		// found the image, get the t_jsurface* from the file
 		return jgraphics_image_surface_create_from_file(filename, path);
 	} else {
+		object_warn((t_object *)x, "Couldn't locate image (%s)", name);
 		return NULL;
 	}
 }
