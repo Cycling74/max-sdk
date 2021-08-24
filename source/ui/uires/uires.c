@@ -18,6 +18,8 @@ typedef struct _uires {
 	t_jbox				j_box;
 	char				j_clicked;
 	char				j_hover;
+	t_jsurface			*j_idrewitmyself;
+	t_jsurface			*j_idrewitmyselftongue;
 } t_uires;
 
 
@@ -27,6 +29,8 @@ typedef struct _uires {
 void uires_initclass();
 t_uires *uires_new(t_symbol *s, short argc, t_atom *argv);
 void uires_free(t_uires *x);
+void uires_load_surfaces(t_uires *x);
+t_jsurface * uires_load_surface_from_name(t_uires *, char *name);
 
 void uires_setmouse(t_uires *x, long which);
 void uires_mousedown(t_uires *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -41,7 +45,6 @@ void uires_paint(t_uires *x, t_object *view);
 // Globals and Statics
 
 static t_class *s_uires_class = NULL;
-static t_jsurface *s_surf_idrewitmyself, *s_surf_idrewitmyselftongue;
 
 
 /**********************************************************************/
@@ -71,9 +74,6 @@ void ext_main(void *moduleRef)
 
 	class_register(CLASS_BOX, c);
 	s_uires_class = c;
-
-	s_surf_idrewitmyself		=	jgraphics_image_surface_create_from_resource(moduleRef, "idrewitmyself");
-	s_surf_idrewitmyselftongue	=	jgraphics_image_surface_create_from_resource(moduleRef, "idrewitmyselftongue");
 }
 
 
@@ -100,6 +100,9 @@ t_uires *uires_new(t_symbol *s, short argc, t_atom *argv)
 
 		jbox_new(&x->j_box, flags, argc, argv);
 		x->j_box.b_firstin = (t_object *) x;
+		
+		// find the images in the search path, and load them.
+		uires_load_surfaces(x);
 
 		jbox_ready(&x->j_box);
 	}
@@ -107,11 +110,43 @@ t_uires *uires_new(t_symbol *s, short argc, t_atom *argv)
 }
 
 
+void uires_load_surfaces(t_uires *x)
+{
+	if (x->j_idrewitmyself == NULL) {
+		x->j_idrewitmyself = uires_load_surface_from_name(x, "idrewitmyself.png");
+	}
+	if (x->j_idrewitmyselftongue == NULL) {
+		x->j_idrewitmyselftongue = uires_load_surface_from_name(x, "idrewitmyselftongue.png");
+	}
+}
+
+t_jsurface * uires_load_surface_from_name(t_uires *x, char *name)
+{
+	short path;
+	t_fourcc outtype;
+	char filename[MAX_FILENAME_CHARS];
+
+	strncpy_zero(filename, name, MAX_FILENAME_CHARS);
+	if (!locatefile_extended(filename, &path, &outtype, NULL, 0)) {
+		// found the image, get the t_jsurface* from the file
+		return jgraphics_image_surface_create_from_file(filename, path);
+	} else {
+		object_warn((t_object *)x, "Couldn't locate image (%s)", name);
+		return NULL;
+	}
+}
+
 void uires_free(t_uires *x)
 {
+	if (x->j_idrewitmyself) {
+		jgraphics_surface_destroy(x->j_idrewitmyself);
+		x->j_idrewitmyself = NULL;
+	}
+	if (x->j_idrewitmyselftongue) {
+		jgraphics_surface_destroy(x->j_idrewitmyselftongue);
+		x->j_idrewitmyselftongue = NULL;
+	}
 	jbox_free(&x->j_box);
-
-	// don't free s_surf_idrewitmyself or s_surf_idrewitmyselftongue! it's used by other uires objects
 }
 
 
@@ -153,21 +188,21 @@ void uires_paint(t_uires *x, t_object *view)
 	jbox_get_rect_for_view((t_object *) x, view, &rect);
 
 	jgraphics_set_source_rgba(g, 0, 0, 0, 1);
-	if (s_surf_idrewitmyself) {
+	if (x->j_idrewitmyself && x->j_idrewitmyselftongue) {
 		t_rect src, dst;
 
 		src.x = src.y = 0.;
-		src.width = jgraphics_image_surface_get_width(s_surf_idrewitmyself);
-		src.height = jgraphics_image_surface_get_height(s_surf_idrewitmyself);
+		src.width = jgraphics_image_surface_get_width(x->j_idrewitmyself);		// we know that both images
+		src.height = jgraphics_image_surface_get_height(x->j_idrewitmyself);	// have the same dimensions.
 
 		dst.x = dst.y = 0.;
 		dst.width = rect.width;
 		dst.height = rect.height;
 
 		if (x->j_clicked)
-			jgraphics_image_surface_draw(g, s_surf_idrewitmyselftongue, src, dst);
+			jgraphics_image_surface_draw(g, x->j_idrewitmyselftongue, src, dst);
 		else
-			jgraphics_image_surface_draw(g, s_surf_idrewitmyself, src, dst);
+			jgraphics_image_surface_draw(g, x->j_idrewitmyself, src, dst);
 	}
 
 	if (x->j_hover) {
