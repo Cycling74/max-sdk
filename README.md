@@ -8,7 +8,7 @@ The repository contains one submodule, [max-sdk-base](https://github.com/Cycling
 
 ## Max 8.2 SDK Update
 
-With the 8.2 update several aspects of the Max-SDK were changed in order to support Apple silicon and CMake project generation. For details on this change and steps to get started with CMake please see the [8.2 update readme](https://github.com/Cycling74/max-sdk/blob/main/README-8.2-update.md).
+With the 8.2 update several aspects of the Max-SDK were changed in order to support Apple silicon and CMake project generation. For details on this change and steps to get started with CMake please see the [8.2 update readme](https://github.com/Cycling74/max-sdk/blob/main/README-8.2-update.md) or the [Max 8.2 SDK Update Overview](https://www.youtube.com/watch?v=il5WblTBUgs) video.
 
 ## C++ API
 
