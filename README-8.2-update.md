@@ -43,6 +43,8 @@ Requirements:
 
 -   CMake (\>=3.19)
 
+A [video](https://www.youtube.com/watch?v=il5WblTBUgs) walk-through is also available.
+
 ### 1. Switch submodule branches from master to main
 
 To switch branches from master to main from the command line:
