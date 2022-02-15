@@ -83,6 +83,9 @@ Build the projects on Mac:
 cmake -G Xcode ..
 ```
 
+*Note:* If you are running on a Mac M1 machine, you will likely see an error `cannot be loaded due to system security policy` when loading your externals in Max. To resolve this, you can ad-hoc codesign your external with `codesign --force --deep -s - myobject.mxo`.
+
+
 Build the projects on Windows (adjust for your version of Visual Studio, or omit for default):
 
 ```
