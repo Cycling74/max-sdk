@@ -57,7 +57,7 @@
 @code
 	void myobject_ft1(t_myobject *x, double f)
 	{
-		post("float %.2f received in right inlet,f);
+		post("float %.2f received in right inlet", f);
 	}
 @endcode
 
