@@ -11,7 +11,7 @@
 	"name" : "Max-SDK",
 	"os" : 	{
 		"macintosh" : 		{
-			"platform" : [ "x64", "arm64" ],
+			"platform" : [ "x64", "aarch64" ],
 			"min_version" : "10.11.x"
 		}
 ,
