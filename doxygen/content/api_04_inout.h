@@ -3,7 +3,7 @@
 
 	You are familiar with inlets and outlets when connecting two objects together in a patcher. To receive data in your object or send data to other objects, you need to create the C versions of inlets and outlets. In this section, we'll explain what inlets and outlets are, how to create them, and how to use them. We'll also discuss a more advanced type of inlet called a proxy that permits a message to be received in any of your object's inlets. Proxies are used by audio objects to permit inlets to handle both signals and normal Max messages.
 
-	By default, every object shows one inlet. Additional inlets appear to the right of the default inlet, with the rightmost inlet being created last.
+	By default, every object shows one inlet. Additional inlets appear sequentially to the right of the default inlet.
 
 	Inlets are essentially message translators. For example, if you create an int inlet, your object will receive the "in1" message instead of the "int" message when a number arrives at this newly created inlet. You can use the different message name to define special behavior for numbers arriving at each inlet. For example, a basic arithmetic object in Max such as + stores the number to be added when it arrives in the right inlet, but performs the computation and outputs the result when a number arrives in the left inlet.
 
