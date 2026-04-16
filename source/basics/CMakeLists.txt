@@ -1,0 +1,10 @@
+add_subdirectory(attrtester)
+add_subdirectory(delay2)
+add_subdirectory(dummy)
+add_subdirectory(plussz)
+add_subdirectory(plussz2)
+add_subdirectory(simplejs)
+add_subdirectory(simplemax)
+add_subdirectory(simpletext)
+add_subdirectory(urner)
+

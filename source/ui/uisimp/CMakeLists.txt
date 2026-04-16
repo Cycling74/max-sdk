@@ -1,24 +1,8 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmake)
+set_property(DIRECTORY PROPERTY max::external YES)
+project(uisimp)
 
-#############################################################
-# MAX EXTERNAL
-#############################################################
-
-include_directories( 
-	"${MAX_SDK_INCLUDES}"
-	"${MAX_SDK_MSP_INCLUDES}"
-	"${MAX_SDK_JIT_INCLUDES}"
+target_sources(uisimp
+    PRIVATE
+        # Change this to compile a different uisimp*.c file
+        uisimp.c
 )
-
-file(GLOB PROJECT_SRC
-     "*.h"
-	 "*.c"
-     "*.cpp"
-)
-add_library( 
-	${PROJECT_NAME} 
-	MODULE
-	uisimp.c
-)
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-posttarget.cmake)

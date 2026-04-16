@@ -1,35 +1,22 @@
 set(C74_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../../externals")
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../max-sdk-base/script/max-pretarget.cmake)
+set_property(DIRECTORY PROPERTY max::external YES)
+project(dllcounter)
 
-#############################################################
-# MAX EXTERNAL
-#############################################################
+target_sources(dllcounter
+    PRIVATE
+        # Source files
+        "dllcounter.cpp"
 
-include_directories( 
-	"${MAX_SDK_INCLUDES}"
-	"${MAX_SDK_MSP_INCLUDES}"
-	"${MAX_SDK_JIT_INCLUDES}"
-	".."
+    PRIVATE FILE_SET HEADERS
+        # Include directory
+        BASE_DIRS
+            "${CMAKE_CURRENT_LIST_DIR}/.."
+
+        # Included headers
+        FILES
+            "${CMAKE_CURRENT_SOURCE_DIR}/../mydll.h"
 )
 
-file(GLOB PROJECT_SRC
-	"../*.h"
-	"*.h"
-	"*.c"
-	"*.cpp"
-)
+target_link_libraries(dllcounter PRIVATE mydll)
 
-add_library( 
-	${PROJECT_NAME} 
-	MODULE
-	${PROJECT_SRC}
-)
-
-target_link_libraries(
-	${PROJECT_NAME}
-	PUBLIC
-	mydll # add project to ensure that it's a dependency
-)
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../max-sdk-base/script/max-posttarget.cmake)
