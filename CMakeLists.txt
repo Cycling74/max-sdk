@@ -8,7 +8,7 @@ message(STATUS "Fetching max-sdk-base")
 FetchContent_Declare(
   max-sdk-base
   GIT_REPOSITORY https://github.com/Cycling74/max-sdk-base.git
-  GIT_TAG cmake-improvements
+  GIT_TAG main
 )
 FetchContent_MakeAvailable(max-sdk-base)
 
