@@ -1,0 +1,10 @@
+add_subdirectory(collect)
+add_subdirectory(dbcuelist)
+add_subdirectory(dbviewer)
+add_subdirectory(dllexample)
+add_subdirectory(filebyte)
+add_subdirectory(linky)
+add_subdirectory(simpleparallel)
+add_subdirectory(simplethread)
+add_subdirectory(threadpool)
+

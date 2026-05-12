@@ -1,25 +1,8 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmake)
+set_property(DIRECTORY PROPERTY max::external YES)
+project(gridmeter_tilde)
 
-#############################################################
-# MAX EXTERNAL
-#############################################################
+target_sources(gridmeter_tilde
+    PRIVATE
+        "gridmeter~.c"
+        "${MAXSDK_SOURCE_DIR}/c74support/max-includes/common/commonsyms.c")
 
-include_directories( 
-	"${MAX_SDK_INCLUDES}"
-	"${MAX_SDK_MSP_INCLUDES}"
-	"${MAX_SDK_JIT_INCLUDES}"
-)
-
-file(GLOB PROJECT_SRC
-     "*.h"
-	"*.c"
-     "*.cpp"
-     "${MAX_SDK_INCLUDES}/common/commonsyms.c"
-)
-add_library( 
-	${PROJECT_NAME} 
-	MODULE
-	${PROJECT_SRC}
-)
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-posttarget.cmake)

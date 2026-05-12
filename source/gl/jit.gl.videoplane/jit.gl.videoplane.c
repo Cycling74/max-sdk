@@ -537,7 +537,7 @@ t_jit_err jit_gl_videoplane_dest_closing(t_jit_gl_videoplane* x)
     // destination is closing, free our context dependent resources
     if (x->dlref) {
         glDeleteLists(x->dlref, 1);
-        x->dlref = NULL;
+        x->dlref = 0;
         x->recalc = 1;
     }
     return JIT_ERR_NONE;

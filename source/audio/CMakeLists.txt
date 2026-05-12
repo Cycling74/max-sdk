@@ -1,0 +1,11 @@
+add_subdirectory(dspstress~)
+add_subdirectory(fftinfo~)
+add_subdirectory(index~)
+add_subdirectory(lores~)
+add_subdirectory(pictmeter~)
+add_subdirectory(plussz~)
+add_subdirectory(simplemsp~)
+add_subdirectory(simpwave~)
+add_subdirectory(split~)
+add_subdirectory(times~)
+

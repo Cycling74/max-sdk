@@ -1,25 +1,8 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmake)
+set_property(DIRECTORY PROPERTY max::external YES)
+project(dbviewer)
 
-#############################################################
-# MAX EXTERNAL
-#############################################################
+target_sources(dbviewer
+    PRIVATE
+        "dbviewer.c"
+        "${MAXSDK_SOURCE_DIR}/c74support/max-includes/common/commonsyms.c")
 
-include_directories( 
-	"${MAX_SDK_INCLUDES}"
-	"${MAX_SDK_MSP_INCLUDES}"
-	"${MAX_SDK_JIT_INCLUDES}"
-)
-
-file(GLOB PROJECT_SRC
-     "*.h"
-	"*.c"
-     "*.cpp"
-)
-add_library( 
-	${PROJECT_NAME} 
-	MODULE
-	${PROJECT_SRC}
-	${MAX_SDK_INCLUDES}/common/commonsyms.c
-)
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-posttarget.cmake)
